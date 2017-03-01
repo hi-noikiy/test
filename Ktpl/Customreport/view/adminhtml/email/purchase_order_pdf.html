@@ -1,0 +1,141 @@
+<html>
+    <body style="margin: 0; padding: 0;">
+        <div style="background:#ffffff; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:15px 0;">
+            <table cellspacing="0" cellpadding="0" border="0" width="100%" style="height:100%;">
+                <tbody>
+                    <tr>
+                        <td align="center" valign="top">
+                            <table cellspacing="0" cellpadding="0" border="0" bgcolor="FFFFFF" width="620" style=" border: 1px solid #c0c0c0; padding: 0 15px 15px;">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <table cellspacing="0" cellpadding="0" border="0" bgcolor="FFFFFF" style="text-align: left; width:100%">
+                                                <tbody>
+                                  <tr>
+                                      <td bgcolor="#fff" valign="top">
+                                          <a style="color:#1E7EC8;" href="{{store url=''}}"><img border="0" width="300" style="padding:15px 0 0;" alt="Price Guru" src="{{var logo_url}}"/></a>
+                                          <table cellspacing="0" cellpadding="0" border="0" bgcolor="FFFFFF" style="text-align: left;">                                              
+                                              <tbody>
+                                                  <tr>
+                                                      <td bgcolor="#fff" valign="top" style="font-size:17px; color: #000000; padding-bottom: 10px;">
+                                                          <strong style="display: block; padding: 0 0 5px 0; font-size:18px;">Price Guru Ltd</strong><br>
+                                                          2nd Floor, Dodo Square<br>
+                                                          Grand Baie<br>
+                                                          Tel:2637082<br>
+                                                          VAT : 27271134<br>
+                                                          BRN : C14123300<br>
+
+                                                      </td>
+                                                  </tr>                                                 
+                                              </tbody>
+                                          </table>
+                                      </td>
+                                      <td align="right" valign="top">
+                                          <h3 style="font-size:26px; padding:15px 0px 0px;"> Purchase Order </h3>
+                                          <table cellspacing="0" cellpadding="0" border="0" bgcolor="FFFFFF" width="200" style="border: 1px solid #000000; font-size:14px;">                     
+                                              <tbody>
+                                                  <tr>
+                                                      <td valign="top" style="border-bottom:1px solid #000000; padding:3px; text-align: center;"> <strong> Date </strong></td>
+                                                      <td valign="top" style="border-bottom:1px solid #000000; border-left:1px solid #000000; padding:3px; text-align: center;"> <strong> P.O. No.</strong> </td>
+                                                  </tr>                                                 
+                                                   <tr>
+                                                       <td valign="top" style="padding:3px; text-align: center;"><span> 
+                                                       {{var todaydate}}</span></td>
+                                                       <td valign="top" style="border-left:1px solid #000000; padding:3px; text-align: center;"><span>{{var increment_id}}</span></td>
+                                                  </tr>                                                 
+                                              </tbody>
+                                          </table>
+                                      </td>
+                                  </tr>
+                                
+                                  <tr>
+                                      <td colspan="2" valign="top" align="right" style="padding-bottom: 15px;">
+                                          <table cellspacing="0" cellpadding="0" border="0" bgcolor="FFFFFF" width="350" style="border: 1px solid #000000; text-align: left;">                                              
+                                              <tbody>
+                                                  <tr>
+                                                      <td valign="top" style="border-bottom:1px solid #000000; padding:5px 15px; text-align: left;"> <strong> Vendor </strong></td>
+                                                  </tr>                                                 
+                                                   <tr>
+                                                       <td valign="top" style="padding:5px 15px; text-align: left; font-size: 15px;">
+                                                           {{var vendor}}
+                                                       </td>
+                                                  </tr>
+                                              </tbody>
+                                          </table>
+                                      </td>                                     
+                                  </tr>                                                                  
+                                  <tr>
+                                      <td colspan="2" valign="top" align="left">
+                                          <table cellspacing="0" cellpadding="0" border="0" bgcolor="FFFFFF" width="100%" style="border: 1px solid #000000; text-align: left; font-size:15px;">                                              
+                                              <tbody>
+                                                  <tr style="background-color:#e5e5e5;">
+                                                      <td valign="top" width="300" style="border-right:1px solid #000000; border-bottom: 1px solid #000000; padding:5px 10px; text-align: center;"> 
+                                                         Product 
+                                                      </td>
+                                                      <td valign="top" width="80" style="border-right:1px solid #000000; border-bottom: 1px solid #000000; padding:5px 10px; text-align: center;"> 
+                                                         QTY
+                                                      </td>
+                                                      <td valign="top" width="120" style="border-right:1px solid #000000; border-bottom: 1px solid #000000; padding:5px 10px; text-align: center;"> 
+                                                         Rate
+                                                      </td>
+                                                      <td valign="top" width="120" style="padding:5px 10px; border-bottom: 1px solid #000000; text-align: center;"> 
+                                                         Amount
+                                                      </td>
+                                                  </tr> 
+                                                  {{var itemoutput}}                                                 
+                                              </tbody>
+                                          </table>                                                                                  
+                                      </td>                                     
+                                  </tr>
+                                  
+                                  <tr>
+                                      <td valign="top" colspan="2">
+                                          <table cellspacing="0" cellpadding="0" border="0" bgcolor="FFFFFF" style="text-align: left; width:100%">
+                                              <tbody>
+                                                  <tr>
+                                                     <td valign="top" align="left">
+                                           <table cellspacing="0" cellpadding="0" border="0" bgcolor="FFFFFF" style="font-size:15px; border: 1px solid #000000; border-width: 0px 0px 1px 1px; height: 60px;">
+                                              <tbody>
+                                                  <tr>
+                                                      <td valign="middle" style="padding:5px 10px; text-align: center;">
+                                                      All Prices are VAT Inclusive. This is a computer generated document which requires no signature
+                                                      </td>
+                                                  </tr>
+                                              <tbody>
+                                            </table>
+                                            
+                                       </td>
+                                      <td valign="top" align="right">
+                                          <table class="table-total" cellspacing="0" cellpadding="0" border="0" bgcolor="FFFFFF" style="font-size:15px; border: 1px solid #000000; border-width: 0px 1px 1px 1px; height: 60px; width:237px;">
+                                              <tbody>
+                                                  <tr>
+                                                      <td valign="middle" style="padding:5px 10px; text-align: left;">
+                                                          <strong style="font-size:30px;">Total</strong>                                                                                                                   
+                                                      </td>
+                                                      <td valign="middle" align="right" style="padding:5px 10px;">
+                                                           <span> {{var grandtotal}} </span>
+                                                      </td>
+                                                  </tr>
+                                              </tbody>
+                                          </table>
+                                      </td>      
+                                                  </tr>
+                                              </tbody>
+                                          </table>
+                                      </td>
+                                                                       
+                                  </tr>
+                                                                 
+                              </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>                             
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

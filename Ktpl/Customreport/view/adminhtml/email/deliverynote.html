@@ -1,0 +1,189 @@
+<!--@subject Delivery note Invoice # {{var increment_id}} @-->
+<html>
+<head>
+<!--@styles
+@-moz-document url-prefix() {
+        .table-total{
+           width:212px!important;
+        }
+    }
+@-->
+</head>
+    <body style="margin: 0; padding: 0;">
+        <div style="background:#ffffff; font-family: arial; font-size:12px; margin:0; padding:15px 0;">
+            <table cellspacing="0" cellpadding="0" border="0" width="100%" style="height:100%;">
+                <tbody>
+                    <tr>
+                        <td align="center" valign="top">
+                            <table cellspacing="0" cellpadding="0" border="0" bgcolor="FFFFFF" width="620" style=" border: 1px solid #c0c0c0; padding: 0 15px 15px;">
+                                 <tbody>
+                                    <tr>
+                                        <td>
+                                            <table cellspacing="0" cellpadding="0" border="0" bgcolor="FFFFFF" style="text-align: left; width:100%">
+                                               <tbody>
+                                                    <tr>
+                                                        <td bgcolor="#fff" valign="top">
+                                                            <a style="color:#1E7EC8;" href="{{store url=''}}"><img border="0" width="300" style="padding:15px 0 0;" alt="Price Guru" src="{{var logo_url}}"/></a>
+                                                              <table cellspacing="0" cellpadding="0" border="0" bgcolor="FFFFFF" style="text-align: left;">                                              
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td bgcolor="#fff" valign="top" style="font-size:15px; color: #000000; padding-bottom: 10px;">
+                                                                            <p><strong style="font-size:18px;">Price Guru Ltd</strong></p>
+                                                                            2nd Floor, Dodo Square, Royal Road<br>
+                                                                            Grand Baie,<br>
+                                                                            VAT : 27271134<br>
+                                                                            BRN : C14123300<br>
+
+                                                                        </td>
+                                                                    </tr>                                                 
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                        <td align="right" valign="top"><br>
+                                                            <span style="font-size:24px; text-transform: uppercase;"><strong> DELIVERY NOTE </strong></span><br>
+                                                            <table cellspacing="0" cellpadding="0" border="0" bgcolor="FFFFFF" width="200" style="border: 1px solid #000000; font-size:14px;">                                              
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td valign="top" style="border-bottom:1px solid #000000; padding:3px; text-align: center;"> <strong> Date </strong></td>
+                                                                        <td valign="top" style="border-bottom:1px solid #000000; border-left:1px solid #000000; padding:3px; text-align: center;"> <strong> ID #</strong> </td>
+                                                                    </tr>                                                 
+                                                                     <tr>
+                                                                         <td valign="top" style="padding:3px; text-align: center;"><span> {{var todaydate}}</span></td>
+                                                                         <td valign="top" style="border-left:1px solid #000000; padding:3px; text-align: center;"><span>{{var increment_id}}</span></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2" valign="top" align="right">
+                                                            <table cellspacing="0" cellpadding="0" border="0" bgcolor="FFFFFF" width="250" style="border: 1px solid #000000; text-align: left;">                                              
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td valign="top" style="border-bottom:1px solid #000000; padding:5px 15px; text-align: left;"> <strong> Customer </strong></td>
+                                                                    </tr>                                                 
+                                                                     <tr>
+                                                                         <td valign="top" style="padding:5px 15px; text-align: left; font-size: 15px;">
+                                                                             {{var billname}} <br>
+                                                                            {{var billto}} <br>
+                                                                            T: {{var telephone}}
+                                                                         </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>                                     
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td colspan="2" valign="top" align="left" style="padding-bottom: 15px;">
+                                                            <table cellspacing="0" cellpadding="0" border="0" bgcolor="FFFFFF" style="border: 1px solid #000000; text-align: left;">                                              
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td valign="top" width="125" style="font-size: 14px; border-right:1px solid #000000; padding:5px 10px; text-align: center; text-transform: uppercase;"> {{var payment_method}} </td>
+                                                                        <td valign="top"  width="125" style="font-size: 14px; padding:5px 10px; text-align: center; text-transform: uppercase;"> {{var payment_status}} </td>
+                                                                    </tr>                                                                                                  
+                                                                </tbody>
+                                                            </table>
+                                                        </td>                                     
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td colspan="2" valign="top" align="left">
+                                                            <table cellspacing="0" cellpadding="0" border="0" bgcolor="FFFFFF" width="100%" style="border: 1px solid #000000; text-align: left; font-size:15px;">                                              
+                                                                <tbody>
+                                                                    <tr style="background-color:#e5e5e5;">
+                                                                        <td valign="top" width="100" style="border-right:1px solid #000000; border-bottom: 1px solid #000000; padding:5px 10px; text-align: center;"> 
+                                                                           Quantity
+                                                                        </td>
+                                                                        <td valign="top" width="320" style="border-right:1px solid #000000; border-bottom: 1px solid #000000; padding:5px 10px; text-align: center;"> 
+                                                                           Description
+                                                                        </td>
+                                                                    
+                                                                    </tr> 
+                                                                {{var itemout}}                                               
+                                                                </tbody>
+                                                            </table>                                                                                  
+                                                        </td>                                     
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td colspan="2" valign="top" align="right" style="padding-bottom:20px;">
+                                                            {{depend deposit}}
+                                                            <table class="table-total" cellspacing="0" cellpadding="0" border="0" bgcolor="FFFFFF" style="font-size:15px; border: 1px solid #000000; border-width: 0px 1px 1px 1px; width: 213px;">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td valign="middle" style="padding:5px 8px; text-align: left; font-size:14px;">
+                                                                            <strong style="font-size:18px;">Total</strong>
+                                                                        </td>
+                                                                        <td valign="middle" align="right" style="padding:5px 8px;">
+                                                                            <span style="font-size:15px;"> Rs{{var deposit}} </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            {{/depend}}
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                     <tr>
+                                                         <td valign="top" align="left" width="49%" style="padding-right:7px;">
+                                                             <table cellspacing="0" cellpadding="0" border="0" bgcolor="FFFFFF" width="100%" style="font-size:16px; border: 1px solid #000000; padding:10px 0px;">
+                                                                  <tbody>
+                                                                     <tr>
+                                                                         <td valign="top" style="padding:5px 10px; text-align: left;">
+                                                                             <span> Received By:</span>
+                                                                             <span>..................................</span>
+                                                                         </td>
+                                                                     </tr>
+                                                                     <tr>
+                                                                         <td valign="top" style="padding:5px 10px; text-align: left;">
+                                                                             <span> NID:</span>
+                                                                              <span>..................................</span>
+                                                                         </td>
+                                                                     </tr>
+                                                                     <tr>
+                                                                         <td valign="top" style="padding:5px 10px; text-align: left;">
+                                                                             <span> Date:</span>
+                                                                              <span>..................................</span>
+                                                                         </td>
+                                                                     </tr>
+                                                                     <tr>
+                                                                         <td valign="top" style="padding:5px 10px; text-align: left;">
+                                                                             <span> Signature:</span>
+                                                                             <span>..................................</span>
+                                                                         </td>
+                                                                     </tr>
+                                                                     <tr>
+                                                                         <td valign="top" style="padding:5px 10px; text-align: left;">
+                                                                             <span style="font-size:18px;"> Warranty Period </span>
+                                                                              <span> </span>
+                                                                         </td>
+                                                                     </tr>
+                                                                  </tbody>
+                                                             </table>
+                                                         </td>
+
+                                                         <td valign="bottom" align="right" width="49%" style="padding-left:7px;">
+                                                              <table cellspacing="0" cellpadding="0" border="0" bgcolor="FFFFFF" width="100%"  style="font-size:15px; border: 1px solid #000000;">
+                                                                  <tbody>
+                                                                      <tr>
+                                                                         <td valign="top" style="padding:5px 10px; text-align: center;">
+                                                                            I hereby acknowledge that the product(s) delivered are brand new and in perfect condition.
+                                                                         </td>
+                                                                     </tr>
+                                                                  </tbody>
+                                                             </table>
+                                                         </td>
+                                                     </tr>
+                                                </tbody> 
+                                            </table>
+                                        </td>
+                                    </tr>
+                            </table>                              
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

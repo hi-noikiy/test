@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="reward_template" label="My Label" file="myemail.html" type="text" module="Ktpl_Rewardschedule" area="frontend"/>
+</config>

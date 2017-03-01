@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ktpl_Customreport::a_menu" title="Cim" translate="title" module="Ktpl_Customreport" sortOrder="11" parent="Magento_Sales::sales" resource="Ktpl_Customreport::cim" />
+        <add id="Ktpl_Customreport::a_menu_item1" title="Cimcredit" module="Ktpl_Customreport" parent="Ktpl_Customreport::a_menu" resource="Ktpl_Customreport::cimcredit"  action="customreport/cimorder/index"  sortOrder="13" />
+        <add id="Ktpl_Customreport::a_menu_item2" title="Pickup Order" module="Ktpl_Customreport" parent="Ktpl_Customreport::a_menu" resource="Ktpl_Customreport::pickup"  action="customreport/pickuporder/index"  sortOrder="14" />
+        <add id="Ktpl_Customreport::a_menu_item3" title="Delivery Order" module="Ktpl_Customreport" parent="Ktpl_Customreport::a_menu" resource="Ktpl_Customreport::delivery"  action="customreport/deliveryorder/index"  sortOrder="15" />
+        <add id="Ktpl_Customreport::a_menu_item4" title="Purchase Order" module="Ktpl_Customreport" parent="Ktpl_Customreport::a_menu" resource="Ktpl_Customreport::purchase"  action="customreport/purchaseorder/index"  sortOrder="16" />
+        <add id="Ktpl_Customreport::a_menu_item5" title="Wholesaler" module="Ktpl_Customreport" parent="Ktpl_Customreport::a_menu" resource="Ktpl_Customreport::wholesaler"  action="customreport/wholesaler/index"  sortOrder="17" />
+    </menu>
+</config>

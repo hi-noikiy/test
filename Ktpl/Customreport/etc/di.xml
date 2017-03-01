@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Ktpl\Customreport\Api\WholesalerRepositoryInterface" type="Ktpl\Customreport\Model\WholesalerRepository" />
+    <preference for="Ktpl\Customreport\Api\CimorderRepositoryInterface" type="Ktpl\Customreport\Model\CimorderRepository" />
+    <preference for="Ktpl\Customreport\Api\DeliveryorderRepositoryInterface" type="Ktpl\Customreport\Model\DeliveryorderRepository" />
+    <preference for="Ktpl\Customreport\Api\PickuporderRepositoryInterface" type="Ktpl\Customreport\Model\PickuporderRepository" />
+  
+    <virtualType name="Ktpl\Customreport\Model\Resource\Wholesaler\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wholesaler</argument>
+            <argument name="resourceModel" xsi:type="string">Ktpl\Customreport\Model\ResourceModel\Wholesaler</argument>
+        </arguments>
+    </virtualType>
+    
+    <virtualType name="Ktpl\Customreport\Model\Resource\Deliveryorder\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_flat_deliveryorder</argument>
+            <argument name="resourceModel" xsi:type="string">Ktpl\Customreport\Model\ResourceModel\Deliveryorder</argument>
+        </arguments>
+    </virtualType>
+    
+<!--    <virtualType name="Ktpl\Customreport\Model\Resource\Pickuporder\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_flat_pickuporder</argument>
+            <argument name="resourceModel" xsi:type="string">Ktpl\Customreport\Model\ResourceModel\Pickuporder</argument>
+        </arguments>
+    </virtualType>-->
+    
+    <type name="Ktpl\Customreport\Model\ResourceModel\Pickuporder\Grid\Collection">
+    <arguments>
+        <argument name="mainTable" xsi:type="string">sales_flat_pickuporder</argument>
+        <argument name="eventPrefix" xsi:type="string">ktpl_customreport_gri_collection</argument>
+        <argument name="eventObject" xsi:type="string">ktpl_gri_collection</argument>
+        <argument name="resourceModel" xsi:type="string">Ktpl\Customreport\Model\ResourceModel\Pickuporder</argument>
+    </arguments>
+</type>
+    
+    <type name="Ktpl\Customreport\Model\ResourceModel\Cimorder\Grid\Collection">
+    <arguments>
+        <argument name="mainTable" xsi:type="string">sales_flat_cimorder</argument>
+        <argument name="eventPrefix" xsi:type="string">ktpl_customreport_grid_collection</argument>
+        <argument name="eventObject" xsi:type="string">ktpl_grid_collection</argument>
+        <argument name="resourceModel" xsi:type="string">Ktpl\Customreport\Model\Resource\Cimorder</argument>
+    </arguments>
+</type>
+ 
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="wholesaler_grid_data_source" xsi:type="string">Ktpl\Customreport\Model\Resource\Wholesaler\Grid\Collection</item>
+                <item name="cimorder_grid_data_source" xsi:type="string">Ktpl\Customreport\Model\ResourceModel\Cimorder\Grid\Collection</item>
+                <item name="deliveryorder_grid_data_source" xsi:type="string">Ktpl\Customreport\Model\Resource\Deliveryorder\Grid\Collection</item>
+                <!--<item name="pickuporder_grid_data_source" xsi:type="string">Ktpl\Customreport\Model\Resource\Pickuporder\Grid\Collection</item>-->
+                <item name="purchaseorder_grid_data_source" xsi:type="string">Ktpl\Customreport\Model\ResourceModel\Pickuporder\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    
+    
+
+<!--<virtualType name="CustomGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+    <arguments>
+        <argument name="appliers" xsi:type="array">
+            <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+            <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+        </argument>
+    </arguments>
+</virtualType> 
+
+<virtualType name="Ktpl\Brand\Model\DataProvi" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+    <arguments>
+        <argument name="collection" xsi:type="object" shared="false">Ktpl\Brand\Model\ResourceModel\Brand\Collection</argument>
+        <argument name="filterPool" xsi:type="object" shared="false">CustomGridFilterPool</argument>
+    </arguments>
+</virtualType>-->
+ 
+</config>

@@ -1,0 +1,43 @@
+<!--@subject Credit application order @-->
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+
+<body style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<div style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<table cellspacing="0" cellpadding="0" border="0" height="100%" width="100%">
+        <tr>
+            <td align="center" valign="top" style="padding:20px 0 20px 0">
+                <!-- [ header starts here] -->
+                <table bgcolor="FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #E0E0E0;">
+                    <tr>
+                        <td valign="top"><a href="{{store url=''}}"><img src="{{var logo_url}}" alt="Priceguru.mu" style="margin-bottom:10px;" border="0"/></a></td>
+                    </tr>
+                    <tr>
+                        <td valign="top">
+                            <h1 style="font-size:20px; font-weight:normal; line-height:22px; margin:0 0 11px 0;">
+                            Hello {{var order.customer_name}},</h1>
+                            <p style="font-size:12px; line-height:16px; margin:0 0 12px 0;">Thank you for your Credit Application #{{var order.order_id}}.</p>
+                            <p style="font-size:12px; line-height:16px; margin:0 0 16px 0;">Please kindly note that in order to process your credit application we require the following documents (scan copy):</p>
+                            <ul style="font-size:12px; line-height:16px; margin:0 0 16px 0; padding:0;">
+                                <li style="list-style:inside; padding:0 0 0 10px; margin:0 0 10px 0;">ID Card</li>
+                                <li style="list-style:inside; padding:0 0 0 10px; margin:0 0 10px 0;">Proof of address: last month</li>
+                                <li style="list-style:inside; padding:0 0 0 10px; margin:0 0 10px 0;">Pay slip: 3 last months</li>
+                            </ul>
+                            <p style="font-size:12px; line-height:16px; margin:0 0 12px 0;">Please rest assured that your data is being handled responsibly and securely. The confidentiality of your records is of paramount concern to us and PriceGuru Ltd is fully committed to ensuring that your privacy is protected. All information provided by our clients is held in strict confidentiality in accordance with the requirements of the Data Protection Act.</p>
+                            <p style="font-size:12px; line-height:16px; margin:0 0 16px 0;">Please do not hesitate to contact us if you need any further information.</p>
+                            <p style="font-size:12px; line-height:16px; margin:0 0 12px 0;">Kind Regards, <br/>Priceguru.mu</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#9a9ab3" align="center" style="text-align:center;background:rgb(154,154,179)">
+                        <center><table style="width:650px"><tbody><tr style="font-size:10px"><td><font color="#ffffff">Price Guru Ltd</font></td><td><font color="#ffffff"><span style="font-weight:bold">Email</span>: <a target="_blank" href="mailto:info@priceguru.mu"><font color="#ffffff"><a href="mailto:{{config path='trans_email/ident_support/email'}}" style="color:#fff;">{{config path='trans_email/ident_support/email'}}</a> </font></a></font></td><td><font color="#ffffff"><span style="font-weight:bold">Telephone</span>: <span class="nobr" style="color:blue;">{{config path='general/store_information/phone'}}</span></font></td><td><font color="#ffffff"><span style="font-weight:bold">BRN</span>: C14123300</font></td><td><font color="#ffffff"><span style="font-weight:bold">VAT: 27271134</span></font></td></tr></tbody></table></center>
+                        
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>

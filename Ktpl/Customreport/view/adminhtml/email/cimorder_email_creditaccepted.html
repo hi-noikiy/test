@@ -1,0 +1,54 @@
+<!--@subject Credit application order @-->
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+                                                                                                                        
+<body style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<div style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<table cellspacing="0" cellpadding="0" border="0" height="100%" width="100%">
+        <tr>
+            <td align="center" valign="top" style="padding:20px 0 20px 0">
+                <!-- [ header starts here] -->
+                <table bgcolor="FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #E0E0E0;">
+                    <tr>
+                        <td valign="top"><a href="{{store url=''}}"><img src="{{var logo_url}}" alt="Priceguru.mu" style="margin-bottom:10px;" border="0"/></a></td>
+                    </tr>
+                    <!-- [ middle starts here] -->
+                    <tr>
+                        <td valign="top">
+                            <h1 style="font-size:20px; font-weight:normal; line-height:22px; margin:0 0 11px 0;">
+                            Hello {{var order.customer_name}},</h1>
+                            <p style="font-size:12px; line-height:16px; margin:0 0 12px 0;">We have the pleasure to inform you that your credit application has been approved.</p>
+                            
+                            <p style="font-size:12px; line-height:16px; margin:0 0 12px 0;"><span style="text-decoration:underline;">Important:</span> Upon delivery of your product you will be required to present the agreed upon original documents as well as the CIM deposit (if applicable), which can be settled in cash, debit / credit card with our delivery agent. Should you fail to provide same, your order as well as your credit application will be put on hold.</p>
+                            <ul style="font-size:14px; line-height:16px; margin:0 0 16px 0; padding:0;">
+                                <li style="list-style:inside; padding:0 0 0 10px; margin:0 0 10px 0;">
+                                    <strong>Order Number: </strong>{{var order.order_id}}
+                                </li>
+                                <li style="list-style:inside; padding:0 0 0 10px; margin:0 0 10px 0;">
+                                    <strong>Product: </strong>{{var order.sku}}
+                                </li>
+                                <li style="list-style:inside; padding:0 0 0 10px; margin:0 0 10px 0;">
+                                    <strong>Deposit Amount: </strong>Rs {{var order.deposit}}
+                                </li>
+                                <li style="list-style:inside; padding:0 0 0 10px; margin:0 0 10px 0;">
+                                    <strong>Monthly Installment: </strong>Rs {{var order.monthly}} x {{var order.installments}}
+                                </li>
+                            </ul>
+                            <p style="font-size:12px; line-height:16px; margin:0 0 12px 0;">Our logistics department will get in touch with you shortly to schedule preferred delivery date and time.</p>
+                            <p style="font-size:12px; line-height:16px; margin:0 0 12px 0;">Thank you very much for choosing Priceguru.mu.</p>
+                            <p style="font-size:12px; line-height:16px; margin:0 0 12px 0;">Please do not hesitate to contact us for any queries.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#9a9ab3" align="center" style="text-align:center;background:rgb(154,154,179)">
+                        <center><table style="width:650px"><tbody><tr style="font-size:10px"><td><font color="#ffffff">Price Guru Ltd</font></td><td><font color="#ffffff"><span style="font-weight:bold">Email</span>: <a target="_blank" href="mailto:info@priceguru.mu"><font color="#ffffff"><a href="mailto:{{config path='trans_email/ident_support/email'}}" style="color:#fff;">{{config path='trans_email/ident_support/email'}}</a> </font></a></font></td><td><font color="#ffffff"><span style="font-weight:bold">Telephone</span>: <span class="nobr" style="color:blue;">{{config path='general/store_information/phone'}}</span></font></td><td><font color="#ffffff"><span style="font-weight:bold">BRN</span>: C14123300</font></td><td><font color="#ffffff"><span style="font-weight:bold">VAT: 27271134</span></font></td></tr></tbody></table></center>
+                        
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>

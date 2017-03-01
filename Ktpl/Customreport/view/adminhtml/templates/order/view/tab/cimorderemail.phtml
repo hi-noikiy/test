@@ -1,0 +1,15 @@
+<div id="cimsendemails">
+    
+<input type="hidden" name="order_id" value="<?php echo $block->getOrder()->getIncrementId();?>">
+<input type="hidden" name="real_id" value="<?php echo $block->getOrder()->getId();?>">
+<select name="cim-email-template" class="select" id="cim-email-template">
+    <option value="selfemployes" selected="selected">Self Employed</option>
+    <option value="resending">Re-sending</option>
+    <option value="creditaccepted">Credit Accepted</option>
+    <option value="creditrefused">Credit Refused</option>
+    <option value="newclient">New Client</option>
+    <option value="existingclient">Existing Client</option>
+</select>
+<button id="btnsendemail" title="Send Email" type="button" class="scalable save" onclick="submitAndReloadArea($('cimsendemails').parentNode, '<?php echo $this->getUrl("customreport/cimorder/sendemail")?>')">
+    <span><span><span>Send Email</span></span></span></button>
+</div>

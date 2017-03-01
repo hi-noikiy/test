@@ -1,0 +1,90 @@
+<?php 
+$order = $this->getOrder();
+$items = $order->getItemsCollection();
+$total_items = $items->count();
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$FormKey = $objectManager->get('Magento\Framework\Data\Form\FormKey'); 
+$pickuporder = $objectManager->create('Ktpl\Customreport\Model\Pickuporder')->getCollection();
+
+$pickuporder->addFieldToFilter('order_id', array('eq' => $order->getIncrementId()));
+
+$itemcnt = 1;
+?>
+<div id="purchaseorder">
+<div class="entry-edit">
+	<div class="entry-edit-head">
+		<h4 class="icon-head head-edit-form fieldset-legend">General</h4>
+	</div>
+	<div class="fieldset">
+		<div class="hor-scroll">
+			<table cellspacing="0" class="form-list">
+        	<tbody>
+            <?php if($pickuporder->count()) { ?>
+        	<?php foreach($pickuporder as $item) { ?>
+        	<tr>
+        		<td class="label"><strong>Item <?php echo $itemcnt; ?></strong></td>
+        		<td>&nbsp;</td>
+        	</tr>
+			<tr>
+				<td class="label"><label>Product</label></td>
+				<td class="value">
+    				<input id="productname" name="productname" value="<?php echo $item->getSku()?>" type="hidden">
+    			<label><?php echo $item->getSku()?></label>
+    			</td>
+    		</tr>
+    		<tr>
+				<td class="label"><label>Qty</label></td>
+				<td class="value">
+    				<input id="product_qty" name="product_qty" value="" type="hidden">
+    				<label><?php echo round($item->getData('qty')) ?></label>
+    			</td>
+			</tr>
+			<tr>
+				<td class="label"><label>Unit Price</label></td>
+				<td class="value">
+    				<input type="text" id="unit_price" name="unit_price" readonly="" value="<?php echo $item->getData('wholesale_price')?>" class="required-entry input-text">
+    			</td>
+    		</tr>
+    		<?php
+    		if(($item->getData('wholesale_price') != NULL && $item->getData('wholesale_price')!=0) && $item->getData('wholesaler_id') != NULL) {
+    		?>
+    		<tr>
+				<td>&nbsp;</td>
+        		<td>
+        			<button title="Send Email" type="button" class="scalable" onclick="confirmSetLocation('Are you sure you want to create purchase order?', '<?php echo $this->getUrl("customreport/cimorder/purchaseorder/order_id/".$order->getId()."/item_id/".$item->getPickupId())?>')">
+        			<span><span><span>Create and Send email</span></span></span></button>
+        			<button title="Print" type="button" class="scalable" onclick="setLocation('<?php echo $this->getUrl("customreport/cimorder/purchaseorderprint/order_id/".$order->getId()."/item_id/".$item->getPickupId())?>')">
+        			<span><span><span>Print</span></span></span></button>
+        		</td>
+        	</tr>
+			<?php } else { ?>
+        	<tr>
+				<td>&nbsp;</td>
+				<td>Please update wholesaler details to create purchase order. <a href="<?php echo $this->getUrl("customreport/pickuporder")?>">Go to Pickup</a></td>
+			</tr>
+        	<?php  } ?>
+
+        	<?php if($total_items != $itemcnt) { ?>
+    		<tr><td colspan="2"><div class="divider"></div></td></tr>
+    		<?php } ?>
+    		<!--<tr>
+				<td class="label"><label>Amount</label></td>
+				<td class="value">
+    				<input type="text" id="amount" name="product_amount" value="" class="required-entry input-text">
+    			</td>
+			</tr>
+			<tr>
+				<td class="label"><label>Total</label></td>
+				<td class="value">
+    				<input type="text" id="total" name="item_total" value="" class=" required-entry input-text">
+    			</td>
+			</tr>-->
+			<?php $itemcnt++; } ?>
+			<?php } ?>
+			</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+</div>

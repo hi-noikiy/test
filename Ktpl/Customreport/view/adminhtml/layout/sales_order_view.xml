@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+   
+    <body>
+            <referenceBlock name="sales_order_tabs">
+                 <block class="Ktpl\Customreport\Block\Adminhtml\Order\View\Tab\Cimorderemail" name="sales_cimorderemail.grid.container" after="sales_transactions.grid.container"/>
+                <action method="addTab" after="order_transactions" >
+                    <argument name="name" xsi:type="string">order_cimorder</argument>
+                    <argument name="block" xsi:type="string">sales_cimorderemail.grid.container</argument>
+                </action>
+                
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">order_purchaseorder</argument>
+                    <argument name="block" xsi:type="string">Ktpl\Customreport\Block\Adminhtml\Order\View\Tab\Purchaseorder</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">order_vatinvoice</argument>
+                    <argument name="block" xsi:type="string">Ktpl\Customreport\Block\Adminhtml\Order\View\Tab\Salesinvoicevat</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">order_deliverynote</argument>
+                    <argument name="block" xsi:type="string">Ktpl\Customreport\Block\Adminhtml\Order\View\Tab\Deliverynote</argument>
+                </action>
+                
+            </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="purchase_order_pdf" label="Purchase Order" file="purchase_order_pdf.html" type="text" module="Ktpl_Customreport" area="adminhtml"/>
+    <template id="vat_invoice_email" label="Vat Invoice" file="vat_invoice_email.html" type="text" module="Ktpl_Customreport" area="adminhtml"/>
+    <template id="delivery_note" label="Delivery Note" file="deliverynote.html" type="text" module="Ktpl_Customreport" area="adminhtml"/>
+    <template id="cimorder_email_selfemployes" label="Cimorder Email selfemployes" file="cimorder_email_selfemployes.html" type="text" module="Ktpl_Customreport" area="adminhtml"/>
+    <template id="cimorder_email_resending" label="Cimorder Email resending" file="cimorder_email_resending.html" type="text" module="Ktpl_Customreport" area="adminhtml"/>
+    <template id="cimorder_email_creditaccepted" label="Cimorder Email creditaccepted" file="cimorder_email_creditaccepted.html" type="text" module="Ktpl_Customreport" area="adminhtml"/>
+    <template id="cimorder_email_creditrefused" label="Cimorder Email creditrefused" file="cimorder_email_creditrefused.html" type="text" module="Ktpl_Customreport" area="adminhtml"/>
+    <template id="cimorder_email_newclient" label="Cimorder Email newclient" file="cimorder_email_newclient.html" type="text" module="Ktpl_Customreport" area="adminhtml"/>
+    <template id="cimorder_email_existingclient" label="Cimorder Email existingclient" file="cimorder_email_existingclient.html" type="text" module="Ktpl_Customreport" area="adminhtml"/>
+</config>

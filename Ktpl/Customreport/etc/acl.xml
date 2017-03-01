@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Sales::sales" title="Sales" translate="title" sortOrder="20">
+                    <resource id="Ktpl_Customreport::cim" title="Cim">
+                        <resource id="Ktpl_Customreport::cimcredit" title="Cimcredit"/>
+                        <resource id="Ktpl_Customreport::pickup" title="Pickup Order"/>
+                        <resource id="Ktpl_Customreport::delivery" title="Delivery Order"/>
+                        <resource id="Ktpl_Customreport::purchase" title="Purchase Order"/>
+                        <resource id="Ktpl_Customreport::wholesaler" title="Wholesaler"/>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

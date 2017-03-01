@@ -1,0 +1,6 @@
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/layout_generic.xsd">
+     <update handle="formkey"/>
+       <container name="root" label="Root">
+           <block class="Ktpl\Customreport\Block\Adminhtml\Pickuporder\Grid" name="adminhtml.pickuporder.grid" />
+       </container>
+</layout>

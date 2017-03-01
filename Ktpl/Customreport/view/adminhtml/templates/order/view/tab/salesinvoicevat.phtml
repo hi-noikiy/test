@@ -1,0 +1,87 @@
+<?php 
+$order = $this->getOrder();
+$items = $order->getItemsCollection();
+$total_items = $items->count();
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$FormKey = $objectManager->get('Magento\Framework\Data\Form\FormKey'); 
+$pickuporder = $objectManager->create('Ktpl\Customreport\Model\Pickuporder')->getCollection();
+
+$pickuporder->addFieldToFilter('order_id', array('eq' => $order->getIncrementId()));
+$itemcnt = 1;
+?>
+<div id="salesinvoice">
+	<?php if($pickuporder->count()) { ?>
+		<?php $vatinvoice = $objectManager->create('Ktpl\Customreport\Model\Salesinvoicevat')->load($order->getId(), 'order_id'); ?>
+		<div class="entry-edit">
+    	<form action="<?php echo $this->getUrl('customreport/cimorder/salesinvoice/order_id/'.$order->getId())?>" method="post" id="salesinvoice_vat" onsubmit="return confirm('Are you sure you want to create VAT invoice?');" enctype="multipart/form-data">
+    		<input type="hidden" name="form_key" value="<?php echo$FormKey->getFormKey(); ?>" />
+    		<!--<input type="hidden" name="attributes" value="<?php //echo $item->getAttributes(); ?>" />
+    		<input type="hidden" name="product_name" value="<?php //echo $item->getProductName(); ?>" />-->
+			<div class="entry-edit-head">
+				<h4 class="icon-head head-edit-form fieldset-legend">Order Items</h4>
+			</div>
+			<div class="fieldset">
+				<div class="hor-scroll">
+					<table cellspacing="0" class="form-list">
+        			<tbody>
+        			<?php foreach($pickuporder as $item) { ?>
+					<tr>
+						<td class="label"><label>Product</label></td>
+						<td class="value">
+    					<input id="sku" name="sku" value="<?php echo $item->getSku()?>" type="hidden">
+    					<label><?php echo $item->getSku()?></label>
+    					</td>
+    				</tr>
+    				<tr>
+						<td class="label"><label>Qty</label></td>
+						<td class="value">
+    						<input id="product_qty" name="product_qty" value="<?php echo round($item->getData('qty')) ?>" type="hidden">
+    						<label><?php echo round($item->getData('qty')) ?></label>
+    					</td>
+					</tr>
+					<tr>
+						<td class="label"><label>Unit Price</label></td>
+						<td class="value">
+    					<input type="text" id="unit_price" name="unit_price" readonly="" value="<?php echo $item->getData('retail_price')?>" class="required-entry input-text">
+    					</td>
+    				</tr>
+    				<tr><td colspan="2"><div class="divider"></div></td></tr>
+    				<?php } ?>
+    				<tr>
+						<td class="label"><label>Invoice #</label></td>
+						<td class="value">
+    					<input type="text" id="invoice_id" name="invoice_id" value="<?php echo $vatinvoice->getInvoiceId()?>" class="required-entry input-text">
+    					</td>
+    				</tr>
+    				<tr>
+						<td class="label"><label>VAT Registration No</label></td>
+						<td class="value">
+    						<input type="text" id="vatregno" name="vatregno" value="<?php echo $vatinvoice->getVatregno()?>" class="required-entry input-text">
+    					</td>
+    				</tr>
+    				<tr>
+						<td class="label"><label>BRN</label></td>
+						<td class="value">
+    						<input type="text" id="brn" name="brn" value="<?php echo $vatinvoice->getBrn()?>" class="required-entry input-text">
+    					</td>
+    				</tr>
+		    		<tr>
+						<td>&nbsp;</td>
+		        		<td>
+		        			<button title="Send Email" type="submit" class="scalable">
+		        			<span><span><span>Create and Send email</span></span></span></button>
+		        		</td>
+		        	</tr>
+		        	<!--<tr>
+						<td>&nbsp;</td>
+						<td>Please update wholesaler details to create purchase order. <a href="<?php //echo Mage::helper("adminhtml")->getUrl("customreport/adminhtml_pickuporder")?>">Go to Pickup</a></td>
+					</tr>-->
+				</tbody>
+			</table>
+		</div>
+	</div>
+</form>
+</div>
+<?php } ?>
+</div>

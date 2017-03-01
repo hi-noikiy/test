@@ -1,0 +1,12 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+         <head>
+        
+<!--        <link src="Ktpl_Customreport::inlinegridreports.js"/>-->
+    </head>
+        <referenceBlock name="content">               
+            <block class="Ktpl\Customreport\Block\Adminhtml\Pickuporder" name="adminhtml.pickuporder.container" />
+<!--            <uiComponent name="pickuporder_grid"/> -->
+        </referenceBlock>
+    </body>
+</page>
