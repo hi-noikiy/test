@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ktpl_Ordercustomer::a_menu_item6" title="Manage Coupons" module="Ktpl_Ordercustomer" parent="Ktpl_Customreport::a_menu" resource="Ktpl_Ordercustomer::coupon"  action="ordercustomer/ordercustomer/index"  sortOrder="12" />
+    </menu>
+</config>

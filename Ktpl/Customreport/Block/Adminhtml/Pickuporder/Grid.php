@@ -53,6 +53,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     protected function _prepareCollection()
     { 
         $collection = $this->_pickuporderFactory->create();
+        $collection->getSelect()->joinleft('sales_order', 'main_table.real_order_id = sales_order.entity_id',array('customer_firstname','customer_email','billing_address_id','total_qty_ordered'));
         $this->setCollection($collection);
        
         return  parent::_prepareCollection();
@@ -88,12 +89,49 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         'index'     => 'customer_name',
         'renderer'  => '\Ktpl\Customreport\Block\Adminhtml\Pickuporder\Grid\Renderer\Customername',
     ));
-
-    $this->addColumn('product_name', array(
-        'header'    => __('Product name'),
+    
+    $this->addColumn('customer_email', array(
+        'header'    => __('Customer Email'),
+        'width'     => '100px', 
         'align'     =>'left',
-     		'width'     => '400px',       		 
-        'index'     => 'product_name',
+        'index'     => 'customer_email',
+    )); 
+    
+     $this->addColumn('telephone', array(
+        'header'    => __('Telephone'),
+        'width'     => '100px', 
+        'align'     =>'left',
+        'index'     => 'telephone',
+    ));  
+     
+     $this->addColumn('address', array(
+        'header'    => __('Address'),
+        'align'     =>'left',
+        'width'     => '500px',            
+        'index'     => 'street',
+         'filter'    => false,
+        'sortable'  => false,
+        'renderer'  => '\Ktpl\Customreport\Block\Adminhtml\Pickuporder\Grid\Renderer\Address',
+        
+    ));
+     
+     $this->addColumn('city', array(
+        'header'    => __('City'),
+        'align'     =>'left',
+        'width'     => '400px',            
+        'index'     => 'city',
+         'filter'    => false,
+        'sortable'  => false,
+        'renderer'  => '\Ktpl\Customreport\Block\Adminhtml\Pickuporder\Grid\Renderer\City',
+        
+    ));
+     
+    $this->addColumn('pickup_by', array(
+        'header'    => __('Pickup By'),
+        'align'     =>'left',
+        'width'     => '400px',            
+        'index'     => 'pickup_by',
+        'renderer'  => '\Ktpl\Customreport\Block\Adminhtml\Pickuporder\Grid\Renderer\Pickupby',
     ));
 
     $this->addColumn('sku', array(
@@ -108,6 +146,13 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         'index'     => 'qty',
     ));
 
+     $this->addColumn('total_qty_ordered', array(
+        'header'    => __('Total Products'),
+        'align'     =>'center',
+        'index'     => 'total_qty_ordered',
+        'renderer'  => '\Ktpl\Customreport\Block\Adminhtml\Pickuporder\Grid\Renderer\Totalqty',
+    ));
+     
     $this->addColumn('attributes', array(
         'header'    => __('Attributes'),
         'align'     =>'left',
@@ -171,8 +216,68 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
           ),
         'renderer'  => '\Ktpl\Customreport\Block\Adminhtml\Pickuporder\Grid\Renderer\Pickup',
     ));
-  
+    
+    $this->addColumn('client_connected', array(
+        'header'    => __('Client Contacted'),
+        'align'     =>'center',
+        'index'     => 'client_connected',
+        'type'      => 'options',
+        'options'   => array(
+              1 => 'Yes',
+              0 => 'No',
+          ),
+        'renderer'  => '\Ktpl\Customreport\Block\Adminhtml\Pickuporder\Grid\Renderer\Clientconnect',
+    ));
 
+    $this->addColumn('pickup_date', array(
+        'header' => __('Pick up Date'),
+        'index' => 'pickup_date',
+        'type' => 'datetime',
+        'renderer'  => '\Ktpl\Customreport\Block\Adminhtml\Pickuporder\Grid\Renderer\Pickupdate',
+    )); 
+    
+    $this->addColumn('pickup_comment', array(
+     		'header'    => __('Pickup Comment'),
+     		'align'     =>'left',
+     		'width'     => '400px',
+     		'filter'    => false,
+        'sortable'  => false,
+        'index'     => 'pickup_comment',
+        'renderer'  => '\Ktpl\Customreport\Block\Adminhtml\Pickuporder\Grid\Renderer\Pickupcomment',
+    ));
+    
+    $this->addColumn('delivery_comment', array(
+        'header'    => __('Delivery Comment'),
+        'align'     =>'left',
+        'width'     => '400px',
+        'filter'    => false,
+        'sortable'  => false,
+        'index'     => 'delivery_comment',
+        'renderer'  => '\Ktpl\Customreport\Block\Adminhtml\Pickuporder\Grid\Renderer\Deliverycomment',
+    ));
+    $this->addColumn('region', array(
+        'header' => __('Region'),
+        'index' => 'region',
+        'type'  => 'options',
+        'options'   => array(
+              1 => '1',
+              2 => '2',
+              3 => '3A',
+              7 => '3B', 
+              4 => '4',
+              5 => '5',
+              6 => '6A',
+              8 => '6B',
+            
+          ),
+        'renderer'  => '\Ktpl\Customreport\Block\Adminhtml\Pickuporder\Grid\Renderer\Region'
+    ));
+    $this->addColumn('delivery_date', array(
+        'header' => __('Delivery Date'),
+        'index' => 'delivery_date',
+        'type' => 'datetime',
+     //   'renderer'  => '\Ktpl\Customreport\Block\Adminhtml\Pickuporder\Grid\Renderer\Deliverydate',
+    )); 
     $this->addColumn('status', array(
         'header' => __('Status'),
         'index' => 'status',
