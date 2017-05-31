@@ -12,14 +12,14 @@
         </arguments>
     </virtualType>
     
-    <virtualType name="Ktpl\Customreport\Model\Resource\Deliveryorder\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+   <!-- <virtualType name="Ktpl\Customreport\Model\Resource\Deliveryorder\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">sales_flat_deliveryorder</argument>
             <argument name="resourceModel" xsi:type="string">Ktpl\Customreport\Model\ResourceModel\Deliveryorder</argument>
         </arguments>
     </virtualType>
     
-<!--    <virtualType name="Ktpl\Customreport\Model\Resource\Pickuporder\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+    <virtualType name="Ktpl\Customreport\Model\Resource\Pickuporder\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">sales_flat_pickuporder</argument>
             <argument name="resourceModel" xsi:type="string">Ktpl\Customreport\Model\ResourceModel\Pickuporder</argument>
@@ -43,13 +43,21 @@
         <argument name="resourceModel" xsi:type="string">Ktpl\Customreport\Model\Resource\Cimorder</argument>
     </arguments>
 </type>
+    <type name="Ktpl\Customreport\Model\ResourceModel\Deliveryorder\Grid\Collection">
+    <arguments>
+        <argument name="mainTable" xsi:type="string">sales_flat_deliveryorder</argument>
+        <argument name="eventPrefix" xsi:type="string">ktpl_customreport_grid_collection</argument>
+        <argument name="eventObject" xsi:type="string">ktpl_grid_collection</argument>
+        <argument name="resourceModel" xsi:type="string">Ktpl\Customreport\Model\Resource\Deliveryorder</argument>
+    </arguments>
+</type>
  
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
                 <item name="wholesaler_grid_data_source" xsi:type="string">Ktpl\Customreport\Model\Resource\Wholesaler\Grid\Collection</item>
                 <item name="cimorder_grid_data_source" xsi:type="string">Ktpl\Customreport\Model\ResourceModel\Cimorder\Grid\Collection</item>
-                <item name="deliveryorder_grid_data_source" xsi:type="string">Ktpl\Customreport\Model\Resource\Deliveryorder\Grid\Collection</item>
+                <item name="deliveryorder_grid_data_source" xsi:type="string">Ktpl\Customreport\Model\ResourceModel\Deliveryorder\Grid\Collection</item>
                 <!--<item name="pickuporder_grid_data_source" xsi:type="string">Ktpl\Customreport\Model\Resource\Pickuporder\Grid\Collection</item>-->
                 <item name="purchaseorder_grid_data_source" xsi:type="string">Ktpl\Customreport\Model\ResourceModel\Pickuporder\Grid\Collection</item>
             </argument>

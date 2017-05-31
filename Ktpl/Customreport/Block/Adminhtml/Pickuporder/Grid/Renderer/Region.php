@@ -7,10 +7,10 @@ class Region extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\Input {
     public function render(\Magento\Framework\DataObject $row)
     {
                
-        $rowval = $row->getData($this->getColumn()->getIndex());
+        $rowval = $row->getData($this->getColumn()->getIndex()); 
 
  		$html = '<select id="region'.$row->getPickupId().'" name="'.$this->getColumn()->getId() . '" style="width:50px;">';
-        
+        $selval1 = ""; $selval2 = ""; $selval3 = ""; $selval4 = ""; $selval5 = ""; $selval6 = "";$selval7 = "";$selval8 = "";
         if($rowval == 1) {
         	$selval1 = 'selected="selected"';
     	} elseif($rowval == 2) {

@@ -73,7 +73,7 @@ class InlineEdit extends \Magento\Backend\App\Action
                 $this->pageRepository->save($page);
             } 
             catch (\Exception $e) {
-                $messages = $this->__('Something went wrong while saving the page.');
+                $messages = [__('Something went wrong while saving the page.')];
                 $error = true;
             }
         }

@@ -13,8 +13,8 @@ class Pickupdate extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\Inpu
         }
         $html = '<input type="text" id="pickup_date'.$row->getPickupId().'" name="'.$this->getColumn()->getId().'" value="'.$rawvalue.'" class="input-text delivery-datetime" data-mage-init=\'{"calendar": {"showTime": false}}\'>';
         $html .= '<script type="text/javascript">
-            require(["jquery","mage/calendar"],function(){ 
-                Calendar.setup({
+            require(["jquery","mage/calendar"],function($){ 
+                $("#pickup_date'.$row->getPickupId().'").datepicker({
                     inputField: "pickup_date'. $row->getPickupId() .'",
                     ifFormat: "%e-%m-%Y",
                     showsTime: true,

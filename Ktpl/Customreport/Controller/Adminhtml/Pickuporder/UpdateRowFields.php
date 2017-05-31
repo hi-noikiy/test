@@ -38,6 +38,7 @@ class UpdateRowFields extends \Magento\Backend\App\Action
                     $deliverymodel->setOrderId($upmodel->getOrderId());
                     $deliverymodel->setRealOrderId($upmodel->getRealOrderId());
                     $deliverymodel->setPickupid($upmodel->getPickupId());
+                    $deliverymodel->setRegion($upmodel->getRegion());
                     $deliverymodel->setCustomerName($upmodel->getCustomerName());
                     $deliverymodel->setTelephone($upmodel->getTelephone());
                     $deliverymodel->setAddress($upmodel->getAddress());

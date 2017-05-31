@@ -31,9 +31,11 @@ class Region implements \Magento\Framework\Data\OptionSourceInterface
     {
         return [1 => '1',
               2 => '2',
-              3 => '3',
+              3 => '3A',
+              7 => '3B',
               4 => '4',
               5 => '5',
-              6 => '6'];
+              6 => '6A',
+              8 => '6B'];
     }
 }

@@ -1,6 +1,5 @@
 window.updateRowFields = function(button, fieldId, url)
 {   
-	console.log("ds");
     new Ajax.Request(url, {
         method: 'post',
         parameters: { 
@@ -28,7 +27,7 @@ window.updatePickupOrders = function(button, fieldId, url)
         parameters: {
             //telephone: $('telephone' + fieldId).getValue(),
             //address: $('address' + fieldId).getValue(),
-            //region: $('region' + fieldId).getValue(),
+            region: $('region' + fieldId).getValue(),
             attributes: $('attributes' + fieldId).getValue(),
             //payment_method: $('payment_method' + fieldId).getValue(), 
             //deposit: $('deposit' + fieldId).getValue(),
@@ -37,11 +36,14 @@ window.updatePickupOrders = function(button, fieldId, url)
             pickup_address: $('pickupaddress' + fieldId).getValue(),
             //purchase_order: $('purchase_order' + fieldId).getValue(),
             pickup: $('pickup' + fieldId).getValue(),
-            //pickup_comment: $('pickup_comment' + fieldId).getValue(),
+            pickup_comment: $('pickup_comment' + fieldId).getValue(),
             //delivery: $('delivery' + fieldId).getValue(),
-            //delivery_comment: $('delivery_comment' + fieldId).getValue(),
+            delivery_comment: $('delivery_comment' + fieldId).getValue(),
             status: $('status' + fieldId).getValue(),
-            //delivery_time: $('delivery_time' + fieldId).getValue(),
+            delivery_date: $('delivery_date' + fieldId).getValue(),
+            client_connected: $('client_connected' + fieldId).getValue(),
+            pickup_by: $('pickup_by' + fieldId).getValue(),
+            pickup_date: $('pickup_date' + fieldId).getValue(),
         },
         onSuccess: function(transport) {
             //$('delivery_time' + fieldId).update(transport.responseText);
@@ -78,7 +80,6 @@ window.updatePickupaddress = function(selectnav, fieldId, url)
 
 window.updateMarkupField = function(button, fieldId, url)
 {
-console.log("dsa");
     new Ajax.Request(url, {
         method: 'post',
         parameters: { 
@@ -88,6 +89,22 @@ console.log("dsa");
         onSuccess: function(transport) {
             $('markup' + fieldId).update(transport.responseText + "%");
             //$('markupinput' + fieldId).setValue(transport.responseText);
+        }
+    });
+}
+window.updatecomm = function(button, orderid,fieldId, url)
+{
+    new Ajax.Request(url, {
+        method: 'post',
+        parameters: { 
+            id: fieldId, 
+            orderid: orderid, 
+            delivery_comment: $('delivery_comment' + fieldId).getValue(),
+        },
+        onSuccess: function(transport) {
+            $('comment_history' + fieldId).value=transport.responseText + "\n\n" +$('comment_history' + fieldId).value;
+            $('delivery_comment' + fieldId).value = '';   
+           
         }
     });
 }
@@ -105,15 +122,16 @@ window.updateDeliveryOrders = function(button, fieldId, url)
             telephone: $('telephone' + fieldId).getValue(),
             address: $('address' + fieldId).getValue(),
             region: $('region' + fieldId).getValue(),
+            city: $('city' + fieldId).getValue(),
             attributes: $('attributes' + fieldId).getValue(),
             payment_method: $('payment_method' + fieldId).getValue(), 
             deposit: $('deposit' + fieldId).getValue(),
             customer_comment: $('customercomment' + fieldId).getValue(),
             //delivery: $('delivery' + fieldId).getValue(),
-            delivery_comment: $('delivery_comment' + fieldId).getValue(),
+            // delivery_comment: $('delivery_comment' + fieldId).getValue(),
             delivery_date_time: $('deliverydate' + fieldId).getValue(),
             status: $('status' + fieldId).getValue(),
-            //delivery_time: $('delivery_time' + fieldId).getValue(),
+            del_time: $('del_time' + fieldId).getValue(),
         },
         onSuccess: function(transport) {
             $('delivery_time' + fieldId).update(transport.responseText);

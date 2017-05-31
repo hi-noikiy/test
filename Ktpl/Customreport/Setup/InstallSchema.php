@@ -116,7 +116,7 @@ $table3 = $installer->getConnection()->newTable(
         )->addColumn('order_id', \Magento\Framework\DB\Ddl\Table::TYPE_TEXT, 50,
             [ 'nullable' => false, ],
             'Order id'
-        )->addColumn('real_order_id', \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,null,
+        )->addColumn('real_order_id', \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,50,
             [ 'nullable' => false, ],
             'Real order id'
         )->addColumn('customer_name', \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,150,
@@ -170,25 +170,37 @@ $table3 = $installer->getConnection()->newTable(
         )->addColumn('pickup', \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT, 4,
             [ 'nullable' => false, 'default' => '0', ],
             'Pickup'
+        )->addColumn('pickup_by', \Magento\Framework\DB\Ddl\Table::TYPE_TEXT, 50,
+            [ 'nullable' => true,],
+            'Pickup By'
+        )->addColumn('pickup_date', \Magento\Framework\DB\Ddl\Table::TYPE_DATETIME, null,
+            [ 'nullable' => true,],
+            'Pickup Date'
         )->addColumn('pickup_comment', \Magento\Framework\DB\Ddl\Table::TYPE_TEXT, null,
             [ 'nullable' => true, ],
             'Pickup comment'
         )->addColumn('delivery', \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT, 4,
             [ 'nullable' => true, ],
             'Delivery'
+        )->addColumn('delivery_date', \Magento\Framework\DB\Ddl\Table::TYPE_DATETIME, null,
+            [ 'nullable' => true, ],
+            'Delivery Date'
         )->addColumn('delivery_comment', \Magento\Framework\DB\Ddl\Table::TYPE_TEXT, null,
             [ 'nullable' => true, ],
             'Delivery comment'
         )->addColumn('status', \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT, 6,
             [ 'nullable' => true, ],
             'Status'
+        )->addColumn('client_connected', \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT, 4,
+            [ 'nullable' => false, 'default' => '0' ],
+            'Po created'
         )->addColumn('po_created', \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT, 6,
             [ 'nullable' => false, 'default' => '0' ],
             'Po created'
         )->addColumn('delivery_time', \Magento\Framework\DB\Ddl\Table::TYPE_TEXT, 50,
             [ 'nullable' => true, ],
             'Delivery time'
-        )->addColumn('order_created_date', \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP, null,
+        )->addColumn('order_created_date', \Magento\Framework\DB\Ddl\Table::TYPE_DATETIME, null,
             [ 'nullable' => false, ],
             'Order created date'
         )->addColumn('created_date', \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP, null,

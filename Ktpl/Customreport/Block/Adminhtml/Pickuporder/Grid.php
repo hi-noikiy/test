@@ -276,7 +276,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         'header' => __('Delivery Date'),
         'index' => 'delivery_date',
         'type' => 'datetime',
-     //   'renderer'  => '\Ktpl\Customreport\Block\Adminhtml\Pickuporder\Grid\Renderer\Deliverydate',
+        'renderer'  => '\Ktpl\Customreport\Block\Adminhtml\Pickuporder\Grid\Renderer\Deliverydate',
     )); 
     $this->addColumn('status', array(
         'header' => __('Status'),

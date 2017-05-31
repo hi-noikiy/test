@@ -60,7 +60,7 @@
          <exportButton name="export_button"/>
 <!--        <filterSearch name="fulltext"/>-->
         <filters name="listing_filters">
-            <argument name="data" xsi:type="array"> <exportButton name="export_button"/>
+            <argument name="data" xsi:type="array"> 
                 <item name="config" xsi:type="array">
                     <item name="templates" xsi:type="array">
                         <item name="filters" xsi:type="array">
@@ -118,7 +118,6 @@
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
                     <item name="sorting" xsi:type="string">desc</item>
-                    <item name="sortOrder" xsi:type="number">1</item>
                     <item name="label" xsi:type="string" translate="true">Order #</item>
                 </item>
             </argument>
@@ -131,7 +130,6 @@
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
                     <item name="dataType" xsi:type="string">date</item>
                     <item name="sorting" xsi:type="string">desc</item>
-                    <item name="sortOrder" xsi:type="number">1</item>
                     <item name="label" xsi:type="string" translate="true">Purchased On</item>
                     <item name="dateFormat" xsi:type="string">MMM dd, YYYY, H:MM:SS A</item>
                 </item>
@@ -143,28 +141,26 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
-                   
-                    <item name="sortOrder" xsi:type="number">3</item>
                     <item name="label" xsi:type="string" translate="true">Customer Name</item>
                 </item>
             </argument>
         </column>
+        
         <column name="telephone">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
                      <item name="editor" xsi:type="string">text</item>
-                      <item name="sortOrder" xsi:type="number">4</item>
                     <item name="label" xsi:type="string" translate="true">Phone</item>
                 </item>
             </argument>
         </column>
+        
         <column name="address">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
                      <item name="editor" xsi:type="string">text</item>
-                      <item name="sortOrder" xsi:type="number">5</item>
                     <item name="label" xsi:type="string" translate="true">Address</item>
                 </item>
             </argument>
@@ -179,63 +175,72 @@
                     <item name="dataType" xsi:type="string">select</item>
                     <item name="editor" xsi:type="string">select</item>
                     <item name="label" xsi:type="string" translate="true">Region</item>
-                    <item name="sortOrder" xsi:type="number">6</item>
                 </item>
             </argument>
         </column>
         
-        <column name="product_name">
+        <column name="city">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
+                    <item name="editor" xsi:type="string">text</item>
                       <item name="sortOrder" xsi:type="number">7</item>
-                    <item name="label" xsi:type="string" translate="true">Product name</item>
+                    <item name="label" xsi:type="string" translate="true">City</item>
                 </item>
             </argument>
         </column>
+        
         <column name="sku">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
-                      <item name="sortOrder" xsi:type="number">8</item>
                     <item name="label" xsi:type="string" translate="true">SKU</item>
                 </item>
             </argument>
         </column>
+        
         <column name="attributes">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
-                    <item name="sortOrder" xsi:type="number">9</item>
                     <item name="label" xsi:type="string" translate="true">Attributes</item>
                 </item>
             </argument>
         </column>
+        
         <column name="qty">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
-                      <item name="sortOrder" xsi:type="number">10</item>
                     <item name="label" xsi:type="string" translate="true">Qty</item>
                 </item>
             </argument>
         </column>
+        
+        <column name="total_qty_ordered">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Total Products</item>
+                </item>
+            </argument>
+        </column>
+        
         <column name="payment_method" >
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
                      <item name="editor" xsi:type="string">text</item>
-                       <item name="sortOrder" xsi:type="number">11</item>
                     <item name="label" xsi:type="string" translate="true">Payment Method</item>
                 </item>
             </argument>
         </column>
+        
         <column name="deposit">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
                     <item name="editor" xsi:type="string">text</item>
-                      <item name="sortOrder" xsi:type="number">12</item>
                     <item name="label" xsi:type="string" translate="true">CIM Deposit</item>
                 </item>
             </argument>
@@ -247,20 +252,20 @@
                    <item name="sortable" xsi:type="boolean">false</item>
                     <item name="editor" xsi:type="string">text</item>
                    <item name="label" xsi:type="string" translate="true">Customer Comment</item>
-                   <item name="sortOrder" xsi:type="number">13</item>
                 </item>
             </argument>
         </column>
+        
         <column name="delivery_comment" class="Ktpl\Customreport\Ui\Component\Listing\Column\Dcomment">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="sortable" xsi:type="boolean">false</item>
                      <item name="editor" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Delivery Comment</item>
-                      <item name="sortOrder" xsi:type="number">14</item>
                 </item>
             </argument>
         </column>
+        
          <column name="delivery_date_time"  class="Magento\Ui\Component\Listing\Columns\Date">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -268,24 +273,21 @@
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
                     <item name="dataType" xsi:type="string">date</item>
                      <item name="editor" xsi:type="string">date</item>
-                    <item name="sortOrder" xsi:type="number">15</item>
                     <item name="label" xsi:type="string" translate="true">Delivery Date</item>
                     <item name="dateFormat" xsi:type="string">MMM dd, YYYY, H:MM:SS A</item>
                 </item>
             </argument>
         </column>
         
-        
-        
         <column name="status">
             <argument name="data" xsi:type="array">
-                <item name="options" xsi:type="object">Ktpl\Customreport\Model\Renderer\Options</item>
+                <item name="options" xsi:type="object">Ktpl\Customreport\Model\Renderer\DeliveryStatus</item>
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">select</item>
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
                     <item name="dataType" xsi:type="string">select</item>
+                     <item name="editor" xsi:type="string">select</item>
                     <item name="label" xsi:type="string" translate="true">Status</item>
-                      <item name="sortOrder" xsi:type="number">16</item>
                 </item>
             </argument>
         </column>
@@ -295,7 +297,6 @@
                 <item name="config" xsi:type="array">
                     <item name="sortable" xsi:type="boolean">false</item>
                     <item name="label" xsi:type="string" translate="true">Delivery Time</item>
-                      <item name="sortOrder" xsi:type="number">17</item>
                 </item>
             </argument>
         </column>
@@ -306,7 +307,6 @@
                     <item name="indexField" xsi:type="string">real_order_id</item>
                     <item name="viewUrlPath" xsi:type="string">sales/order/view</item>
                     <item name="urlEntityParamName" xsi:type="string">order_id</item>
-                      <item name="sortOrder" xsi:type="number">18</item>
                 </item>
             </argument>
         </actionsColumn>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ktpl_Repaircenter::a_menu_item6" title="Repair to center" module="Ktpl_Repaircenter" parent="Ktpl_Customreport::a_menu" resource="Ktpl_Repaircenter::repaircenter"  action="repaircenter/repairtocenter/index"  sortOrder="18" />
+        <add id="Ktpl_Repaircenter::a_menu_item7" title="Repair to customer" module="Ktpl_Repaircenter" parent="Ktpl_Customreport::a_menu" resource="Ktpl_Repaircenter::repaircustomer"  action="repaircenter/repairtocustomer/index"  sortOrder="19" />
+    </menu>
+</config>

@@ -22,5 +22,15 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         );
         $this->storeManager = $storeManager;
     }
+     protected function _initSelect()
+    {
+        parent::_initSelect();
+
+        $this->getSelect()->joinLeft(
+                ['secondTable' => $this->getTable('sales_order')],
+                'main_table.order_id = secondTable.increment_id',
+                ['entity_id','subtotal','order_currency_code','total_qty_ordered', 'created_at']
+            );
+    }
     
 }
