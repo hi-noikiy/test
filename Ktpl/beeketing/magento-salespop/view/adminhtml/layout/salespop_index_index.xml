@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<page layout="admin-1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Sales Pop</title>
+		<css src="Beeketing_SalesPop::css/app.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Beeketing\SalesPop\Block\Adminhtml\Index\Index" name="salespop.index.index"
+                   template="Beeketing_SalesPop::index/index.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

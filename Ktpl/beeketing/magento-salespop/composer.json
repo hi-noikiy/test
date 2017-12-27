@@ -1,0 +1,25 @@
+{
+    "name": "beeketing/magento-salespop",
+    "description": "Sales Pop app",
+    "license": "MIT",
+    "type": "magento2-module",
+    "version": "1.0.1",
+    "authors": [
+        {
+            "name": "Beeketing",
+            "email": "hi@beeketing.com"
+        }
+    ],
+    "require": {
+        "beeketing/magento-common": "^1.0.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Beeketing\\SalesPop\\": ""
+        },
+        "files": [
+            "registration.php",
+            "config.php"
+        ]
+    }
+}

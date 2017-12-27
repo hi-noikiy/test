@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_order_save_after">
+        <observer instance="Beeketing\SalesPop\Observer\Sales\OrderSaveAfter"
+                  name="beeketing_salespop_observer_sales_order_save_after"/>
+    </event>
+    <event name="customer_save_after">
+        <observer instance="Beeketing\SalesPop\Observer\Customer\SaveAfter"
+                  name="beeketing_salespop_observer_customer_save_after"/>
+    </event>
+    <event name="customer_delete_after">
+        <observer instance="Beeketing\SalesPop\Observer\Customer\DeleteAfter"
+                  name="beeketing_salespop_observer_customer_delete_after"/>
+    </event>
+</config>

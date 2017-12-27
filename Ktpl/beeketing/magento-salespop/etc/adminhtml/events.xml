@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="controller_action_catalog_product_save_entity_after">
+        <observer instance="Beeketing\SalesPop\Observer\Controller\CatalogProductSaveEntityAfter"
+                  name="beeketing_salespop_observer_controller_action_catalog_product_save_entity_after"/>
+    </event>
+    <event name="catalog_product_delete_after_done">
+        <observer instance="Beeketing\SalesPop\Observer\Catalog\ProductDeleteAfterDone"
+                  name="beeketing_salespop_observer_catalog_product_delete_after_done"/>
+    </event>
+    <event name="catalog_category_change_products">
+        <observer instance="Beeketing\SalesPop\Observer\Catalog\CategoryChangeProducts"
+                  name="beeketing_salespop_observer_catalog_category_change_products"/>
+    </event>
+</config>

@@ -1,0 +1,22 @@
+{
+    "name": "beeketing/magento-common",
+    "description": "Beeketing magento common api, function",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "tungquach",
+            "email": "tungquach@brodev.com"
+        }
+    ],
+    "require": {
+        "paragonie/random_compat": "^2.0",
+        "kriswallsmith/buzz": "^0.15.0",
+        "symfony/http-foundation": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Beeketing\\MagentoCommon\\": "src/"
+        }
+    }
+}
