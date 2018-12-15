@@ -1,0 +1,249 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+		<hn module="salesforce">
+			<label>Hungnam</label>
+			<sort_order>120</sort_order>
+		</hn>
+	</tabs>
+	<sections>
+		<salesforce translate="label" module="salesforce">
+			<label>Salesforce integration setting</label>
+			<tab>hn</tab>
+		
+			<sort_order>100</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			
+			<groups>
+				<auth translate="label">
+					<label>Salesforce integration authenticate</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>10</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					
+					<fields>						
+                        <user_id>
+							<label>Username</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <comment>Email of developer account</comment>
+						</user_id>
+						<password>
+						      <label>Password</label>
+							 <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <comment>Password of developer account</comment>
+						</password>						
+						<client_id>
+							<label>Client ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <comment>Consumer key of connect app</comment>
+						</client_id>
+						<client_secret>
+						    <label>Client Secret</label>
+							<frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <comment>Consumer secret of connect app</comment>
+						</client_secret>
+						<security_token>
+							<label>Security token</label>
+							<frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <comment>Receive security token via email</comment>
+						</security_token>								
+					</fields>
+				</auth>
+			</groups>
+			<groups>
+				<operation>
+					<label>Operation</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>20</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<fields>
+						<sync_lead>
+							<label>Sync Lead</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>130</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>							
+						</sync_lead>
+						<sync_contact>
+							<label>Sync Contact</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>140</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</sync_contact>						
+						<sync_account>
+						    <label>Sync Account</label>
+						    <source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>120</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</sync_account>
+						<sync_campaign>
+						    <label>Sync Campaign</label>
+						    <source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>130</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</sync_campaign>						
+						<sync_order>
+						    <label>Sync Order</label>
+						    <source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>150</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</sync_order>
+						<sync_product>
+						    <label>Sync Product</label>
+						    <source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>160</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</sync_product>
+						<sync_subscriber>
+						    <label>Sync Subcriber</label>
+						    <source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>180</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</sync_subscriber>
+					</fields>
+				</operation>
+			</groups>			
+			<groups>
+				<custom>
+					<label>Sync Custom Table</label>\
+					<frontend_type>text</frontend_type>
+					<sort_order>50</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<fields>
+						<sync_custom_customer>
+							<label>Sync Custom Customer</label>
+							<frontend_type>text</frontend_type>
+							<frontend_type>select</frontend_type>
+								<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</sync_custom_customer>
+						<customer>
+							<label>Custom Customer Table</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>110</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<comment>API Name of Table</comment>
+							<depends><sync_custom_customer>1</sync_custom_customer></depends>
+						</customer>
+						<unique_customer>
+							<label>Unique field of Custom Customer Table</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>115</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<depends><sync_custom_customer>1</sync_custom_customer></depends>
+							<comment>API Name of unique field(pass email of customer, use it check avoid duplicate customer)</comment>
+						</unique_customer>
+						<sync_custom_product>
+						    <label>Sync Custom Product</label>
+						    <source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>120</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</sync_custom_product>
+						<product>
+							<label>Custom Product Table</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>130</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<depends><sync_custom_product>1</sync_custom_product></depends>
+							<comment>API Name of Table</comment>
+						</product>
+						<unique_product>
+							<label>Unique field of Custom Product Table</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>131</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<depends><sync_custom_product>1</sync_custom_product></depends>
+							<comment>API Name of unique field(pass SKU of Product, use it check avoid duplicate Product)</comment>
+						</unique_product>
+						<sync_custom_invoice>
+							<label>Sync Custom Invoice</label>
+						    <source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>140</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</sync_custom_invoice>
+						<invoice>
+							<label>Custom Invoice</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>150</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<depends><sync_custom_invoice>1</sync_custom_invoice></depends>
+							<comment>API Name of Table</comment>
+						</invoice>
+						<invoice_item>
+							<label>Custom Invoice Product</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>160</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<comment>API Name of Table</comment>
+							<depends><sync_custom_invoice>1</sync_custom_invoice></depends>
+						</invoice_item>
+					</fields>
+				</custom>
+			</groups>
+			<groups>
+				<customize>
+					<label>Customize Sync Customer</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>60</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<fields>
+						<customer_group>
+							<label>Customer Group</label>
+							<frontend_type>multiselect</frontend_type>
+							<sort_order>130</sort_order>
+							<source_model>adminhtml/system_config_source_customer_group</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</customer_group>
+					</fields>
+				</customize>
+			</groups>
+		</salesforce>
+	</sections>
+</config>
+                      

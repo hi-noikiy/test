@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * MindMagnet Products Sort
+ *
+ * Copyright (C) 2015-2016 MindMagnet <contact@mindmagnet.com>
+ * LICENSE: GNU General Public License for more details <http://opensource.org/licenses/gpl-license.php>
+ *
+ * @package MindMagnet_Sort
+ * @author Simona Trifan <simona.plesuvu@mindmagnetsoftware.com>
+ * @link http://www.mindmagnet.com
+*/
+-->
+<config>
+    <modules>
+        <MindMagnet_Sort>
+            <version>1.0.10</version>
+        </MindMagnet_Sort>
+    </modules>
+
+    <global>
+        <blocks>
+            <catalog>
+                <rewrite>
+                    <product_list_toolbar>MindMagnet_Sort_Block_Product_List_Toolbar</product_list_toolbar>
+                </rewrite>
+            </catalog>
+            <mindmagnetsort>
+                <class>MindMagnet_Sort_Block</class>
+            </mindmagnetsort>
+            <adminhtml>
+                <rewrite>
+                    <catalog_product_attribute_edit_form>MindMagnet_Sort_Block_Adminhtml_Catalog_Product_Attribute_Edit_Form</catalog_product_attribute_edit_form>
+                    <catalog_product_attribute_edit_tab_options>MindMagnet_Sort_Block_Adminhtml_Catalog_Product_Attribute_Edit_Tab_Options</catalog_product_attribute_edit_tab_options>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+        <helpers>
+            <mindmagnetsort>
+                <class>MindMagnet_Sort_Helper</class>
+            </mindmagnetsort>
+        </helpers>
+        <models>
+            <catalog>
+                <rewrite>
+                    <config>MindMagnet_Sort_Model_Config</config>
+                    <category_attribute_source_sortby>MindMagnet_Sort_Model_Sortby</category_attribute_source_sortby>
+                </rewrite>
+            </catalog>
+            <catalog_resource>
+                <rewrite>
+                    <product_collection>MindMagnet_Sort_Model_Resource_Product_Collection</product_collection>
+                </rewrite>
+            </catalog_resource>
+            <mindmagnetsort>
+                <class>MindMagnet_Sort_Model</class>
+            </mindmagnetsort>
+        </models>
+        <resources>
+            <mindmagnetsort_setup>
+                <setup>
+                    <module>MindMagnet_Sort</module>
+                    <class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </mindmagnetsort_setup>
+            <mindmagnetsort_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </mindmagnetsort_write>
+            <mindmagnetsort_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </mindmagnetsort_read>
+        </resources>
+    </global>
+
+    <frontend>
+        <layout>
+            <updates>
+                <mindmagnet_sort>
+                    <file>mindmagnet_sort.xml</file>
+                </mindmagnet_sort>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <mindmagnet_sort>
+                    <files>
+                        <default>MindMagnet_Sort.csv</default>
+                    </files>
+                </mindmagnet_sort>
+            </modules>
+        </translate>
+        <routers>
+            <catalog>
+                <args>
+                    <modules>
+                        <mindmagnet_sort before="Mage_Catalog">MindMagnet_Sort</mindmagnet_sort>
+                    </modules>
+                </args>
+            </catalog>
+        </routers>
+    </frontend>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <!--<MindMagnet_Sort after="Mage_Adminhtml">MindMagnet_Sort</MindMagnet_Sort>-->
+                        <MindMagnet_Sort before="Mage_Adminhtml">MindMagnet_Sort_Adminhtml</MindMagnet_Sort>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <mindmagnetsort>
+                    <file>mindmagnet_sort.xml</file>
+                </mindmagnetsort>
+            </updates>
+        </layout>
+
+        <!--<translate>-->
+            <!--<modules>-->
+                <!--<mindmagnetsort>-->
+                    <!--<files>-->
+                        <!--<default>MindMagnet_Sort.csv</default>-->
+                    <!--</files>-->
+                <!--</mindmagnetsort>-->
+            <!--</modules>-->
+        <!--</translate>-->
+
+        <events>
+            <adminhtml_catalog_product_attribute_edit_prepare_form>
+                <observers>
+                    <mindmagnetsort>
+                        <type>singleton</type>
+                        <class>MindMagnet_Sort_Model_Observer</class>
+                        <method>prepareAttributeForm</method>
+                    </mindmagnetsort>
+                </observers>
+            </adminhtml_catalog_product_attribute_edit_prepare_form>
+        </events>
+    </adminhtml>
+
+    <default>
+        <mindmagnet_sort>
+            <global_config>
+                <enabled>0</enabled>
+                <popularity_title>Popularity</popularity_title>
+                <value_title>Value</value_title>
+            </global_config>
+        </mindmagnet_sort>
+    </default>
+</config>

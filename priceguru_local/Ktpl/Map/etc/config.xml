@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Ktpl_Map>
+            <version>1.0.0</version>
+        </Ktpl_Map>
+    </modules>
+    
+   <admin>
+    <routers>
+        <adminhtml>
+            <args>
+                <modules>
+                    <ktplmap before="Mage_Adminhtml">Ktpl_Map_Adminhtml</ktplmap>
+                </modules>
+            </args>
+        </adminhtml>
+    </routers>
+</admin>
+    
+    <global>
+        <models>
+            <ktplmap>
+                <class>Ktpl_Map_Model</class>
+            </ktplmap>   
+        </models>
+        <resources>
+            <ktplmap_setup>
+                <setup>
+                    <module>Ktpl_Map</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </ktplmap_setup>
+            <ktplmap_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </ktplmap_write>
+            <ktplmap_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </ktplmap_read>
+        </resources>
+        <events>
+            <sales_order_place_after>
+                <observers>
+                    <save_latitude>
+                        <type>singleton</type>
+                        <class>Ktpl_Map_Model_Observer</class>
+                        <method>setlatitude</method>
+                    </save_latitude>
+                </observers>
+            </sales_order_place_after>
+        </events>
+    </global>    
+    
+</config>

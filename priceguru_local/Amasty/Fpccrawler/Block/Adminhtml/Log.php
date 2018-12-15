@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @copyright   Copyright (c) 2009-2014 Amasty (http://www.amasty.com)
+ */
+class Amasty_Fpccrawler_Block_Adminhtml_Log extends Mage_Adminhtml_Block_Widget_Grid_Container
+{
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->_controller = 'adminhtml_log';
+        $this->_blockGroup = 'amfpccrawler';
+        $this->_headerText = Mage::helper('amfpccrawler')->__('Log');
+        $this->_removeButton('add');
+    }
+}

@@ -1,0 +1,267 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Ktpl_Customreport>
+            <version>0.1.6</version>
+        </Ktpl_Customreport>
+    </modules>
+    <frontend>
+        <layout>
+            <updates>
+                <customreport>
+                    <file>customreport.xml</file>
+                </customreport>
+            </updates>
+        </layout>
+        <routers>
+            <customreport>
+                <use>standard</use>
+                <args>
+                    <module>Ktpl_Customreport</module>
+                    <frontName>cimcheckout</frontName>
+                </args>
+            </customreport>
+        </routers>
+    </frontend>
+	
+    <global>
+        <models>
+            <customreport>
+                <class>Ktpl_Customreport_Model</class>
+                <resourceModel>customreport_mysql4</resourceModel>
+            </customreport>
+            <customreport_mysql4>
+                <class>Ktpl_Customreport_Model_Mysql4</class>
+                <entities>                                   
+                    <salescimorder>
+                        <table>sales_flat_cimorder</table>
+                    </salescimorder>
+                    <salespickuporder>
+                        <table>sales_flat_pickuporder</table>
+                    </salespickuporder>
+                    <salesdeliveryorder>
+                        <table>sales_flat_deliveryorder</table>
+                    </salesdeliveryorder>
+                    <salesinvoicevat>
+                        <table>sales_invoice_vat</table>
+                    </salesinvoicevat> 
+                    <wholesaler>
+                        <table>wholesaler</table>
+                    </wholesaler>                           
+                    <poorder>
+                        <table>po_order</table>
+                    </poorder>                           
+                </entities>                
+            </customreport_mysql4>
+        </models>
+        <resources>
+            <customreport_setup>
+                <setup>
+                    <module>Ktpl_Customreport</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </customreport_setup>
+            <customreport_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </customreport_write>
+            <customreport_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </customreport_read>
+        </resources>
+        <blocks>
+            <customreport>
+                <class>Ktpl_Customreport_Block</class>
+            </customreport>
+        </blocks>
+        <helpers>
+            <customreport>
+                <class>Ktpl_Customreport_Helper</class>
+            </customreport>
+        </helpers>
+        <template>
+            <email>
+                <cimorder_email_guest translate="label" module="customreport">
+                    <label>Credit Application - New Order</label>
+                    <file>customreport/cimorder_guest.html</file>
+                    <type>html</type>
+                </cimorder_email_guest>
+                <cimorder_email_selfemployes translate="label" module="customreport">
+                    <label>Credit Application - Self Employed</label>
+                    <file>customreport/selfemployed.html</file>
+                    <type>html</type>
+                </cimorder_email_selfemployes>
+                <cimorder_email_resending translate="label" module="customreport">
+                    <label>Credit Application - Resending</label>
+                    <file>customreport/resending.html</file>
+                    <type>html</type>
+                </cimorder_email_resending>
+                <cimorder_email_creditaccepted translate="label" module="customreport">
+                    <label>Credit Application Accepted</label>
+                    <file>customreport/creditaccepted.html</file>
+                    <type>html</type>
+                </cimorder_email_creditaccepted>
+                <cimorder_email_creditrefused translate="label" module="customreport">
+                    <label>Credit Application Refused</label>
+                    <file>customreport/creditrefused.html</file>
+                    <type>html</type>
+                </cimorder_email_creditrefused>
+                <cimorder_email_newclient translate="label" module="customreport">
+                    <label>Credit Application - New Client</label>
+                    <file>customreport/newclient.html</file>
+                    <type>html</type>
+                </cimorder_email_newclient>
+                <cimorder_email_existingclient translate="label" module="customreport">
+                    <label>Credit Application - Existing Client</label>
+                    <file>customreport/existingclient.html</file>
+                    <type>html</type>
+                </cimorder_email_existingclient>
+                <purchase_order_email translate="label" module="customreport">
+                    <label>Purchase Order</label>
+                    <file>customreport/purchaseorder.html</file>
+                    <type>html</type>
+                </purchase_order_email>
+                <purchase_order_pdf translate="label" module="customreport">
+                    <label>Purchase Order</label>
+                    <file>customreport/purchaseorderpdf.html</file>
+                    <type>html</type>
+                </purchase_order_pdf>
+                <vat_invoice_email translate="label" module="customreport">
+                    <label>Sales Invoice VAT</label>
+                    <file>customreport/salesinvoicevat.html</file>
+                    <type>html</type>
+                </vat_invoice_email>
+                <delivery_note translate="label" module="customreport">
+                    <label>Delivery Note</label>
+                    <file>customreport/deliverynote.html</file>
+                    <type>html</type>
+                </delivery_note>
+            </email>
+        </template>
+    </global>
+    <admin>
+        <routers>
+            <customreport>
+                <use>admin</use>
+                <args>
+                    <module>Ktpl_Customreport</module>
+                    <frontName>customreport</frontName>
+                </args>
+            </customreport>
+        </routers>
+    </admin>
+	<adminhtml>
+        <layout>
+            <updates>
+                <customreport>
+                    <file>customreport.xml</file>
+                </customreport>
+            </updates>
+        </layout>
+        <menu>
+            <sales>
+                <children>
+                    <order translate="title" module="customreport">
+                        <children>
+                            <customreport translate="title" module="customreport">
+                                <title>CIM Credit</title>
+                                <action>customreport/adminhtml_cimcreditorder</action>
+                                <sort_order>20</sort_order>
+                            </customreport>
+                            <sales_po translate="title" module="customreport">
+                                <title>Po Order</title>
+                                <action>customreport/adminhtml_poorder</action>
+                                <sort_order>24</sort_order>
+                            </sales_po>
+                            <sales_pickup translate="title" module="customreport">
+                                <title>Pickup Order</title>
+                                <action>customreport/adminhtml_pickuporder</action>
+                                <sort_order>25</sort_order>
+                                <children>
+                                    <wholesaler translate="title" module="customreport">
+                                        <title>Add Wholesaler</title>
+                                        <action>customreport/adminhtml_wholesaler</action>
+                                        <sort_order>10</sort_order>
+                                    </wholesaler>
+                                </children>
+                            </sales_pickup>
+                            <sales_delivery translate="title" module="customreport">
+                                <title>Delivery Order</title>
+                                <action>customreport/adminhtml_deliveryorder</action>
+                                <sort_order>30</sort_order>
+                            </sales_delivery>
+                            
+                            <purchaseorder translate="title" module="customreport">
+                                <title>Purchase Order</title>
+                                <action>customreport/adminhtml_purchaseorder</action>
+                                <sort_order>35</sort_order>
+                            </purchaseorder>
+                        </children>
+                    </order>
+                </children>
+            </sales>
+        </menu>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <customreport>
+                                            <title>Custom Report and Checkout</title>
+                                        </customreport>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                        <sales translate="title" module="customreport">
+                            <children>
+                                <order translate="title" module="customreport">
+                                    <children>
+                                        <customreport translate="title" module="customreport">
+                                            <title>CIM Credit</title>
+                                            <sort_order>20</sort_order>
+                                        </customreport>
+                                        <sales_po translate="title" module="customreport">
+                                            <title>Po Order</title>
+                                            <sort_order>24</sort_order>
+                                        </sales_po>
+                                        <sales_pickup translate="title" module="customreport">
+                                            <title>Pickup Order</title>
+                                            <sort_order>25</sort_order>
+                                            <children>
+                                                <wholesaler translate="title" module="customreport">
+                                                    <title>Add Wholesaler</title>
+                                                    <sort_order>10</sort_order>
+                                                </wholesaler>
+                                            </children>
+                                        </sales_pickup>
+                                        <sales_delivery translate="title" module="customreport">
+                                            <title>Delivery Order</title>
+                                            <sort_order>30</sort_order>
+                                        </sales_delivery>
+                                        <purchaseorder translate="title" module="customreport">
+                                            <title>Purchase Order</title>
+                                            <sort_order>35</sort_order>
+                                        </purchaseorder>
+                                    </children>
+                                </order>
+                            </children>
+                        </sales>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+	</adminhtml>
+</config>

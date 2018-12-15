@@ -1,0 +1,30 @@
+<config>
+    <modules>
+        <MindMagnet_Conf>
+            <version>1.0.0</version>
+        </MindMagnet_Conf>
+    </modules>
+    <global>
+        <models>
+            <mindmagnetconf>
+                <class>MindMagnet_Conf_Model</class>
+            </mindmagnetconf>
+        </models>
+        <helpers>
+            <mindmagnetconf>
+                <class>MindMagnet_Conf_Helper</class>
+            </mindmagnetconf>
+        </helpers>
+    </global>
+    <frontend>
+        <routers>
+            <amconf>
+                <args>
+                    <modules>
+                        <mindmagnetconf before="Amasty_Conf">MindMagnet_Conf</mindmagnetconf>
+                    </modules>
+                </args>
+            </amconf>
+        </routers>
+    </frontend>
+</config>

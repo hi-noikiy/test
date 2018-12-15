@@ -1,0 +1,1024 @@
+<?xml version="1.0"?>
+<config>
+    <api2>
+		<resource_groups>
+            <apiios translate="title" module="api2">
+                <title>Api IOS</title>
+                <sort_order>30</sort_order>
+                <children>
+                    <apiios_stores translate="title" module="api2">
+                        <title>Product</title>
+                        <sort_order>50</sort_order>
+                    </apiios_stores>
+                </children>
+            </apiios>
+        </resource_groups>
+        <resources>
+            <stores translate="title" module="api2">
+                <group>apiios_stores</group>
+                <model>apiios/api2_stores</model>
+                <working_model>catalog/product</working_model>
+                <title>Catalog Product</title>
+                <sort_order>10</sort_order>
+                <attributes translate="id name groups stores" module="api2">
+                    <id>Store ID</id>
+                    <name>Name</name>
+                    <groups>Groups</groups>
+                    <stores>Stores</stores>
+                    <currency>Currency Code</currency>
+                    <currencies>Currency List</currencies>
+                    <current>Current Currency</current>
+                    <text_list>Text Translate List</text_list>
+                </attributes>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                    <customer>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </customer>
+                    <guest>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </guest>
+                </privileges>
+                <routes>
+                    <route_entity_store_list>
+                        <route>/iosstores</route>
+                        <action_type>collection</action_type>
+                    </route_entity_store_list>
+                    <route_entity_currency_list>
+                        <route>/ios/get/:method</route>
+                        <action_type>entity</action_type>
+                    </route_entity_currency_list>
+                    <route_entity_set_currency>
+                        <route>/ios/setCurrency</route>
+                        <action_type>entity</action_type>
+                    </route_entity_set_currency>
+                </routes>
+                <versions>1</versions>
+            </stores>
+            <ios_category>
+                <group>apiios_stores</group>
+                <model>apiios/api2_category</model>
+                 <title>Catalog Product</title>
+                <sort_order>10</sort_order>
+                <attributes translate="category_object category_list name products thumb products_num entity_id type_id attribute_set_id stock_data image_url is_saleable total_reviews_count url buy_now_url has_custom_options is_in_stock price use_config_gift_message_available use_config_gift_wrapping_available url_key_create_redirect minimal_price min_price max_price sortby attributes_filter active_filter" module="api2">
+                    <id>Store ID</id>
+                    <name>Name</name>
+                    <category_list>Category List</category_list>
+                    <thumb>Thumbnail</thumb>
+                    <products_num>Products number</products_num>
+                    <category_object>Category Object</category_object>
+                    <products>Product List</products>
+                    <entity_id>Product ID</entity_id>
+                    <type_id>Product Type</type_id>
+                    <attribute_set_id>Attribute Set</attribute_set_id>
+                    <stock_data>Inventory Data</stock_data>
+                    <image_url>Default Image</image_url>
+                    <is_saleable>Salability Status</is_saleable>
+                    <total_reviews_count>Total Reviews Count</total_reviews_count>
+                    <url>Product URL</url>
+                    <buy_now_url>Buy Now URL</buy_now_url>
+                    <has_custom_options>Has Custom Options</has_custom_options>
+                    <is_in_stock>Stock Status</is_in_stock>
+                    <price>Regular Price With Tax</price>
+                    <final_price>Final Price With Tax</final_price>
+                    <minimal_price>Minimal Price With Tax</minimal_price>
+                    <max_price>Min Price With Tax</max_price>
+                    <regular_price_with_tax>Regular Price With Tax</regular_price_with_tax>
+                    <use_config_gift_message_available>Use Config Settings for Allow Gift Message</use_config_gift_message_available>
+                    <use_config_gift_wrapping_available>Use Config Settings for Allow Gift Wrapping</use_config_gift_wrapping_available>
+                    <url_key_create_redirect>Create Permanent Redirect for old URL</url_key_create_redirect>
+                    <sortby>Availables Order, current sort by, direction</sortby>
+                    <attributes_filter>Attributes filter</attributes_filter>
+                    <active_filter>Active Filter</active_filter>
+                    <catalog_search>Catalog Search Page</catalog_search>
+                    <total>Total</total>
+                    <limit>Limit</limit>
+                    <cur_page>Current Page</cur_page>
+                    <products>Product List</products>
+                    <result>Return result json</result>
+                </attributes>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                    <customer>
+                        <retrieve>1</retrieve>
+                    </customer>
+                    <guest>
+                        <retrieve>1</retrieve>
+                    </guest>
+                </privileges>
+                <routes>
+                    <route_entity_category_list>
+                        <route>/ioscategory</route>
+                        <action_type>collection</action_type>
+                    </route_entity_category_list>
+                    <route_entity_category_product_list>
+                        <route>/ioscategory/:category_id/products</route>
+                        <action_type>entity</action_type>
+                    </route_entity_category_product_list>
+                    <route_entity_catalog_search>
+                        <route>/ios/catalog/search</route>
+                        <action_type>entity</action_type>
+                    </route_entity_catalog_search>
+                </routes>
+                <versions>1</versions>
+            </ios_category>
+            <ios_blockproducts>
+				<group>apiios_stores</group>
+                <model>apiios/api2_blockproducts</model>
+				 <title>Catalog Product</title>
+                <sort_order>10</sort_order>
+                <attributes translate="category_list name thumb products_num" module="api2">
+                    <id>Store ID</id>
+                    <name>Name</name>
+                    <category_list>Category List</category_list>
+                    <thumb>Thumbnail</thumb>
+                    <products_num>Products number</products_num>
+                    <entity_id>Product ID</entity_id>
+                    <type_id>Product Type</type_id>
+                    <attribute_set_id>Attribute Set</attribute_set_id>
+                    <stock_data>Inventory Data</stock_data>
+                    <image_url>Default Image</image_url>
+                    <is_saleable>Salability Status</is_saleable>
+                    <total_reviews_count>Total Reviews Count</total_reviews_count>
+                    <url>Product URL</url>
+                    <buy_now_url>Buy Now URL</buy_now_url>
+                    <has_custom_options>Has Custom Options</has_custom_options>
+                    <is_in_stock>Stock Status</is_in_stock>
+                    <price>Regular Price With Tax</price>
+                    <final_price>Final Price With Tax</final_price>
+                    <minimal_price>Minimal Price With Tax</minimal_price>
+                    <max_price>Min Price With Tax</max_price>
+                    <regular_price_with_tax>Regular Price With Tax</regular_price_with_tax>
+                    <use_config_gift_message_available>Use Config Settings for Allow Gift Message</use_config_gift_message_available>
+                    <use_config_gift_wrapping_available>Use Config Settings for Allow Gift Wrapping</use_config_gift_wrapping_available>
+                    <url_key_create_redirect>Create Permanent Redirect for old URL</url_key_create_redirect>
+                </attributes>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                    <customer>
+                        <retrieve>1</retrieve>
+                    </customer>
+                    <guest>
+                        <retrieve>1</retrieve>
+                    </guest>
+                </privileges>
+                <routes>
+                    <route_entity_blockproducts_list>
+                        <route>/iosblockproducts</route>
+                        <action_type>collection</action_type>
+                    </route_entity_blockproducts_list>
+                </routes>
+                <versions>1</versions>
+			</ios_blockproducts>
+			<ios_suggestsearch>
+				<group>apiios_stores</group>
+                <model>apiios/api2_suggestsearch</model>
+				 <title>Catalog Product</title>
+                <sort_order>10</sort_order>
+                <attributes translate="name num" module="api2">
+                    <name>Name</name>
+                    <num>Number</num>
+                    <keywords>Key Words</keywords>
+                </attributes>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                    <customer>
+                        <retrieve>1</retrieve>
+                    </customer>
+                    <guest>
+                        <retrieve>1</retrieve>
+                    </guest>
+                </privileges>
+                <routes>
+                    <route_entity_suggestsearch_list>
+                        <route>/iossuggestsearch</route>
+                        <action_type>entity</action_type>
+                    </route_entity_suggestsearch_list>
+                </routes>
+                <versions>1</versions>
+			</ios_suggestsearch>
+			<ios_productsinfo>
+				<group>apiios_stores</group>
+                <model>apiios/api2_productsinfo</model>
+				<title>Catalog Product Details</title>
+                <sort_order>10</sort_order>
+                <attributes translate="category_list name thumb products_num" module="api2">
+                    <info>info</info>
+                    <entity_id>entity id</entity_id>
+                    <entity_type_id>entity type id</entity_type_id>
+                    <name>Name</name>                   
+                    <thumb>Thumbnail</thumb>
+                    <entity_id>Product ID</entity_id>
+                    <type_id>Product Type</type_id>
+                    <attribute_set_id>Attribute Set</attribute_set_id>
+                    <additional>Additional</additional>
+                    <stock_data>Inventory Data</stock_data>
+                    <image_url>Default Image</image_url>
+                    <is_saleable>Salability Status</is_saleable>
+                    <total_reviews_count>Total Reviews Count</total_reviews_count>
+                    <url>Product URL</url>
+                    <buy_now_url>Buy Now URL</buy_now_url>
+                    <has_custom_options>Has Custom Options</has_custom_options>
+                    <is_in_stock>Stock Status</is_in_stock>
+                    <price>Regular Price With Tax</price>
+                    <final_price>Final Price With Tax</final_price>
+                    <minimal_price>Minimal Price With Tax</minimal_price>
+                    <max_price>Min Price With Tax</max_price>
+                    <regular_price_with_tax>Regular Price With Tax</regular_price_with_tax>
+                    <use_config_gift_message_available>Use Config Settings for Allow Gift Message</use_config_gift_message_available>
+                    <use_config_gift_wrapping_available>Use Config Settings for Allow Gift Wrapping</use_config_gift_wrapping_available>
+                    <url_key_create_redirect>Create Permanent Redirect for old URL</url_key_create_redirect>
+                </attributes>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                    <customer>
+                        <retrieve>1</retrieve>
+                    </customer>
+                    <guest>
+                        <retrieve>1</retrieve>
+                    </guest>
+                </privileges>
+                <routes>
+                    <route_entity_productsinfo_list>
+                        <route>/iosproductsinfo/product/:id</route>
+                        <action_type>entity</action_type>
+                    </route_entity_productsinfo_list>
+                </routes>
+                <versions>1</versions>
+			</ios_productsinfo>
+			<ios_listreviews>
+				<group>apiios_stores</group>
+                <model>apiios/api2_reviews</model>
+				<title>Reviews list</title>
+                <sort_order>10</sort_order>
+                <attributes translate="list_review review_id created_at status_id title detail nickname customer_id rating_vote vote_id rating_code percent" module="api2">
+                    <list_review>list review</list_review>
+                    <count_review>count review</count_review>
+					<summary>rating summary</summary>
+                    <review_id>review id</review_id>
+                    <created_at>created at</created_at>
+                    <status_id>status id</status_id>
+					<title>title</title>
+					<detail>detail</detail>
+                    <nickname>nickname</nickname>
+                    <customer_id>customer id</customer_id>
+                    <rating_vote>rating vote</rating_vote>
+                    <vote_id>vote id</vote_id>
+                    <rating_code>rating code</rating_code>
+                    <percent>percent</percent>
+                </attributes>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                    <customer>
+                        <retrieve>1</retrieve>
+                        <create>1</create>
+                    </customer>
+                    <guest>
+                        <retrieve>1</retrieve>
+                        <create>1</create>
+                    </guest>
+                </privileges>
+                <routes>
+                    <route_entity_listreviews_list>
+                        <route>/ios/reviews/product/:id</route>
+                        <action_type>entity</action_type>
+                    </route_entity_listreviews_list>
+                </routes>
+                <versions>1</versions>
+			</ios_listreviews>
+			<ios_formreviews>
+				<group>apiios_stores</group>
+                <model>apiios/api2_reviews_form</model>
+				<title>Reviews form</title>
+                <sort_order>10</sort_order>
+                <attributes translate="form_review rating input" module="api2">
+                    <form_review>Form review</form_review>                    
+                    <rating>Rating</rating>                    
+                    <input>Input</input>                    
+                    <product>Product</product>                    
+                    <detail>Detail</detail>                    
+                    <nickname>Nickname</nickname>                    
+                    <title>Title</title>                    
+                    <ratings>Ratings</ratings>                    
+                    <validate_rating>Validate Rating</validate_rating>                    
+                </attributes>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                    <customer>
+                        <retrieve>1</retrieve>
+                        <create>1</create>
+                    </customer>
+                    <guest>
+                        <retrieve>1</retrieve>
+                        <create>1</create>
+                    </guest>
+                </privileges>
+                <routes>
+                    <route_entity_listreviews_form>
+                        <route>/ios/reviews/form</route>
+                        <action_type>entity</action_type>
+                    </route_entity_listreviews_form>
+					<route_entity_add_reviews>
+                        <route>/ios/reviews/add</route>
+                        <action_type>collection</action_type>
+                    </route_entity_add_reviews>
+                </routes>
+                <versions>1</versions>
+			</ios_formreviews>
+			<ios_checkout>
+				<group>apiios_stores</group>
+                <model>apiios/api2_checkout</model>
+				<title>Add to cart</title>
+                <sort_order>10</sort_order>
+                <attributes translate="store_id product options qty related_product" module="api2">
+                    <store_id>Store ID</store_id>
+                    <product>Product ID</product>
+                    <title>Custom title</title>
+                    <text>Custom text</text>
+                    <options>Options</options>
+                    <qty>Qty</qty>
+                    <related_product>Related Product</related_product>
+                    <super_group>Grouped product</super_group>
+                    <super_attribute>Configurable product</super_attribute>
+                    <bundle_option>Bundle product</bundle_option>
+                    <bundle_option_qty>Bundle product qty</bundle_option_qty>
+                    <links>Downloadable product</links>
+                    <update_cart_action>update cart action</update_cart_action>
+                    <cart>cart</cart>
+                </attributes>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                    <customer>
+                        <retrieve>1</retrieve>
+                        <create>1</create>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </customer>
+                    <guest>
+                        <retrieve>1</retrieve>
+                        <create>1</create>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </guest>
+                </privileges>
+                <routes>
+                    <route_entity_ios_checkout_cart>
+                        <route>/ios/checkout/cart</route>
+                        <action_type>collection</action_type>
+                    </route_entity_ios_checkout_cart>
+					<route_entity_ios_checkout_cart_delete>
+                        <route>/ios/checkout/cart/delete/:item_id</route>
+                        <action_type>entity</action_type>
+                    </route_entity_ios_checkout_cart_delete>
+					<route_entity_ios_checkout_cart_update>
+                        <route>/ios/checkout/cart/updatePost</route>
+                        <action_type>entity</action_type>
+                    </route_entity_ios_checkout_cart_update>
+                </routes>
+                <versions>1</versions>
+			</ios_checkout>
+            <ios_customer_form>
+                <group>apiios_stores</group>
+                <model>apiios/api2_customer_form</model>
+                <title>Create An Account</title>
+                <sort_order>10</sort_order>.
+                <attributes translate="store_id product options qty related_product" module="api2">
+                    <store_id>Store ID</store_id>
+                    <prefix>Prefix</prefix>
+                    <firstname>First Name</firstname>
+                    <middlename>Middle Name</middlename>
+                    <lastname>Last Name</lastname>
+                    <suffix>Suffix</suffix>
+                    <email>Email Address</email>
+                    <confirm_email>Confirm email</confirm_email>
+                    <date_birth>Date of Birth</date_birth>
+                    <tax>Tax/VAT number</tax>
+                    <gender>Gender</gender>
+                    <change_password>Change password or not</change_password>
+                    <current_password>Current Password</current_password>
+                    <password>Password</password>
+                    <confirmation>Confirm Password</confirmation>
+                    <captcha_user_create>Captcha for create user page</captcha_user_create>
+                    <dob>Dob</dob>
+                    <taxvat>Tax Vat</taxvat>
+                    <capcha></capcha>
+                    <list_field>List Field</list_field>
+                    <customer>Current Api User</customer>
+                    <imgSrc>image source of captcha after refresh</imgSrc>
+                    <message_captcha_refresh>Message if refresh catcha not required</message_captcha_refresh>
+                    <message_account>Message when user is logged in</message_account>
+                    <login_username>Username login</login_username>
+                    <login_password>Password login</login_password>
+                    <login_captcha>Captcha login</login_captcha>
+                    <captcha_user_forgotpassword>Captcha for forgotpassword page</captcha_user_forgotpassword>
+                    <ignore_captcha>Ignore Captcha</ignore_captcha>
+					<access_token>Access Token</access_token>
+					<os>Check ios or android</os>
+                </attributes>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <create>1</create>
+                    </admin>
+                    <customer>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </customer>
+                    <guest>
+                        <retrieve>1</retrieve>
+                        <create>1</create>
+                        <update>1</update>
+                    </guest>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/customers/:id</route>
+                        <action_type>entity</action_type>
+                    </route_entity>
+                    <route_entity_ios_cutomer_account_update>
+                        <route>/ios/customer/account/editPost/</route>
+                        <action_type>entity</action_type>
+                    </route_entity_ios_cutomer_account_update>
+                    <route_entity_ios_cutomer_account_create>
+                        <route>/ios/customer/account/create/</route>
+                        <action_type>entity</action_type>
+                    </route_entity_ios_cutomer_account_create>
+                    <route_entity_ios_cutomer_account_login>
+                        <route>/ios/customer/account/login/</route>
+                        <action_type>entity</action_type>
+                    </route_entity_ios_cutomer_account_login>
+                    <!--<route_entity_ios_cutomer_account_put>
+                        <route>/ios/customer/account/:method</route>
+                        <action_type>entity</action_type>
+                    </route_entity_ios_cutomer_account_put>-->
+                    <route_entity_ios_cutomer_account_loginput>
+                        <route>/ios/customer/account/loginPut/</route>
+                        <action_type>entity</action_type>
+                    </route_entity_ios_cutomer_account_loginput>
+                    <route_entity_ios_cutomer_account_loginsocialput>
+                        <route>/ios/customer/account/loginSocialPut/</route>
+                        <action_type>entity</action_type>
+                    </route_entity_ios_cutomer_account_loginsocialput>
+                    <route_entity_ios_cutomer_account_forgotpassword>
+                        <route>/ios/customer/account/forgotpassword/</route>
+                        <action_type>entity</action_type>
+                    </route_entity_ios_cutomer_account_forgotpassword>
+                    <route_entity_ios_cutomer_account_forgotpasswordPut>
+                        <route>/ios/customer/account/forgotpasswordPut/</route>
+                        <action_type>entity</action_type>
+                    </route_entity_ios_cutomer_account_forgotpasswordPut>
+                    <route_entity_ios_cutomer_refresh_captcha>
+                        <route>/ios/captcha/refresh</route>
+                        <action_type>entity</action_type>
+                    </route_entity_ios_cutomer_refresh_captcha>
+                    <route_entity_ios_cutomer_account_createPost>
+                        <route>/ios/customer/account/createPost/</route>
+                        <action_type>collection</action_type>
+                    </route_entity_ios_cutomer_account_createPost>
+                    <route_entity_ios_cutomer_account_logout>
+                        <route>/ios/customer/account/logout/</route>
+                        <action_type>entity</action_type>
+                    </route_entity_ios_cutomer_account_logout>
+                </routes>
+                <versions>1</versions>
+            </ios_customer_form>
+            <ios_customer_address>
+                <group>apiios_stores</group>
+                <model>apiios/api2_customer_address</model>
+                <title>Load, update address of the customer</title>
+                <sort_order>15</sort_order>
+                <attributes translate="store_id" module="api2">
+                    <store_id>Store ID</store_id>
+                    <address>Address List</address>
+                    <billing>Billing Address</billing>
+                    <shipping>Shipping Address</shipping>
+                    <additional>Additional Address</additional>
+                    <address_data>The value of address</address_data>
+                    <field_list>Field List</field_list>
+					<prefix>Prefix</prefix>
+					<middlename>Middle Name</middlename>
+                    <firstname>First Name</firstname>
+                    <lastname>Last Name</lastname>
+                    <company>Company</company>
+                    <street>Street</street>
+                    <city>City</city>
+                    <country_id>Country Id</country_id>
+                    <region>Region</region>
+                    <region_id>Region Id</region_id>
+                    <postcode>Post Code</postcode>
+                    <telephone>Telephone</telephone>
+                    <fax>Fax</fax>
+                    <vat_id>Vat Id</vat_id>
+                    <id>Address Id</id>
+                    <default_billing>Default Billing</default_billing>
+                    <default_shipping>Default Shipping</default_shipping>
+                </attributes>
+                <privileges>
+                    <customer>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </customer>
+                </privileges>
+                <routes>
+                    <route_collection_ios_customer_address>
+                        <route>/ios/customer/address/</route>
+                        <action_type>collection</action_type>
+                    </route_collection_ios_customer_address>
+                    <route_entity_ios_customer_address_edit>
+                        <route>/ios/customer/address/edit/:id</route>
+                        <action_type>entity</action_type>
+                    </route_entity_ios_customer_address_edit>
+                    <route_entity_ios_customer_address_new>
+                        <route>/ios/customer/address/new</route>
+                        <action_type>entity</action_type>
+                    </route_entity_ios_customer_address_new>
+                    <route_entity_ios_customer_address_formPost>
+                        <route>/ios/customer/address/formPost</route>
+                        <action_type>collection</action_type>
+                    </route_entity_ios_customer_address_formPost>
+                </routes>
+                <versions>1</versions>
+            </ios_customer_address>
+            <ios_orders>
+                <group>apiios_stores</group>
+                <model>apiios/api2_customer_order</model>
+                <title>Load order list, detail of an order</title>
+                <sort_order>20</sort_order>
+                <attributes translate="entity_id increment_id created_at status shipping_description _payment_method base_currency_code store_currency_code store_name remote_ip store_to_order_rate subtotal subtotal_incl_tax discount_amount base_grand_total grand_total shipping_amount shipping_tax_amount shipping_incl_tax tax_amount _tax_name _tax_rate coupon_code base_discount_amount base_subtotal base_shipping_amount base_shipping_tax_amount base_tax_amount total_paid base_total_paid total_refunded base_total_refunded base_subtotal_incl_tax base_total_due total_due shipping_discount_amount base_shipping_discount_amount discount_description customer_balance_amount base_customer_balance_amount base_customer_balance_amount _gift_message _order_comments customer_id" module="api2">
+                    <entity_id>Order ID (internal)</entity_id>
+                    <increment_id>Order ID</increment_id>
+                    <created_at>Order Date</created_at>
+                    <status>Order Status</status>
+                    <shipping_description>Shipping Method</shipping_description>
+                    <_payment_method>Payment Method</_payment_method>
+                    <store_name>Store Name</store_name>
+                    <remote_ip>Placed from IP</remote_ip>
+                    <subtotal>Subtotal</subtotal>
+                    <subtotal_incl_tax>Subtotal Including Tax</subtotal_incl_tax>
+                    <discount_amount>Discount</discount_amount>
+                    <grand_total>Grand Total</grand_total>
+                    <shipping_amount>Shipping Amount</shipping_amount>
+                    <shipping_tax_amount>Shipping Including Tax</shipping_tax_amount>
+                    <shipping_incl_tax>Shipping Tax</shipping_incl_tax>
+                    <tax_amount>Tax Amount</tax_amount>
+                    <_tax_name>Tax Name</_tax_name>
+                    <_tax_rate>Tax Rate</_tax_rate>
+                    <coupon_code>Coupon Code</coupon_code>
+                    <total_paid>Total Paid</total_paid>
+                    <total_refunded>Total Refunded</total_refunded>
+                    <total_due>Total Due</total_due>
+                    <shipping_discount_amount>Shipping Discount</shipping_discount_amount>
+                    <discount_description>Discount Description</discount_description>
+                    <_order_comments>Order Comments</_order_comments>
+                    <customer_id>Customer ID</customer_id>
+                    <shipping_address_name>Shipping Address Name</shipping_address_name>
+                    <status_label>Status Label</status_label>
+                    <shipping_method>Shipping Method</shipping_method>
+                    <shipping_description>Shipping Description</shipping_description>
+                    <payment_method_name>Payment Method Name</payment_method_name>
+					<order_items_label>Order Items Label</order_items_label>
+                    <qty_ordered>Qty Ordered Label</qty_ordered>
+                    <qty_shipped>Qty Shipped Label</qty_shipped>
+                    <qty_canceled>Qty Canceled Label</qty_canceled>
+                    <qty_refunded>Qty Refunded Label</qty_refunded>
+					<tax>Tax Amount</tax>
+                    <list_order>List of order</list_order>
+                    <qty_label>Qty Label</qty_label>
+                </attributes>
+				<include_attributes>
+                    <customer>
+                        <read>
+                            <entity_id>1</entity_id>
+                            <increment_id>1</increment_id>
+                            <created_at>1</created_at>
+                            <status>1</status>
+                            <shipping_description>1</shipping_description>
+                            <discount_amount>1</discount_amount>
+                            <grand_total>1</grand_total>
+                            <subtotal>Subtotal</subtotal>
+                            <shipping_amount>1</shipping_amount>
+                            <shipping_tax_amount>1</shipping_tax_amount>
+                            <shipping_incl_tax>1</shipping_incl_tax>
+                            <tax_amount>1</tax_amount>
+                            <_tax_name>1</_tax_name>
+                            <_tax_rate>1</_tax_rate>
+                            <_gift_message>1</_gift_message>
+                            <_order_comments>1</_order_comments>
+                            <shipping_address_name>Shipping Address Name</shipping_address_name>
+                            <status_label>Status Label</status_label>
+                            <shipping_method>Shipping Method</shipping_method>
+                            <shipping_description>Shipping Description</shipping_description>
+                            <payment_method_name>Payment Method Name</payment_method_name>
+                            <qty_ordered>Qty Ordered Label</qty_ordered>
+                            <qty_shipped>Qty Shipped Label</qty_shipped>
+                            <qty_canceled>Qty Canceled Label</qty_canceled>
+                            <qty_refunded>Qty Refunded Label</qty_refunded>
+							<tax>Tax Amount</tax>
+							<list_order>List of order</list_order>
+							<qty_label>Qty Label</qty_label>
+                        </read>
+                    </customer>
+                </include_attributes>
+                <force_attributes>
+                    <customer>
+						<list_order>List of order</list_order>
+						<list_order>Qty Label</list_order>
+                        <payment_method>1</payment_method>
+                        <addresses>1</addresses>
+                        <order_items>1</order_items>
+						<order_items_label>1</order_items_label>
+                        <gift_message_from>1</gift_message_from>
+                        <gift_message_to>1</gift_message_to>
+                        <gift_message_body>1</gift_message_body>
+                        <order_comments>1</order_comments>
+                        <tax_name>1</tax_name>
+                        <tax_rate>1</tax_rate>
+						<tax>1</tax>
+						<list_order>List of order</list_order>
+                        <qty_label>Qty Label</qty_label>
+                    </customer>
+                    <admin>
+						<order_items_label>1</order_items_label>
+                        <payment_method>1</payment_method>
+                        <addresses>1</addresses>
+                        <order_items>1</order_items>
+                        <gift_message_from>1</gift_message_from>
+                        <gift_message_to>1</gift_message_to>
+                        <gift_message_body>1</gift_message_body>
+                        <order_comments>1</order_comments>
+                        <tax_name>1</tax_name>
+                        <tax_rate>1</tax_rate>
+						<list_order>List of order</list_order>
+                        <qty_label>Qty Label</qty_label>
+                    </admin>
+                </force_attributes>
+                <privileges>
+                    <customer>
+                        <retrieve>1</retrieve>
+                    </customer>
+                </privileges>
+                <routes>
+                    <route_collection_ios_customer_orders>
+                        <route>/ios/customer/orders/</route>
+                        <action_type>entity</action_type>
+                    </route_collection_ios_customer_orders>
+                </routes>
+                <versions>1</versions>
+            </ios_orders>
+			<ios_checkout_cart>
+				<group>apiios_stores</group>
+                <model>apiios/api2_checkout_cart</model>
+				<title>Shopping cart</title>
+                <sort_order>11</sort_order>
+                <attributes translate="items crosssell totals" module="api2">
+                    <items>items</items>
+                    <crosssell>crosssell</crosssell>
+                    <totals>totals</totals>
+                    <shopping_cart>shopping cart</shopping_cart>
+                    <success>success</success>
+                </attributes>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                    <customer>
+                        <retrieve>1</retrieve>
+                        <create>1</create>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </customer>
+                    <guest>
+                        <retrieve>1</retrieve>
+                        <create>1</create>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </guest>
+                </privileges>
+                <routes>
+                    <route_entity_ios_checkout_shoppingcart>
+                        <route>/ios/checkout/cartitem/</route>
+                        <action_type>entity</action_type>
+                    </route_entity_ios_checkout_shoppingcart>
+                </routes>
+                <versions>1</versions>
+			</ios_checkout_cart>
+			<ios_checkout_coupon>
+				<group>apiios_stores</group>
+                <model>apiios/api2_checkout_coupon</model>
+				<title>Coupon Post</title>
+                <sort_order>11</sort_order>
+                <attributes translate="coupon_code remove" module="api2">
+                    <coupon_code>coupon code</coupon_code>
+                    <remove>remove</remove>
+                </attributes>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                    <customer>
+                        <retrieve>1</retrieve>
+                        <create>1</create>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </customer>
+                    <guest>
+                        <retrieve>1</retrieve>
+                        <create>1</create>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </guest>
+                </privileges>
+                <routes>
+                    <route_entity_ios_checkout_coupon>
+                        <route>/ios/checkout/cart/coupon</route>
+                        <action_type>collection</action_type>
+                    </route_entity_ios_checkout_coupon>
+                </routes>
+                <versions>1</versions>
+			</ios_checkout_coupon>
+            <ios_slideshow translate="title" module="api2">
+                <group>apiios_stores</group>
+                <model>apiios/api2_slideshow</model>
+                <title>Get Slideshow</title>
+                <sort_order>30</sort_order>
+                <attributes translate="img_src" module="api2">
+                    <img_src>Image Source Url</img_src>
+                    <list_image>List Image</list_image>
+                </attributes>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                    <customer>
+                        <retrieve>1</retrieve>
+                    </customer>
+                    <guest>
+                        <retrieve>1</retrieve>
+                    </guest>
+                </privileges>
+                <routes>
+                    <route_entity_slide_collection>
+                        <route>/ios/slideshow</route>
+                        <action_type>entity</action_type>
+                    </route_entity_slide_collection>
+                </routes>
+                <versions>1</versions>
+            </ios_slideshow>
+            <ios_checkout_onepage translate="title" module="api2">
+                <group>apiios_stores</group>
+                <model>apiios/api2_checkout_onepage</model>
+                <title>Checkout Onepage</title>
+                <sort_order>50</sort_order>
+                <attributes translate="" module="api2">
+                    <checkout_type>Checkout type</checkout_type>
+                    <login>Login</login>
+                    <pass>Ignore step</pass>
+                    <data_fields>Fields and data in form</data_fields>
+                    <data>Data address</data>
+                    <address_data>Address Data</address_data>
+                    <billing>Billing data for submit</billing>
+                    <shipping>Shipping data for submit</shipping>
+                    <shipping_method>Shipping Method</shipping_method>
+                    <payment>Payment data for submit</payment>
+                    <review>Review data for submit</review>
+                    <update_section>Data for next section</update_section>
+                    <method>Method</method>
+					<messages>Message Error</messages>
+					<totals>Totals</totals>
+                </attributes>
+                <privileges>
+                    <customer>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                    </customer>
+                    <guest>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                    </guest>
+                </privileges>
+                <routes>
+                    <route_entity_checkout_onepage>
+                        <route>/ios/checkout/onepage/:step</route>
+                        <action_type>entity</action_type>
+                    </route_entity_checkout_onepage>
+                    <route_entity_checkout_onepage_saveMethod>
+                        <route>/ios/checkout/onepage/save/:step</route>
+                        <action_type>collection</action_type>
+                    </route_entity_checkout_onepage_saveMethod>
+                </routes>
+                <versions>1</versions>
+            </ios_checkout_onepage>
+
+            <ios_paypalexpress>
+                <group>apiios_stores</group>
+                <model>apiios/api2_paypalexpress</model>
+                <title>Checkout With Paypal Express</title>
+                <sort_order>60</sort_order>
+                <attributes translate="" module="api2">
+                    <return_url>Url Return</return_url>
+                    <cancel_url>Url Cancel</cancel_url>
+                    <review_fields>Review Fields</review_fields>
+                    <result>The fields in review page</result>
+                    <billing>Billing detail submit </billing>
+                    <shipping>Shipping detail submit </shipping>
+                    <customer-email>Customer Email</customer-email>
+                    <shipping_method>Shipping Method</shipping_method>
+                    <call_update_shipping_method>Call update shipping method</call_update_shipping_method>
+                </attributes>
+                <privileges>
+                    <customer>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </customer>
+                    <guest>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </guest>
+                </privileges>
+                <routes>
+                    <route_entity_paypal_express_start>
+                        <route>/ios/paypal/express/:step</route>
+                        <action_type>entity</action_type>
+                    </route_entity_paypal_express_start>
+                </routes>
+                <versions>1</versions>
+            </ios_paypalexpress>
+
+            <ios_wishlist>
+                <group>apiios_stores</group>
+                <model>apiios/api2_wishlist</model>
+                <title>Add, view and delete wishlist</title>
+                <sort_order>60</sort_order>
+                <attributes translate="" module="api2">
+                    <items>Wish list items</items>
+                    <count>The number of wish list item</count>
+                    <empty_message>The message when there is not wish list item</empty_message>
+                    <product>The product id</product>
+					<thumbnail_width>Thumbnail width</thumbnail_width>
+					<thumbnail_height>Thumbnail height</thumbnail_height>
+                </attributes>
+                <privileges>
+                    <customer>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </customer>
+                </privileges>
+                <routes>
+                    <route_entity_wishlist_add>
+                        <route>/ios/wishlist/add</route>
+                        <action_type>collection</action_type>
+                    </route_entity_wishlist_add>
+                    <route_entity_wishlist_view>
+                        <route>/ios/wishlist/view</route>
+                        <action_type>entity</action_type>
+                    </route_entity_wishlist_view>
+                    <route_entity_wishlist_delete>
+                        <route>/ios/wishlist/delete/:item_id</route>
+                        <action_type>entity</action_type>
+                    </route_entity_wishlist_delete>
+                </routes>
+                <versions>1</versions>
+            </ios_wishlist>
+
+			<ios_mobapp>
+				<group>apiios_stores</group>
+                <model>apiios/api2_mobapp</model>
+				<title>Mobapp Infomation</title>
+                <sort_order>10</sort_order>
+                <attributes translate="name" module="api2">
+                    <result>Result</result>
+                    <id>Id</id>
+                    <name>Name</name>
+                    <license>License</license>
+                    <start>Start</start>
+                    <expired>Expired</expired>
+                    <status>Status</status>
+                    <slideshow>Slideshow</slideshow>
+                    <color>Color</color>
+                    <paygate>Paygate</paygate>
+                </attributes>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                    <customer>
+                        <retrieve>1</retrieve>
+                    </customer>
+                    <guest>
+                        <retrieve>1</retrieve>
+                    </guest>
+                </privileges>
+                <routes>
+                    <route_entity_mobapp>
+                        <route>/ios/mobapp/:id</route>
+                        <action_type>entity</action_type>
+                    </route_entity_mobapp>
+                </routes>
+                <versions>1</versions>
+			</ios_mobapp>
+			
+			<addinfo translate="title" module="api2">
+                <group>apiios_stores</group>
+                <model>apiios/api2_addinfo</model>
+                <title>Apiios Addition Info</title>
+                <sort_order>10</sort_order>
+                <attributes module="api2">
+                    <name>Name</name>
+                    <link>Link</link>
+                    <price>Price</price>
+                    <contact_name>Contact Name</contact_name>
+                    <contact_email>Contact Email</contact_email>
+                    <external_functions_url>External Functions Url</external_functions_url>
+                    <latest_version>Latest Version</latest_version>
+                    <update_url>Update Url</update_url>
+                </attributes>
+                <privileges>
+                    <customer>
+                        <retrieve>1</retrieve>
+                    </customer>
+                    <guest>
+                        <retrieve>1</retrieve>
+                    </guest>
+                </privileges>
+                <routes>
+                    <route_entity_info_list>
+                        <route>/ios/addinfo</route>
+                        <action_type>collection</action_type>
+                    </route_entity_info_list>
+					<route_entity_general_info>
+                        <route>/ios/generalinfo</route>
+                        <action_type>entity</action_type>
+                    </route_entity_general_info>
+                </routes>
+                <versions>1</versions>
+            </addinfo>
+        </resources>
+    </api2>
+</config>

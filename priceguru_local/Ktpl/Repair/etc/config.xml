@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Ktpl_Repair>
+            <version>0.1.0</version>
+        </Ktpl_Repair>
+    </modules>
+    
+    <frontend>
+        <layout>
+            <updates>
+                <repair>
+                    <file>repair.xml</file>
+                </repair>
+            </updates>
+        </layout>
+        <routers>
+            <repair>
+                <use>standard</use>
+                <args>
+                    <module>Ktpl_Repair</module>
+                    <frontName>repair</frontName>
+                </args>
+            </repair>
+        </routers>
+    </frontend>
+    <global>
+        <helpers>
+            <repair>
+                <class>Ktpl_Repair_Helper</class>
+            </repair>
+        </helpers>
+    </global>
+        
+    
+</config>

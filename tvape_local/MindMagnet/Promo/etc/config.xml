@@ -1,0 +1,92 @@
+<config>
+    <modules>
+        <MindMagnet_Promo>
+            <version>1.0.0</version>
+        </MindMagnet_Promo>
+    </modules>
+    <global>
+        <models>
+            <mindmagnetpromo>
+                <class>MindMagnet_Promo_Model</class>
+            </mindmagnetpromo>
+        </models>
+        <helpers>
+            <mindmagnetpromo>
+                <class>MindMagnet_Promo_Helper</class>
+            </mindmagnetpromo>
+        </helpers>
+    </global>
+    <frontend>
+        <events>
+            <checkout_cart_add_product_complete>
+                <observers>
+                    <mm_promo_model_observer>
+                        <type>singleton</type>
+                        <class>MindMagnet_Promo_Model_Observer</class>
+                        <method>onCheckoutCartProductAddAfter</method>
+                    </mm_promo_model_observer>
+                </observers>
+            </checkout_cart_add_product_complete>
+            <sales_quote_remove_item>
+                <observers>
+                    <mm_promo_remove_cart_item>
+                        <type>singleton</type>
+                        <class>MindMagnet_Promo_Model_Observer</class>
+                        <method>removeProductFromMap</method>
+                    </mm_promo_remove_cart_item>
+                </observers>
+            </sales_quote_remove_item>
+            <checkout_cart_update_items_after>
+                <observers>
+                    <mm_promo_update_cart_item>
+                        <class>MindMagnet_Promo_Model_Observer</class>
+                        <method>updateGiftQuantities</method>
+                    </mm_promo_update_cart_item>
+                </observers>
+            </checkout_cart_update_items_after>
+            <!--<checkout_cart_update_items_before>
+                <observers>
+                    <mm_promo_update_cart_item_before>
+                        <class>MindMagnet_Promo_Model_Observer</class>
+                        <method>updateQuantities</method>
+                    </mm_promo_update_cart_item_before>
+                </observers>
+            </checkout_cart_update_items_before>-->
+        </events>
+    </frontend>
+    <adminhtml>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <mindmagnetpromo translate="title" module="mindmagnetpromo">
+                                            <title>Upgrade Product Configuration</title>
+                                            <sort_order>100</sort_order>
+                                        </mindmagnetpromo>
+                                    </children>
+                                </config>    
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+    <default>
+        <mindmagnetpromo>
+            <upgrade>
+                <popup_title>Upgrade Gift</popup_title>
+                <popup_button_title>Upgrade</popup_button_title>
+                <popup_free_gift_title>No, Thanks! Keep the free gift</popup_free_gift_title>
+                <upgrade_gift_button_title>Upgrade Gift</upgrade_gift_button_title>
+            </upgrade>
+        </mindmagnetpromo>
+    </default>
+</config>

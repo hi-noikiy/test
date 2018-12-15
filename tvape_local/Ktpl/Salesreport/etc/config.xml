@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ktpl_Salesreport>
+            <version>1.0.0</version>
+        </Ktpl_Salesreport>
+    </modules>
+    
+    <global>
+        <blocks>
+            <salesreport>
+                <class>Ktpl_Salesreport_Block</class>
+            </salesreport>   
+        </blocks>
+        <helpers>
+            <salesreport>
+                <class>Ktpl_Salesreport_Helper</class>
+            </salesreport>
+        </helpers>
+        <models>
+            <salesreport>
+                <class>Ktpl_Salesreport_Model</class>
+            </salesreport>
+            
+            <sales_resource>
+                <rewrite>
+                    <order_item_collection>Ktpl_Salesreport_Model_Resource_Order_Item_Collection</order_item_collection>
+                </rewrite>
+            </sales_resource>
+        </models>
+    </global>
+    
+    <adminhtml>
+        <translate>
+            <modules>
+                <Ktpl_Salesreport>
+                    <files>
+                        <default>Ktpl_Salesreport.csv</default>
+                    </files>
+                </Ktpl_Salesreport>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <salesreport>
+                    <file>salesreport.xml</file>
+                </salesreport>
+            </updates>
+        </layout>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <report>
+                            <children>
+                                <salesreport translate="title" module="salesreport">
+                                    <title>Sales Representative Reports</title>
+                                    <sort_order>-1</sort_order>
+                                </salesreport>
+                            </children>
+                        </report>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <menu>
+            <report>
+                <children>
+                    <salesreport translate="title" module="salesreport">
+                        <title>Sales Representative Reports</title>
+                        <sort_order>-1</sort_order>
+                        <action>adminhtml/salesreport</action>
+                    </salesreport>
+                </children>
+            </report>
+        </menu>
+    </adminhtml>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <salesreport after="Mage_Adminhtml">Ktpl_Salesreport_Adminhtml</salesreport>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    
+</config> 

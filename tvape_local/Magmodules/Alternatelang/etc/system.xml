@@ -1,0 +1,313 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * Magmodules.eu - http://www.magmodules.eu - info@magmodules.eu
+ * =============================================================
+ * NOTICE OF LICENSE [Single domain license]
+ * This source file is subject to the EULA that is
+ * available through the world-wide-web at:
+ * http://www.magmodules.eu/license-agreement/
+ * =============================================================
+ * @category    Magmodules
+ * @package     Magmodules_Alternatelang
+ * @author      Magmodules <info@magmodules.eu>
+ * @copyright   Copyright (c) 2015 (http://www.magmodules.eu)
+ * @license     http://www.magmodules.eu/license-agreement/  
+ * =============================================================
+ */
+ -->
+<config>
+	<tabs>
+		<magmodules translate="label" module="alternatelang">
+			<label>Magmodules</label>
+			<sort_order>200</sort_order>
+		</magmodules>
+	</tabs>
+	<sections>
+		<alternatelang translate="label" module="alternatelang">
+			<label>Alternate Language Url</label>
+			<tab>magmodules</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>11</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<info>
+					<frontend_model>alternatelang/adminhtml_widget_info_info</frontend_model>
+					<sort_order>1</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+				</info>
+				<general translate="label" module="alternatelang">				
+					<label>Licence</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>2</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+		            <expanded>1</expanded>					
+					<comment>
+  					 <![CDATA[
+						<script>
+						function showLicenseImg(message) {
+							if (Prototype.Browser.IE) {
+								$('alternatelang_general_license_key').next('p').outerHTML = message;
+							} else {
+								$('alternatelang_general_license_key').next('p').innerHTML = message;
+							}
+						}
+						Event.observe(window, 'load', function() {
+							if ($('row_alternatelang_general_server')) {
+								$('row_alternatelang_general_server').hide();
+							}
+							if ($('alternatelang_general_servername')) {
+								$('alternatelang_general_servername').style.backgroundColor='#f0f0f0';
+								$('alternatelang_general_servername').disable();
+							}									
+						showLicenseImg('<a href="http://www.magmodules.eu/" target="_blank"><img src="//www.magmodules.eu/license/?check='+$('alternatelang_general_server').value+'" border="0" style="margin-top: 4px;"/></a>');
+						});
+						</script>
+						<p>
+							<b>License Keys</b>:
+							You can find your license key on your order conformation mail or login to you account at <a href="http://www.magmodules.eu/customer/account/">Magmodules.eu</a><br/>
+							Need development license keys? Please go to <a href="http://www.magmodules.eu/customer/account/">My License Keys</a> in our store to generate a development license key.<br/><br/>
+						</p>						
+                    ]]>								
+					</comment>					
+					<fields>
+                        <servername translate="label">
+                            <label>Server Name</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>alternatelang/system_config_model_servername</backend_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </servername>
+                        <license_key translate="label">
+                            <label>License Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Enter your license key here</comment>
+                        </license_key>
+                        <server translate="label">
+                            <label/>
+                            <frontend_type>hidden</frontend_type>
+                            <backend_model>alternatelang/system_config_model_license</backend_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </server>                                           
+                        <enabled translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>alternatelang/system_config_model_enable</backend_model>                            
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <tooltip>A valid license key is required in order to enable the module.</tooltip>
+                        </enabled>                        
+					</fields>
+				</general>	
+				<targeting translate="label" module="alternatelang">				
+					<label>System Settings</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>3</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>0</show_in_website>
+					<show_in_store>0</show_in_store>
+		            <expanded>1</expanded>					
+					<fields>
+                       <note translate="label">
+                            <label><![CDATA[Select the scope of the hreflang tag. <a href="http://www.magmodules.eu/help/alternate-hreflang/activate-alternatehref/#setting" target="_blank">Read more</a>]]></label>
+                            <frontend_model>alternatelang/adminhtml_system_config_form_field_note</frontend_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>                            
+                        </note> 
+                        <language_scope translate="label">
+                            <label>Include</label>
+                            <frontend_type>select</frontend_type>
+						    <source_model>alternatelang/system_config_locale_languagescope</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </language_scope>                                                                      
+					</fields>
+				</targeting>	
+				<language translate="label" module="alternatelang">				
+					<label>Targeting Settings</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>4</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+		            <expanded>1</expanded>					
+					<fields>
+						<note translate="label">
+                            <label><![CDATA[<p>These settings need to be set on store view level. Please switch to the right scope (top left) and set these values. You will need to repeat this for all your store views. <a href="http://www.magmodules.eu/help/alternate-hreflang/what-hreflangtag-use/" target="_blank">Read more</a></p>]]></label>
+                            <frontend_model>alternatelang/adminhtml_system_config_form_field_note</frontend_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>                            
+                        </note> 
+						<note2 translate="label">
+                            <label><![CDATA[<p>To ensure that your content is catered towards the correct audience, there are two methods to do so, depending on how your webshop is set up. Users can be targeted based on language or region. Please set the correct language tag under "Hreflang Tag:". For more information about targeting languages and region, please visit our <a href="http://www.magmodules.eu/help/alternate-hreflang/what-hreflangtag-use/" target="_blank">knowledge base</a></p>]]></label>
+                            <frontend_model>alternatelang/adminhtml_system_config_form_field_note</frontend_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>                            
+                        </note2> 
+                        <language_dummy translate="label">
+                            <label>Shop language:</label>
+                            <frontend_type>label</frontend_type>
+						    <backend_model>alternatelang/system_config_locale_scope</backend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </language_dummy>
+                        <language translate="label">
+                            <label>Shop language:</label>
+                            <frontend_type>label</frontend_type>
+						    <backend_model>alternatelang/system_config_locale_language</backend_model>
+                            <sort_order>11</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </language>
+                        <suggested translate="label">
+                            <label>Suggested:</label>
+                            <frontend_type>label</frontend_type>
+						    <backend_model>alternatelang/system_config_locale_suggest</backend_model>
+                            <sort_order>12</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </suggested>                        
+                        <hreflang translate="label">
+                            <label>Hreflang Tag:</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>13</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </hreflang>                                              
+					</fields>
+				</language>	
+				<config translate="label" module="alternatelang">				
+					<label>Configuration</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>5</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+		            <expanded>1</expanded>					
+					<fields>
+ 						<product_header translate="label">
+                            <label>Catalog</label>
+                            <frontend_model>magmodules_core/system_config_form_field_heading</frontend_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_header>
+                        <product translate="label">
+                            <label>Enable Product Alternate</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product>                                                    
+                        <category translate="label">
+                            <label>Enable Category Alternate</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </category>   
+                        <canonical translate="label">
+                            <label>Use the Canonical Url</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </canonical>                           
+ 						<cms_header translate="label">
+                            <label>CMS / Homepage</label>
+                            <frontend_model>magmodules_core/system_config_form_field_heading</frontend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cms_header>                        
+                        <homepage translate="label">
+                            <label>Enable Homepage Alternate</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </homepage>  
+                        <cms translate="label">
+                            <label>Enable CMS Pages Alternate</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cms>  
+                        <cms_categories translate="label">
+                            <label>Enable CMS Categories</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Link CMS pages from different languages though a keyword.</comment>
+                        </cms_categories>   
+ 						<debug_header translate="label">
+                            <label>Debug</label>
+                            <frontend_model>magmodules_core/system_config_form_field_heading</frontend_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </debug_header> 
+                        <debug translate="label">
+                            <label>Enable Debug</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>21</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[To debug simple add <b>?show-alternate=1</b> to the url]]></comment>
+                        </debug>                                                                                                                                               
+					</fields>
+				</config>						
+			</groups>				
+		</alternatelang>
+	</sections>
+</config>

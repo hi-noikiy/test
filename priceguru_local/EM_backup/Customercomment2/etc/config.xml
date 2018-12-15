@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <EM_Customercomment2>
+      <version>0.1.0</version>
+    </EM_Customercomment2>
+  </modules>
+  <global>
+    <helpers>
+      <customercomment2>
+        <class>EM_Customercomment2_Helper</class>
+      </customercomment2>
+    </helpers>
+    <models>
+		<sales>
+			<rewrite>
+				<order>Excellence_Custom_Model_Sales_Order</order>
+			</rewrite>
+		</sales>	
+        <customercomment2><!--Namespace name-->
+            <class>EM_Customercomment2_Model</class><!--File path to the model directory-->
+			<resourceModel>customercomment2_mysql4</resourceModel>
+        </customercomment2>
+		<customercomment2_mysql4>
+			<class>EM_Customercomment2_Model_Mysql4</class>
+			<entities>
+				<customercomment2_quote>
+					<table>sales_quote_custommercomment2</table>
+				</customercomment2_quote>
+				<customercomment2_order>
+					<table>sales_order_custommercomment2</table>
+				</customercomment2_order>
+			</entities>
+		</customercomment2_mysql4>
+    </models>	
+	<resources>
+	  <customercomment2_setup>
+		<setup>
+		  <module>EM_Customercomment2</module>
+		</setup>
+		<connection>
+		  <use>core_setup</use>
+		</connection>
+	  </customercomment2_setup>
+	  <customercomment2_write>
+		<connection>
+		  <use>core_write</use>
+		</connection>
+	  </customercomment2_write>
+	  <customercomment2_read>
+		<connection>
+		  <use>core_read</use>
+		</connection>
+	  </customercomment2_read>
+	</resources>
+    <events>
+	  <sales_quote_save_before> <!-- identifier of the event we want to catch -->
+        <observers>
+          <sales_quote_save_before_handler> <!-- identifier of the event handler -->
+            <type>model</type> <!-- class method call type; valid are model, object and singleton -->
+            <class>customercomment2/observer</class> <!-- observers class alias -->
+            <method>saveQuoteBefore</method>  <!-- observer's method to be called -->
+            <args></args> <!-- additional arguments passed to observer -->
+          </sales_quote_save_before_handler>
+        </observers>
+      </sales_quote_save_before>
+	  <sales_quote_save_after> <!-- identifier of the event we want to catch -->
+        <observers>
+          <sales_quote_save_after_handler> <!-- identifier of the event handler -->
+            <type>model</type> <!-- class method call type; valid are model, object and singleton -->
+            <class>customercomment2/observer</class> <!-- observers class alias -->
+            <method>saveQuoteAfter</method>  <!-- observer's method to be called -->
+            <args></args> <!-- additional arguments passed to observer -->
+          </sales_quote_save_after_handler>
+        </observers>
+      </sales_quote_save_after>
+	  <sales_quote_load_after> <!-- identifier of the event we want to catch -->
+        <observers>
+          <sales_quote_load_after_handler> <!-- identifier of the event handler -->
+            <type>model</type> <!-- class method call type; valid are model, object and singleton -->
+            <class>customercomment2/observer</class> <!-- observers class alias -->
+            <method>loadQuoteAfter</method>  <!-- observer's method to be called -->
+            <args></args> <!-- additional arguments passed to observer -->
+          </sales_quote_load_after_handler>
+        </observers>
+      </sales_quote_load_after>
+	  <sales_model_service_quote_submit_after> <!-- identifier of the event we want to catch -->
+        <observers>
+          <sales_model_service_quote_submit_after_handler> <!-- identifier of the event handler -->
+            <type>model</type> <!-- class method call type; valid are model, object and singleton -->
+            <class>customercomment2/observer</class> <!-- observers class alias -->
+            <method>saveOrderAfter</method>  <!-- observer's method to be called -->
+            <args></args> <!-- additional arguments passed to observer -->
+          </sales_model_service_quote_submit_after_handler>
+        </observers>
+      </sales_model_service_quote_submit_after>
+	  <sales_order_load_after> <!-- identifier of the event we want to catch -->
+        <observers>
+          <sales_order_load_after_handler> <!-- identifier of the event handler -->
+            <type>model</type> <!-- class method call type; valid are model, object and singleton -->
+            <class>customercomment2/observer</class> <!-- observers class alias -->
+            <method>loadOrderAfter</method>  <!-- observer's method to be called -->
+            <args></args> <!-- additional arguments passed to observer -->
+          </sales_order_load_after_handler>
+        </observers>
+      </sales_order_load_after>
+    </events>
+  </global>
+</config> 

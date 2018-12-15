@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<config>
+	<menu>
+		<newsletter>
+			<depends><module>My_Nonexisting_Model</module></depends>
+		</newsletter>
+		<Dotdigitalgroup_Dotmailer_menu translate="title" module="dotdigitalgroup_dotmailer">
+			<title>dotMailer</title>
+			<sort_order>60</sort_order>
+				<children>
+					<Dotdigitalgroup_Dotmailer_menu_newsletter_subscribers translate="title" module="dotdigitalgroup_dotmailer">
+						<title>Newsletter Subscribers</title>
+						<action>adminhtml/newsletter_subscriber</action>
+					</Dotdigitalgroup_Dotmailer_menu_newsletter_subscribers>
+					<Dotdigitalgroup_Dotmailer_menu_manager translate="title" module="dotdigitalgroup_dotmailer">
+						<title>Manager</title>
+						<action>dotmailer/manager/index</action>
+					</Dotdigitalgroup_Dotmailer_menu_manager>
+				</children>
+		</Dotdigitalgroup_Dotmailer_menu>
+	</menu>
+
+    <acl>
+		<resources>
+
+			<admin>
+				<children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <Dotdigitalgroup_Dotmailer_section translate="title" module="dotdigitalgroup_dotmailer">
+                                        <title>Dotdigitalgroup_Dotmailer section</title>
+                                        <sort_order>100</sort_order>
+                                    </Dotdigitalgroup_Dotmailer_section>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+					<Dotdigitalgroup_Dotmailer_menu translate="title" module="dotdigitalgroup_dotmailer">
+						<title>Dotdigitalgroup_Dotmailer</title>
+						<sort_order>60</sort_order>
+								<Dotdigitalgroup_Dotmailer_menu_newsletter_subscribers translate="title" module="dotdigitalgroup_dotmailer">
+									<title>Newsletter subscribers</title>
+									<sort_order>61</sort_order>
+								</Dotdigitalgroup_Dotmailer_menu_newsletter_subscribers>
+								<Dotdigitalgroup_Dotmailer_menu_manager translate="title" module="dotdigitalgroup_dotmailer">
+									<title>Manager</title>
+									<sort_order>62</sort_order>
+								</Dotdigitalgroup_Dotmailer_menu_manager>
+					</Dotdigitalgroup_Dotmailer_menu>
+				</children>
+			</admin>
+		</resources>
+    </acl>
+</config>

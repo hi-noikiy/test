@@ -1,0 +1,9 @@
+eav:
+  customer:
+   - entity_id: 2
+     entity_type_id: 1
+     email: john@example.com
+     firstname: John
+     lastname: Doe
+     created_at: 2013-09-30 00:00:00
+     store_id: 1

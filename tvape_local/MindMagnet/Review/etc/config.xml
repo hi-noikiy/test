@@ -1,0 +1,26 @@
+<config>
+    <modules>
+        <MindMagnet_Review>
+            <version>1.0.0</version>
+        </MindMagnet_Review>
+    </modules>
+    <global>
+        <blocks>
+            <review>
+                <rewrite>
+                    <product_view_list>MindMagnet_Review_Block_Product_View_List</product_view_list>
+                </rewrite>
+            </review>
+        </blocks>
+        <models>
+            <mindmagnet_review>
+                <class>MindMagnet_Review_Model</class>
+            </mindmagnet_review>
+        </models>
+        <helpers>
+            <mindmagnet_review>
+                <class>MindMagnet_Review_Helper</class>
+            </mindmagnet_review>
+        </helpers>
+    </global>
+</config>

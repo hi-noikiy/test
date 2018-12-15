@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category   Mage
+ * @package    EM_Emailofproduct
+ * @copyright  Copyright (c) 2004-2007 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <EM_Emailofproduct>
+            <version>0.8.0</version>
+        </EM_Emailofproduct>
+    </modules>
+    <frontend>
+        <routers>
+            <emailofproduct>
+                <use>standard</use>
+                <args>
+                    <module>EM_Emailofproduct</module>
+                    <frontName>emailofproduct</frontName>
+                </args>
+            </emailofproduct>
+        </routers>
+        <translate>
+            <modules>
+                <EM_Emailofproduct>
+                    <files>
+                        <default>EM_Emailofproduct.csv</default>
+                    </files>
+                </EM_Emailofproduct>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <quote>
+                    <file>emailofproduct.xml</file>
+                </quote>
+            </updates>
+        </layout>
+    </frontend>
+    <global>
+        <resources>
+            <emailofproduct_setup>
+                <setup>
+                    <module>EM_Emailofproduct</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </emailofproduct_setup>
+        </resources>
+		<helpers>
+			<emailofproduct><!-- class group -->
+				<class>EM_Emailofproduct_Helper</class><!-- class prefix -->
+			</emailofproduct>
+		</helpers>
+        <template>
+            <email>
+                <emailofproduct_email_email_template translate="label" module="emailofproduct">
+                    <label>Quote Form</label>
+                    <file>quote_form.html</file>
+                    <type>text</type>
+                </emailofproduct_email_email_template>
+				<emailofproduct_email_email2_template translate="label" module="emailofproduct">
+                    <label>Quote Form2</label>
+                    <file>quote_form2.html</file>
+                    <type>text</type>
+                </emailofproduct_email_email2_template>
+                <emailofproduct_email_email3_template translate="label" module="emailofproduct">
+                    <label>Quote Form</label>
+                    <file>quote_form.html</file>
+                    <type>text</type>
+                </emailofproduct_email_email3_template>				
+            </email>
+        </template>
+		<blocks>
+			<emailofproduct>
+				<class>EM_Emailofproduct_Block</class>
+			</emailofproduct>
+			<catalog>
+				<rewrite>
+					<product_view>EM_Emailofproduct_Block_Catalog_Product_View</product_view>
+				</rewrite>
+			</catalog>			
+		</blocks>    
+	</global>
+
+    <adminhtml>
+        <translate>
+            <modules>
+                <EM_Emailofproduct>
+                    <files>
+                        <default>EM_Emailofproduct.csv</default>
+                    </files>
+                </EM_Emailofproduct>
+            </modules>
+        </translate>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <emailofproduct>
+                                            <title>Email of product</title>
+                                        </emailofproduct>
+										<creditprice>
+											<title>Email Credit Price</title>
+										</creditprice>										
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+
+    <default>
+        <emailofproduct>
+            <emailofproduct>
+                <enabled>1</enabled>
+            </emailofproduct>
+            <email>
+                <recipient_email><![CDATA[hello@priceguru.mu]]></recipient_email>
+                <sender_email_identity>Priceguru.mu</sender_email_identity>
+                <email_template>emailofproduct_email_email_template</email_template>
+				<email2_template>emailofproduct_email_email2_template</email2_template>
+				<email3_template>emailofproduct_email_email3_template</email3_template>
+            </email>
+        </emailofproduct>
+        <creditprice>
+            <emailofproduct>
+                <enabled>1</enabled>
+            </emailofproduct>
+            <email>
+                <recipient_email><![CDATA[hello@priceguru.mu]]></recipient_email>
+                <sender_email_identity>Priceguru.mu</sender_email_identity>
+				<email2_template>creditprice_email_email2_template</email2_template>
+				<email3_template>creditprice_email_email3_template</email3_template>				
+            </email>
+        </creditprice>
+    </default>
+</config>

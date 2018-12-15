@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ktpl_Eshopsync>
+            <version>0.0.1</version>
+        </Ktpl_Eshopsync>
+    </modules>
+    <global>
+        <models>
+            <ktpl_eshopsync>
+                <class>Ktpl_Eshopsync_Model</class>
+            </ktpl_eshopsync>
+            <eshopsync>
+                <rewrite>
+                    <order>Ktpl_Eshopsync_Model_Order</order>
+                    <customer>Ktpl_Eshopsync_Model_Customer</customer>
+                </rewrite>
+            </eshopsync>
+        </models>
+    </global>
+</config>
+

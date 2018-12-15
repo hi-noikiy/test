@@ -1,0 +1,31 @@
+<config>
+    <modules>
+        <MindMagnet_Sales>
+            <version>1.0.0</version>
+        </MindMagnet_Sales>
+    </modules>
+    <global>
+        <models>
+            <mindmagnetsales>
+                <class>MindMagnet_Sales_Model</class>
+            </mindmagnetsales>
+        </models>
+        <helpers>
+            <mindmagnetsales>
+                <class>MindMagnet_Sales_Helper</class>
+            </mindmagnetsales>
+        </helpers>
+        <sales>
+            <quote>
+                <totals>
+                    <subtotal>
+                        <class>mindmagnetsales/quote_address_total_subtotal</class>
+                        <after>nominal</after>
+                        <before>grand_total</before>
+                    </subtotal>
+                </totals>
+            </quote>
+        </sales>
+
+    </global>
+</config>

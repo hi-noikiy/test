@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Root_Landingpage>
+			<version>1.0.0</version>
+		</Root_Landingpage>
+	</modules>
+  
+	<global>
+		<blocks>
+			<landingpage>
+				<class>Root_Landingpage_Block</class>
+			</landingpage>
+		</blocks>
+		<helpers>
+			<landingpage>
+				<class>Root_Landingpage_Helper</class>
+			</landingpage>
+		</helpers>
+	</global>
+	
+	<frontend>
+		<routers>
+			<landingpage>
+				<use>standard</use>
+				<args>
+					<module>Root_Landingpage</module>
+					<frontName>landingpage</frontName>
+				</args>
+			</landingpage>
+		</routers>
+		
+		<layout>
+			<updates>
+				<landingpage>
+					<file>rootlandingpage.xml</file>
+				</landingpage>
+			</updates>
+		</layout>
+	</frontend>
+</config> 

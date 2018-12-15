@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <EM_Getbestdealproduct>
+      <version>0.1.0</version>
+    </EM_Getbestdealproduct>
+  </modules>
+  <global>
+    <helpers>
+      <getbestdealproduct>
+        <class>EM_Getbestdealproduct_Helper</class>
+      </getbestdealproduct>
+    </helpers>
+	<models>
+	  <getbestdealproduct>
+		<class>EM_Getbestdealproduct_Model</class>
+		<resourceModel>getbestdealproduct_mysql4</resourceModel>
+	  </getbestdealproduct>
+	</models>
+    <events>
+	  <catalog_block_product_list_collection_before> <!-- identifier of the event we want to catch -->
+        <observers>
+          <catalog_block_product_list_collection_before_handler> <!-- identifier of the event handler -->
+            <type>model</type> <!-- class method call type; valid are model, object and singleton -->
+            <class>getbestdealproduct/observer</class> <!-- observers class alias -->
+            <method>getbestdeal</method>  <!-- observer's method to be called -->
+            <args></args> <!-- additional arguments passed to observer -->
+          </catalog_block_product_list_collection_before_handler>
+        </observers>
+      </catalog_block_product_list_collection_before>
+    </events>
+  </global>
+</config> 

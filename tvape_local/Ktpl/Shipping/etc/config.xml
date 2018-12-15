@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+ 
+<config>
+    <modules>
+        <Ktpl_Shipping>
+            <version>0.1.0</version>
+        </Ktpl_Shipping>
+    </modules>
+    <global>
+     <models>
+       <shipping>
+         <rewrite>
+              <carrier_flatrate>Ktpl_Shipping_Model_Flatrate</carrier_flatrate>
+         </rewrite>
+       </shipping>
+     </models>
+   </global>
+</config>

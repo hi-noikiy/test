@@ -1,0 +1,279 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   EM
+ * @package    EM_Onestepcheckout
+ * @author     Emthemes <emthemes.com>
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+<config>
+    <modules>
+        <EM_Onestepcheckout>
+            <version>2.0.8</version>
+        </EM_Onestepcheckout>
+    </modules>
+    <frontend>
+        <layout>
+            <updates>
+                <onestepcheckout>
+                    <file>em_onestepcheckout.xml</file>
+                </onestepcheckout>
+            </updates>
+        </layout>
+        <routers>
+            <onestepcheckout>
+                <use>standard</use>
+                <args>
+                    <module>EM_Onestepcheckout</module>
+                    <frontName>onestep</frontName>
+                </args>
+            </onestepcheckout>
+        </routers>
+		<events>
+			<controller_action_layout_load_before>
+				<observers>
+					<add_onestep_layout>
+						<class>EM_Onestepcheckout_Model_Observer</class>
+						<method>addLayout</method>
+					</add_onestep_layout>
+				</observers>
+			</controller_action_layout_load_before>
+		</events>
+    </frontend>
+	
+    <global>
+        <models>
+            <onestepcheckout>
+                <class>EM_Onestepcheckout_Model</class>
+                <resourceModel>onestepcheckout_mysql4</resourceModel>
+            </onestepcheckout>
+            <onestepcheckout_mysql4>
+                <class>EM_Onestepcheckout_Model_Mysql4</class>
+                <entities>                                   
+                    <salescimorder>
+                        <table>sales_flat_cimorder</table>
+                    </salescimorder>
+                    <salespickuporder>
+                        <table>sales_flat_pickuporder</table>
+                    </salespickuporder>
+                    <salesdeliveryorder>
+                        <table>sales_flat_deliveryorder</table>
+                    </salesdeliveryorder>
+                    <salesinvoicevat>
+                        <table>sales_invoice_vat</table>
+                    </salesinvoicevat> 
+                    <wholesaler>
+                        <table>wholesaler</table>
+                    </wholesaler>                           
+                </entities>                
+            </onestepcheckout_mysql4>
+        </models>
+        <resources>
+            <onestepcheckout_setup>
+                <setup>
+                    <module>EM_Onestepcheckout</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </onestepcheckout_setup>
+            <onestepcheckout_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </onestepcheckout_write>
+            <onestepcheckout_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </onestepcheckout_read>
+        </resources>
+        <blocks>
+            <onestepcheckout>
+                <class>EM_onestepcheckout_Block</class>
+            </onestepcheckout>
+        </blocks>
+        <helpers>
+            <onestepcheckout>
+                <class>EM_Onestepcheckout_Helper</class>
+            </onestepcheckout>
+        </helpers>
+        <template>
+            <email>
+                <cimorder_email_guest translate="label" module="onestepcheckout">
+                    <label>Credit Application - New Order</label>
+                    <file>onestepcheckout/cimorder_guest.html</file>
+                    <type>html</type>
+                </cimorder_email_guest>
+                <cimorder_email_selfemployes translate="label" module="onestepcheckout">
+                    <label>Credit Application - Self Employed</label>
+                    <file>onestepcheckout/selfemployed.html</file>
+                    <type>html</type>
+                </cimorder_email_selfemployes>
+                <cimorder_email_resending translate="label" module="onestepcheckout">
+                    <label>Credit Application - Resending</label>
+                    <file>onestepcheckout/resending.html</file>
+                    <type>html</type>
+                </cimorder_email_resending>
+                <cimorder_email_creditaccepted translate="label" module="onestepcheckout">
+                    <label>Credit Application Accepted</label>
+                    <file>onestepcheckout/creditaccepted.html</file>
+                    <type>html</type>
+                </cimorder_email_creditaccepted>
+                <cimorder_email_creditrefused translate="label" module="onestepcheckout">
+                    <label>Credit Application Refused</label>
+                    <file>onestepcheckout/creditrefused.html</file>
+                    <type>html</type>
+                </cimorder_email_creditrefused>
+                <cimorder_email_newclient translate="label" module="onestepcheckout">
+                    <label>Credit Application - New Client</label>
+                    <file>onestepcheckout/newclient.html</file>
+                    <type>html</type>
+                </cimorder_email_newclient>
+                <cimorder_email_existingclient translate="label" module="onestepcheckout">
+                    <label>Credit Application - Existing Client</label>
+                    <file>onestepcheckout/existingclient.html</file>
+                    <type>html</type>
+                </cimorder_email_existingclient>
+                <purchase_order_email translate="label" module="onestepcheckout">
+                    <label>Purchase Order</label>
+                    <file>onestepcheckout/purchaseorder.html</file>
+                    <type>html</type>
+                </purchase_order_email>
+                <purchase_order_pdf translate="label" module="onestepcheckout">
+                    <label>Purchase Order</label>
+                    <file>onestepcheckout/purchaseorderpdf.html</file>
+                    <type>html</type>
+                </purchase_order_pdf>
+                <vat_invoice_email translate="label" module="onestepcheckout">
+                    <label>Sales Invoice VAT</label>
+                    <file>onestepcheckout/salesinvoicevat.html</file>
+                    <type>html</type>
+                </vat_invoice_email>
+                <delivery_note translate="label" module="onestepcheckout">
+                    <label>Delivery Note</label>
+                    <file>onestepcheckout/deliverynote.html</file>
+                    <type>html</type>
+                </delivery_note>
+            </email>
+        </template>
+    </global>
+    <admin>
+        <routers>
+            <onestepcheckout>
+                <use>admin</use>
+                <args>
+                    <module>EM_Onestepcheckout</module>
+                    <frontName>onestep</frontName>
+                </args>
+            </onestepcheckout>
+        </routers>
+    </admin>
+	<adminhtml>
+        <layout>
+            <updates>
+                <onestepcheckout>
+                    <file>onestepcheckout.xml</file>
+                </onestepcheckout>
+            </updates>
+        </layout>
+        <menu>
+            <sales>
+                <children>
+                    <order translate="title" module="onestepcheckout">
+                        <children>
+                            <onestepcheckout translate="title" module="onestepcheckout">
+                                <title>CIM Credit</title>
+                                <action>onestepcheckout/adminhtml_cimcreditorder</action>
+                                <sort_order>20</sort_order>
+                            </onestepcheckout>
+                            <sales_pickup translate="title" module="onestepcheckout">
+                                <title>Pickup Order</title>
+                                <action>onestepcheckout/adminhtml_pickuporder</action>
+                                <sort_order>25</sort_order>
+                                <children>
+                                    <wholesaler translate="title" module="onestepcheckout">
+                                        <title>Add Wholesaler</title>
+                                        <action>onestepcheckout/adminhtml_wholesaler</action>
+                                        <sort_order>10</sort_order>
+                                    </wholesaler>
+                                </children>
+                            </sales_pickup>
+                            <sales_delivery translate="title" module="onestepcheckout">
+                                <title>Delivery Order</title>
+                                <action>onestepcheckout/adminhtml_deliveryorder</action>
+                                <sort_order>30</sort_order>
+                            </sales_delivery>
+                            <purchaseorder translate="title" module="onestepcheckout">
+                                <title>Purchase Order</title>
+                                <action>onestepcheckout/adminhtml_purchaseorder</action>
+                                <sort_order>35</sort_order>
+                            </purchaseorder>
+                        </children>
+                    </order>
+                </children>
+            </sales>
+        </menu>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <onestepcheckout>
+                                            <title>EM Onestep Checkout</title>
+                                        </onestepcheckout>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                        <sales translate="title" module="onestepcheckout">
+                            <children>
+                                <order translate="title" module="onestepcheckout">
+                                    <children>
+                                        <onestepcheckout translate="title" module="onestepcheckout">
+                                            <title>CIM Credit</title>
+                                            <sort_order>20</sort_order>
+                                        </onestepcheckout>
+                                        <sales_pickup translate="title" module="onestepcheckout">
+                                            <title>Pickup Order</title>
+                                            <sort_order>25</sort_order>
+                                            <children>
+                                                <wholesaler translate="title" module="onestepcheckout">
+                                                    <title>Add Wholesaler</title>
+                                                    <sort_order>10</sort_order>
+                                                </wholesaler>
+                                            </children>
+                                        </sales_pickup>
+                                        <sales_delivery translate="title" module="onestepcheckout">
+                                            <title>Delivery Order</title>
+                                            <sort_order>30</sort_order>
+                                        </sales_delivery>
+                                        <purchaseorder translate="title" module="onestepcheckout">
+                                            <title>Purchase Order</title>
+                                            <sort_order>35</sort_order>
+                                        </purchaseorder>
+                                    </children>
+                                </order>
+                            </children>
+                        </sales>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+	</adminhtml>
+
+	<default>
+		<onestepcheckout>
+			<general>
+				<enable>1</enable>
+			</general>
+		</onestepcheckout>
+	</default>
+</config>

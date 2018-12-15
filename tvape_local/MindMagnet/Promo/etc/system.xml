@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <mindmagnetpromo translate="label" module="mindmagnetpromo">
+            <label>Upgrade Product Popup</label>
+            <sort_order>300</sort_order>
+        </mindmagnetpromo>
+    </tabs>
+    <sections>
+        <mindmagnetpromo translate="label" module="mindmagnetpromo">
+            <label>Upgrade Product Popup</label>
+            <tab>mindmagnetpromo</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>99999</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <upgrade translate="label">
+                    <label>Upgrade Product Popup Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <popup_title translate="label">
+                            <label>Upgrade Product Popup Title</label>
+                            <comment>Enter Upgrade Product Popup Title</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </popup_title>
+                        <popup_button_title translate="label">
+                            <label>Upgrade Product Popup Button Title</label>
+                            <comment>Enter Upgrade Product Popup Button Title</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </popup_button_title>
+                        <popup_free_gift_title translate="label">
+                            <label>Upgrade Product Popup Free Gift Title</label>
+                            <comment>Enter Upgrade Product Popup Free Gift Title</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </popup_free_gift_title>
+                        <upgrade_gift_button_title translate="label">
+                            <label>Upgrade Gift Button Title</label>
+                            <comment>Enter Upgrade Gift Button Title</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </upgrade_gift_button_title>
+                    </fields>
+                </upgrade>
+            </groups>
+        </mindmagnetpromo>
+    </sections>
+</config>

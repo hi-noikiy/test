@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <EM_Mobapp>
+            <version>1.0.1</version>
+        </EM_Mobapp>
+    </modules>
+    <admin>
+        <routers>
+			<adminhtml>
+                <args>
+                    <modules>
+                        <mobapp before="Mage_Adminhtml">EM_Mobapp_Adminhtml</mobapp>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+		<translate>
+            <modules>
+                <EM_Mobapp>
+                    <files>
+                        <default>EM_Mobapp.csv</default>
+                    </files>
+                </EM_Mobapp>
+            </modules>
+        </translate>
+		<menu>
+			<emthemes translate="title">
+				<title>EMThemes</title>
+				<sort_order>72</sort_order>
+				<children>
+					<mobapp module="mobapp">
+						<title>Emobcart</title>
+						<sort_order>170</sort_order>
+						<children>
+							<manage module="mobapp">
+								<title>Manage Apps</title>
+								<sort_order>0</sort_order>
+								<action>adminhtml/mobapp</action>
+							</manage>
+							<!--history module="mobapp">
+								<title>History Apps</title>
+								<sort_order>1</sort_order>
+								<action>mobapp/adminhtml_mobapp</action>
+							</history-->
+						</children>
+					</mobapp>
+				</children>
+			</emthemes>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<emthemes>
+							<title>EM Themes Menu</title>
+							<sort_order>72</sort_order>
+							<children>
+								<mobapp>
+									<title>EM Mobcart</title>
+									<sort_order>170</sort_order>
+									<children>
+										<manage>
+											<title>Manage Apps</title>
+											<sort_order>0</sort_order>
+											<children>
+												<save translate="title">
+													<title>Save App</title>
+													<sort_order>0</sort_order>
+												</save>
+												<delete translate="title">
+													<title>Delete App</title>
+													<sort_order>10</sort_order>
+												</delete>
+											</children>
+										</manage>
+									</children>
+								</mobapp>
+							</children>
+						</emthemes>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<mobapp>
+					<file>em_mobapp.xml</file>
+				</mobapp>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <mobapp>
+                <class>EM_Mobapp_Model</class>
+                <resourceModel>mobapp_mysql4</resourceModel>
+            </mobapp>
+            <mobapp_mysql4>
+                <class>EM_Mobapp_Model_Mysql4</class>
+                <entities>
+                    <store>
+                        <table>em_mobapp_store</table>
+                    </store>
+					<notifi>
+                        <table>em_mobapp_notification</table>
+                    </notifi>
+                </entities>
+            </mobapp_mysql4>
+        </models>
+        <resources>
+            <em_mobapp_setup>
+                <setup>
+                    <module>EM_Mobapp</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </em_mobapp_setup>
+            <mobapp_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </mobapp_write>
+            <mobapp_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </mobapp_read>
+        </resources>
+        <blocks>
+            <mobapp>
+                <class>EM_Mobapp_Block</class>
+            </mobapp>
+        </blocks>
+        <helpers>
+            <mobapp>
+                <class>EM_Mobapp_Helper</class>
+            </mobapp>
+        </helpers>
+		<template>
+			<email>
+				<custom_email_mobapp module="mobapp">
+					<label>EM Mobapp custom email module</label>
+					<file>em_mobapp_custom_email.html</file>
+					<type>html</type>
+				</custom_email_mobapp>
+			</email>
+		</template>
+    </global>
+	<default>
+		<mobapp>
+			<mail_register>
+				<email_name>Phuc Tran</email_name>
+				<email_address>phuc.tran@codespot.vn</email_address>
+			</mail_register>
+			<service_api>
+				<generalinfo><![CDATA[http://14.161.40.8/Extension/EM_Apiios/dev_site/api/rest/ios/generalinfo]]></generalinfo>
+			</service_api>
+			
+		</mobapp>
+	</default>
+</config>

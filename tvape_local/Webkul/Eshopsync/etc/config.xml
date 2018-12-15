@@ -1,0 +1,302 @@
+<?xml version="1.0"?>
+<!-- /**
+ * @category   Webkul
+ * @package    Magento-Salesforce-Connector
+ * @author     Webkul Software Private Limited
+ * @copyright  Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */ -->
+<config>
+    <modules>
+        <Webkul_Eshopsync>
+            <version>1.0.1</version>
+        </Webkul_Eshopsync>
+    </modules>
+
+    <default>
+      <eshopsync>
+        <setting>
+          <client>enterprise</client>
+          <status>Not Connected</status>
+        </setting>
+        <auto>
+            <order>1</order>
+            <contactus>1</contactus>
+        </auto>
+      </eshopsync>
+    </default>
+
+    <global>
+        <models>
+            <eshopsync>
+                <class>Webkul_Eshopsync_Model</class>
+                <resourceModel>eshopsync_mysql4</resourceModel>
+            </eshopsync>
+            <eshopsync_mysql4>
+                <class>Webkul_Eshopsync_Model_Mysql4</class>
+                <entities>
+                    <category>
+                        <table>wk_salesforce_eshopsync_category_mapping</table>
+                    </category>
+                    <product>
+                        <table>wk_salesforce_eshopsync_product_mapping</table>
+                    </product>
+                    <customer>
+                        <table>wk_salesforce_eshopsync_customer_mapping</table>
+                    </customer>
+                    <contact>
+                        <table>wk_salesforce_eshopsync_contact_mapping</table>
+                    </contact>
+                    <contactus>
+                        <table>wk_salesforce_eshopsync_lead_mapping</table>
+                    </contactus>
+                    <order>
+                        <table>wk_salesforce_eshopsync_order_mapping</table>
+                    </order>
+                </entities>
+            </eshopsync_mysql4>
+        </models>
+        <resources>
+            <eshopsync_setup>
+                <setup>
+                    <module>Webkul_Eshopsync</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </eshopsync_setup>
+            <eshopsync_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </eshopsync_write>
+            <eshopsync_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </eshopsync_read>
+        </resources>
+        <blocks>
+            <eshopsync>
+                <class>Webkul_Eshopsync_Block</class>
+            </eshopsync>
+        </blocks>
+        <helpers>
+            <eshopsync>
+                <class>Webkul_Eshopsync_Helper</class>
+            </eshopsync>
+        </helpers>
+
+        <events>
+            <!-- after category save-->
+            <catalog_category_prepare_save>
+                <observers>
+                   <Webkul_Eshopsync_Model_Observer>
+                      <type>singleton</type>
+                      <class>Webkul_Eshopsync_Model_Observer</class>
+                      <method>onCategorySave</method>
+                   </Webkul_Eshopsync_Model_Observer>
+                </observers>
+            </catalog_category_prepare_save>
+
+            <!-- after product save-->
+            <catalog_product_save_after>
+                <observers>
+                   <Webkul_Eshopsync_Model_Observer>
+                      <type>singleton</type>
+                      <class>Webkul_Eshopsync_Model_Observer</class>
+                      <method>onProductSave</method>
+                   </Webkul_Eshopsync_Model_Observer>
+                </observers>
+            </catalog_product_save_after>
+
+            <!-- after customer_address save-->
+            <customer_save_after>
+                <observers>
+                   <Webkul_Eshopsync_Model_Observer>
+                      <type>singleton</type>
+                      <class>Webkul_Eshopsync_Model_Observer</class>
+                      <method>onAddressSave</method>
+                   </Webkul_Eshopsync_Model_Observer>
+                </observers>
+            </customer_save_after>
+
+            <!-- Mass Action Event -->
+            <core_block_abstract_prepare_layout_before>
+              <observers>
+                  <Webkul_Eshopsync_Model_Observer>
+                      <type>model</type>
+                      <class>Webkul_Eshopsync_Model_Observer</class>
+                      <method>addMassaction</method>
+                  </Webkul_Eshopsync_Model_Observer>
+              </observers>
+            </core_block_abstract_prepare_layout_before>
+
+            <!-- after multi shipping place order -->
+            <checkout_multishipping_controller_success_action>
+                <observers>
+                   <Webkul_Eshopsync_Model_Observer>
+                      <type>singleton</type>
+                      <class>Webkul_Eshopsync_Model_Observer</class>
+                      <method>afterPlaceOrder</method>
+                   </Webkul_Eshopsync_Model_Observer>
+                </observers>
+            </checkout_multishipping_controller_success_action>
+            <!-- after order place save-->
+            <sales_order_place_after>
+                <observers>
+                   <Webkul_Eshopsync_Model_Observer>
+                      <type>singleton</type>
+                      <class>Webkul_Eshopsync_Model_Observer</class>
+                      <method>afterAdminOrderPlace</method>
+                   </Webkul_Eshopsync_Model_Observer>
+                </observers>
+            </sales_order_place_after>
+            <!-- Order Related Events END -->
+
+        </events>
+    </global>
+
+    <frontend>
+        <events>
+            <controller_action_postdispatch_contacts_index_post>
+                <observers>
+                   <Webkul_Eshopsync_Model_Observer>
+                      <type>model</type>
+                      <class>Webkul_Eshopsync_Model_Observer</class>
+                      <method>onContactusPost</method>
+                   </Webkul_Eshopsync_Model_Observer>
+               </observers>
+            </controller_action_postdispatch_contacts_index_post>
+        </events>
+    </frontend>
+
+    <admin>
+        <routers>
+			<eshopsync>
+				<use>admin</use>
+				<args>
+					<module>Webkul_Eshopsync</module>
+					<frontName>eshopsync</frontName>
+				</args>
+			</eshopsync>
+        </routers>
+    </admin>
+
+    <adminhtml>
+		<menu>
+			<eshopsync module="eshopsync">
+				<title>Salesforce Connector</title>
+				<sort_order>71</sort_order>
+				<children>
+					<category module="eshopsync">
+						<title>Categories</title>
+						<sort_order>0</sort_order>
+						<action>eshopsync/adminhtml_category</action>
+					</category>
+                    <product module="eshopsync">
+                        <title>Products</title>
+                        <sort_order>5</sort_order>
+                        <action>eshopsync/adminhtml_product</action>
+                    </product>
+                    <eshopsync_customer_menu translate="title" module="eshopsync">
+                        <title>Customers</title>
+                        <sort_order>10</sort_order>
+                        <action>eshopsync/adminhtml_customer</action>
+                        <!-- <children>
+                            <account translate="title" module="eshopsync">
+                                <title>Accounts</title>
+                                <sort_order>1</sort_order>
+                                <action>eshopsync/adminhtml_customer</action>
+                            </account>
+                            <contact translate="title" module="eshopsync">
+                                <title>Contacts</title>
+                                <sort_order>2</sort_order>
+                                <action>eshopsync/adminhtml_contact</action>
+                            </contact>
+                        </children> -->
+                    </eshopsync_customer_menu>
+                    <order module="eshopsync">
+                        <title>Orders</title>
+                        <sort_order>14</sort_order>
+                        <action>eshopsync/adminhtml_order</action>
+                    </order>
+                    <contactus module="eshopsync">
+                        <title>Contact Us(Lead)</title>
+                        <sort_order>15</sort_order>
+                        <action>eshopsync/adminhtml_contactus</action>
+                    </contactus>
+                    <configuration module="eshopsync">
+                        <title>Salesforce Configuration</title>
+                        <sort_order>50</sort_order>
+                        <action>adminhtml/system_config/edit/section/eshopsync</action>
+                    </configuration>
+				</children>
+			</eshopsync>
+		</menu>
+		<acl>
+			<resources>
+                <admin>
+                    <children>
+                        <eshopsync module="eshopsync">
+                          <title>Salesforce Connector</title>
+                          <sort_order>71</sort_order>
+                            <children>
+                                <category module="eshopsync">
+                                    <title>Categories</title>
+                                    <sort_order>0</sort_order>
+                                </category>
+                                <product module="eshopsync">
+                                    <title>Products</title>
+                                    <sort_order>5</sort_order>
+                                </product>
+                                <eshopsync_customer_menu translate="title" module="eshopsync">
+                                    <title>Customers</title>
+                                    <sort_order>10</sort_order>
+                                </eshopsync_customer_menu>
+                                <contact translate="title" module="eshopsync">
+                                    <title>Contacts</title>
+                                    <sort_order>2</sort_order>
+                                    <action>eshopsync/adminhtml_contact</action>
+                                </contact>
+                                <contactus module="eshopsync">
+                                    <title>Contact Us(Lead)</title>
+                                    <sort_order>15</sort_order>
+                                    <action>eshopsync/adminhtml_contactus</action>
+                                </contactus>
+                                <order module="eshopsync">
+                                    <title>Orders</title>
+                                    <sort_order>14</sort_order>
+                                </order>
+                                <configuration module="eshopsync">
+                                    <title>Salesforce Configuration</title>
+                                    <sort_order>50</sort_order>
+                                </configuration>
+                            </children>
+                        </eshopsync>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <eshopsync translate="title" module="eshopsync">
+                                            <title>Salesforce Api Configuration</title>
+                                            <sort_order>85</sort_order>
+                                        </eshopsync>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<eshopsync>
+					<file>eshopsync.xml</file>
+				</eshopsync>
+			</updates>
+		</layout>
+    </adminhtml>
+
+</config>

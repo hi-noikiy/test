@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<config>
+	<menu>
+		<report translate="title" module="reports">  
+			<children>        
+				<products translate="title" module="reports">
+					<children>                      
+						<outstock translate="title" module="outstocknotification">
+							<title>Out of Stock Subscription</title>
+							<action>adminhtml/outstocknotification</action>
+						</outstock>
+					</children>
+				</products>
+			</children>  
+		</report>    
+	</menu>	
+	<acl>
+		<resources>
+			<all>
+				<title>Allow Everything</title>
+			</all>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<config>
+								<children>
+									<outstocknotification translate="title">
+										<title>Out of Stock Notification</title>
+										<sort_order>50</sort_order>
+									</outstocknotification>								
+								</children>
+							</config>
+						</children>
+					</system>
+					<report>  
+						<children>        
+							<products>
+								<children>                      
+									<outstock translate="title" module="outstocknotification">
+										<title>Out of Stock Subscription</title>
+										<sort_order>10</sort_order>
+									</outstock>
+								</children>
+							</products>
+						</children>  
+					</report>
+				</children>
+			</admin>
+		</resources>
+	</acl>	
+</config>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Ktpl_Customerordertracking>
+      <version>0.1.0</version>
+    </Ktpl_Customerordertracking>
+  </modules>
+  <global>
+    <helpers>
+      <customerordertracking>
+        <class>Ktpl_Customerordertracking_Helper</class>
+      </customerordertracking>
+        <sales>
+			<rewrite>
+				<guest>Ktpl_Customerordertracking_Helper_Sales_Guest</guest>
+            </rewrite>
+        </sales>
+    </helpers>
+  </global>
+</config> 

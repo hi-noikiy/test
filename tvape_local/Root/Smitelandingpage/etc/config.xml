@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Root_Smitelandingpage>
+			<version>1.0.0</version>
+		</Root_Smitelandingpage>
+	</modules>
+  
+	<global>
+		<blocks>
+			<smitelandingpage>
+				<class>Root_Smitelandingpage_Block</class>
+			</smitelandingpage>
+		</blocks>
+		<helpers>
+			<smitelandingpage>
+				<class>Root_Smitelandingpage_Helper</class>
+			</smitelandingpage>
+		</helpers>
+	</global>
+	
+	<frontend>
+		<routers>
+			<smitelandingpage>
+				<use>standard</use>
+				<args>
+					<module>Root_Smitelandingpage</module>
+					<frontName>smite-landingpage</frontName>
+				</args>
+			</smitelandingpage>
+		</routers>
+		
+		<layout>
+			<updates>
+				<smitelandingpage>
+					<file>rootsmitelandingpage.xml</file>
+				</smitelandingpage>
+			</updates>
+		</layout>
+	</frontend>
+</config> 

@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Ebizon_TwilioSms>
+      <version>0.1.0</version>
+    </Ebizon_TwilioSms>
+  </modules>
+  <global>
+    <helpers>
+      <twiliosms>
+        <class>Ebizon_TwilioSms_Helper</class>
+      </twiliosms>
+    </helpers>
+	<blocks>
+	  <twiliosms>
+		<class>Ebizon_TwilioSms_Block</class>
+	  </twiliosms>
+	</blocks>
+	<resources>
+	  <twiliosms_setup>
+		<setup>
+		  <module>Ebizon_TwilioSms</module>
+		</setup>
+		<connection>
+		  <use>core_setup</use>
+		</connection>
+	  </twiliosms_setup>
+	  <twiliosms_write>
+		<connection>
+		  <use>core_write</use>
+		</connection>
+	  </twiliosms_write>
+	  <twiliosms_read>
+		<connection>
+		  <use>core_read</use>
+		</connection>
+	  </twiliosms_read>
+	</resources>
+  </global>
+  <admin>
+	<routers>
+	  <twiliosms>
+	    <use>admin</use>
+		<args>
+		  <module>Ebizon_TwilioSms</module>
+		  <frontName>admin_twiliosms</frontName>
+		</args>
+	  </twiliosms>
+	</routers>
+  </admin>
+  <adminhtml>
+	<menu>
+	  <twiliosms module="twiliosms">
+		<title>Twilio Sms</title>
+		<sort_order>100</sort_order>
+		<children>
+		  <twiliosmsbackend module="twiliosms">
+			<title>Twilio Sms</title>
+			<sort_order>0</sort_order>
+			<action>admin_twiliosms/adminhtml_twiliosmsbackend</action>
+		  </twiliosmsbackend>
+		</children>
+	  </twiliosms>
+	</menu>
+	<acl>
+	  <resources>
+		<all>
+		  <title>Allow Everything</title>
+		</all>
+		<admin>
+		  <children>
+			<twiliosms translate="title" module="twiliosms">
+			  <title>TwilioSms</title>
+			  <sort_order>1000</sort_order>
+			  <children>
+		  <twiliosmsbackend translate="title">
+			<title>Twilio Sms</title>
+		  </twiliosmsbackend>
+			  </children>
+			</twiliosms>
+		  </children>
+		</admin>
+	  </resources>
+	</acl>
+	<layout>
+	  <updates>
+		<twiliosms>
+		  <file>twiliosms.xml</file>
+		</twiliosms>
+	  </updates>
+	</layout>
+  </adminhtml>
+</config> 

@@ -1,0 +1,16 @@
+<widgets>
+    <slideshow3 type="slideshow3/slideshow3" module="slideshow3" translate="name description">
+        <name>EM ImageBrand </name>
+        <description type="desc"></description>
+        <parameters>
+			<slideshow>
+                <label>Slideshow : </label>
+                <visible>1</visible>
+				<required>1</required>
+                <description></description>
+                <type>select</type>
+                <source_model>slideshow3/Slider</source_model>
+            </slideshow>
+		</parameters>
+    </slideshow3>
+</widgets>

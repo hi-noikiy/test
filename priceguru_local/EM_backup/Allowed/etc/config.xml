@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <EM_Allowed>
+      <version>0.1.0</version>
+    </EM_Allowed>
+  </modules>
+  <global>
+    <helpers>
+      <allowed>
+        <class>EM_Allowed_Helper</class>
+      </allowed>
+    </helpers>
+	<resources>
+	  <allowed_setup>
+		<setup>
+		  <module>EM_Allowed</module>
+		</setup>
+		<connection>
+		  <use>core_setup</use>
+		</connection>
+	  </allowed_setup>
+	  <allowed_write>
+		<connection>
+		  <use>core_write</use>
+		</connection>
+	  </allowed_write>
+	  <allowed_read>
+		<connection>
+		  <use>core_read</use>
+		</connection>
+	  </allowed_read>
+	</resources>
+  </global>
+</config> 

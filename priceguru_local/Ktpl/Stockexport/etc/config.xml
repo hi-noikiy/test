@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<config>
+<modules>
+    <Ktpl_Stockexport>
+        <version>1.0</version>
+    </Ktpl_Stockexport>
+</modules>
+
+<admin>
+    <routers>
+        <adminhtml>
+            <args>
+                <modules>
+                    <Ktpl_Stockexport before="Mage_Adminhtml">Ktpl_Stockexport_Adminhtml</Ktpl_Stockexport>
+                </modules>
+            </args>
+        </adminhtml>
+    </routers>
+</admin>
+    
+<global>
+        <blocks>
+            <Ktpl_Stockexport>
+                <class>Ktpl_Stockexport_Block</class>
+            </Ktpl_Stockexport>
+            <adminhtml>
+                <rewrite>
+                    <catalog_product_grid>Ktpl_Stockexport_Block_Adminhtml_Catalog_Product_Grid</catalog_product_grid>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+    </global>
+</config>

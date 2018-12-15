@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   EM
+ * @package    EM_Onestepcheckout
+ * @author     Emthemes <emthemes.com>
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+<config>
+    <modules>
+        <EM_Onestepcheckout>
+            <version>1.0.1</version>
+        </EM_Onestepcheckout>
+    </modules>
+    <frontend>
+        <layout>
+            <updates>
+                <onestepcheckout>
+                    <file>em_onestepcheckout.xml</file>
+                </onestepcheckout>
+            </updates>
+        </layout>
+        <routers>
+            <onestepcheckout>
+                <use>standard</use>
+                <args>
+                    <module>EM_Onestepcheckout</module>
+                    <frontName>onestep</frontName>
+                </args>
+            </onestepcheckout>
+        </routers>
+		<events>
+			<controller_action_layout_load_before>
+				<observers>
+					<add_onestep_layout>
+						<class>EM_Onestepcheckout_Model_Observer</class>
+						<method>addLayout</method>
+					</add_onestep_layout>
+				</observers>
+			</controller_action_layout_load_before>
+		</events>
+    </frontend>
+	
+    <global>
+        <helpers>
+            <onestepcheckout>
+                <class>EM_Onestepcheckout_Helper</class>
+            </onestepcheckout>
+        </helpers>
+    </global>
+
+	<adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <onestepcheckout>
+                                            <title>EM Onestep Checkout</title>
+                                        </onestepcheckout>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+	</adminhtml>
+
+	<default>
+		<onestepcheckout>
+			<general>
+				<enable>1</enable>
+			</general>
+		</onestepcheckout>
+	</default>
+</config>

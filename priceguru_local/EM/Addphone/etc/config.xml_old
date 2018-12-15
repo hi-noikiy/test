@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <EM_Addphone>
+      <version>0.1.0</version>
+    </EM_Addphone>
+  </modules>
+  <frontend>
+    <routers>
+      <addphone>
+        <use>standard</use>
+          <args>
+            <module>EM_Addphone</module>
+            <frontName>addphone</frontName>
+          </args>
+      </addphone>
+    </routers>
+  </frontend>
+  <global>
+		<rewrite>        
+            <em_addphone_customer_accountcontroller>
+                <from><![CDATA[#^/customer/account/#]]></from> <!-- Mage_Customer_AccountController  -->
+                <to>/addphone/customer_account/</to> <!-- EM_Addphone_Customer_AccountController  -->
+            </em_addphone_customer_accountcontroller>
+		</rewrite>
+    <helpers>
+      <addphone>
+        <class>EM_Addphone_Helper</class>
+      </addphone>
+    </helpers>
+	<blocks>
+	  <addphone>
+		<class>EM_Addphone_Block</class>
+	  </addphone>
+			<adminhtml>
+				<rewrite>
+					<customer_grid>EM_Addphone_Block_Adminhtml_Customer_Grid</customer_grid>
+				</rewrite>
+			</adminhtml>
+	</blocks>
+  </global>
+  <admin>
+	<routers>
+	  <addphone>
+	    <use>admin</use>
+		<args>
+		  <module>EM_Addphone</module>
+		  <frontName>admin_addphone</frontName>
+		</args>
+	  </addphone>
+	</routers>
+  </admin>
+</config> 

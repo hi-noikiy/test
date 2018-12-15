@@ -1,0 +1,92 @@
+<config>
+	<menu>
+	<salesforce translate="title" module="salesforce">
+		<title>SalesforceCRM Integration</title>
+		<sort_order>100</sort_order>
+		<children>			
+			<map translate="title" module="salesforce">
+				<title>Field Mapping</title>
+				<sort_order>10</sort_order>
+				<action>adminhtml/salesforce_map/index</action>
+            </map>
+            <report translate="title" module="salesforce">
+                <title>Report</title>
+                <sort_order>20</sort_order>
+                <action>adminhtml/salesforce_report/index</action>
+            </report>
+            <retrieve translate="title" module="salesforce">
+                <title>Retrieve Field</title>
+                <sort_order>30</sort_order>
+                <action>adminhtml/salesforce_retrieve/index</action>
+            </retrieve> 
+            <sync translate="title" module="salesforce">
+                <title>Sync Old Data</title>
+                <sort_order>35</sort_order>
+                <action>adminhtml/salesforce_sync/index</action>
+            </sync>  
+            <config translate="title" module="salesforce">
+                <title>Configuration</title>
+                <sort_order>40</sort_order>
+                <action>adminhtml/system_config/edit/section/salesforce</action>
+            </config>			
+		</children>
+	</salesforce>
+    </menu>
+	<layout>
+		<updates>
+			<salesforce>
+				<file>HN_Salesforce.xml</file>
+			</salesforce>
+		</updates>
+    </layout>
+	<translate>
+		<modules>
+			<HN_Salesforce>
+				<files>
+					<default>HN_Salesforce.csv</default>
+				</files>
+			</HN_Salesforce>
+		</modules>
+	</translate>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <salesforce translate="title" module="salesforce">
+                                        <title>SalesforceCRM Integration</title>
+                                    </salesforce>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <salesforce translate="title" module="salesforce">
+                        <title>Salesforce</title>
+                        <sort_order>300</sort_order>
+                        <children>
+                            <map translate="title" module="salesforce">
+                                <title>Field Mapping</title>
+                                <sort_order>10</sort_order>
+                            </map>
+                            <report translate="title" module="salesforce">
+                                <title>Report</title>
+                                <sort_order>20</sort_order>
+                            </report>   
+                            <retrieve translate="title" module="salesforce">
+                                <title>Retrieve Field</title>
+                                <sort_order>30</sort_order>
+                            </retrieve> 
+                            <config translate="title" module="salesforce">
+                                <title>Configuration</title>
+                                <sort_order>40</sort_order>
+                            </config>           
+                        </children>
+                    </salesforce>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

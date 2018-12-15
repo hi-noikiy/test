@@ -1,0 +1,143 @@
+<?php
+/**
+ * Mirasvit
+ *
+ * This source file is subject to the Mirasvit Software License, which is available at https://mirasvit.com/license/.
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category  Mirasvit
+ * @package   mirasvit/extension_rma
+ * @version   2.4.7
+ * @copyright Copyright (C) 2017 Mirasvit (https://mirasvit.com/)
+ */
+
+
+
+/**
+ * @method Mirasvit_Rma_Model_Resource_Status_Collection|Mirasvit_Rma_Model_Status[] getCollection()
+ * @method Mirasvit_Rma_Model_Status load(int $id)
+ * @method bool getIsMassDelete()
+ * @method Mirasvit_Rma_Model_Status setIsMassDelete(bool $flag)
+ * @method bool getIsMassStatus()
+ * @method Mirasvit_Rma_Model_Status setIsMassStatus(bool $flag)
+ * @method Mirasvit_Rma_Model_Resource_Status getResource()
+ */
+class Mirasvit_Rma_Model_Status extends Mage_Core_Model_Abstract
+{
+    const APPROVED = 'approved';
+    const PACKAGE_SENT = 'package_sent';
+    const REJECTED = 'rejected';
+    const CLOSED = 'closed';
+
+    protected function _construct()
+    {
+        $this->_init('rma/status');
+    }
+
+    public function getOptionArray($emptyOption = false)
+    {
+        return $this->getCollection()->setOrder('sort_order', 'asc')->getOptionArray($emptyOption);
+    }
+
+    public function toOptionArray($emptyOption = false)
+    {
+        return $this->getCollection()->setOrder('sort_order', 'asc')->toOptionArray($emptyOption);
+    }
+
+    public function getName()
+    {
+        return Mage::helper('rma/storeview')->getStoreViewValue($this, 'name');
+    }
+
+    public function setName($value)
+    {
+        Mage::helper('rma/storeview')->setStoreViewValue($this, 'name', $value);
+
+        return $this;
+    }
+
+    public function getCustomerMessage()
+    {
+        return Mage::helper('rma/storeview')->getStoreViewValue($this, 'customer_message');
+    }
+
+    public function setCustomerMessage($value)
+    {
+        Mage::helper('rma/storeview')->setStoreViewValue($this, 'customer_message', $value);
+
+        return $this;
+    }
+
+    public function getHistoryMessage()
+    {
+        return Mage::helper('rma/storeview')->getStoreViewValue($this, 'history_message');
+    }
+
+    public function setHistoryMessage($value)
+    {
+        Mage::helper('rma/storeview')->setStoreViewValue($this, 'history_message', $value);
+
+        return $this;
+    }
+
+    public function getAdminMessage()
+    {
+        return Mage::helper('rma/storeview')->getStoreViewValue($this, 'admin_message');
+    }
+
+    public function setAdminMessage($value)
+    {
+        Mage::helper('rma/storeview')->setStoreViewValue($this, 'admin_message', $value);
+
+        return $this;
+    }
+
+    public function addData(array $data)
+    {
+        if (isset($data['name']) && strpos($data['name'], 'a:') !== 0) {
+            $this->setName($data['name']);
+            unset($data['name']);
+        }
+
+        if (isset($data['customer_message']) && strpos($data['customer_message'], 'a:') !== 0) {
+            $this->setCustomerMessage($data['customer_message']);
+            unset($data['customer_message']);
+        }
+
+        if (isset($data['history_message']) && strpos($data['history_message'], 'a:') !== 0) {
+            $this->setHistoryMessage($data['history_message']);
+            unset($data['history_message']);
+        }
+
+        if (isset($data['admin_message']) && strpos($data['admin_message'], 'a:') !== 0) {
+            $this->setAdminMessage($data['admin_message']);
+            unset($data['admin_message']);
+        }
+
+        return parent::addData($data);
+    }
+
+    /**
+     * @param string $code
+     *
+     * @return bool|Mirasvit_Rma_Model_Status
+     */
+    public function loadByCode($code)
+    {
+        $collection = $this->getCollection()
+            ->addFieldToFilter('code', $code);
+        if ($collection->count() > 0) {
+            return $collection->getFirstItem();
+        } else {
+            return false;
+        }
+    }
+    /************************/
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
+}

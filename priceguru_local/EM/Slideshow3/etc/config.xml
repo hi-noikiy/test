@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   EM
+ * @package    EM_Slideshow3
+ * @author     Emthemes <emthemes.com>
+ */
+ -->
+<config>
+    <modules>
+        <EM_Slideshow3>
+            <version>0.1.0</version>
+        </EM_Slideshow3>
+    </modules>
+    <frontend>
+        <routers>
+            <slideshow3>
+                <use>standard</use>
+                <args>
+                    <module>EM_Slideshow3</module>
+                    <frontName>slideshow3</frontName>
+                </args>
+            </slideshow3>
+        </routers>
+        <layout>
+            <updates>
+                <slideshow3>
+                    <file>em_slideshow3.xml</file>
+                </slideshow3>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <slideshow3 before="Mage_Adminhtml">EM_Slideshow3_Adminhtml</slideshow3>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+		<menu>
+			<emthemes module="slideshow3" translate="title">
+                <title>EMThemes</title>
+                <sort_order>73</sort_order>
+                <children>
+                    <slideshow3 module="slideshow3">
+                        <title>EM Imagemenu</title>
+                        <sort_order>170</sort_order>
+                        <action>adminhtml/slider3</action>
+                    </slideshow3>
+                </children>
+            </emthemes>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<EM_Slideshow3>
+							<title>Slideshow3 Module</title>
+							<sort_order>10</sort_order>
+						</EM_Slideshow3>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<slideshow3>
+					<file>em_slideshow3.xml</file>
+				</slideshow3>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <slideshow3>
+                <class>EM_Slideshow3_Model</class>
+                <resourceModel>slideshow3_mysql4</resourceModel>
+            </slideshow3>
+            <slideshow3_mysql4>
+                <class>EM_Slideshow3_Model_Mysql4</class>
+                <entities>
+                    <media>
+                        <table>em_slideshow3_media</table>
+                    </media>
+					<slider>
+                        <table>em_slideshow3_slider</table>
+                    </slider>
+                </entities>
+            </slideshow3_mysql4>
+        </models>
+        <resources>
+            <slideshow3_setup>
+                <setup>
+                    <module>EM_Slideshow3</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </slideshow3_setup>
+            <slideshow3_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </slideshow3_write>
+            <slideshow3_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </slideshow3_read>
+        </resources>
+        <blocks>
+            <slideshow3>
+                <class>EM_Slideshow3_Block</class>
+            </slideshow3>
+        </blocks>
+        <helpers>
+            <slideshow3>
+                <class>EM_Slideshow3_Helper</class>
+            </slideshow3>
+        </helpers>
+    </global>
+</config>

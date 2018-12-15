@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Ktpl_Abandoned>
+            <version>0.1.0</version>
+        </Ktpl_Abandoned>
+    </modules>
+    
+    <global>
+        <models>
+            <abandoned>
+                <class>Ktpl_Abandoned_Model</class>
+            </abandoned>   
+        </models>
+    </global>    
+    <crontab>
+        <jobs>
+            <abandoned>
+                <schedule>
+                    <cron_expr>*/1 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>abandoned/cron::sendabandoned</model>
+                </run>
+            </abandoned>
+           
+        </jobs>
+    </crontab>
+</config>

@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Ktpl_RewardPoints>
+            <version>0.1.0</version>
+        </Ktpl_RewardPoints>
+    </modules>
+    
+    <global>
+        <models>
+            <kreward>
+                <class>Ktpl_RewardPoints_Model</class>
+                <resourceModel>kreward_mysql4</resourceModel>
+            </kreward>   
+            <kreward_mysql4>
+                <class>Ktpl_RewardPoints_Model_Mysql4</class>
+                <entities>    
+                    <kreward>
+                        <table>reward_schedule</table> 
+                    </kreward>
+                </entities>
+            </kreward_mysql4>                  
+        </models>
+        <resources>  
+            <kreward_setup>
+                <setup>
+                    <module>Ktpl_RewardPoints</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </kreward_setup>
+            <kreward_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </kreward_write>
+            <kreward_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </kreward_read>
+        </resources>
+    </global>
+    
+    <crontab>
+        <jobs>
+            <kreward>
+                <schedule>
+                    <cron_expr>* 9 3 * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>kreward/cron::createrewards</model>
+                </run>
+            </kreward>
+            <krewardmail>
+                <schedule>
+                    <cron_expr>*/10 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>kreward/cron::sendrewards</model>
+                </run>
+            </krewardmail>
+        </jobs>
+    </crontab>
+</config>

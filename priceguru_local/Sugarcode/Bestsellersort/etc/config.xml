@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Sugarcode_Bestsellersort>
+            <version>0.1.0</version>
+        </Sugarcode_Bestsellersort>
+    </modules>
+	<global>
+		
+		<blocks>
+            <catalog>
+						 
+				<rewrite>
+				<product_list_toolbar>Sugarcode_Bestsellersort_Block_Product_List_Toolbar</product_list_toolbar>
+				</rewrite>
+            </catalog>            
+        </blocks>
+         <models>
+            <sugarcode_bestsellersort>
+                <class>Sugarcode_Bestsellersort_Model</class>
+                <resourceModel>tindexer_mysql4</resourceModel>
+            </sugarcode_bestsellersort>
+             <sugarcode_bestsellersort_mysql4>
+                <class>Sugarcode_Bestsellersort_Model_Mysql4</class>
+                <entities>
+                    <mostviewed>
+                        <table>ln_mostviewed</table>
+                    </mostviewed>
+                </entities>
+            </sugarcode_bestsellersort_mysql4>  
+        </models>
+         <index>
+                    <indexer>
+                            <sugarcode_mostviewedsellersort>
+                                    <model>sugarcode_bestsellersort/indexer</model>
+                            </sugarcode_mostviewedsellersort >
+                    </indexer>
+                </index>
+	</global>
+</config>

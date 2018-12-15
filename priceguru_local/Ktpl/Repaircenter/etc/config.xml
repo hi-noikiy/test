@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Ktpl_Repaircenter>
+            <version>1.0.1</version>
+        </Ktpl_Repaircenter>
+    </modules>
+    	
+    <global>
+        <models>
+            <repaircenter>
+                <class>Ktpl_Repaircenter_Model</class>
+                <resourceModel>repaircenter_mysql4</resourceModel>
+            </repaircenter>
+            <repaircenter_mysql4>
+                <class>Ktpl_Repaircenter_Model_Mysql4</class>
+                <entities>                                   
+                    <repaircenter>
+                        <table>repair_to_center</table>
+                    </repaircenter>
+                    <repaircustomer>
+                        <table>repair_to_customer</table>
+                    </repaircustomer>
+                    <servicecenter>
+                        <table>service_center</table>
+                    </servicecenter>
+                </entities>                
+            </repaircenter_mysql4>
+        </models>
+        <resources>
+            <repaircenter_setup>
+                <setup>
+                    <module>Ktpl_Repaircenter</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </repaircenter_setup>
+            <repaircenter_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </repaircenter_write>
+            <repaircenter_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </repaircenter_read>
+        </resources>
+        <blocks>
+            <repaircenter>
+                <class>Ktpl_Repaircenter_Block</class>
+            </repaircenter>
+            <adminhtml>
+                <rewrite>
+                    <sales_order_view>Ktpl_Repaircenter_Block_Adminhtml_Sales_Order_View</sales_order_view>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+        <helpers>
+            <repaircenter>
+                <class>Ktpl_Repaircenter_Helper</class>
+            </repaircenter>
+        </helpers>
+    </global>
+
+    <admin>
+        <routers>
+            <repaircenter>
+                <use>admin</use>
+                <args>
+                    <module>Ktpl_Repaircenter</module>
+                    <frontName>repaircenter</frontName>
+                </args>
+            </repaircenter>
+        </routers>
+    </admin>
+    
+    <adminhtml>
+        <layout>
+            <updates>
+                <repaircenter>
+                    <file>repaircenter.xml</file>
+                </repaircenter>
+            </updates>
+        </layout>
+        <menu>
+            <sales>
+                <children>
+                    <order translate="title" module="repaircenter">
+                        <children>
+                            <repaircenter translate="title" module="repaircenter">
+                                <title>Repair to Center</title>
+                                <action>repaircenter/adminhtml_repaircenter</action>
+                                <sort_order>40</sort_order>
+                                <children>
+                                    <servicecenter translate="title" module="repaircenter">
+                                        <title>Add Servicecenter</title>
+                                        <action>repaircenter/adminhtml_servicecenter</action>
+                                        <sort_order>11</sort_order>
+                                    </servicecenter>
+                                </children>
+                            </repaircenter>
+                            <repaircustomer translate="title" module="repaircenter">
+                                <title>Repair to Customer</title>
+                                <action>repaircenter/adminhtml_repaircustomer</action>
+                                <sort_order>45</sort_order>
+                            </repaircustomer>
+                        </children>
+                    </order>
+                </children>
+            </sales>
+        </menu>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <repaircenter>
+                                            <title>Repair-Center</title>
+                                        </repaircenter>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                        <sales>
+                            <children>
+                                <order translate="title" module="repaircenter">
+                                    <children>
+                                        <repaircenter translate="title" module="repaircenter">
+                                            <title>Repair to Center</title>
+                                            <action>repaircenter/adminhtml_repaircenter</action>
+                                            <sort_order>40</sort_order>
+                                            <children>
+                                                <servicecenter translate="title" module="repaircenter">
+                                                    <title>Add Servicecenter</title>
+                                                    <action>repaircenter/adminhtml_servicecenter</action>
+                                                    <sort_order>11</sort_order>
+                                                </servicecenter>
+                                            </children>
+                                        </repaircenter>
+                                        <repaircustomer translate="title" module="repaircenter">
+                                            <title>Repair to Customer</title>
+                                            <action>repaircenter/adminhtml_repaircustomer</action>
+                                            <sort_order>45</sort_order>
+                                        </repaircustomer>
+                                    </children>
+                                </order>
+                            </children>
+                        </sales>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+    
+</config>

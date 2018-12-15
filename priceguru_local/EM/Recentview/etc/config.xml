@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <EM_Recentview>
+            <version>0.1.0</version>
+        </EM_Recentview>
+    </modules>
+    <global>
+        <models>
+            <recentview>
+                <class>EM_Recentview_Model</class>
+            </recentview>
+        </models>
+		
+        <blocks>
+            <recentview>
+                <class>EM_Recentview_Block</class>
+            </recentview>
+        </blocks>
+		
+        <helpers>
+            <recentview>
+                <class>EM_Recentview_Helper</class>
+            </recentview>
+        </helpers>
+    </global>
+</config>

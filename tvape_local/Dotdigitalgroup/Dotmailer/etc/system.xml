@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<config>
+	<sections>
+        <dotmailer translate="label" module="dotdigitalgroup_dotmailer">
+            <label>dotMailer Configuration</label>
+			<class>dotmailer-section</class>
+			<tab>customer</tab>
+			<sort_order>105</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+				<dotMailer_banner>
+					<sort_order>10</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<frontend_model>dotdigitalgroup_dotmailer/system_config_banner</frontend_model>
+				</dotMailer_banner>
+
+                <dotMailer_group translate="label">
+                    <label>General</label>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+                    <fields>
+						<dotMailer_header>
+							<sort_order>0</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>dotdigitalgroup_dotmailer/system_config_header</frontend_model>
+						</dotMailer_header>
+                        <dotMailer_api_username translate="label comment">
+                            <label>API Username</label>
+							<validate>required-entry</validate>
+							<sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>text</frontend_type>
+                        </dotMailer_api_username>
+                        <dotMailer_api_password translate="label comment">
+                            <label>API Password</label>
+							<validate>required-entry</validate>
+							<sort_order>2</sort_order>
+                            <comment>The API Username and Password are not the same as your normal login details. Speak to your account manager if you're unsure what to enter.</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>text</frontend_type>
+                        </dotMailer_api_password>
+						<dotMailer_credential_button>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>dotdigitalgroup_dotmailer/system_config_credentialbutton</frontend_model>
+						</dotMailer_credential_button>
+                        <dotMailer_book_general_subscribers translate="label comment">
+                            <label>Add General Subscribers To Address Book</label>
+							<validate>required-entry</validate>
+							<sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>select</frontend_type>
+							<source_model>dotdigitalgroup_dotmailer/system_config_source_books</source_model>
+                        </dotMailer_book_general_subscribers>
+                        <dotMailer_book_checkout_customers translate="label comment">
+                            <label>Add Customers Who Complete Checkout To Address Book</label>
+							<validate>required-entry</validate>
+							<sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>select</frontend_type>
+							<source_model>dotdigitalgroup_dotmailer/system_config_source_books</source_model>
+                        </dotMailer_book_checkout_customers>
+                        <dotMailer_campaign_cart_abandoned translate="label comment">
+                            <label>Campaign To Trigger for Abandoned Carts</label>
+							<validate>required-entry</validate>
+							<sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>select</frontend_type>
+							<source_model>dotdigitalgroup_dotmailer/system_config_source_campaigns</source_model>
+                        </dotMailer_campaign_cart_abandoned>
+                        <dotMailer_hours_before_sending_lost_basket_email translate="label comment">
+                            <label>Hours Before Sending Lost Basket Email</label>
+							<validate>required-entry validate-number</validate>
+							<sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>text</frontend_type>
+                        </dotMailer_hours_before_sending_lost_basket_email>
+                        <dotMailer_campaign_incomplete_order translate="label comment">
+                            <label>Campaign To Trigger for Incomplete Orders</label>
+							<validate>required-entry</validate>
+							<sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>select</frontend_type>
+							<source_model>dotdigitalgroup_dotmailer/system_config_source_campaigns</source_model>
+                        </dotMailer_campaign_incomplete_order>
+                        <dotMailer_hours_before_sending_incomplete_order_email translate="label comment">
+                            <label>Hours Before Sending Incomplete Order Email</label>
+							<validate>required-entry validate-number</validate>
+							<sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>text</frontend_type>
+                        </dotMailer_hours_before_sending_incomplete_order_email>
+                        <dotMailer_track_conversions translate="label comment">
+                            <label>Track Conversions on dotMailer</label>
+							<validate>required-entry</validate>
+							<comment>Sends information to dotMailer about orders that convert from emails so you can see how effective they are.</comment>
+							<sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+                        </dotMailer_track_conversions>
+                    </fields>
+                </dotMailer_group>
+				<dotMailer_footer>
+					<sort_order>30</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<frontend_model>dotdigitalgroup_dotmailer/system_config_footer</frontend_model>
+				</dotMailer_footer>
+
+            </groups>
+		</dotmailer>
+	</sections>
+
+</config>

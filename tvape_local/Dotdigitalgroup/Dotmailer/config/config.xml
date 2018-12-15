@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<brand_name>espService</brand_name>
+	<banner_url>http://bogutsky.ru/test/</banner_url>
+	<enable_for_orders>1</enable_for_orders>
+</config>

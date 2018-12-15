@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <EM_Overcheckout>
+      <version>0.1.0</version>
+    </EM_Overcheckout>
+  </modules>
+  <frontend>
+    <routers>
+      <overcheckout>
+        <use>standard</use>
+          <args>
+            <module>EM_Overcheckout</module>
+            <frontName>overcheckout</frontName>
+          </args>
+      </overcheckout>
+    </routers>
+  </frontend>
+  <global>
+		<rewrite>        
+            <em_overcheckout_checkout_cartcontroller>
+                <from><![CDATA[#^/checkout/cart/#]]></from> <!-- Mage_Checkout_CartController  -->
+                <to>/overcheckout/checkout_cart/</to> <!-- EM_Overcheckout_Checkout_CartController  -->
+            </em_overcheckout_checkout_cartcontroller>
+		</rewrite>
+    <helpers>
+      <overcheckout>
+        <class>EM_Overcheckout_Helper</class>
+      </overcheckout>
+    </helpers>
+	<models>
+	  <overcheckout>
+		<class>EM_Overcheckout_Model</class>
+		<resourceModel>overcheckout_mysql4</resourceModel>
+	  </overcheckout>
+			<checkout>
+				<rewrite>
+					<cart>EM_Overcheckout_Model_Checkout_Cart</cart>
+				</rewrite>
+			</checkout>
+	</models>
+  </global>
+  <admin>
+	<routers>
+	  <overcheckout>
+	    <use>admin</use>
+		<args>
+		  <module>EM_Overcheckout</module>
+		  <frontName>admin_overcheckout</frontName>
+		</args>
+	  </overcheckout>
+	</routers>
+  </admin>
+</config> 

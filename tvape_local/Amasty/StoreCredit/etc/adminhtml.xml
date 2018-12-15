@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_StoreCredit
+ */
+-->
+<config>
+    <menu>
+        <report>
+            <children>
+                <amstcred translate="title" module="amstcred">
+                    <title>Credit Transactions History</title>
+                    <action>adminhtml/amstcred_history/</action>
+                    <sort_order>130</sort_order>
+                </amstcred>
+            </children>
+        </report>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <customer>
+                        <children>
+                            <manage>
+                                <children>
+                                    <amstcred translate="title" module="amstcred">
+                                        <title>Store Credit</title>
+                                    </amstcred>
+                                </children>
+                            </manage>
+                        </children>
+                    </customer>
+                    <report>
+                        <children>
+                            <amstcred translate="title" module="amstcred">
+                                <title>Credit Transactions History</title>
+                            </amstcred>
+                        </children>
+                    </report>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <amstcred translate="title" module="amstcred">
+                                        <title>Store Credit Section</title>
+                                    </amstcred>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

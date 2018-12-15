@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+       <AW_Visitorsonline>
+          <version>1.0.1</version>
+       </AW_Visitorsonline>
+    </modules>
+
+    <global>
+	    <blocks>
+            <visitorsonline>
+                <class>AW_Visitorsonline_Block</class>
+            </visitorsonline>
+        </blocks>
+        <models>
+            <visitorsonline>
+                <class>AW_Visitorsonline_Model</class>
+            </visitorsonline>
+        </models>
+
+        <helpers>
+        	<visitorsonline>
+        		<class>AW_Visitorsonline_Helper</class>
+        	</visitorsonline>
+        </helpers>
+        <resources>
+            <visitorsonline_setup>
+                <setup>
+                    <module>AW_Visitorsonline</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </visitorsonline_setup>
+            <visitorsonline_write>
+                <connection>
+                  <use>core_write</use>
+                </connection>
+            </visitorsonline_write>
+            <visitorsonline_read>
+               <connection>
+                <use>core_read</use>
+              </connection>
+            </visitorsonline_read>
+        </resources>	    
+    </global>
+    
+	<frontend>
+	   <routers>
+			<visitorsonline>
+				<use>standard</use>
+				<args>
+					<module>AW_Visitorsonline</module>
+					<frontName>visitorsonline</frontName>
+				</args>
+			</visitorsonline>
+		</routers>
+		<layout>
+			<updates>
+				<visitorsonline>
+					<file>visitorsonline.xml</file>
+				</visitorsonline>
+			</updates>
+		</layout>
+		<translate>
+            <modules>
+                <AW_Visitorsonline>
+                    <files>
+                        <default>AW_Visitorsonline.csv</default>
+                    </files>
+                </AW_Visitorsonline>
+            </modules>
+        </translate>
+	</frontend>
+    
+    <adminhtml>
+        <acl>
+          <resources>
+			<all>
+				<title>Allow Everything</title>
+			</all>
+            <admin>
+              <children>
+                  <system>
+                      <children>
+                        <config>
+                          <children>
+                            <visitorsonline>
+                              <title>aheadWorks - Review Rotator Section</title>
+                            </visitorsonline>
+                          </children>
+                        </config>
+                      </children>
+                  </system>
+              </children>
+            </admin>
+          </resources>
+        </acl>
+		
+		<translate>
+            <modules>
+                <AW_Visitorsonline>
+                    <files>
+                        <default>AW_Visitorsonline.csv</default>
+                    </files>
+                </AW_Visitorsonline>
+            </modules>
+        </translate>
+		
+    </adminhtml>    
+</config>

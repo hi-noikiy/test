@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Ktpl_Giftvoucher>
+            <version>0.1.0</version>
+        </Ktpl_Giftvoucher>
+    </modules>
+   
+    <global>        
+        <models>
+            <ktpl_giftvoucher>
+                <class>Ktpl_Giftvoucher_Model</class>
+            </ktpl_giftvoucher>
+        </models>
+    
+        <events>
+            <payment_method_is_active> 
+                <observers>
+                    <ktpl_giftvoucher>
+                        <type>singleton</type>
+                        <class>ktpl_giftvoucher/observer</class>
+                        <method>paymentMethodIsActive</method>
+                    </ktpl_giftvoucher>
+                </observers>
+            </payment_method_is_active>
+            
+             <controller_action_predispatch_checkout_cart_add>
+                <observers>
+                    <ktpl_giftvoucher_cart_add>
+                        <class>ktpl_giftvoucher/observer</class>
+                        <method>CheckCartAdd</method>
+                    </ktpl_giftvoucher_cart_add>
+                </observers>
+            </controller_action_predispatch_checkout_cart_add>
+        </events>
+   
+    </global>
+  </config>

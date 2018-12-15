@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Atwix_Addallowed>
+            <version>1.0.0</version>
+        </Atwix_Addallowed>
+    </modules>
+    <global>
+        <resources>
+            <atwix_addallowed>
+                <setup>
+                    <module>Atwix_Addallowed</module>
+                </setup>
+            </atwix_addallowed>
+        </resources>
+    </global>
+</config>

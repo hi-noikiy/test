@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <customer>
+            <groups>
+                <guestabandoned translate="label">
+                    <label>Guest Abandoned Cart</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label comment">
+                            <label>Enable Guest Abandoned Cart</label>
+                            <comment><![CDATA[Enables or disables Guest Abandoned Cart Module.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <startdate translate="label">
+                           <label>Guest Abandoned Cart Start Date</label>
+                           <frontend_type>text</frontend_type>
+                           <frontend_model>guestabandoned/adminhtml_system_config_date</frontend_model>
+                           <sort_order>20</sort_order>
+                           <show_in_default>1</show_in_default>
+                           <show_in_website>1</show_in_website>
+                           <validate>required-entry</validate>
+                           <show_in_store>1</show_in_store>
+                        </startdate>
+                        <crontab translate="label">
+                           <label>Guest Abandoned Cart Cron Run Time</label>
+                           <frontend_type>text</frontend_type>               
+                           <sort_order>21</sort_order>
+                           <show_in_default>1</show_in_default>
+                           <show_in_website>1</show_in_website>
+                           <validate>required-entry</validate>
+                           <show_in_store>1</show_in_store>
+                        </crontab>
+                    </fields>
+                </guestabandoned>
+            </groups>
+        </customer>
+    </sections>
+</config>

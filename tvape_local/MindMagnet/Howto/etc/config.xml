@@ -1,0 +1,35 @@
+<config>
+    <modules>
+        <MindMagnet_Howto>
+            <version>1.0.0</version>
+        </MindMagnet_Howto>
+    </modules>
+    <global>
+        <helpers>
+            <mindmagnet_howto>
+                <class>MindMagnet_Howto_Helper</class>
+            </mindmagnet_howto>
+        </helpers>
+        <resources>
+            <mindmagnethowto_setup>
+                <setup>
+                    <module>MindMagnet_Howto</module>
+                    <class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </mindmagnethowto_setup>
+            <mindmagnethowto_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </mindmagnethowto_write>
+            <mindmagnethowto_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </mindmagnethowto_read>
+        </resources>
+    </global>
+</config>

@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ebizon_Ordersms>
+            <version>1.0.10</version>
+        </Ebizon_Ordersms>
+    </modules>
+  <global>
+	<models>
+	  <ordersms>
+		<class>Ebizon_Ordersms_Model</class>
+	  </ordersms>
+
+	</models>
+	
+    <events>
+	 
+	  <sales_order_place_after> <!-- identifier of the event we want to catch -->
+        <observers>
+          <ordersms_afterorderplaced> <!-- identifier of the event handler -->
+            <type>model</type> <!-- class method call type; valid are model, object and singleton -->
+            <class>ordersms/observer</class> <!-- observers class alias -->
+            <method>afterOrderSms</method>  <!-- observer's method to be called -->
+            <args></args> <!-- additional arguments passed to observer -->
+          </ordersms_afterorderplaced>
+        </observers>
+      </sales_order_place_after>	
+			
+		<sales_order_invoice_register>
+		   <observers>
+				<ordersms_afterinvoice> <!-- identifier of the event handler -->
+				<type>model</type> <!-- class method call type; valid are model, object and singleton -->
+				<class>ordersms/observer</class> <!-- observers class alias -->
+				<method>afterInvoiceSms</method>  <!-- observer's method to be called -->
+				<args></args> <!-- additional arguments passed to observer -->
+			  </ordersms_afterinvoice>
+			</observers>
+		</sales_order_invoice_register>
+		
+		<!--<sales_order_save_after>
+		   <observers>
+				<ordersms_afterstatuschange> 
+				<type>model</type> 
+				<class>ordersms/observer</class> 
+				<method>afterStatusChangeSms</method>
+				<args></args> 
+				</ordersms_afterstatuschange>
+			</observers>
+		</sales_order_save_after> -->
+                
+                <sales_order_shipment_save_after>
+                <observers>
+                     <twilioshipment>
+                        <class>ordersms/observer</class>
+                        <method>orderProcessing</method>
+                     </twilioshipment>
+                </observers>
+            </sales_order_shipment_save_after>
+				
+    </events>
+	
+	
+  </global>
+
+</config> 

@@ -1,0 +1,519 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_StoreCredit
+ */
+-->
+<config>
+    <modules>
+        <Amasty_StoreCredit>
+            <version>1.2.0</version>
+        </Amasty_StoreCredit>
+    </modules>
+
+
+    <global>
+        <models>
+            <amstcred>
+                <class>Amasty_StoreCredit_Model</class>
+                <resourceModel>amstcred_resource</resourceModel>
+            </amstcred>
+
+            <amstcred_resource>
+                <class>Amasty_StoreCredit_Model_Resource</class>
+                <entities>
+                    <amount>
+                        <table>amasty_storecredit_amount</table>
+                    </amount>
+                    <customer_balance>
+                        <table>amasty_storecredit_customer_balance</table>
+                    </customer_balance>
+                    <customer_balance_history>
+                        <table>amasty_storecredit_customer_balance_history</table>
+                    </customer_balance_history>
+                    <customer_balance_send>
+                        <table>amasty_storecredit_customer_balance_send</table>
+                    </customer_balance_send>
+                </entities>
+            </amstcred_resource>
+        </models>
+
+        <resources>
+            <amstcred_setup>
+                <setup>
+                    <module>Amasty_StoreCredit</module>
+                    <class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
+                </setup>
+            </amstcred_setup>
+
+
+            <amstcred_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </amstcred_write>
+
+            <amstcred_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </amstcred_read>
+        </resources>
+
+
+        <template>
+            <email>
+                <amstcred_email_email_template_notify translate="label" module="amstcred">
+                    <label>Update Store Credit</label>
+                    <file>amasty_storecredit_update_balance.html</file>
+                    <type>html</type>
+                </amstcred_email_email_template_notify>
+                <amstcred_email_email_template_send_balance translate="label" module="amstcred">
+                    <label>Send Store Credit to Friend</label>
+                    <file>amasty_storecredit_send_balance.html</file>
+                    <type>html</type>
+                </amstcred_email_email_template_send_balance>
+            </email>
+        </template>
+
+
+        <blocks>
+            <amstcred>
+                <class>Amasty_StoreCredit_Block</class>
+            </amstcred>
+        </blocks>
+
+        <helpers>
+            <amstcred>
+                <class>Amasty_StoreCredit_Helper</class>
+            </amstcred>
+        </helpers>
+
+        <catalog>
+            <product>
+                <type>
+                    <amstcred translate="label" module="amstcred">
+                        <label>Store Credit</label>
+                        <model>amstcred/catalog_product_type_storeCredit</model>
+                        <is_qty>1</is_qty>
+                        <index_data_retreiver>amstcred/catalogIndex_data_storeCredit</index_data_retreiver>
+                        <price_model>amstcred/catalog_product_price_storeCredit</price_model>
+
+                        <index_priority>50</index_priority>
+                        <composite>0</composite>
+                        <!--<price_indexer>amstcred/indexer_price</price_indexer>-->
+                    </amstcred>
+                </type>
+            </product>
+        </catalog>
+
+        <events>
+            <catalog_product_collection_load_before>
+                <observers>
+                    <amgiftcard>
+                        <model>amstcred/observer</model>
+                        <method>catalogProductCollectionLoadBefore</method>
+                    </amgiftcard>
+                </observers>
+            </catalog_product_collection_load_before>
+
+            <adminhtml_customer_save_after>
+                <observers>
+                    <amstcred_store_credit>
+                        <class>amstcred/observer</class>
+                        <method>customerSaveAfter</method>
+                    </amstcred_store_credit>
+                </observers>
+            </adminhtml_customer_save_after>
+
+            <sales_quote_config_get_product_attributes>
+                <observers>
+                    <amstcred>
+                        <class>amstcred/observer</class>
+                        <method>addProductAttributes</method>
+                    </amstcred>
+                </observers>
+            </sales_quote_config_get_product_attributes>
+
+            <sales_convert_quote_item_to_order_item>
+                <observers>
+                    <amstcred_append_additional_data>
+                        <class>amstcred/observer</class>
+                        <method>appendAdditionalData</method>
+                    </amstcred_append_additional_data>
+                </observers>
+            </sales_convert_quote_item_to_order_item>
+
+            <sales_order_save_commit_after>
+                <observers>
+                    <amstcred_charge>
+                        <class>amstcred/observer</class>
+                        <method>chargeStoreCredit</method>
+                    </amstcred_charge>
+                </observers>
+            </sales_order_save_commit_after>
+
+
+            <sales_quote_payment_import_data_before>
+                <observers>
+                    <amstcred>
+                        <class>amstcred/observer</class>
+                        <method>paymentDataImport</method>
+                    </amstcred>
+                </observers>
+            </sales_quote_payment_import_data_before>
+
+
+            <payment_method_is_active>
+                <observers>
+                    <amstcred>
+                        <class>amstcred/observer</class>
+                        <method>togglePaymentMethods</method>
+                    </amstcred>
+                </observers>
+            </payment_method_is_active>
+
+            <sales_model_service_quote_submit_before>
+                <observers>
+                    <amstcred>
+                        <class>amstcred/observer</class>
+                        <method>processOrderPlace</method>
+                    </amstcred>
+                </observers>
+            </sales_model_service_quote_submit_before>
+
+            <checkout_type_multishipping_create_orders_single>
+                <observers>
+                    <amstcred>
+                        <class>amstcred/observer</class>
+                        <method>processOrderPlace</method>
+                    </amstcred>
+                </observers>
+            </checkout_type_multishipping_create_orders_single>
+
+
+            <order_cancel_after>
+                <observers>
+                    <amstcred>
+                        <class>amstcred/observer</class>
+                        <method>revertStoreCredit</method>
+                    </amstcred>
+                </observers>
+            </order_cancel_after>
+
+
+            <sales_model_service_quote_submit_failure>
+                <observers>
+                    <amstcred>
+                        <class>amstcred/observer</class>
+                        <method>revertStoreCredit</method>
+                    </amstcred>
+                </observers>
+            </sales_model_service_quote_submit_failure>
+
+            <checkout_multishipping_refund_all>
+                <observers>
+                    <amstcred>
+                        <class>amstcred/observer</class>
+                        <method>revertStoreCreditForAllOrders</method>
+                    </amstcred>
+                </observers>
+            </checkout_multishipping_refund_all>
+
+            <sales_quote_collect_totals_before>
+                <observers>
+                    <amstcred>
+                        <class>amstcred/observer</class>
+                        <method>quoteCollectTotalsBefore</method>
+                    </amstcred>
+                </observers>
+            </sales_quote_collect_totals_before>
+
+            <sales_quote_merge_after>
+                <observers>
+                    <amstcred>
+                        <class>amstcred/observer</class>
+                        <method>quoteMergeAfter</method>
+                    </amstcred>
+                </observers>
+            </sales_quote_merge_after>
+
+
+            <sales_order_invoice_save_after>
+                <observers>
+                    <amstcred>
+                        <class>amstcred/observer</class>
+                        <method>increaseOrderInvoicedAmount</method>
+                    </amstcred>
+                </observers>
+            </sales_order_invoice_save_after>
+
+
+            <customer_register_success>
+                <observers>
+                    <amstcred>
+                        <class>amstcred/observer</class>
+                        <method>customerRegisterAfter</method>
+                    </amstcred>
+                </observers>
+            </customer_register_success>
+
+            <sales_order_creditmemo_refund>
+                <observers>
+                    <amstcred>
+                        <class>amstcred/observer</class>
+                        <method>refund</method>
+                    </amstcred>
+                </observers>
+            </sales_order_creditmemo_refund>
+
+            <paypal_prepare_line_items>
+                <observers>
+                    <amstcred>
+                        <class>amstcred/observer</class>
+                        <method>addPaypalCustomerBalanceItem</method>
+                    </amstcred>
+                </observers>
+            </paypal_prepare_line_items>
+
+            <sales_order_load_after>
+                <observers>
+                    <amstcred>
+                        <class>amstcred/observer</class>
+                        <method>salesOrderLoadAfter</method>
+                    </amstcred>
+                </observers>
+            </sales_order_load_after>
+
+            <adminhtml_sales_order_create_process_data>
+                <observers>
+                    <amstcred>
+                        <class>amstcred/observer</class>
+                        <method>processOrderCreationData</method>
+                    </amstcred>
+                </observers>
+            </adminhtml_sales_order_create_process_data>
+
+            <adminhtml_sales_order_creditmemo_register_before>
+                <observers>
+                    <amstcred>
+                        <class>amstcred/observer</class>
+                        <method>creditmemoDataImport</method>
+                    </amstcred>
+                </observers>
+            </adminhtml_sales_order_creditmemo_register_before>
+
+            <sales_order_creditmemo_save_after>
+                <observers>
+                    <amstcred>
+                        <class>amstcred/observer</class>
+                        <method>creditmemoSaveAfter</method>
+                    </amstcred>
+                </observers>
+            </sales_order_creditmemo_save_after>
+
+            <customer_save_before>
+                <observers>
+                    <amstcred>
+                        <class>amstcred/observer</class>
+                        <method>onCustomerSaveBefore</method>
+                    </amstcred>
+                </observers>
+            </customer_save_before>
+
+            <customer_save_after>
+                <observers>
+                    <amstcred>
+                        <class>amstcred/observer</class>
+                        <method>onCustomerSaveAfter</method>
+                    </amstcred>
+                </observers>
+            </customer_save_after>
+        </events>
+
+
+        <sales>
+            <quote>
+                <totals>
+                    <amstcred>
+                        <class>amstcred/total_quote_storeCredit</class>
+                        <after>discount,tax,grand_total,reward,giftwrapping,amgiftwrap,shipping</after>
+                        <!--<before>customerbalance</before>-->
+                        <renderer>amstcred/checkout_cart_total</renderer>
+                    </amstcred>
+                </totals>
+            </quote>
+            <order_invoice>
+                <totals>
+                    <amstcred>
+                        <class>amstcred/total_invoice_storeCredit</class>
+                        <after>weee,discount,tax,grand_total,reward,giftcardaccount</after>
+                    </amstcred>
+                </totals>
+            </order_invoice>
+            <order_creditmemo>
+                <totals>
+                    <amstcred>
+                        <class>amstcred/total_creditmemo_storeCredit</class>
+                        <after>weee,discount,tax,grand_total</after>
+                    </amstcred>
+                </totals>
+            </order_creditmemo>
+        </sales>
+
+        <fieldsets>
+            <sales_convert_quote_address>
+                <base_amstcred_amount>
+                    <to_order>*</to_order>
+                </base_amstcred_amount>
+                <amstcred_amount>
+                    <to_order>*</to_order>
+                </amstcred_amount>
+            </sales_convert_quote_address>
+        </fieldsets>
+
+        <pdf>
+            <totals>
+                <amstcred translate="title">
+                    <title>Store Credit</title>
+                    <source_field>amstcred_amount</source_field>
+                    <amount_prefix>-</amount_prefix>
+                    <font_size>7</font_size>
+                    <display_zero>0</display_zero>
+                    <sort_order>550</sort_order>
+                </amstcred>
+            </totals>
+        </pdf>
+    </global>
+
+
+    <frontend>
+        <routers>
+            <amstcred>
+                <use>standard</use>
+                <args>
+                    <module>Amasty_StoreCredit</module>
+                    <frontName>amstcred</frontName>
+                </args>
+            </amstcred>
+        </routers>
+        <translate>
+            <modules>
+                <Amasty_StoreCredit>
+                    <files>
+                        <default>Amasty_StoreCredit.csv</default>
+                    </files>
+                </Amasty_StoreCredit>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <amstcred module="Amasty_StoreCredit">
+                    <file>amasty/amstcred/amstcred.xml</file>
+                </amstcred>
+            </updates>
+        </layout>
+    </frontend>
+
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Amasty_StoreCredit before="Mage_Adminhtml">Amasty_StoreCredit_Adminhtml</Amasty_StoreCredit>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <adminhtml>
+        <events>
+            <adminhtml_catalog_product_edit_prepare_form>
+                <observers>
+                    <amasty_storecredit_product_edit_prepare_form>
+                        <class>amstcred/storeCredit</class>
+                        <method>replaceRendererPrices</method>
+                    </amasty_storecredit_product_edit_prepare_form>
+                </observers>
+            </adminhtml_catalog_product_edit_prepare_form>
+
+
+            <adminhtml_customer_prepare_save>
+                <observers>
+                    <amasty_storecredit>
+                        <class>amstcred/observer</class>
+                        <method>prepareCustomerBalanceSave</method>
+                    </amasty_storecredit>
+                </observers>
+            </adminhtml_customer_prepare_save>
+
+            <core_block_abstract_prepare_layout_before>
+                <observers>
+                    <amasty_storecredit_customer_grid>
+                        <class>amstcred/observer</class>
+                        <method>prepareCustomerGrid</method>
+                    </amasty_storecredit_customer_grid>
+                </observers>
+            </core_block_abstract_prepare_layout_before>
+
+
+            <eav_collection_abstract_load_before>
+                <observers>
+                    <amasty_storecredit_customer_grid_select>
+                        <class>amstcred/observer</class>
+                        <method>addSelectCustomerCollection</method>
+                    </amasty_storecredit_customer_grid_select>
+                </observers>
+            </eav_collection_abstract_load_before>
+
+
+            <core_block_abstract_to_html_before>
+                <observers>
+                    <amstcred>
+                        <type>singleton</type>
+                        <class>amstcred/observer</class>
+                        <method>onCoreBlockAbstractToHtmlBefore</method>
+                    </amstcred>
+                </observers>
+            </core_block_abstract_to_html_before>
+
+
+        </events>
+        <layout>
+            <updates>
+                <amstcred module="Amasty_StoreCredit">
+                    <file>amasty/amstcred/amstcred.xml</file>
+                </amstcred>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Amasty_StoreCredit>
+                    <files>
+                        <default>Amasty_StoreCredit.csv</default>
+                    </files>
+                </Amasty_StoreCredit>
+            </modules>
+        </translate>
+    </adminhtml>
+
+
+    <default>
+        <amstcred>
+            <general>
+                <active>1</active>
+                <allowed_product_types>simple,grouped,configurable,virtual,bundle,downloadable</allowed_product_types>
+            </general>
+            <email>
+                <email_identity>general</email_identity>
+                <email_template_notify>amstcred_email_email_template_notify</email_template_notify>
+                <email_template_send_balance>amstcred_email_email_template_send_balance</email_template_send_balance>
+                <subscribe_new_customer>1</subscribe_new_customer>
+            </email>
+        </amstcred>
+    </default>
+</config>
