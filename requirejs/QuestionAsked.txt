@@ -1,0 +1,121 @@
+
+
+What type of injection does magneto support
+- Constructor Injection
+- Setter Injection
+- Interface Injection
+
+Types of Plugins
+Block vs Container functional difference
+Which classes are extended by block and container
+Ways of rendering block automatically
+Observer loading Sequence
+Questions related to encryption in system.xml
+What happens when you run save on a whole collection
+Entity types
+Question related to routing path
+how does magneto save category - parent category relationship
+How many line items are added to quote-item table if you add two different configurations of a single product
+plugin sort order
+relationship of shipping address with quote item
+Scenario based question on which product type will be used.
+difference between ddl and rdbms | why does magento uses ddl
+scopes of configuration in system.xm ( no global )
+how to add quantity in decimals in Magento 2
+What is use of Service folder in the extension directory
+steps to add a note attribute section on checkout page. values submitted should be saved in database.
+Which file to edit if you want to configure redis
+Change product view page layout dynamically based on price range
+How to access customer data in Js
+
+
+
+
+
+
+1. A client have millions of skus in the catalog. Customization like product detail page layout should get change according to price range. How will you do it?
+
+2. 2 modules have same event. How can you make sure module B's event will be executed ahead of Module A's?
+
+3.	<referenceBlock>
+		<block custom block created here>
+	</referenceBlock>
+
+	How custom block will be rendered? It will be rendered automatically or using childHtml?
+
+4. After customer login, a customer_login event should be called only when customer logged in from mobile. How can this be done?
+
+5. Syntax question from routes.xml frontend and adminhtml both
+
+6. What is primay difference between plugin and event-observer?
+
+7. How can a customer attribute is created that can be used only in admin customer form? (Process of creating customer attribute - Multiselect)
+
+8. What is primary difference between Block and Container?
+
+9. Customer adds two different variant of same configurable product. How many rows will be added in quote_item table? Or How many rows will be seen on cart page?
+
+10. Magento CLI questions.
+
+11. Client wants to migrate from Magento 1 to Magento 2. How will you install Magento 2 on the server?
+
+12. Question from SearchBuilderInterface. (Don't exactly remember)
+
+13. Client is a merchant selling ring. Rings are based on sizes......Which type of product will you create? (Simple product or configurable product or configurable product with custom options or something like that)
+
+14. Question related to Extension Attribute.
+
+15. Which files are required to create theme? Or Where is parent theme of custom theme defined?
+
+16. Question related to admin and system configuration.
+
+
+1. Production mode set command
+
+2. HOw to add category name in product url
+
+3. How to change layout for perticular category
+
+4. Catalog product view layout override in module which is not reflacting what is the reason
+
+5. Use of resource model
+
+#################################
+
+Updated on 02/01/2019 (Jaimin, Ravichandra)
+
+#################################
+
+1) Delete after abstract/core 
+2) event observer
+3) Multiple billing address functionality
+4) Price based layout
+5) module enable
+6) payment method store vise
+7) Log function save/observer
+8) Product and category
+9) db persist function
+10) Adding column using get connection
+11) Fall back for design/custom module/core/design
+12) plugin types
+13) product  with color and size option which product type suitable
+13) notify customer on update account information using mobile where to use observer
+14) set default value for yes/no custom module admin config.
+15) Which blocks will load its child automatically?
+16) Which entity allows scoped attributes
+17) Add Customer attribute steps
+18) Execute script on every setup:upgrade execution
+19) Exclude system configuration value in config:dump
+20) Config field encryption
+21) Attribute set relation with Category
+22) Get query from collection
+23) Create table using script (Standard approach)
+24) Rewrite phtml file in module and add the same file in theme. What effect will occur on removing the module.
+25) Want to add a custom block on every page with below code, how it will effect on frontend. Effects of using cacheable="false" on page
+26) Event observer sorting
+27) CLI Command to enable production mode
+28) Which actions can be restricted using ACL
+29) Relation between shipping address and cart items. (One address per order/one address per item/one address per quantity)
+30) Allow decimal quantity for some product and integer for others
+31) Is customer address an EAV entity or Flat entity
+32) What is object Manager (Method injector/Constructor Injector/Interface Injector)
