@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Gearup_Amastyfeed>
+            <version>1.0.0</version>
+        </Gearup_Amastyfeed>
+    </modules>
+    <global>
+        <models>
+            <amfeed>
+                <rewrite>
+                    <profile>Gearup_Amastyfeed_Model_Profile</profile>
+                </rewrite>
+            </amfeed>
+        </models>
+        <blocks>
+            <amfeed>
+                <rewrite>
+                    <adminhtml_profile_edit_tab_content>Gearup_Amastyfeed_Block_Adminhtml_Content</adminhtml_profile_edit_tab_content>
+                </rewrite>
+            </amfeed>
+        </blocks>
+        <helpers>
+            <gearup_amastyfeed>
+                <class>Gearup_Amastyfeed_Helper</class>
+            </gearup_amastyfeed>            
+        </helpers>
+    </global>
+</config>

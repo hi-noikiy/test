@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <reviewwall translate="label">
+            <label>Review Wall</label>
+            <tab>mw</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>600</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <reviewwall_settings translate="label">
+                    <label>Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>1</expanded>
+                    <fields>
+                        <reviewwall_count_on_page translate="label comment">
+                            <label>Reviews on page:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>reviewwall/system_config_source_wall_pages</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </reviewwall_count_on_page>
+                        <template_id translate="label comment">
+                            <label>Wall template</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>reviewwall/system_config_source_wall_template</source_model>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </template_id>
+                        <count_chars_in_review translate="label comment">
+                            <label>Preview length:</label>
+                            <frontend_type>Text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-greater-than-zero validate-digits validate-not-negative-number required-entry</validate>
+                            <depends>
+                                <template_id>1</template_id>
+                            </depends>
+                        </count_chars_in_review>
+                    </fields>
+                </reviewwall_settings>
+                <share_review_by_email translate="label comment">
+                    <label>Share Review By Email</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>0</expanded>
+                    <fields>
+                        <enabled translate="label comment">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+
+                        <template translate="label comment">
+                            <label>Share Email Template</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </template>
+                        <blind_copy_to translate="label comment">
+                            <label>Email Blind Copy To</label>
+                            <frontend_type>Text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Comma-separated. If empty then email will be send to 'Customer Support'</comment>
+                        </blind_copy_to>
+                    </fields>
+                </share_review_by_email>
+            </groups>
+        </reviewwall>
+    </sections>
+</config>

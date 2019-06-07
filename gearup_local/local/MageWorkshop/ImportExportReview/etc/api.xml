@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<config>
+    <api>
+        <resources>
+            <mageworkshop_importexportreview_sync translate="title" module="mageworkshop_importexportreview">
+                <model>mageworkshop_importexportreview/sync_api</model>
+                <title>Reviews Sync API</title>
+                <acl>mageworkshop_importexportreview</acl>
+                <methods>
+                    <list translate="title" module="mageworkshop_importexportreview">
+                        <title>List of Reviews</title>
+                        <method>items</method>
+                    </list>
+                </methods>
+                <faults module="mageworkshop_importexportreview">
+                    <date_invalid>
+                        <code>100500</code >
+                        <message>Invalid date is sent for reviews sync.</message>
+                    </date_invalid>
+                    <store_invalid>
+                        <code>100501</code >
+                        <message>Invalid store identifier is sent. Store should be registered in Admin Panel > Catalog > Reviews and Ratings > Reviews Synchronization > Sync Stores</message>
+                    </store_invalid>
+                </faults>
+            </mageworkshop_importexportreview_sync>
+        </resources>
+        <resources_alias>
+            <review>mageworkshop_importexportreview_sync</review>
+        </resources_alias>
+        <v2>
+            <resources_function_prefix>
+                <review>drieReview</review>
+            </resources_function_prefix>
+        </v2>
+        <acl>
+            <resources>
+                <mageworkshop_importexportreview translate="title" module="mageworkshop_importexportreview">
+                    <title>Reviews Sync</title>
+                    <sort_order>5</sort_order>
+                </mageworkshop_importexportreview>
+            </resources>
+        </acl>
+    </api>
+</config>

@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <one2crowd translate="label" module="gearup_sds">
+            <label>One2Crowd</label>
+            <sort_order>2000</sort_order>
+        </one2crowd>
+    </tabs>
+    <sections>
+        <checkout translate="label" module="checkout">
+            <groups>
+                <import translate="label">
+                    <fields>
+                        <testmode translate="label">
+                            <label><![CDATA[Test - Disable Checkout]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </testmode>
+                    </fields>
+                </import>
+            </groups>
+        </checkout>
+        <payment>
+            <groups>
+                <cashondelivery>
+                    <fields>
+                        <max_price_total translate="label">
+                            <label>Maximum Price Total</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </max_price_total>
+                        <sdsmax_price_total translate="label">
+                            <label>SDS COD limit</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>101</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </sdsmax_price_total>
+                    </fields>
+                </cashondelivery>
+            </groups>
+        </payment>
+        <customer translate="label" module="customer">
+            <groups>
+                <ugpc translate="label">
+                    <label>UGPC contact</label>
+                    <sort_order>200</sort_order>
+                    <frontend_type>text</frontend_type>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <email translate="label">
+                            <label>UGPC email</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>Can use multiple emails separate by semicolon(;) ex: test@mail.com;test2@mail.com</comment>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </email>
+                    </fields>
+                </ugpc>
+            </groups>
+        </customer>
+        <gearup_sds translate="label" module="gearup_sds">
+            <label>Gearupme Support</label>
+            <tab>one2crowd</tab>
+            <sort_order>500</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <sdsmail translate="label">
+                    <label>SDS Low Stock Email</label>
+                    <sort_order>1</sort_order>
+                    <frontend_type>text</frontend_type>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <email translate="label">
+                            <label>SDS Low Stock email</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>Can use multiple emails separate by semicolon(;) ex: test@mail.com;test2@mail.com</comment>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </email>
+                    </fields>
+                </sdsmail>
+            </groups>
+        </gearup_sds>
+        <checkout translate="label" module="checkout">
+            <groups>
+                 <cmessage translate="label">
+                    <label>Cart page custom message</label>
+                    <sort_order>200</sort_order>
+                    <frontend_type>text</frontend_type>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enablem translate="label">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Show warning message on cart page]]></comment>
+                        </enablem>
+                        <message translate="label">
+                            <label>Message</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </message>
+                        <displayCmsOnCartPage translate="label">
+                            <label>Display Banner On Cart Page</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Show banner on cart page]]></comment>
+                        </displayCmsOnCartPage>
+                        <CmsOnCartPage translate="label">
+                            <label>Template CMS block</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>cms/resource_block_collection</source_model>
+                            <sort_order>4</sort_order>     
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </CmsOnCartPage >
+                    </fields>
+                </cmessage>
+            </groups>
+        </checkout>
+    </sections>
+</config>

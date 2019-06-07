@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<widgets>
+    <custom_products type="customcatalog/product_widget_custom" translate="name description" module="customcatalog">
+        <name>Custom Catalog Widget</name>
+        <description>Custom Catalog Widget</description>
+        <is_email_compatible>1</is_email_compatible>
+        <parameters>
+            <products_count translate="label">
+                <required>1</required>
+                <visible>1</visible>
+                <value>1</value>
+                <label>Number of Products to Display</label>
+                <type>text</type>
+            </products_count>
+            <template>
+                <required>1</required>
+                <visible>1</visible>
+                <label>Template</label>
+                <type>select</type>
+                <value>catalog/product/widget/new/content/new_grid.phtml</value>
+                <values>
+                    <default translate="label">
+                        <value>catalog/product/widget/new/content/new_grid.phtml</value>
+                        <label>New Products Grid Template</label>
+                    </default>
+                    <list translate="label">
+                        <value>catalog/product/widget/new/content/new_list.phtml</value>
+                        <label>New Products List Template</label>
+                    </list>
+                </values>
+            </template>
+            <category translate="label description">
+                <label>Category ID</label>
+                <description>Categor ID Filter</description>
+                <visible>1</visible>
+                <type>text</type>
+            </category>
+        </parameters>
+    </custom_products>
+
+</widgets>

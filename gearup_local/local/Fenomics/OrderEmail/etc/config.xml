@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * FENOMICS extension for Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade
+ * the Fenomics GTM module to newer versions in the future.
+ * If you wish to customize the Fenomics GTM module for your needs
+ * please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   Fenomics
+ * @package    Fenomics_OrderEmail
+ * @copyright  Copyright (C) 2014 FENOMICS GmbH (http://www.fenomics.de/)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+ 	<global>
+		<models>
+			<sales>
+				<rewrite>
+					<order>Fenomics_OrderEmail_Model_Sales_Order</order>
+				</rewrite>
+			</sales>
+		</models>
+		<blocks>
+			<adminhtml>
+				<rewrite>
+					<sales_order_view>Fenomics_OrderEmail_Block_Adminhtml_Sales_Order_View</sales_order_view> </rewrite> 
+				<rewrite>
+					<sales_order_view_info>Fenomics_OrderEmail_Block_Adminhtml_Sales_Order_View_Info</sales_order_view_info>
+				</rewrite>
+			</adminhtml>
+		</blocks>
+		<helpers>
+			<orderemail>
+				<class>Fenomics_OrderEmail_Helper</class>
+			</orderemail>
+		</helpers>
+	</global>
+	<admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<Fenomics_OrderEmail before="Mage_Adminhtml">Fenomics_OrderEmail_Adminhtml</Fenomics_OrderEmail>
+					</modules>
+				</args>
+			</adminhtml>
+		</routers>
+	</admin>
+	<adminhtml>
+		<translate>
+			<modules>
+				<Fenomics_OrderEMail>
+					<files>
+						<default>Fenomics_OrderEMail.csv</default>
+					</files>
+				</Fenomics_OrderEMail>
+			</modules>
+		</translate>	
+	</adminhtml>
+	<stores>
+		<admin>
+			<design>
+				<theme>
+					<default>fenomics</default>
+				</theme>
+			</design>
+		</admin>
+	</stores>
+	<default>
+		<fe_orderemail_options>
+			<customization>
+				<fe_emailorder>0</fe_emailorder>
+			</customization>
+		</fe_orderemail_options>
+		<fe_orderemail_options>
+			<customization>
+				<fe_edit_email>0</fe_edit_email>
+			</customization>
+		</fe_orderemail_options>
+		<fe_orderemail_options>
+			<customization>
+				<fe_edit_status>0</fe_edit_status>
+			</customization>
+		</fe_orderemail_options>
+	</default>
+</config>

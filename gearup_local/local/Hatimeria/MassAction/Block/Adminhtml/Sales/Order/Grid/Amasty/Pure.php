@@ -1,0 +1,3 @@
+<?php /* added automatically by conflict fixing tool */ if (Mage::getConfig()->getNode('modules/Amasty_Email/active')) {
+            class Hatimeria_MassAction_Block_Adminhtml_Sales_Order_Grid_Amasty_Pure extends Amasty_Email_Block_Adminhtml_Sales_Order_Grid {}
+        } else { class Hatimeria_MassAction_Block_Adminhtml_Sales_Order_Grid_Amasty_Pure extends Amasty_Email_Block_Adminhtml_Sales_Order_Grid {} } ?>

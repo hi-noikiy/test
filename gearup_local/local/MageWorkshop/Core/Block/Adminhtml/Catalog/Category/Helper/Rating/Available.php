@@ -1,0 +1,6 @@
+<?php
+
+class MageWorkshop_Core_Block_Adminhtml_Catalog_Category_Helper_Rating_Available extends Mage_Drcore_Block_Adminhtml_Catalog_Category_Helper_Rating_Available
+{
+    
+}

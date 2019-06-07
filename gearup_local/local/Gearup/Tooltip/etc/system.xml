@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <tooltip>
+            <tab>sales</tab>
+            <label>Tooltip Settings</label>
+            <frontend_type>text</frontend_type>
+            <sort_order>900</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <general translate="label" module="tooltip">
+                    <label>Tooltip Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <payment_tooltip translate="label" module="tooltip">
+                            <label>Tooltip for Payment Methods</label>
+                            <frontend_model>tooltip/config_paymentTooltip</frontend_model>
+                            <backend_model>adminhtml/system_config_backend_serialized_array</backend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>                    
+                        </payment_tooltip>
+                        <shipping_tooltip translate="label" module="tooltip">
+                            <label>Tooltip for Shipping Methods</label>
+                            <frontend_model>tooltip/config_shippingTooltip</frontend_model>
+                            <backend_model>adminhtml/system_config_backend_serialized_array</backend_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>                    
+                        </shipping_tooltip>
+                    </fields>
+                </general>    
+            </groups>
+        </tooltip>
+    </sections>
+</config>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Gearup_EmailTotals>
+            <version>0.1.0</version>
+        </Gearup_EmailTotals>
+    </modules>
+    <global>
+        <blocks>
+            <gearup_emailtotals>
+                <class>Gearup_EmailTotals_Block</class>
+            </gearup_emailtotals>
+        </blocks>
+    </global>
+</config>

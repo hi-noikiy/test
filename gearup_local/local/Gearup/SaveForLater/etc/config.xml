@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Gearup_SaveForLater>
+            <version>1.0.0</version>
+        </Gearup_SaveForLater>
+    </modules>
+    <global>
+        <rewrite>
+            <gearup_saveforlater_index>
+                <from><![CDATA[#^/saveforlater/index/#]]></from>
+                <to>/gearup_saveforlater/index/</to>
+            </gearup_saveforlater_index>
+        </rewrite>
+    </global>   
+    <frontend>
+        <routers>
+            <gearup_saveforlater>
+                <use>standard</use>
+                <args>
+                    <module>Gearup_SaveForLater</module>
+                    <frontName>gearup_saveforlater</frontName>
+                </args>
+            </gearup_saveforlater>
+            <checkout>
+                <use>standard</use>
+                <args>
+                    <modules>
+                        <gearup_saveforlater before="RedStage_SaveForLater">Gearup_SaveForLater</gearup_saveforlater>
+                    </modules>
+                </args>
+            </checkout>
+         </routers>
+    </frontend>
+</config>

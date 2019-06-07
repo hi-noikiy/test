@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Gearup_Bundlefilter>
+             <version>0.1.0</version>
+        </Gearup_Bundlefilter>
+    </modules>
+    <global>
+        <models>
+            <catalog_resource>
+                <rewrite>
+                    <product_indexer_eav_source>Gearup_Bundlefilter_Model_Resource_Product_Indexer_Eav_Source</product_indexer_eav_source>
+                </rewrite>
+            </catalog_resource>
+        </models>
+    </global>
+</config>

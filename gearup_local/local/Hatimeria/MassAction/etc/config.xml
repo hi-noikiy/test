@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Hatimeria_MassAction>
+            <version>1.0.0</version>
+        </Hatimeria_MassAction>
+    </modules>
+
+    <admin>
+        <routers>
+            <hmassaction>
+                <use>admin</use>
+                <args>
+                    <module>Hatimeria_MassAction</module>
+                    <frontName>hmassaction</frontName>
+                </args>
+            </hmassaction>
+        </routers>
+    </admin>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <hmassaction>
+                    <file>hmassaction_admin.xml</file>
+                </hmassaction>
+            </updates>
+        </layout>
+    </adminhtml>
+
+    <global>
+        <helpers>
+            <hmassaction>
+                <class>Hatimeria_MassAction_Helper</class>
+            </hmassaction>
+        </helpers>
+
+        <blocks>
+            <hmassaction>
+                <class>Hatimeria_MassAction_Block_Adminhtml_Sales_Order_Grid</class>
+            </hmassaction>
+            <adminhtml>
+                <rewrite>
+                    <sales_order_grid>Hatimeria_MassAction_Block_Adminhtml_Sales_Order_Grid</sales_order_grid>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+    </global>
+</config>

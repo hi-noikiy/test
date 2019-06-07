@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Gearup_EMI extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Gearup
+ * @package        Gearup_EMI
+ * @copyright      Copyright (c) 2018
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+--> 
+<config>
+    <tabs>
+        <gearup translate="label" module="gearup_emi">
+            <label>Gearup</label>
+            <sort_order>2000</sort_order>
+        </gearup>
+    </tabs>
+    <sections>
+        <gearup_emi translate="label" module="gearup_emi">
+            <class>separator-top</class>
+            <label>Installments Manager</label>
+            <tab>gearup</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <banks translate="label" module="gearup_emi">
+                    <label>Bank</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <allowed_amount translate="label">
+                            <label>Amount to enable Installment button</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowed_amount>
+                        <message translate="label">
+                            <label>Message</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </message>
+                    </fields>
+                </banks>
+            </groups>
+        </gearup_emi>
+    </sections>
+</config>

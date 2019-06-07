@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <FFDX_Shipping>
+            <version>1.0.0</version>
+        </FFDX_Shipping>
+    </modules>
+    <global>
+        <blocks>
+            <ffdxshipping>
+                <class>FFDX_Shipping_Block</class>
+            </ffdxshipping>
+        </blocks>
+        <models>
+            <ffdxshipping>
+                <class>FFDX_Shipping_Model</class>
+            </ffdxshipping>
+            <shipping>
+                <rewrite>
+                    <carrier_tablerate>FFDX_Shipping_Model_Carrier</carrier_tablerate>
+                </rewrite>
+            </shipping>
+        </models>
+        <helpers>
+            <ffdxshipping>
+                <class>FFDX_Shipping_Helper</class>
+            </ffdxshipping>
+        </helpers>
+        <sales>
+            <shipping>
+                <carriers>
+                    <ffdxshipping>
+                        <class>FFDX_Shipping_Model_Carrier</class>
+                    </ffdxshipping>
+                </carriers>
+            </shipping>
+        </sales>
+        <events>
+            <sales_order_shipment_track_save_before>
+                <observers>
+                    <ffdxshipping>
+                        <class>ffdxshipping/observer</class>
+                        <method>changeTrackingTitle</method>
+                    </ffdxshipping>
+                </observers>
+            </sales_order_shipment_track_save_before>
+
+        </events>
+    </global>
+    <default>
+        <ffdxshipping>
+            <general>
+                <active>0</active>
+                <entity_id></entity_id>
+                <entity_pin></entity_pin>
+                <access_id></access_id>
+                <access_pin></access_pin>
+                <debug>0</debug>
+            </general>
+            <information>
+                <is_validate>0</is_validate>
+                <label_required>1</label_required>
+                <type_code>EN</type_code>
+                <goods_description>IT Components</goods_description>
+                <acc_card_code>ABC111</acc_card_code>
+                <delivery_instructions>Cash on Delivery</delivery_instructions>
+            </information>
+        </ffdxshipping>
+    </default>
+</config>

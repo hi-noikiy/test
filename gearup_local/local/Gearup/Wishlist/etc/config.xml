@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <Gearup_Wishlist>
+            <version>1.0.0</version>
+        </Gearup_Wishlist>
+    </modules>
+    <global>
+        <blocks>
+            <wishlist>
+                <rewrite>
+                    <customer_wishlist>Gearup_Wishlist_Block_Customer_Wishlist</customer_wishlist>
+                </rewrite>
+            </wishlist>
+        </blocks>
+    </global>
+    <frontend>
+        <routers>
+            <wishlist>
+                <args>
+                    <modules>
+                        <gearup_wishlist before="Mage_Wishlist">Gearup_Wishlist</gearup_wishlist>
+                    </modules>
+                </args>
+            </wishlist>
+        </routers>
+    </frontend>
+</config>

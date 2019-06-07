@@ -1,0 +1,27 @@
+<config>
+    <sections>
+        <sales_email>
+            <groups>
+                <order>
+                     <fields>
+                        <bankpaymentatt translate="label">
+                             <label>Bank Payment Method Attchment</label>
+                             <frontend_type>file</frontend_type>
+                             <upload_dir config="system/filesystem/media">bankpaymentatt</upload_dir>
+                             <backend_model>emailattachments/system_file</backend_model>
+                             <sort_order>175</sort_order>
+                             <show_in_default>1</show_in_default>
+                             <show_in_website>1</show_in_website>
+                             <show_in_store>1</show_in_store>
+                         </bankpaymentatt>
+                     </fields>
+                </order>
+              
+            </groups>
+        </sales_email>
+   </sections>
+</config>
+
+
+
+

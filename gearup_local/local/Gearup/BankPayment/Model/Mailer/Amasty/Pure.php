@@ -1,0 +1,3 @@
+<?php /* added automatically by conflict fixing tool */ if (Mage::getConfig()->getNode('modules/Fooman_EmailAttachments/active')) {
+            class Gearup_BankPayment_Model_Mailer_Amasty_Pure extends Fooman_EmailAttachments_Model_Core_Email_Template_Mailer {}
+        } else { class Gearup_BankPayment_Model_Mailer_Amasty_Pure extends Fooman_EmailAttachments_Model_Core_Email_Template_Mailer {} } ?>

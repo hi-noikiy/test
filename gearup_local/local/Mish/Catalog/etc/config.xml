@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Mish_Catalog>
+            <version>1.0.0</version>
+        </Mish_Catalog>
+    </modules>
+    <global>
+        <helpers>
+            <customcatalog>
+                <class>Mish_Catalog_Helper</class>
+            </customcatalog>
+        </helpers>
+        <blocks>
+            <catalog>
+                <rewrite>
+                    <product_view_attributes>Mish_Catalog_Block_Product_View_Attributes</product_view_attributes>
+                    <product_list>Mish_Catalog_Block_Product_List</product_list>
+                </rewrite>
+            </catalog>
+            <customcatalog>
+                <class>Mish_Catalog_Block</class>
+            </customcatalog>
+        </blocks>
+        <models>
+            <catalog>
+                <rewrite>
+                    <url>Mish_Catalog_Model_Catalog_Url</url>
+                </rewrite>
+            </catalog>
+        </models>
+    </global>
+</config>

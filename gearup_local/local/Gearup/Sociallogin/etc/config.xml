@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Gearup_Sociallogin>
+            <version>1.1.9</version>
+        </Gearup_Sociallogin>
+    </modules>
+    <global>
+        <blocks>
+            <gearup_sociallogin>
+              <class>Gearup_Sociallogin_Block</class>
+            </gearup_sociallogin>
+        </blocks>
+        <helpers>
+            <gearup_sociallogin>
+                <class>Gearup_Sociallogin_Helper</class>
+            </gearup_sociallogin>
+        </helpers>
+    </global>
+    <frontend>
+        <routers>       
+            <sociallogin>
+                <args>
+                    <modules>
+                        <Gearup_Sociallogin before="Magestore_Sociallogin">Gearup_Sociallogin</Gearup_Sociallogin>
+                    </modules>
+                </args>
+            </sociallogin>
+        </routers>
+    </frontend>
+</config>

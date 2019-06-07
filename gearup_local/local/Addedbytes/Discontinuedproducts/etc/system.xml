@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <addedbytes translate="label" module="discontinuedproducts">
+            <label>Added Bytes</label>
+            <sort_order>25</sort_order>
+        </addedbytes>
+    </tabs>
+    <sections>
+        <discontinuedproducts translate="label" module="discontinuedproducts">
+            <label>Discontinued Products</label>
+            <tab>addedbytes</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>25</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <display_settings translate="label">
+                    <label>Display Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <discontinued_product_unavailable_message translate="label">
+                            <label>Product Unavailable Message</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Message to display when product is unavailable. Use %s to represent product name. HTML is permitted.</comment>
+                        </discontinued_product_unavailable_message>
+                        <discontinued_product_count translate="label">
+                            <label>Number of Products</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>When displaying products from an associated category, how many to display.</comment>
+                        </discontinued_product_count>
+                        <discontinued_product_column_count translate="label">
+                            <label>Number of Columns</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>When displaying products from an associated category, how many columns to use.</comment>
+                        </discontinued_product_column_count>
+                        <discontinued_intro_text translate="label">
+                            <label>Introductory Text</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Shown above product list. Use %s to represent product name. HTML is permitted.</comment>
+                        </discontinued_intro_text>
+                    </fields>
+                </display_settings>
+                <extension_notes translate="label">
+                    <label>Discontinued Products Common Issues</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>250</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <comment><![CDATA[
+                        <h3>The "Discontinued Product" and "Discontinued Category" attributes are missing</h3>
+                        <p>If the installer has not run successfully, you can have Magento reinstall the extension. In your database, in the "core_resource" table, find the entry with code "discontinuedproducts_setup". Delete this entry, clear your cache, and refresh the admin panel. The attributes should then be created as normal.</p>
+                        <h3>The alternative products are not showing up</h3>
+                        <p>While a product is available to buy, no alternatives are displayed. You can set a product to discontinued and specify the category to load alternatives from, but nothing will appear on the front end until the product can no longer be purchased.</p>
+                        <h3>Different products are being displayed, compared to what I was expecting</h3>
+                        <p>The extension skips products as alternatives if they are not available to buy, to ensure customers are not bounced from one discontinued product to another and back again.</p>
+                        <h3>This extension is really useful. Where can I find more like it?</h3>
+                        <p>You can find all Added Bytes extensions for Magento in our <a target="_blank" href="https://www.addedbytes.com/store/">in our Magento Extension store</a>.</p>
+                    ]]></comment>
+                </extension_notes>
+                <addedbytes_information translate="label">
+                    <label>Added Bytes Extension Support</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>500</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <comment><![CDATA[
+                        <h3><a target="_blank" href="http://www.addedbytes.com"><img src="https://www.addedbytes.com/store/logo.png"></a></h3>
+                        <h3>Extension Support</h3>
+                        <p>We stand by all of our extensions and will help resolve any installation or operational problems that arise with them. Please contact our support team at <a href="mailto:support@addedbytes.com">support@addedbytes.com</a> with any questions or problems you have for any of our extensions.</p>
+                        <h3>Bespoke Development</h3>
+                        <p>We will happily customise any of our existing extensions for you, or even build an entirely new extension. Please contact our team at <a href="mailto:support@addedbytes.com">support@addedbytes.com</a> for more information.</p>
+                        <h3>More Extensions!</h3>
+                        <p>Added Bytes offer a selection of free and commercial extensions for Magento. Find out more <a target="_blank" href="https://www.addedbytes.com/store/">in our Magento Extension store</a>.</p>
+                    ]]></comment>
+                </addedbytes_information>
+            </groups>
+        </discontinuedproducts>
+    </sections>
+</config>

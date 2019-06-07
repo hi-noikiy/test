@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Gearup_Mostviewed>
+            <version>1.1.0</version>
+        </Gearup_Mostviewed>
+    </modules>
+    <global>
+        <blocks>
+            <gearup_mostviewed>
+                <class>Gearup_Mostviewed_Block</class>
+            </gearup_mostviewed>            
+        </blocks>
+          <helpers>
+            <gearup_mostviewed>
+                <class>Gearup_Mostviewed_Helper</class>
+            </gearup_mostviewed>            
+        </helpers>
+    </global>
+    
+</config>

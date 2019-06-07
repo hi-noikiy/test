@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<tabs>
+        <justselling translate="label">
+            <label>Justselling</label>
+            <sort_order>105</sort_order>
+        </justselling>
+    </tabs>
+    <sections>
+       <productconfigurator translate="label" module="configurator">
+            <label>Product Configurator</label>
+            <tab>justselling</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>5</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+               <prodconf translate="label comment">
+                    <label>Product Configurator</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[<p><a href="http://www.justselling.de/" target="_blank"><img style="float:right;border:1px solid grey;" src="http://www.product-configurator.biz/skin/frontend/justselling/prodconf/images/logo.gif" alt="justSelling"/></a>The justsellng Product Configurator was installed successfully.</p><p>You can find additional information at <a target="_blank"  href="http://www.product-configurator.biz/">www.product-configurator.biz</a></p><p>Documentation is provided online at <a target="_blank" href="http://docs.product-configurator.biz/">docs.product-configurator.biz</a></p><p>Professional extension for your Magento store on <a target="_blank" href="http://www.mage-extension-store.com/">http://www.mage-extension-store.com</a></p>]]></comment>
+                </prodconf>            
+               <general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<licensekey translate="label">
+							<label>License key</label>
+                            <frontend_model>configurator/system_config_source_licenseText</frontend_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>"
+						</licensekey>
+						<edition translate="label">
+							<label>Version/Edition</label>
+                            <frontend_model>configurator/system_config_source_version</frontend_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</edition>
+                        <onlinehelp translate="label">
+                            <label>Show integrated help</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>"
+                            <comment>Show integrated help in Magento admin backend.</comment>
+                        </onlinehelp>
+                        <loadingtext translate="label">
+                            <label>Text message during startup animation</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>"
+                        </loadingtext>
+                        <jquery translate="label">
+                            <label>Load jQuery base library</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>"
+                            <comment>If the jQuery base library is already loaded by an other module you can disable loading here to prevent conflicts.</comment>
+                        </jquery>
+                        <jqueryui translate="label">
+                            <label>Load jQuery UI library</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>"
+                            <comment>If the jQuery UI library is already loaded by an other module you can disable loading here to prevent conflicts.</comment>
+                        </jqueryui>
+                        <combinedimage translate="label">
+                            <label>Create combined product image in real-time on frontend</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>"
+                            <comment>If set to yes the combined product image will be created via javascript in the frontend without any ajax request to the magento backend.</comment>
+                        </combinedimage>
+                    </fields>
+                </general>
+                <stock>
+                    <label>ERP / Single Products</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enable stock management for linked products in ERP mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>"
+                            <comment>Check stock status and only show value if linked product is availaible for sale</comment>
+                        </active>
+                        <configuration translate="label">
+                            <label>Add configured product to cart</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>configurator/adminpanel_erpCartDropdownValues</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>"
+                            <comment>Will add an additional configured product with all options that are not linked to single products.</comment>
+                        </configuration>
+                        <price translate="label">
+                            <label>Get price from configuration when adding configuration to the cart</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>"
+                            <comment>Will get the price from the configuration product instead of the single product price.</comment>
+                        </price>
+                        <productprice translate="label">
+                            <label>Get price from linked product</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>"
+                            <comment>Get price from the liked product instead of the one defined in the option value.</comment>
+                        </productprice>
+                        <minordercheck translate="label">
+                            <label>Check minimal sale quantity for products</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>"
+                            <comment>Will order the minimal sale quantity, if quantity to order is lower.</comment>
+                        </minordercheck>
+                        <maxordercheck translate="label">
+                            <label>Check maximal sale quantity for products</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>"
+                            <comment>Will order the maximum sale quantity, if quantity to order is higher.</comment>
+                        </maxordercheck>
+                        <incrementsordercheck translate="label">
+                            <label>Check sales increments qunatity for products</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>"
+                            <comment>Will order the next higher multiple of the increments sale quantity, if quantity invalid.</comment>
+                        </incrementsordercheck>
+
+                    </fields>
+                </stock>
+                <dataimport translate="label">
+                    <label>Dataimport</label>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <csvseparator translate="label">
+                            <label>CSV Delimiter</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>configurator/adminpanel_csvDelimiterDropdownValues</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>"
+                            <comment>The Delimiter for CSV files when doing imports.</comment>
+                        </csvseparator>
+                    </fields>
+                </dataimport>
+                <overlayimage translate="label">
+                    <label>Overlay Image</label>
+                    <sort_order>60</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <usewidthfromimage translate="label">
+                            <label>Use width from images in overlay</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>"
+                        </usewidthfromimage>
+                    </fields>
+                </overlayimage>
+                <cache translate="label">
+                    <label>Cache</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>90</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <livetime translate="label">
+                            <label>Cache life-time for Full Configuration Cache</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Cache life-time in seconds. Default value is 3600s (equal to 1 hour).</comment>
+                        </livetime>
+                    </fields>
+                </cache>
+                <developer translate="label">
+                    <label>Developer</label>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <loglevel translate="label">
+                            <label>Console log level</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>configurator/adminpanel_loglevelDropdownValues</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>"
+                        </loglevel>
+                        <files translate="label">
+                            <label>Download log files</label>
+                            <frontend_model>configurator/adminhtml_log_form_downloadFiles</frontend_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </files>
+                        <productimageselector translate="label">
+                            <label>Product image selector</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>This is jQuery selector for product image</comment>
+                        </productimageselector>
+                        <importtrigger translate="label">
+                            <label>Import Template</label>
+                            <frontend_model>configurator/adminhtml_export_form_importTrigger</frontend_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </importtrigger>
+                    </fields>
+                </developer>
+            </groups>
+       </productconfigurator>
+        <fileuploader translate="label" module="configurator">
+            <label>File Uploader</label>
+            <tab>justselling</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <mediapath translate="label">
+                            <label>Path in media folder to store uploads</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </mediapath>
+                        <maxsize translate="label comment">
+                            <label>Maximal size of upload files</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Size in KB</comment>
+                        </maxsize>
+                        <filetype translate="label comment">
+                            <label>Allowed file extensions/types</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>List in format *.gif; *.png; ...</comment>
+                        </filetype>                  
+                        <deletedays translate="label comment">
+                            <label>Delete uploads entries from db which older than days</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default value is 90 days</comment>
+                        </deletedays>                  
+                    </fields>
+                </general>
+            </groups>
+        </fileuploader>
+    </sections>
+</config>
+
+

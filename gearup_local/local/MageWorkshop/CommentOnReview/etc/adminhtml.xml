@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <catalog>
+            <children>
+                <reviews_ratings>
+                    <children>
+                        <reviews>
+                            <children>
+                                <mageworkshop_commentonreview translate="title" module="mageworkshop_commentonreview">
+                                    <title>All Comments</title>
+                                    <action>adminhtml/mageworkshop_commentonreview_comment</action>
+                                </mageworkshop_commentonreview>
+                                <mageworkshop_commentonreview_pending translate="title" module="mageworkshop_commentonreview">
+                                    <title>Pending Comments</title>
+                                    <action>adminhtml/mageworkshop_commentonreview_comment/pending/</action>
+                                </mageworkshop_commentonreview_pending>
+                            </children>
+                        </reviews>
+                    </children>
+                </reviews_ratings>
+            </children>
+        </catalog>
+    </menu>
+
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <catalog>
+                        <children>
+                            <reviews_ratings>
+                                <children>
+                                    <reviews>
+                                        <children>
+                                            <mageworkshop_commentonreview translate="title">
+                                                <title>All Comments</title>
+                                            </mageworkshop_commentonreview>
+                                        </children>
+                                    </reviews>
+                                </children>
+                            </reviews_ratings>
+                        </children>
+                    </catalog>
+
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <mageworkshop_commentonreview translate="title">
+                                        <title>Comment On Review</title>
+                                        <sort_order>700</sort_order>
+                                    </mageworkshop_commentonreview>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

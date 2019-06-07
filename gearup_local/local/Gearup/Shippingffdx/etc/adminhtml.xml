@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <sales translate="title" module="sales">
+            <title>Sales</title>
+            <sort_order>20</sort_order>
+            <depends><module>Mage_Sales</module></depends>
+            <children>
+                <ffdxshippingbox translate="title" module="ffdxshippingbox">
+                    <title>FFDX Shipping Box</title>
+                    <action>ffdxshippingbox/adminhtml_tracking/index</action>
+                    <sort_order>40</sort_order>
+                    <children>
+                        <gearup_shippingffdx translate="title" module="gearup_shippingffdx">
+                            <title>Destination</title>
+                            <action>adminhtml/shippingffdx_destination</action>
+                            <sort_order>40</sort_order>
+                        </gearup_shippingffdx>
+                    </children>
+                </ffdxshippingbox>
+            </children>
+        </sales>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <ffdxshippingbox translate="title" module="ffdxshippingbox">
+                        <title>FFDX Shipping Box</title>
+                        <action>ffdxshippingbox/adminhtml_tracking/index</action>
+                        <sort_order>40</sort_order>
+                        <children>
+                            <gearup_shippingffdx translate="title" module="gearup_shippingffdx">
+                                <title>Destination</title>
+                                <action>adminhtml/shippingffdx_destination</action>
+                                <sort_order>40</sort_order>
+                            </gearup_shippingffdx>
+                        </children>
+                    </ffdxshippingbox>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <ffdxshippingbox>
+                                        <children>
+                                            <gearup_shippingffdx translate="title" module="gearup_shippingffdx">
+                                                <title>Destination</title>
+                                            </gearup_shippingffdx>
+                                        </children>
+                                    </ffdxshippingbox>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

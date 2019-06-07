@@ -1,0 +1,3 @@
+<?php
+class Fenomics_OrderEmail_Block_Adminhtml_Sales_Order_View extends Fenomics_OrderEmail_Block_Adminhtml_Sales_Order_View_Amasty_Pure {
+}

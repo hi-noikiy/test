@@ -1,0 +1,93 @@
+<?php
+
+/**
+ * Attributes
+ */
+class Mish_Catalog_Block_Product_View_Attributes extends Mish_Catalog_Block_Product_View_Attributes_Amasty_Pure 
+{
+    protected $attributeGroupName;
+    protected $attributes;
+    
+    public function setAttributeGroupName($name)
+    {
+        $this->attributeGroupName = $name;
+    }
+    
+    public function getAttibuteGroupName()
+    {
+        return $this->attributeGroupName;
+    }
+    
+    protected function _beforeToHtml()
+    {
+        $this->prepareData();
+        parent::_beforeToHtml();
+        
+        return $this;
+    }
+    
+    protected function prepareData()
+    {
+        $groups = Mage::getModel('eav/entity_attribute_group')
+                ->getCollection()
+                ->addFieldToFilter('attribute_group_name', $this->getAttibuteGroupName())
+                ->addFieldToFilter('attribute_set_id', $this->getProduct()->getAttributeSetId())
+                ->load();
+        
+        if ($groups->getSize()) {
+            $currentGroup = $groups->getFirstItem();
+        }
+        else {
+            $this->setTemplate('');
+            
+            return false;
+        }
+        
+        $data = array();
+        $product = $this->getProduct();
+        $attributes = $product->getAttributes();
+        foreach ($attributes as $attribute) {
+            
+            if ($attribute->getIsVisibleOnFront()) {
+                
+                if ($attribute->getAttributeGroupId() != $currentGroup->getAttributeGroupId()) {
+                    continue;
+                }
+                
+                $value = $attribute->getFrontend()->getValue($product);
+
+                if (!$product->hasData($attribute->getAttributeCode())) {
+                    $value = Mage::helper('catalog')->__('N/A');
+                    continue;
+                } elseif ((string)$value == '') {
+                    $value = Mage::helper('catalog')->__('No');
+                } elseif ($attribute->getFrontendInput() == 'price' && is_string($value)) {
+                    if($attribute->getAttributeCode() == 'price'){
+                        $value = Mage::app()->getStore()->convertPrice($value, true);
+                    } else {
+                        $value = (string) round($value, 2);
+                    }
+                }
+
+                if (is_string($value) && strlen($value)) {
+                    $data[$attribute->getAttributeCode()] = array(
+                        'label' => $attribute->getStoreLabel(),
+                        'value' => $value,
+                        'code'  => $attribute->getAttributeCode()
+                    );
+                }
+            }
+        }
+        
+        if (!count($data)) {
+            $this->setTemplate('');
+        }
+        
+        $this->attributes = $data;
+    }
+    
+    public function getAdditionalData(array $excludeAttr = array()) 
+    {
+        return $this->attributes;
+    }
+}

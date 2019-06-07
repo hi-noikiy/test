@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <EM_Galagearboxsettings>
+            <version>0.1.0</version>
+        </EM_Galagearboxsettings>
+    </modules>
+	 <adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <galagearbox>
+                                            <title>Image Configure</title>
+                                        </galagearbox>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+
+    <frontend>
+        <routers>
+            <galagearboxsettings>
+                <use>standard</use>
+                <args>
+                    <module>EM_Galagearboxsettings</module>
+                    <frontName>galagearboxsettings</frontName>
+                </args>
+            </galagearboxsettings>
+        </routers>
+        <layout>
+            <updates>
+                <galagearboxsettings>
+                    <file>galagearboxsettings.xml</file>
+                </galagearboxsettings>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<galagearboxsettings>
+				<use>admin</use>
+				<args>
+					<module>EM_Galagearboxsettings</module>
+					<frontName>galagearboxsettings</frontName>
+				</args>
+			</galagearboxsettings>
+        </routers>
+    </admin>
+    <adminhtml>
+		
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<EM_Galagearboxsettings>
+							<title>GalaGearboxSettings Module</title>
+							<sort_order>10</sort_order>
+						</EM_Galagearboxsettings>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<galagearboxsettings>
+					<file>galagearboxsettings.xml</file>
+				</galagearboxsettings>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <galagearboxsettings>
+                <class>EM_Galagearboxsettings_Model</class>
+                <resourceModel>galagearboxsettings_mysql4</resourceModel>
+            </galagearboxsettings>
+            <galagearboxsettings_mysql4>
+                <class>EM_Galagearboxsettings_Model_Mysql4</class>
+                <entities>
+                    <galagearboxsettings>
+                        <table>galagearboxsettings</table>
+                    </galagearboxsettings>
+                </entities>
+            </galagearboxsettings_mysql4>
+        </models>
+        <resources>
+            <galagearboxsettings_setup>
+                <setup>
+                    <module>EM_Galagearboxsettings</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </galagearboxsettings_setup>
+            <galagearboxsettings_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </galagearboxsettings_write>
+            <galagearboxsettings_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </galagearboxsettings_read>
+        </resources>
+        <blocks>
+            <galagearboxsettings>
+                <class>EM_Galagearboxsettings_Block</class>
+            </galagearboxsettings>
+        </blocks>
+        <helpers>
+            <galagearboxsettings>
+                <class>EM_Galagearboxsettings_Helper</class>
+            </galagearboxsettings>
+        </helpers>
+    </global>
+	<default>
+		<galagearbox>
+			<image>
+						<grid_thumb_width>155</grid_thumb_width>
+						
+                        <grid_thumb_height>125</grid_thumb_height>
+						
+                        <listing_thumb_width>115</listing_thumb_width>
+						
+						<listing_thumb_height>115</listing_thumb_height>
+                       
+						<base_image_width>256</base_image_width>
+						
+                        <base_image_height>256</base_image_height>
+					
+                        <thumb_base_width>60</thumb_base_width>
+						
+						<thumb_base_height>60</thumb_base_height>
+                       
+						<related_width>56</related_width>
+						
+                        <related_height>56</related_height>
+						
+                        <crosssell_width>115</crosssell_width>
+						
+						<crosssell_height>115</crosssell_height>
+                      
+						<upsell_width>155</upsell_width>
+						
+                        <upsell_height>115</upsell_height>
+						
+                        <widget_width>230</widget_width>
+						
+						<widget_height>235</widget_height>
+                       
+					    <widget_width_product_home>110</widget_width_product_home>
+						
+						<widget_height_product_home>110</widget_height_product_home>
+						
+						<cart_sidebar_width>60</cart_sidebar_width>
+						
+						<cart_sidebar_height>60</cart_sidebar_height>
+						
+						<wishlist_sidebar_width>56</wishlist_sidebar_width>
+						
+						<wishlist_sidebar_height>56</wishlist_sidebar_height>
+						
+						<lastest_review_width>56</lastest_review_width>
+						  
+						<lastest_review_height>56</lastest_review_height>
+						 
+						<compare_width>155</compare_width>
+						 
+						<compare_height>115</compare_height>
+						<bg_body>images/gearbox_bg.png</bg_body>
+						<bgcolor_body>#ffffff</bgcolor_body>
+			</image>
+		</galagearbox>
+	</default>
+</config>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Gearup_Payfort>
+            <version>0.0.1</version>
+        </Gearup_Payfort>
+    </modules>
+    <global>
+        <!--<events>
+            <payment_method_is_active>
+                <observers>
+                    <gearup_payfort_paymentfilter_payment_method_is_active>
+                        <type>singleton</type>
+                        <class>gearup_payfort/observer</class>
+                        <method>filterpaymentmethod</method>
+                    </gearup_payfort_paymentfilter_payment_method_is_active>
+                </observers>
+            </payment_method_is_active>
+        </events>-->
+        <blocks>
+            <gearup_payfort>
+                <class>Gearup_Payfort_Block</class>
+            </gearup_payfort>
+           
+        </blocks>     
+        <models>
+            <gearup_payfort>
+                <class>Gearup_Payfort_Model</class>
+            </gearup_payfort>
+            <payfort>
+                <rewrite>
+                    <payment_installments>Gearup_Payfort_Model_Payment_Installments</payment_installments>
+                </rewrite>
+            </payfort>
+        </models> 
+    </global>   
+</config>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Gearup_SuggestedProducts>
+            <version>1.1.9</version>
+        </Gearup_SuggestedProducts>
+    </modules>
+    <global>
+        <blocks>
+            <suggestedproducts>
+                <class>Gearup_SuggestedProducts_Block</class>
+            </suggestedproducts>
+        </blocks>
+        <helpers>
+            <suggestedproducts>
+                <class>Gearup_SuggestedProducts_Helper</class>
+            </suggestedproducts>
+        </helpers>
+    </global>   
+</config>

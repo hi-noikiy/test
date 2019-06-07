@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <sales translate="title" module="sales">
+            <children>
+                <gearup_sds translate="title" module="gearup_sds">
+                    <title>DXB storage</title>
+                    <action>adminhtml/sds_sds</action>
+                    <sort_order>15</sort_order>
+                </gearup_sds>
+            </children>
+        </sales>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <gearup_sds translate="title" module="gearup_sds">
+                                        <title>DXB storage</title>
+                                    </gearup_sds>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <sales translate="title" module="sales">
+                        <title>Sales</title>
+                        <children>
+                            <gearup_sds translate="title" module="gearup_sds">
+                                <title>DXB storage</title>
+                                <sort_order>0</sort_order>
+                            </gearup_sds>
+                        </children>
+                    </sales>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

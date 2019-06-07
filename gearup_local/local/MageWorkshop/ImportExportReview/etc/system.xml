@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <drie translate="label comment">
+            <label>Reviews Import/Export</label>
+            <tab>mw</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>600</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <share_website_reviews translate="label comment" module="mageworkshop_importexportreview">
+                    <label>Shared Reviews Between Websites</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable translate="label comment" module="mageworkshop_importexportreview">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <frontend_model>mageworkshop_importexportreview_adminhtml/system_config_shareBetweenWebsites</frontend_model>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>This feature allows to assign new approved reviews to all websites that have reviewed product</comment>
+                        </enable>
+                    </fields>
+                </share_website_reviews>
+                <sync_settings translate="label comment" module="mageworkshop_importexportreview">
+                    <label>Reviews Synchronization Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <frontend_model>mageworkshop_importexportreview_adminhtml/system_config_sync_notice</frontend_model>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable translate="label comment" module="mageworkshop_importexportreview">
+                            <label>Enable Sync</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+                        <sync_store_identity translate="label comment" module="mageworkshop_importexportreview">
+                            <label>Store Sync Identity</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>required-entry</validate>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>This store identity should be added to the Sync Store List in the websites Admin Panel were reviews should be pulled from</comment>
+                            <depends>
+                                <enable>1</enable>
+                            </depends>
+                        </sync_store_identity>
+                        <sync_cron_test translate="label comment" module="mageworkshop_importexportreview">
+                            <label>Enable Sync Test Mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Test mode allows to set sync frequency</comment>
+                        </sync_cron_test>
+                        <sync_cron_test_frequency translate="label comment" module="mageworkshop_importexportreview">
+                            <label>Sync Frequency</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mageworkshop_importexportreview/system_config_source_sync_frequency</source_model>
+                            <backend_model>mageworkshop_importexportreview/system_config_backend_sync_cron</backend_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <sync_cron_test>1</sync_cron_test>
+                            </depends>
+                        </sync_cron_test_frequency>
+                        <sync_cron translate="label comment" module="mageworkshop_importexportreview">
+                            <label>Sync Reviews Start Time</label>
+                            <frontend_type>time</frontend_type>
+                            <backend_model>mageworkshop_importexportreview/system_config_backend_sync_cron</backend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enable>1</enable>
+                                <sync_cron_test>0</sync_cron_test>
+                            </depends>
+                        </sync_cron>
+                        <create_ratings translate="label comment" module="mageworkshop_importexportreview">
+                            <label>Create New Ratings</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enable>1</enable>
+                            </depends>
+                        </create_ratings>
+                        <create_proscons translate="label comment" module="mageworkshop_importexportreview">
+                            <label>Create New Pros/Cons</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enable>1</enable>
+                            </depends>
+                        </create_proscons>
+                        <max_width translate="label comment" module="mageworkshop_importexportreview">
+                            <label>Max image width</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>74</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Resize image to this dimensions if image is bigger</comment>
+                            <depends>
+                                <enable>1</enable>
+                            </depends>
+                        </max_width>
+                        <max_height translate="label comment" module="mageworkshop_importexportreview">
+                            <label>Max image height</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>74</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Resize image to this dimensions if image is bigger</comment>
+                            <depends>
+                                <enable>1</enable>
+                            </depends>
+                        </max_height>
+                        <fails_limit translate="label comment" module="mageworkshop_importexportreview">
+                            <label>Number Of Attempts To Save Reviews During Sync Process</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-number required-entry validate-greater-than-zero</validate>
+                            <depends>
+                                <enable>1</enable>
+                            </depends>
+                        </fails_limit>
+                        <fails_notification_email translate="label comment" module="mageworkshop_importexportreview">
+                            <label>Fails Notifications Receiver</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-email required-entry</validate>
+                            <depends>
+                                <enable>1</enable>
+                            </depends>
+                        </fails_notification_email>
+                        <sync_logs translate="label comment" module="mageworkshop_importexportreview">
+                            <label>Enable Logs</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sync_logs>
+                    </fields>
+                </sync_settings>
+            </groups>
+        </drie>
+    </sections>
+</config>

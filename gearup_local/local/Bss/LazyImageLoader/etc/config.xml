@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Bss_LazyImageLoader>
+      <version>1.0.7</version>
+    </Bss_LazyImageLoader>
+  </modules>
+
+  <global>
+    <helpers>
+      <lazyimageloader>
+        <class>Bss_LazyImageLoader_Helper</class>
+      </lazyimageloader>
+    </helpers>
+    <models>
+      <lazyimageloader>
+        <class>Bss_LazyImageLoader_Model</class>
+      </lazyimageloader>
+    </models>
+    <blocks>
+      <lazyimageloader>
+        <class>Bss_LazyImageLoader_Block</class>
+      </lazyimageloader>
+    </blocks>
+  </global>
+
+  <frontend>
+    <layout>
+      <updates>
+        <lazyimageloader>
+          <file>bss/lazyimageload.xml</file>
+        </lazyimageloader>
+      </updates>
+    </layout>
+    <events>
+      <controller_action_postdispatch>
+        <observers>
+          <bss_lazyimageload>
+            <class>lazyimageloader/observer</class>
+            <method>lazyImage</method>
+          </bss_lazyimageload>
+        </observers>   
+      </controller_action_postdispatch> 
+    </events> 
+  </frontend>
+
+  <adminhtml>
+    <acl>
+      <resources>
+        <all>
+          <title>Allow Everything</title>
+        </all> 
+        <admin>
+          <children>
+            <system>
+              <children>
+                <config>
+                  <children>
+                    <lazyimageloader>
+                      <title>Bss Lazy Image Loader Configuration</title>
+                    </lazyimageloader>    
+                  </children>  
+                </config> 
+              </children>   
+            </system>      
+          </children>    
+        </admin>
+      </resources> 
+    </acl>
+  </adminhtml>
+
+  <default>
+    <lazyimageloader>
+      <general>
+        <active translate="label">1</active>
+        <loading_width translate="label">50</loading_width>
+        <jquery translate="label">1</jquery>
+        <threshold translate="label">0</threshold>
+        <exclude_home_page translate="label">0</exclude_home_page>
+      </general>
+    </lazyimageloader>
+  </default>
+</config> 

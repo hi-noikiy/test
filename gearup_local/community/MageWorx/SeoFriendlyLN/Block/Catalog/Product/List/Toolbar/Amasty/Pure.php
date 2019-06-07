@@ -1,0 +1,2 @@
+<?php /* added automatically by conflict fixing tool */
+             class MageWorx_SeoFriendlyLN_Block_Catalog_Product_List_Toolbar_Amasty_Pure extends MageWorx_SeoFriendlyLN_Block_Catalog_Product_List_Toolbar_Abstract {}  ?>

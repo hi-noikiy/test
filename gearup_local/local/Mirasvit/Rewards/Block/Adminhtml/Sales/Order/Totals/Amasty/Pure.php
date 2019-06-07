@@ -1,0 +1,3 @@
+<?php /* added automatically by conflict fixing tool */ if (Mage::getConfig()->getNode('modules/Gearup_Shippingffdx/active')) {
+            class Mirasvit_Rewards_Block_Adminhtml_Sales_Order_Totals_Amasty_Pure extends Gearup_Shippingffdx_Block_Adminhtml_Sales_Order_Totals {}
+        } else { class Mirasvit_Rewards_Block_Adminhtml_Sales_Order_Totals_Amasty_Pure extends Mage_Adminhtml_Block_Sales_Order_Totals {} } ?>

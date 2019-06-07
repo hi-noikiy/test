@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <menu>
+        <catalog translate="title" module="catalog">
+             <children>
+                <items module="cnetdescription" translate="title">
+                    <title>Cnet Description</title>
+                    <sort_order>1000</sort_order>
+                    <action>adminhtml/cnetdescription</action>    
+                </items>
+            </children>
+        </catalog>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <Gearup_Cnetdescription>
+                        <title>Gearup CnetDescription</title>
+                        <sort_order>1000</sort_order>
+                    </Gearup_Cnetdescription>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

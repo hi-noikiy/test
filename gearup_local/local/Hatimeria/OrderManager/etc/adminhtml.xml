@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <sales translate="title" module="sales">
+            <children>
+                <hordermanager translate="title" module="hordermanager">
+                    <title>Order Manager</title>
+                    <action>hordermanager/adminhtml_period</action>
+                    <sort_order>15</sort_order>
+                </hordermanager>
+            </children>
+        </sales>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <hordermanager translate="title" module="hordermanager">
+                                        <title>Order Manager</title>
+                                    </hordermanager>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <sales translate="title" module="sales">
+                        <title>Sales</title>
+                        <children>
+                            <hordermanager translate="title" module="hordermanager">
+                                <title>Order Manager</title>
+                                <sort_order>0</sort_order>
+                            </hordermanager>
+                        </children>
+                    </sales>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+    <modules>
+        <Hatimeria_OrderManager>
+            <version>0.1.2</version>
+        </Hatimeria_OrderManager>
+    </modules>
+
+    <admin>
+        <routers>
+            <hordermanager>
+                <use>admin</use>
+                <args>
+                    <module>Hatimeria_OrderManager</module>
+                    <frontName>hordermanager</frontName>
+                </args>
+            </hordermanager>
+        </routers>
+    </admin>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <hordermanager>
+                    <file>hordermanager_admin.xml</file>
+                </hordermanager>
+            </updates>
+        </layout>
+    </adminhtml>
+
+    <frontend>
+        <routers>
+            <hordermanager>
+                <use>standard</use>
+                <args>
+                    <module>Hatimeria_OrderManager</module>
+                    <frontName>hordermanager</frontName>
+                </args>
+            </hordermanager>
+        </routers>
+
+        <layout>
+            <updates>
+                <hordermanager>
+                    <file>hordermanager_shippingon.xml</file>
+                </hordermanager>
+            </updates>
+        </layout>
+    </frontend>
+
+    <global>
+        <helpers>
+            <hordermanager>
+                <class>Hatimeria_OrderManager_Helper</class>
+            </hordermanager>
+        </helpers>
+
+        <blocks>
+            <hordermanager>
+                <class>Hatimeria_OrderManager_Block</class>
+            </hordermanager>
+        </blocks>
+
+        <models>
+            <hordermanager>
+                <class>Hatimeria_OrderManager_Model</class>
+                <resourceModel>hordermanager_resource</resourceModel>
+            </hordermanager>
+
+            <hordermanager_resource>
+                <class>Hatimeria_OrderManager_Model_Resource</class>
+                <entities>
+                    <period>
+                        <table>hordermanager_period</table>
+                    </period>
+                    <order>
+                        <table>hordermanager_period_has_order</table>
+                    </order>
+                    <order_item>
+                        <table>hordermanager_period_order_has_item</table>
+                    </order_item>
+                </entities>
+            </hordermanager_resource>
+        </models>
+
+        <resources>
+            <hordermanager_setup>
+                <setup>
+                    <module>Hatimeria_OrderManager</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+            </hordermanager_setup>
+        </resources>
+
+        <events>
+            <checkout_submit_all_after>
+                <observers>
+                    <hordermanager>
+                        <type>singleton</type>
+                        <class>hordermanager/observer</class>
+                        <method>insertPeriodHasOrders</method>
+                    </hordermanager>
+                </observers>
+            </checkout_submit_all_after>
+            <admin_system_config_changed_section_hordermanager>
+                <observers>
+                    <hordermanager>
+                        <type>singleton</type>
+                        <class>hordermanager/observer</class>
+                        <method>updatePeriods</method>
+                    </hordermanager>
+                </observers>
+            </admin_system_config_changed_section_hordermanager>
+        </events>
+
+    </global>
+
+    <default>
+        <hordermanager>
+            <general>
+                <day>4</day>
+                <time>17:00:00</time>
+            </general>
+            <periods>
+                <firstPeriodSign>A</firstPeriodSign>
+                <secondPeriodSign>B</secondPeriodSign>
+            </periods>
+            <firstPeriod>
+                <beginTime>17:01:00</beginTime>
+                <endTime>17:00:00</endTime>
+                <beginDay>1</beginDay>
+                <endDay>4</endDay>
+                <periodFlag>1</periodFlag>
+            </firstPeriod>
+            <secondPeriod>
+                <beginTime>17:01:00</beginTime>
+                <endTime>17:00:00</endTime>
+                <beginDay>4</beginDay>
+                <endDay>1</endDay>
+                <periodFlag>2</periodFlag>
+            </secondPeriod>
+            <firstShipping>
+                <day>0</day>
+            </firstShipping>
+            <secondShipping>
+                <day>3</day>
+            </secondShipping>
+            <popUpText>
+                <firstShippingText>First Shipping Text</firstShippingText>
+                <secondShippingText>Second Shipping Text</secondShippingText>
+                <sameDayShippingText>Same Day Shipping Text</sameDayShippingText>
+            </popUpText>
+            <frontEnable>
+                <enable>0</enable>
+            </frontEnable>
+        </hordermanager>
+    </default>
+
+</config>

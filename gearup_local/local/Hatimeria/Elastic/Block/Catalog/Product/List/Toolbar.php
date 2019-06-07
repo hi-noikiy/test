@@ -1,0 +1,238 @@
+<?php
+/**
+ * Toolbar with predefined sorting
+ * All customizations only by LAYOUT!
+ */
+
+class Hatimeria_Elastic_Block_Catalog_Product_List_Toolbar extends Hatimeria_Elastic_Block_Catalog_Product_List_Toolbar_Amasty_Pure
+{
+    /**
+     * @var bool $_paramsMemorizeAllowed
+     */
+    protected $_paramsMemorizeAllowed = false;
+
+    /**
+     * Direction => Field Map
+     * @var array
+     */
+    protected $_directions = array();
+
+    /**
+     * Allowed sorting attributes
+     * @var array
+     */
+    protected $_sortAttributes;
+
+    /**
+     * Blacklist for default sorting attributes
+     * @var array
+     */
+    //protected $_removedSortFields = array();
+    protected $_removedSortFields = array('popularity_by_sells', 'popularity_by_reviews', 'popularity_by_rating', 'relevance');
+
+    /**
+     * Retrieve Attributes Used for Sort by as array
+     * key = code, value = name
+     *
+     * @return array
+     */
+    public function getAttributeUsedForSortByArray()
+    {
+        $options = array(
+            array(
+                'position' => 99,
+                'label'  => Mage::helper('catalog')->__('Position'),
+                'code' => 'position'
+            )
+        );
+        foreach (Mage::getModel('catalog/config')->getAttributesUsedForSortBy() as $attribute) {
+            /* @var $attribute Mage_Eav_Model_Entity_Attribute_Abstract */
+            if ((string)Mage::getConfig()->getModuleConfig('Amasty_Sorting')->active == 'true'){
+                if (isset($attribute['position'])) {
+                    $position = $attribute['position'];
+                } else {
+                    $position = 0;
+                }
+                $options[] = array(
+                    'position'  => $position,
+                    'code'      => $attribute['attribute_code'],
+                    'label'     => $attribute['frontend_label']
+                );
+            } else {
+                $options[] = array(
+                    'position'  => $attribute->getPosition(),
+                    'code'      => $attribute->getAttributeCode(),
+                    'label'     => $attribute->getStoreLabel()
+                );
+            }
+        }
+        
+        return $options;
+    }
+
+    /**
+     * Sort Attributes
+     * @return array
+     */
+    public function getSortAttributes()
+    {
+        if (!isset($this->_sortAttributes)) {
+            $this->_sortAttributes = array();
+            $attributes = $this->getAttributeUsedForSortByArray();
+            sort($attributes);
+            foreach ($attributes as $attribute) {
+                $this->_sortAttributes[$attribute['code']] = $attribute['label'];
+            }
+            $this->_sortAttributes['relevance'] = 'Relevance';
+        }
+
+        return $this->_sortAttributes;
+    }
+
+    /**
+     * Retrieve current direction
+     *
+     * @return string
+     */
+    public function getCurrentDirection()
+    {
+        $dir = $this->_getData('_current_grid_direction');
+        if ($dir) {
+            return $dir;
+        }
+
+        $directions = array('asc', 'desc');
+        $dir = strtolower($this->getRequest()->getParam($this->getDirectionVarName()));
+        if ($dir && in_array($dir, $directions)) {
+            if ($dir == $this->_direction) {
+                Mage::getSingleton('catalog/session')->unsSortDirection();
+            } else {
+                $this->_memorizeParam('sort_direction', $dir);
+            }
+        } else {
+            $dir = Mage::getSingleton('catalog/session')->getSortDirection();
+        }
+        // validate direction
+        if (!$dir || !in_array($dir, $directions)) {
+            $dir = $this->getDefaultDirection();
+        }
+        $this->setData('_current_grid_direction', $dir);
+        return $dir;
+    }
+
+    /**
+     * Set default sort direction
+     *
+     * @param array $config
+     * @return Hatimeria_Elastic_Block_Catalog_Product_List_Toolbar_Amasty_Pure
+     */
+    public function setDefaultDirection($config)
+    {
+        if (!is_array($config)) {
+            return $this;
+        }
+
+        $config = array_merge(array(
+            'field' => 'name',
+            'dir' => 'asc'
+        ), $config);
+
+        $dir = $config['dir'];
+        $field = $config['field'];
+        $attrs = $this->getSortAttributes();
+
+        if (!isset($attrs[$field])) {
+            return $this;
+        }
+
+        if (in_array(strtolower($dir), array('asc', 'desc'))) {
+            $this->_directions[$field] = strtolower($dir);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Default Direction
+     * @return string
+     */
+    public function getDefaultDirection()
+    {
+        $order = $this->getCurrentOrder();
+        $dir = $this->_direction;
+        $desc = array('view_count','sales_count','rate_count');
+        if (in_array($order, $desc)) {
+            if (!strtolower($this->getRequest()->getParam($this->getDirectionVarName()))) {
+                $dir = 'desc';
+            }
+        }
+        if (isset($this->_directions[$order])) {
+            $dir = $this->_directions[$order];
+        }
+
+        return $dir;
+    }
+
+    /**
+     * Set Available order fields list
+     *
+     * @param array $orders
+     * @return Hatimeria_Elastic_Block_Catalog_Product_List_Toolbar_Amasty_Pure
+     */
+    public function setAvailableOrders($orders)
+    {
+        $sorted = array();
+        $sortedAttributes = $this->getSortAttributes();
+
+        foreach ($sortedAttributes as $code => $attribute) {
+            if (isset($orders[$code])) {
+                $sorted[$code] = $orders[$code];
+            }
+        }
+
+        foreach ($this->_removedSortFields as $id) {
+            if (isset($sorted[$id])) {
+                unset($sorted[$id]);
+            }
+        }
+        $this->_availableOrder = $sorted;
+        return $this;
+    }
+
+    /**
+     * Remove Sorting
+     * @param $field
+     * @return $this;
+     */
+    public function removeSorting($field)
+    {
+        $this->_removedSortFields[] = $field;
+
+        return $this;
+    }
+
+    /**
+     * Retrieve Pager URL
+     *
+     * @param string $order
+     * @param string $direction
+     * @return string
+     */
+    public function getOrderUrl($order, $direction)
+    {
+        if (is_null($order)) {
+            $order = $this->getCurrentOrder() ? $this->getCurrentOrder() : $this->_availableOrder[0];
+        }
+        $desc = array('view_count','sales_count','rate_count');
+        if (in_array($order, $desc)) {
+            if (!$direction) {
+                $direction = 'desc';
+            }
+        }
+        return $this->getPagerUrl(array(
+            $this->getOrderVarName()        => $order,
+            $this->getDirectionVarName()    => $direction,
+            $this->getPageVarName()         => null
+        ));
+    }
+}

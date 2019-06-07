@@ -1,0 +1,26 @@
+<config>
+    <sections>
+        <customer>
+            <groups>
+                <startup>
+                    <fields>
+                        <inactivetime translate="label">
+                            <label>Customer Logout After</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>Customer will logout after xxx seconds inactive. set 0 for deactive this feacture.</comment>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </inactivetime>
+                    </fields>
+                </startup>
+              
+            </groups>
+        </customer>
+   </sections>
+</config>
+
+
+
+

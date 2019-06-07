@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Gearup_Compare>
+      <version>0.1.0</version>
+    </Gearup_Compare>
+  </modules>
+  <frontend>
+    <routers>
+      <compare>
+        <use>standard</use>
+          <args>
+            <module>Gearup_Compare</module>
+            <frontName>compare</frontName>
+          </args>
+      </compare>
+    </routers>
+  </frontend>
+  <global>
+		<rewrite>        
+            <gearup_compare_catalog_product_comparecontroller>
+                <from><![CDATA[#^/catalog/product_compare/#]]></from> <!-- Mage_Catalog_Product_CompareController  -->
+                <to>/compare/catalog_product_compare/</to> <!-- Gearup_Compare_Catalog_Product_CompareController  -->
+            </gearup_compare_catalog_product_comparecontroller>
+		</rewrite>
+    </global>
+  <admin>
+	<routers>
+	  <compare>
+	    <use>admin</use>
+		<args>
+		  <module>Gearup_Compare</module>
+		  <frontName>admin_compare</frontName>
+		</args>
+	  </compare>
+	</routers>
+  </admin>
+</config> 

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+    Copyright (c) 2014 Amasty (http://www.amasty.com)
+-->
+<config>
+    <modules>
+        <Amasty_Autoshipping>
+            <version>1.0.0</version>
+        </Amasty_Autoshipping>
+    </modules>
+
+    <global>
+        <helpers>
+            <amautoshipping>
+                <class>Amasty_Autoshipping_Helper</class>
+            </amautoshipping>
+        </helpers>
+        <models>
+            <amautoshipping>
+                <class>Amasty_Autoshipping_Model</class>
+            </amautoshipping>
+        </models>
+        <events>
+            <sales_quote_collect_totals_before>
+                <observers>
+                    <amasty_autoshipping>
+                        <class>amautoshipping/observer</class>
+                        <method>handleCollect</method>
+                    </amasty_autoshipping>
+                </observers>
+            </sales_quote_collect_totals_before>
+        </events>
+    </global>
+
+    <default>
+        <amautoshipping>
+            <general>
+                <enabled>0</enabled>
+                <shipping_method></shipping_method>
+            </general>
+
+            <address>
+                <country_id></country_id>
+                <region_id></region_id>
+                <city></city>
+                <postcode></postcode>
+            </address>
+
+        </amautoshipping>
+    </default>
+</config>  

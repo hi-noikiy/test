@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Orderstatus
+ */
+-->
+<config>
+    <sections>
+        <amorderstatus translate="label" module="amorderstatus">
+            <label>Order Status</label>
+            <tab>amasty</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>151819</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>0</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <hide_state translate="label comment">
+                            <label>Hide order state</label>
+                            <comment>If set to `No`, custom order status will be shown as `State: Custom Status`</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </hide_state>
+                        <hide_state_on_frontend translate="label comment">
+                            <label>Hide order state on the Frontend</label>
+                            <comment>If set to `No`, custom order status will be shown as `State: Custom Status`</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <hide_state>0</hide_state>
+                            </depends>
+                        </hide_state_on_frontend>
+                    </fields>
+                </general>
+            </groups>
+        </amorderstatus>
+    </sections>
+</config>

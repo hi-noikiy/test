@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Hatimeria_Elastic>
+            <version>0.1.0</version>
+        </Hatimeria_Elastic>
+    </modules>
+    <global>
+        <helpers>
+            <helastic>
+                <class>Hatimeria_Elastic_Helper</class>
+            </helastic>
+        </helpers>
+        <models>
+            <helastic>
+                <class>Hatimeria_Elastic_Model</class>
+                <resourceModel>helastic_resource</resourceModel>
+            </helastic>
+        </models>
+        <blocks>
+            <helastic>
+                <class>Hatimeria_Elastic_Block</class>
+            </helastic>
+            <catalog>
+                <rewrite>
+                    <product_list_toolbar>Hatimeria_Elastic_Block_Catalog_Product_List_Toolbar</product_list_toolbar>
+                </rewrite>
+            </catalog>
+        </blocks>
+        <resources>
+            <helastic_setup>
+                <setup>
+                    <module>Hatimeria_Elastic</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+            </helastic_setup>
+        </resources>
+    </global>
+
+    <crontab>
+        <jobs>
+            <helastic_fill_attributes>
+                <schedule>
+                    <cron_expr>0 20 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>helastic/observer::fillAttributes</model>
+                </run>
+            </helastic_fill_attributes>
+        </jobs>
+    </crontab>
+</config>

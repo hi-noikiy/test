@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Gearup_BankPayment>
+            <version>1.1.0</version>
+        </Gearup_BankPayment>
+    </modules>
+    <global>
+        <models>
+            <gearup_bankpayment>
+                <class>Gearup_BankPayment_Model</class>
+            </gearup_bankpayment>
+            <core>
+                <rewrite>
+                    <email_template_mailer>Gearup_BankPayment_Model_Mailer</email_template_mailer>
+                </rewrite>
+            </core>
+        </models>   
+        <events>
+            <sales_order_place_after>
+                <observers>
+                    <yourmodule_autoinvoice>
+                        <class>gearup_bankpayment/observer</class>
+                        <method>autoInvoice</method>
+                    </yourmodule_autoinvoice>
+                </observers>
+            </sales_order_place_after>
+
+                <fooman_emailattachments_before_send_order>
+                <observers>
+                    <fooman_emailattachments_before_send_order>
+                        <type>singleton</type>
+                        <class>gearup_bankpayment/observer</class>
+                        <method>beforeSendOrder</method>
+                    </fooman_emailattachments_before_send_order>
+                </observers>
+            </fooman_emailattachments_before_send_order>
+            
+              <fooman_emailattachments_before_send_invoice>
+                <observers>
+                    <gearup_bankpayment_emailattachments_before_send_invoice>
+                        <type>singleton</type>
+                        <class>gearup_bankpayment/observer</class>
+                        <method>beforeSendInvoice</method>
+                    </gearup_bankpayment_emailattachments_before_send_invoice>
+                </observers>
+            </fooman_emailattachments_before_send_invoice>
+        </events>    
+    </global>
+    <default>
+        <payment>
+            <bankpayment>
+                <auto_invoice>1</auto_invoice>                
+            </bankpayment>
+        </payment>
+    </default>
+</config>

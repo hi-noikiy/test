@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+            <Justselling_Simplecore>
+                <version>1.0.0</version>
+            </Justselling_Simplecore>
+    </modules>
+    <frontend>
+        <layout>
+            <updates>
+                <simplecore>
+                    <file>simplecore.xml</file>
+                </simplecore>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Justselling_Simplecore>
+                    <files>
+                        <default>Justselling_Simplecore.csv</default>
+                    </files>
+                </Justselling_Simplecore>
+            </modules>
+        </translate>
+    </frontend>
+</config>
+

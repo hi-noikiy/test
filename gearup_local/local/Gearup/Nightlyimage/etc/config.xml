@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Gearup_Nightlyimage>
+      <version>0.1.1</version>
+    </Gearup_Nightlyimage>
+  </modules>
+  <global>
+    <helpers>
+      <nightlyimage>
+        <class>Gearup_Nightlyimage_Helper</class>
+      </nightlyimage>
+    </helpers>
+	<models>
+	  <nightlyimage>
+		<class>Gearup_Nightlyimage_Model</class>
+		<resourceModel>nightlyimage_mysql4</resourceModel>
+	  </nightlyimage>
+	  <nightlyimage_mysql4>
+		<class>Gearup_Nightlyimage_Model_Mysql4</class>
+		<entities>		  
+			  <nightly>
+				<table>nightly</table>
+			  </nightly>
+			  <nightlyrm>
+				<table>nightly_remove</table>
+			  </nightlyrm>
+        </entities>
+	  </nightlyimage_mysql4>
+	</models>
+	<resources>
+	  <nightlyimage_setup>
+		<setup>
+		  <module>Gearup_Nightlyimage</module>
+		</setup>
+		<connection>
+		  <use>core_setup</use>
+		</connection>
+	  </nightlyimage_setup>
+	  <nightlyimage_write>
+		<connection>
+		  <use>core_write</use>
+		</connection>
+	  </nightlyimage_write>
+	  <nightlyimage_read>
+		<connection>
+		  <use>core_read</use>
+		</connection>
+	  </nightlyimage_read>
+	</resources>
+    <events>
+	  <catalog_product_save_after> <!-- identifier of the event we want to catch -->
+        <observers>
+          <catalog_product_save_before_handler> <!-- identifier of the event handler -->
+            <type>singleton</type> <!-- class method call type; valid are model, object and singleton -->
+            <class>nightlyimage/observer</class> <!-- observers class alias -->
+            <method>Productsavebefore</method>  <!-- observer's method to be called -->
+            <args></args> <!-- additional arguments passed to observer -->
+          </catalog_product_save_before_handler>
+        </observers>
+      </catalog_product_save_after>
+    </events>
+  </global>
+</config> 

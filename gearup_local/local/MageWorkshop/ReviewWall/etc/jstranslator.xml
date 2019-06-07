@@ -1,0 +1,16 @@
+<jstranslator>
+    <published-date translate="message" module="detailedreview">
+        <message> years ago by </message>
+        <message> months ago by </message>
+        <message> days ago by </message>
+        <message> hours ago by </message>
+        <message> minutes ago by </message>
+        <message> seconds ago by </message>
+        <message> year ago by </message>
+        <message> month ago by </message>
+        <message> day ago by </message>
+        <message> hour ago by </message>
+        <message> minute ago by </message>
+        <message> second ago by </message>
+    </published-date>
+</jstranslator>

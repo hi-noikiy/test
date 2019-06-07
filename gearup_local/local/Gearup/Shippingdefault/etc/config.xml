@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Gearup_Shippingdefault>
+            <version>0.0.1</version>
+        </Gearup_Shippingdefault>
+    </modules>
+    <frontend>
+        <events>
+            <checkout_cart_save_after>
+                <observers>
+                    <ktpl_select_default_shipping_method>
+                        <class>Gearup_Shippingdefault_Model_Observer</class>
+                        <method>setShipping</method>
+                    </ktpl_select_default_shipping_method>
+                </observers>
+            </checkout_cart_save_after>
+              <controller_action_postdispatch_directory_currency_switch>
+                <observers>
+                    <ktpl_select_default_shipping_country>
+                        <class>Gearup_Shippingdefault_Model_Observer</class>
+                        <method>setShippingSwitcher</method>
+                    </ktpl_select_default_shipping_country>
+                </observers>
+            </controller_action_postdispatch_directory_currency_switch>
+        </events>
+    </frontend>
+</config>

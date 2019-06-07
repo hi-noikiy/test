@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Mish_ProtoSlider>
+            <version>1.0.0</version>
+        </Mish_ProtoSlider>
+    </modules>
+    <global>
+        <helpers>
+            <protoslider>
+                <class>Mish_ProtoSlider_Helper</class>
+            </protoslider>
+        </helpers>
+        <blocks>
+            <protoslider>
+                <class>Mish_ProtoSlider_Block</class>
+            </protoslider>
+        </blocks>
+    </global>
+</config>

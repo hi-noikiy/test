@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Gearup_Printinvoice>
+            <version>0.1.0</version>
+        </Gearup_Printinvoice>
+    </modules>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Gearup_Printinvoice before="Mage_Adminhtml">Gearup_Printinvoice_Adminhtml</Gearup_Printinvoice>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+</config>

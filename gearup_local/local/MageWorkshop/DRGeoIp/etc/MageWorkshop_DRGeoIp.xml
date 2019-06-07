@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+    <name>MageWorkshop_DRGeoIp</name>
+    <version>0.1.0</version>
+    <stability>stable</stability>
+    <license>GPL</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Detailed Review GeoIp. DO NOT UNINSTALL EXTENSION HERE. Go to extension configuration and uninstall it by clicking "Uninstall" button there.</summary>
+    <description>Detailed Review GeoIp.</description>
+    <notes>Detailed Review GeoIp added.&amp;#xD;&#xD;
+   </notes>
+    <authors><author><name>Default Value</name><user>DV</user><email>info@mage-review.com</email></author></authors>
+    <date>2017-10-24</date>
+    <time>07:23:10</time>
+    <contents><target name="mageetc"><dir name="modules"><file name="MageWorkshop_DRGeoIp.xml" hash="529a457925fa763cadd6785586f690e3"/></dir></target><target name="magelocal"><dir name="MageWorkshop"><dir name="DRGeoIp"><dir name="Helper"><file name="Data.php" hash="ed60e6fcaac031fb84d2c091e7deab40"/></dir><dir name="Model"><file name="GeoIp.php" hash="cd399e2836ab6dc540d9fd531426004a"/><file name="Observer.php" hash="4700dbc30818c259d3653c61e2579e5e"/><file name="Uninstall.php" hash="6196cca0942417262264b2728909cae5"/></dir><dir name="etc"><file name="MageWorkshop_DRGeoIp.xml" hash="2002749f1bedddf70eed2a93634f19f3"/><file name="adminhtml.xml" hash="4922e85d4552418f01f511ad1f8d389f"/><file name="config.xml" hash="f811572618711390d79b2d0596672819"/><file name="system.xml" hash="39e94265364e9f609e9a1791fa6a6641"/></dir></dir></dir></target><target name="magelocale"><dir name="en_US"><file name="MageWorkshop_DRGeoIp.csv" hash="61c989e816018da1e3aa813e9beabaff"/><dir name="template"><dir name="email"><dir name="mageworkshop"><dir name="drgeoip"><file name="review_new_to_admin.html" hash="87588418da340081a110a9966de2dbc4"/></dir></dir></dir></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.3.0</min><max>7.0.0</max></php><package><name>MageWorkshop_Core</name><channel>community</channel><min/><max/></package><package><name>MageWorkshop_DetailedReview</name><channel>community</channel><min/><max/></package></required></dependencies>
+</package>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Gearup_Checkout>
+            <version>0.1.0</version>
+        </Gearup_Checkout>
+    </modules>
+    <frontend>
+        <routers>
+            <oyecheckout>
+                <args>
+                    <modules>
+                        <Gearup_Checkout before="Oye_Checkout">Gearup_Checkout</Gearup_Checkout>
+                    </modules>
+                </args>
+            </oyecheckout>
+        </routers>
+    </frontend>
+    <frontend>
+        <routers>
+            <checkout>
+                <args>
+                    <modules>
+                        <Gearup_Checkout before="Mage_Checkout">Gearup_Checkout</Gearup_Checkout>
+                    </modules>
+                </args>
+            </checkout>
+        </routers>
+    </frontend>
+    <global>
+        <helpers>
+            <gearup_product>
+                <class>Gearup_Checkout_Helper</class>
+            </gearup_product>
+        </helpers>
+        <blocks>
+            <gearup_checkout>
+                <class>Gearup_Checkout_Block</class>
+            </gearup_checkout>
+        </blocks>
+    </global>
+</config>

@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <Gearup_Review>
+            <version>1.0.0</version>
+        </Gearup_Review>
+    </modules>
+    <global>
+        <blocks>
+            <detailedreview>
+                <rewrite>
+                    <review_products_list>Gearup_Review_Block_Review_Products_List</review_products_list>
+                </rewrite>
+            </detailedreview>
+            <detailreview>
+                <class>Gearup_Review_Block</class>
+            </detailreview>
+        </blocks>
+        <helpers>
+            <gearup_review>
+                <class>Gearup_Review_Helper</class>
+            </gearup_review>
+        </helpers>
+    </global>
+    <frontend>
+        <routers>
+            <detailreview>
+                <use>standard</use>
+                <args>
+                    <module>Gearup_Review</module>
+                    <frontName>detailreview</frontName>
+                </args>
+            </detailreview>
+        </routers>
+    </frontend>    
+</config>

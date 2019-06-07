@@ -1,0 +1,3 @@
+<?php /* added automatically by conflict fixing tool */ if (Mage::getConfig()->getNode('modules/Amasty_Shopby/active')) {
+            class MageWorx_SeoFriendlyLN_Model_Catalog_Layer_Filter_Item_Amasty_Pure extends MageWorx_SeoFriendlyLN_Model_Catalog_Layer_Filter_Item_Abstract {}
+        } else { class MageWorx_SeoFriendlyLN_Model_Catalog_Layer_Filter_Item_Amasty_Pure extends MageWorx_SeoFriendlyLN_Model_Catalog_Layer_Filter_Item_Abstract {} } ?>

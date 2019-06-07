@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Mish_Import>
+            <version>1.0.0</version>
+        </Mish_Import>
+    </modules>
+    <global>
+        <blocks>
+            <import>
+                <class>Mish_Import_Block</class>
+            </import>
+        </blocks>
+        <helpers>
+            <import>
+                <class>Mish_Import_Helper</class>
+            </import>
+        </helpers>
+    </global>
+	<admin>
+        <routers>
+            <import>
+                <use>admin</use>
+                <args>
+                    <module>Mish_Import</module>
+                    <frontName>import</frontName>
+                </args>
+            </import>
+        </routers>
+    </admin>
+    <default>
+        <checkout>
+            <import>
+                <enabled>1</enabled>
+                <custom_text><![CDATA[Due to scheduled maintenance the checkout was temporarily disabled and will be back in 1 hour]]></custom_text>
+            </import>
+        </checkout>
+    </default>
+</config>

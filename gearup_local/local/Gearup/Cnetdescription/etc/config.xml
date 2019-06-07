@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Gearup_Cnetdescription>
+            <version>1.0.0</version>
+        </Gearup_Cnetdescription>
+    </modules>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Gearup_Cnetdescription after="Mage_Adminhtml">Gearup_Cnetdescription_Adminhtml</Gearup_Cnetdescription>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <global>
+    	<blocks>
+            <cnetdescription>
+                <class>Gearup_Cnetdescription_Block</class>
+            </cnetdescription>
+        </blocks>
+        <helpers>
+            <cnetdescription>
+                <class>Gearup_Cnetdescription_Helper</class>
+            </cnetdescription>
+        </helpers>
+    </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <cnetdescription>
+                    <file>gearup_cnetdescription.xml</file>
+                </cnetdescription>
+            </updates>
+        </layout>
+    </adminhtml>
+</config>    	

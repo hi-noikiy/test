@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Gearup_Bannerwidget>
+            <version>0.1.0</version>
+        </Gearup_Bannerwidget>
+    </modules>
+    <global>
+        <blocks>
+            <bannerwidget>
+                <class>Gearup_Bannerwidget_Block</class>
+            </bannerwidget>
+        </blocks>
+        <helpers>
+            <bannerwidget>
+                <class>Gearup_Bannerwidget_Helper</class>
+            </bannerwidget>
+        </helpers>
+        <models>
+            <bannerwidget>
+                <class>Gearup_Bannerwidget_Model</class>
+            </bannerwidget>
+        </models>
+    </global>
+    <adminhtml>
+        <!--<acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <bannerwidget translate="title" module="bannerwidget">
+                                            <title>Banner Section</title>
+                                        </bannerwidget>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl> -->
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <bannerwidget translate="title" module="bannerwidget">
+                                            <title>Top Banner</title>
+                                            <sort_order>100</sort_order>
+                                        </bannerwidget>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+    <default>
+        <bannerwidget>
+            <general>                
+                <enable>1</enable>
+                <enablesticky>1</enablesticky>         
+            </general>      
+        </bannerwidget>
+    </default>
+</config>

@@ -1,0 +1,396 @@
+fghanistan Other
+Kabul
+Albania Other
+Algeria Other
+Algiers
+American Samoa Other
+Pago Pago
+Andorra Other
+Angola Other
+Luanda
+Anguilla Other
+Antigua And Barbuda Other
+Argentina Other
+Buenos Aires
+Armenia Other
+Aruba Other
+Australia Other
+Brisbane
+Melbourne
+Perth
+Sydney
+Austria Other
+Vienna
+Azerbaijan Other
+Bahamas Other
+Nassau
+Bahrain Other
+Bangladesh Other
+Dhaka
+Barbados Other
+Belarus Other
+Antwerp
+Belgium Other
+Brussels
+Belize Other
+Benin Other
+Bermuda Other
+Hamilton
+Bhutan Other
+Thimphu
+Bolivia Other
+Bosnia And Herzegovina
+Botswana Other
+Gaborone
+Bouvet Island Other
+Brasilla
+Brazil Other
+Bandar Seri Begawan
+Brunei Darussalam Other
+Bulgaria Other
+Sofia
+Burkina Faso Other
+Ouagadougou
+Bjumbura
+Burundi Other
+Cambodia Other
+Phnom Penh
+Cameroon Other
+Yaounde
+Canada Other
+Toronto
+Vancouver
+Cape Verde Other
+Cayman Islands Other
+Bangui
+Central African Republic
+Chad Other
+N'Djamena
+Chile Other
+Santiago
+Beijing
+China Other
+Guangzhou
+Shanghai
+Shenzhen
+Christmas Island Other
+Cocos (keeling) Islands O
+Bogota
+Colombia Other
+Comoros Other
+Brazzaville
+Congo Other
+Cook Islands Other
+Costa Rica Other
+San Jose
+Abidjan
+Ivory Coast
+Croatia (local Name: Hrva
+Zagreb
+Cuba Other
+Cyprus Other
+Czech Republic Other
+Prague
+Copenhagen
+Denmark Other
+Djibouti Other
+Dominica Other
+Dominican Republic Other
+Santo Domingo
+East Timor Other
+Ecuador Other
+Quito
+Cairo
+Egypt Other
+El Salvador Other
+San Salvador
+Equatorial Guinea Other
+Eritrea Other
+Estonia Other
+Addis Ababa
+Ethiopia Other
+Falkland Islands (malvina
+Faroe Islands
+Fiji Other
+Suva
+Finland Other
+Helsinki
+France Other
+Paris
+French Guiana Other
+French Polynesia Other
+Papeete
+Gabon Other
+Libreville
+Banjul
+Gambia Other
+Georgia Other
+Cologne
+Dusseldorf
+Frankfurt
+Germany Other
+Munich
+Accra
+Ghana Other
+Gibraltar
+Athens
+Greece Other
+Greenland Other
+Grenada Other
+Guadeloupe Other
+Guam Other
+Guatemala City
+Guatemala Other
+Guernsey
+Conakry
+Guinea Other
+Guinea-bissau Other
+Georgetown
+Guyana Other
+Haiti Other
+Port Au Prince
+Honduras Other
+Tegucigalpa
+Hong Kong
+Hong Kong Other
+Budapest
+Hungary Other
+Iceland Other
+Reyjavik
+Reykjavik
+Bangalore
+Chennai
+Delhi
+India Other
+Mumbai
+Indonesia Other
+Jakarta
+Iran (islamic Republic Of
+Tehran
+Iraq Other
+Belfast
+Dublin
+Ireland Other
+Isle of Man
+Israel Other
+Tel Aviv
+Italy Other
+Milan
+Rome
+Jamaica Other
+Kingston
+Japan Other
+Tokyo
+Jersey
+Amman
+Jordan Other
+Kazakhstan Other
+Kenya Other
+Nairobi
+Kiribati Other
+Tarawa
+Korea, Democratic People'
+Korea, Republic Of Other
+Seoul
+Kuwait
+Kuwait Other
+Kyrgyzstan Other
+Laos Other
+Vientiane
+Latvia Other
+Beirut
+Lebanon Other
+Lesotho Other
+Maseru
+Liberia Other
+Monrovia
+Libyan Arab Jamahiriya Ot
+Liechtenstein Other
+Lithuania Other
+Luxembourg
+Macau
+Macau Other
+Macedonia, The Former Yug
+Antananarivo
+Madagascar Other
+Lilongwe
+Malawi Other
+East Malaysia Other
+Johore Bahru
+Kota Kinabalu
+Kuala Lumpur
+Kuching
+Penang
+West Malaysia Other
+Maldives Other
+Male
+Bamako
+Mali Other
+Malta Other
+Marshall Islands Other
+Fort de France
+Martinique Other
+Mauritania Other
+Mauritius Other
+Port Louis
+Mayotte Other
+Mexico City
+Mexico Other
+Micronesia, Federated Sta
+Moldova, Republic Of Othe
+Monaco
+Monaco Other
+Mongolia Other
+Montserrat Other
+Morocco Other
+Rabat
+Maputo
+Mozambique Other
+Myanmar Other
+Yangon
+Namibia Other
+Windhoek
+Nauru
+Nauru Other
+Kathmandu
+Nepal Other
+Amsterdam
+Netherlands Other
+Antilles Netherlands Othe
+Philipsburg
+New Caledonia Other
+Noumea
+Auckland
+New Zealand Other
+Wellington
+Managua
+Nicaragua Other
+Niamey
+Niger Other
+Abuja
+Nigeria Other
+Niue Other
+Norfolk Island Other
+Norway Other
+Oslo
+Muscat
+Oman Other
+Karachi
+Pakistan Other
+Palau Other
+Panama City
+Panama Other
+Papua New Guinea Other
+Port Moresby
+Asuncion
+Paraguay Other
+Lima
+Peru Other
+Manila
+Philippines Other
+Pitcairn Other
+Poland Other
+Warsaw
+Lisbon
+Portugal Other
+Puerto Rico Other
+San Juan
+Doha
+Qatar Other
+Reunion Other
+Romania Other
+Moscow
+Russian Federation Other
+Kigali
+Rwanda Other
+Saint Kitts And Nevis Oth
+Saint Lucia Other
+Saint Vincent And The Gre
+Samoa Other
+San Marino Other
+Sao Tome And Principe Oth
+Riyadh
+Saudi Arabia Other
+Dakar
+Senegal Other
+Seychelles Other
+Freetown
+Sierra Leone Other
+Singapore
+Slovakia (slovak Republic
+Slovenia Other
+Honiara
+Solomon Islands Other
+Mogadishu
+Somalia Other
+Johannesburg
+South Africa Other
+South Georgia And The Sou
+Barcelona
+Madrid
+Spain Other
+Colombo
+Sri Lanka Other
+St. Helena Other
+Khartoum
+Sudan Other
+Suriname Other
+Swaziland Other
+Stockholm
+Sweden Other
+Geneva
+Switzerland Other
+Zurich
+Damascus
+Syrian Arab Republic Othe
+Taipei
+Taiwan, Province Of China
+Tajikistan Other
+Tanzania, United Republic
+TBA
+Bangkok
+Thailand Other
+Lome
+Togo Other
+Tonga Other
+Port Of Spain
+Trinidad And Tobago Other
+Tunis
+Tunisia Other
+Istanbul
+Turkey Other
+Turkmenistan Other
+Turks And Caicos Islands
+Funafuti
+Tuvalu Other
+Kampala
+Uganda Other
+Ukraine Other
+Dubai
+United Arab Emirates Othe
+London
+United Kingdom Other
+Los Angeles
+Miami
+New York
+San Francisco
+United States Other
+Montevideo
+Uruguay Other
+Uzbekistan Other
+Vanuatu Other
+Caracas
+Venezuela Other
+Ho Chi Minh
+Vietnam Other
+Virgin Islands (british)
+Virgin Islands (u.s.) Oth
+Wallis And Futuna Islands
+Western Sahara Other
+Yemen Other
+Serbia & Montenegro Other
+Zaire Other
+Lusaka
+Zambia Other
+Harare
+Zimbabwe Other

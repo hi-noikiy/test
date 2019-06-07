@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<widgets>
+    <reviewwall type="reviewwall/widget_wall" translate="name" module="reviewwall">
+        <name>Review Wall</name>
+    </reviewwall>
+</widgets>

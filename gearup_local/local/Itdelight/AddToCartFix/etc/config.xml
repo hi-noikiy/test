@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Itdelight_AddToCartFix>
+            <version>0.1.0</version>
+        </Itdelight_AddToCartFix>
+    </modules>
+    <global>
+    </global>
+    <frontend>
+        <routers>
+            <ajaxcart>
+                <args>
+                    <modules>
+                        <Itdelight_AddToCartFix before="EM_Ajaxcart">Itdelight_AddToCartFix</Itdelight_AddToCartFix>
+                    </modules>
+                </args>
+            </ajaxcart>
+        </routers>
+    </frontend>
+</config>

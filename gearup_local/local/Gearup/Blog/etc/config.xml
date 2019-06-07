@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Gearup_EMI extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Gearup
+ * @package        Gearup_EMI
+ * @copyright      Copyright (c) 2018
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <modules>
+        <Gearup_Blog>
+            <version>1.1.2</version>
+        </Gearup_Blog>
+    </modules>
+    <global>      
+        <blocks>
+            <gearup_blog>
+                <class>Gearup_Blog_Block</class>
+            </gearup_blog>
+            <blog>
+                <rewrite>
+                    <blog>Gearup_Blog_Block_Blog</blog>
+                    <post>Gearup_Blog_Block_Post</post>                    
+                    <last>Gearup_Blog_Block_Last</last>
+                    <cat>Gearup_Blog_Block_Cat</cat>
+                    <menu_sidebar>Gearup_Blog_Block_Menu_Sidebar</menu_sidebar>
+                    <manage_blog_edit_tab_form>Gearup_Blog_Block_Manage_Blog_Edit_Tab_Form</manage_blog_edit_tab_form>
+                    <manage_blog_edit_form>Gearup_Blog_Block_Manage_Blog_Edit_Form</manage_blog_edit_form>
+                </rewrite>
+            </blog>
+        </blocks>
+        <helpers>
+            <gearup_blog>
+                <class>Gearup_Blog_Helper</class>
+            </gearup_blog>
+        </helpers> 
+        <models>
+            <gearup_blog>
+                <class>Gearup_Blog_Model</class>
+            </gearup_blog>
+        </models>
+        <resources>
+            <blograting_setup>
+                <setup>
+                    <module>Gearup_Blog</module>
+                </setup>
+            </blograting_setup>
+        </resources>      
+    </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <gearup_blog>
+                    <file>gearup_blog.xml</file>
+                </gearup_blog>
+            </updates>
+        </layout>        
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Gearup_EMI before="Mage_Adminhtml">Gearup_EMI_Adminhtml</Gearup_EMI>
+                    </modules>
+                    <modules>
+                        <Gearup_Blog before="AW_Blog_Adminhtml">Gearup_Blog_Adminhtml</Gearup_Blog>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <frontend>
+        <routers>
+            <gearup_blog>
+                <use>standard</use>
+                <args>
+                    <module>Gearup_Blog</module>
+                    <frontName>gearup_blog</frontName>
+                </args>
+            </gearup_blog>
+        </routers>
+        <layout>
+            <updates>
+                <gearup_blog>
+                    <file>gearup_blog.xml</file>
+                </gearup_blog>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Gearup_EMI>
+                    <files>
+                        <default>Gearup_EMI.csv</default>
+                    </files>
+                </Gearup_EMI>
+            </modules>
+        </translate>
+    </frontend>
+</config>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Gearup_Elasticsearch>
+            <version>1.0.0</version>
+        </Gearup_Elasticsearch>
+    </modules>
+    <global>
+        <helpers>
+            <gearupelastic>
+                <class>Gearup_Elasticsearch_Helper</class>
+            </gearupelastic>
+            <elasticsearch>
+                <rewrite>
+                    <indexer_product>Gearup_Elasticsearch_Helper_Indexer_Product</indexer_product>
+                </rewrite>
+            </elasticsearch>
+      </helpers>
+    </global>    
+</config> 

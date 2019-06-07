@@ -1,0 +1,560 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Mostviewed
+ */
+-->
+<config>
+    <sections>
+        <ammostviewed translate="label" module="ammostviewed">
+            <label>Automatic Related Products</label>
+            <tab>amasty</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>32101</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <amasty_information translate="label">
+                    <label>Information</label>
+                    <frontend_type>text</frontend_type>
+                    <frontend_model>ammostviewed/adminhtml_system_config_fieldset_info</frontend_model>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </amasty_information>
+                <general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>7</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <show_only translate="label comment">
+                            <label>Show Only Products From Categories</label>
+                            <comment>Comma separated IDs of Categories.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_only>
+                        <exclude translate="label comment">
+                            <label>Exclude Products by Category</label>
+                            <comment>Comma separated IDs of Categories.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </exclude>
+                        <limit translate="label comment">
+                            <label>Query Limit</label>
+                            <comment>Limit of records in query for period.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </limit>
+                    </fields>
+                </general>
+                <up_sells translate="label">
+                    <label>Up-Sells</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+
+                        <size translate="label">
+                            <label>Maximum Products Count</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enabled>1</enabled></depends>
+                        </size>
+                        <manually translate="label">
+                            <label>Manually Added Products</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ammostviewed/source_manually</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enabled>1</enabled></depends>
+                        </manually>
+                        <in_stock translate="label">
+                            <label>Show In Stock Products Only</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </in_stock>
+                        <show_for_out_of_stock_only translate="label">
+                            <label>Show Up-Sells Only for Out of Stock</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </show_for_out_of_stock_only>
+                        <period translate="label comment">
+                            <label>Data Gathered Period</label>
+                            <comment>In days.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>31</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </period>
+                        <data_source translate="label">
+                            <label>Data Source</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ammostviewed/source_datasource</source_model>
+                            <sort_order>32</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </data_source>
+                        <order_status translate="label">
+                            <label>Status</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>ammostviewed/source_status</source_model>
+                            <sort_order>33</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <data_source>1</data_source>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </order_status>
+                        <conditions translate="label">
+                            <label><![CDATA[<b>Conditions</b>]]></label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </conditions>
+                        <category translate="label">
+                            <label>Category Condition</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ammostviewed/source_condition_category</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </category>
+                        <brand_condition translate="label">
+                            <label>Brand Condition</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ammostviewed/source_condition_brand</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </brand_condition>
+                        <brand_attribute translate="label">
+                            <label>Brand Attribute</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ammostviewed/source_condition_brandattribute</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <brand_condition>1</brand_condition>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </brand_attribute>
+                        <price_condition translate="label">
+                            <label>Price Condition</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ammostviewed/source_condition_price</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </price_condition>
+                    </fields>
+                </up_sells>
+
+                <related_products translate="label">
+                    <label>Related Products</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <size translate="label">
+                            <label>Maximum Products Count</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enabled>1</enabled></depends>
+                        </size>
+                        <manually translate="label">
+                            <label>Manually Added Products</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ammostviewed/source_manually</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enabled>1</enabled></depends>
+                        </manually>
+                        <in_stock translate="label">
+                            <label>Show In Stock Products Only</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </in_stock>
+                        <show_for_out_of_stock_only translate="label">
+                            <label>Show Related Products Only for Out of Stock</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </show_for_out_of_stock_only>
+                        <period translate="label comment">
+                            <label>Data Gathered Period</label>
+                            <comment>In days.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>31</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </period>
+                        <data_source translate="label">
+                            <label>Data Source</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ammostviewed/source_datasource</source_model>
+                            <sort_order>32</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </data_source>
+                        <order_status translate="label">
+                            <label>Status</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>ammostviewed/source_status</source_model>
+                            <sort_order>33</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <data_source>1</data_source>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </order_status>
+
+                        <conditions translate="label">
+                            <label><![CDATA[<b>Conditions</b>]]></label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </conditions>
+                        <category translate="label">
+                            <label>Category Condition</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ammostviewed/source_condition_category</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </category>
+                        <brand_condition translate="label">
+                            <label>Brand Condition</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ammostviewed/source_condition_brand</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </brand_condition>
+                        <brand_attribute translate="label">
+                            <label>Brand Attribute</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ammostviewed/source_condition_brandattribute</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <brand_condition>1</brand_condition>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </brand_attribute>
+                        <price_condition translate="label">
+                            <label>Price Condition</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ammostviewed/source_condition_price</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </price_condition>
+                    </fields>
+                </related_products>
+
+                <cross_sells translate="label">
+                    <label>Cross-Sells</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <size translate="label">
+                            <label>Maximum Products Count</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enabled>1</enabled></depends>
+                        </size>
+                        <manually translate="label">
+                            <label>Manually Added Products</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ammostviewed/source_manually</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enabled>1</enabled></depends>
+                        </manually>
+                        <in_stock translate="label">
+                            <label>Show In Stock Products Only</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </in_stock>
+                        <period translate="label comment">
+                            <label>Data Gathered Period</label>
+                            <comment>In days.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>31</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </period>
+                        <data_source translate="label comment">
+                            <label>Data Source</label>
+                            <comment>The products selection will be based on the last added to cart product</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ammostviewed/source_datasource</source_model>
+                            <sort_order>32</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </data_source>
+                        <order_status translate="label">
+                            <label>Status</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>ammostviewed/source_status</source_model>
+                            <sort_order>33</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <data_source>1</data_source>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </order_status>
+                        <category translate="label">
+                            <label>Category Condition</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ammostviewed/source_condition_category</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <data_source>2</data_source>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </category>
+                        <brand_condition translate="label">
+                            <label>Brand Condition</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ammostviewed/source_condition_brand</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <data_source>2</data_source>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </brand_condition>
+                        <brand_attribute translate="label">
+                            <label>Brand Attribute</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ammostviewed/source_condition_brandattribute</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <brand_condition>1</brand_condition>
+                                <data_source>2</data_source>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </brand_attribute>
+                        <price_condition translate="label">
+                            <label>Price Condition</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ammostviewed/source_condition_price</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <data_source>2</data_source>
+                                <enabled>1</enabled>
+                                <manually separator=",">1,2</manually>
+                            </depends>
+                        </price_condition>
+                    </fields>
+                </cross_sells>
+            </groups>
+        </ammostviewed>
+    </sections>
+</config>

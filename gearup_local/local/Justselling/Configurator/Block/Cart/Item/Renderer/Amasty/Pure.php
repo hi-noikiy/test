@@ -1,0 +1,3 @@
+<?php /* added automatically by conflict fixing tool */ if (Mage::getConfig()->getNode('modules/Amasty_Preorder/active')) {
+            class Justselling_Configurator_Block_Cart_Item_Renderer_Amasty_Pure extends Amasty_Preorder_Block_Rewrite_Checkout_Cart_Item_Renderer {}
+        } else { class Justselling_Configurator_Block_Cart_Item_Renderer_Amasty_Pure extends Mage_Checkout_Block_Cart_Item_Renderer {} } ?>

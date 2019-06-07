@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets>
+    <protoslider type="protoslider/slider" module="protoslider" translate="name description">
+        <name>Slider</name>
+        <description>Protoslider of contents!</description>
+        
+        <parameters>
+            <visibility>
+                <label>Visibility</label>
+                <visible>1</visible>
+                <required>1</required>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <value>1</value>
+                        <label>Yes</label>
+                    </yes>
+                    <no translate="label">
+                        <value>0</value>
+                        <label>No</label>
+                    </no>
+                </values>
+            </visibility>
+            
+            <width>
+                <required>1</required>
+                <visible>1</visible>
+                <label>Width</label>
+                <type>text</type>
+                <value>700</value>
+            </width>
+            
+            <height>
+                <required>1</required>
+                <visible>1</visible>
+                <label>Height</label>
+                <type>text</type>
+                <value>300</value>
+            </height>
+            
+            <interval>
+                <required>1</required>
+                <visible>1</visible>
+                <label>Interval</label>
+                <type>text</type>
+                <value>2000</value>
+            </interval>
+            
+            <duration>
+                <required>1</required>
+                <visible>1</visible>
+                <label>Duration</label>
+                <type>text</type>
+                <value>500</value>
+            </duration>
+                       
+            <fps>
+                <required>1</required>
+                <visible>1</visible>
+                <label>Frames Per Seconds (fps)</label>
+                <type>text</type>
+                <value>50</value>
+            </fps>
+            
+            <columns>
+                <required>1</required>
+                <visible>1</visible>
+                <label>Columns</label>
+                <type>text</type>
+                <value>7</value>
+            </columns>
+            
+            <rows>
+                <required>1</required>
+                <visible>1</visible>
+                <label>Rows</label>
+                <type>text</type>
+                <value>5</value>
+            </rows>
+            
+            <seat>
+                <required>1</required>
+                <visible>1</visible>
+                <label>Seat</label>
+                <type>text</type>
+                <value>0.25</value>
+            </seat>
+            
+            <speed_up>
+                <required>1</required>
+                <visible>1</visible>
+                <label>Speed Up</label>
+                <type>text</type>
+                <value>1</value>
+            </speed_up>
+            
+            <navigation_enabled>
+                <label>Navigation Prev/Next</label>
+                <visible>1</visible>
+                <required>1</required>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <value>1</value>
+                        <label>Yes</label>
+                    </yes>
+                    <no translate="label">
+                        <value>0</value>
+                        <label>No</label>
+                    </no>
+                </values>
+            </navigation_enabled>
+            
+            <navigation_opacity>
+                <required>1</required>
+                <visible>1</visible>
+                <label>Navigation Opacity</label>
+                <type>text</type>
+                <value>0.7</value>
+            </navigation_opacity>
+            
+            <blocks translate="label">
+                <visible>1</visible>
+                <required>1</required>
+                <label>Static Block</label>
+                <type>multiselect</type>
+                <source_model>cms/mysql4_block_collection</source_model>
+            </blocks>
+            
+            <order>
+                <visible>1</visible>
+                <required>0</required>
+                <label>Blocks order</label>
+                <type>text</type>
+                <value></value>
+                <description>Coma separated identifiers of blocks. Empty menas order from static blocks.</description>
+            </order>
+            
+        </parameters>
+    </protoslider>
+</widgets>

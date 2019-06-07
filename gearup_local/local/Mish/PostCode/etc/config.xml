@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Mish_PostCode>
+            <version>1.0.0</version>
+        </Mish_PostCode>
+    </modules>
+    <global>
+        <models>
+            <customer>
+                <rewrite>
+                    <form>Mish_PostCode_Model_Form</form>
+                </rewrite>
+            </customer>
+        </models>
+    </global>
+</config>

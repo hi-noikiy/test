@@ -1,0 +1,211 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Scroll
+ */
+-->
+<!--
+/**
+ *
+ * @category    Amasty
+ * @package     Amasty_Scroll
+ */
+-->
+<config>
+    <sections>
+        <amscroll translate="label" module="amscroll">
+            <label>Ajax Scroll</label>
+            <tab>amasty</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>11019</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <amasty_information translate="label">
+                    <label>Information</label>
+                    <frontend_type>text</frontend_type>
+                    <frontend_model>amscroll/adminhtml_system_config_fieldset_info</frontend_model>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </amasty_information>
+            	<general translate="label">
+                    <label>General settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>                   
+                    <fields>
+                        <loading translate="label">
+                            <label>Loading Type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>amscroll/source_loading</source_model>                                                         
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </loading>
+						<page_numbers>
+                            <label>Display Page Numbers</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>                                                         
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Choose Yes to display number of the current page above loaded products in the product listing]]></comment>
+                        </page_numbers>
+                        <loading_icon translate="label">
+                            <label>AJAX Progress Image Path</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Specify path to loading image within your theme, i.e. images/amscroll-scroll.gif]]></comment>
+                        </loading_icon>
+						<remove_hash translate="label">
+                            <label>Remove Hash from URLs</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model> 
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </remove_hash>
+                    </fields>                              
+                </general> 
+                <button translate="label">
+                    <label>Load Next Button (optional)</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>                   
+                    <fields>
+                        <label translate="label">
+                            <label>Label for the Button</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Specify here the text to be displayed on the action button]]></comment>
+                        </label>
+                        <styles translate="label">
+                            <label>Styles for the Button</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Specify here CSS rules for load next button, like color:black]]></comment>
+                        </styles>
+                    </fields>                              
+                </button>     
+                <info translate="label">
+                	<label>Info Bar (optional)</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>                   
+                    <fields>
+                        <enabled>
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>                                                         
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Choose Yes to display info bar with current page number and total pages count]]></comment>
+                        </enabled>                        
+                        <background translate="label">
+                            <label>Background Color</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Specify here hex color (like #3A4F62)]]></comment>
+                        </background>
+                        <width>
+                            <label>Width</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Specify bar width in pixels or percents]]></comment>
+                        </width>
+                        <offset>
+                            <label>Offsets</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Specify the bar offsets in pixels from top, right, bottom, left like: left: 30px; top: 20px;]]></comment>
+                        </offset>
+                    </fields>
+                </info>      
+                <advanced translate="label">
+                	<label>CSS Selectors (for custom themes)</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>                   
+                    <fields>
+                        <product_container_group>
+                            <label>Products Group</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_container_group>                        
+                        <product_container translate="label">
+                            <label>Product Container</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_container>
+                        <toolbar>
+                            <label>Toolbar</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </toolbar>
+                        <toolbar_bottom>
+                            <label>Bottom Toolbar</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </toolbar_bottom>
+                        <pager>
+                            <label>Pager</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </pager>
+                    </fields>      
+                </advanced>  
+            </groups>
+        </amscroll>
+    </sections>
+</config>

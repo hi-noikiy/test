@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Gearup_Hometab>
+            <version>1.0.0</version>
+        </Gearup_Hometab>
+    </modules>
+    <global>
+        <helpers>
+            <gearup_hometab>
+                <class>Gearup_Hometab_Helper</class>
+            </gearup_hometab>
+        </helpers>
+    </global>
+    
+    <adminhtml>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <hometabs>
+                                            <title>Homepage Tabs</title>
+                                        </hometabs>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+</config>

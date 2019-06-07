@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Gearup_Countdown>
+            <version>1.0.1</version>
+        </Gearup_Countdown>
+    </modules>
+    
+    <global>      
+        <helpers>
+            <gearup_countdown>
+                <class>Gearup_Countdown_Helper</class>
+            </gearup_countdown>
+        </helpers>
+        <blocks>
+            <gearup_countdown>
+                <class>Gearup_Countdown_Block</class>
+            </gearup_countdown>
+        </blocks>
+        <resources>
+            <dailydeal_setup>
+                <setup>
+                    <module>Gearup_Countdown</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </dailydeal_setup>
+            <dailydeal_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </dailydeal_write>
+            <dailydeal_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </dailydeal_read>
+        </resources>
+    </global>
+    
+    <adminhtml>
+        <layout>
+            <updates>
+                <gearup_countdown>
+                    <file>gearup_countdown.xml</file>
+                </gearup_countdown>
+            </updates>
+        </layout>        
+    </adminhtml>
+    
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Gearup_Countdown before="Mage_Adminhtml">Gearup_Countdown_Adminhtml</Gearup_Countdown>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    
+</config>

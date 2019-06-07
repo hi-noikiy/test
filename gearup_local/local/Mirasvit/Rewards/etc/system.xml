@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <sections>
+        <rewards translate="label" module="rewards">
+            <label>Reward Points</label>
+            <tab>mstcore</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general>
+                    <label>General Settings</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>10</sort_order>
+                    <!-- <frontend_model>mstcore/system_config_form_fieldset</frontend_model> -->
+                    <fields>
+                        <point_unit_name translate="label">
+                            <label>Point Unit Name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </point_unit_name>
+                        <expires_after_days translate="label">
+                            <label>Reward points expire after, days</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>
+                            <![CDATA[leave empty to disable]]>
+                            </comment>
+                        </expires_after_days>
+                        <is_earn_after_invoice translate="label">
+                            <label>Approve earned points on invoice</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </is_earn_after_invoice>
+                        <is_earn_after_shipment translate="label">
+                            <label>Approve earned points on shipment</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </is_earn_after_shipment>
+                        <earn_in_statuses translate="label">
+                            <label>Approve earned points if order has status</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>rewards/config_source_order_status</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>
+                                <![CDATA[set "Approve earned points on invoice" and "Approve earned points on shipment"
+                                to "No" to earn points ONLY at specific order status"]]>
+                            </comment>
+                        </earn_in_statuses>
+                        <is_cancel_after_refund translate="label">
+                            <label>Cancel earned points after order refunding</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </is_cancel_after_refund>
+                        <is_restore_after_refund translate="label">
+                            <label>Restore spent points after order refunding</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </is_restore_after_refund>
+                        <is_earn_shipping translate="label">
+                            <label>Allow to earn points from shipping charges</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </is_earn_shipping>
+                        <is_spend_shipping translate="label">
+                            <label>Allow to spend points for shipping charges</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </is_spend_shipping>
+                        <is_allow_zero_orders translate="label">
+                            <label>Allow to place orders with grand total = 0</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>
+                            <![CDATA[If grand total of order = 0, you can't create a credit memo.]]>
+                            </comment>
+                        </is_allow_zero_orders>
+                        <is_allow_rewards_and_coupons translate="label">
+                            <label>Use points and coupons at the same time</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rewards/config_source_order_coupons</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </is_allow_rewards_and_coupons>
+                        <is_allow_points_as_money translate="label">
+                            <label>Display points on product pages as currency equivalent</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>
+                                <![CDATA[Applied only when Product Earning Rules are used and active Spending rules exist]]>
+                            </comment>
+                        </is_allow_points_as_money>
+                    </fields>
+                </general>
+                <notification>
+                    <label>Notification Settings</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>20</sort_order>
+                    <!-- <frontend_model>mstcore/system_config_form_fieldset</frontend_model> -->
+                    <fields>
+                        <sender_email translate="label">
+                            <label>Email Sender</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sender_email>
+                        <balance_update_email_template translate="label">
+                            <label>Balance update Email</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rewards/system_config_source_email_template</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </balance_update_email_template>
+                        <points_expire_email_template translate="label">
+                            <label>Points expire Email</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rewards/system_config_source_email_template</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </points_expire_email_template>
+                        <send_before_expiring_days translate="label">
+                            <label>Send notification before points expiring (in days)</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </send_before_expiring_days>
+                    </fields>
+                </notification>
+                <referral>
+                    <label>Referrals</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>30</sort_order>
+                    <!-- <frontend_model>mstcore/system_config_form_fieldset</frontend_model> -->
+                    <fields>
+                        <is_active translate="label">
+                            <label>Enable Referral System</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>
+                        <invitation_email_template translate="label">
+                            <label>Invitation Email Template</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rewards/system_config_source_email_template</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </invitation_email_template>
+                    </fields>
+                </referral>
+                <display>
+                    <label>Display</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>40</sort_order>
+                    <fields>
+                        <checkout translate="label">
+                            <label>Display Reward Points block on checkout page</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </checkout>
+                        <cart translate="label">
+                            <label>Display Reward Points block on cart page</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cart>
+                        <behaviour_notifications translate="label">
+                            <label>Disable Behaviour Notifications</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>rewards/system_config_source_behaviour</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </behaviour_notifications>
+                    </fields>
+                </display>
+                <advanced>
+                    <label>Advanced</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>50</sort_order>
+                    <fields>
+                        <disable_points_refresh translate="label">
+                            <label>Disable Points Refreshing at Stages</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>rewards/system_config_source_stages</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>
+                                <![CDATA[DO NOT USE IT UNLESS YOU HAVE CONFIRMED CONFLICT]]>
+                            </comment>
+                        </disable_points_refresh>
+                        <observer_points_refresh translate="label">
+                            <label>Refresh points on cart and checkout</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>
+                                <![CDATA[DO NOT USE IT UNLESS YOU HAVE CONFIRMED CONFLICT]]>
+                            </comment>
+                        </observer_points_refresh>
+                        <exclude_request_url translate="label">
+                            <label>Exclude points refresh, when URI request has pattern</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>
+                                <![CDATA[DO NOT USE IT UNLESS YOU HAVE CONFIRMED CONFLICT]]>
+                            </comment>
+                        </exclude_request_url>
+                    </fields>
+                </advanced>
+
+            </groups>
+        </rewards>
+    </sections>
+</config>

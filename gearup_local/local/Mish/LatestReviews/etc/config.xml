@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <Mish_LatestReviews>
+            <version>0.1.0</version>
+        </Mish_LatestReviews>
+    </modules>
+    <global>
+        <blocks>
+            <latestreviews>
+                <class>Mish_LatestReviews_Block</class>
+            </latestreviews>
+        </blocks>
+        <helpers>
+            <latestreviews>
+                <class>Mish_LatestReviews_Helper</class>
+            </latestreviews>
+        </helpers>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <latestreviews>
+                    <file>latestreviews.xml</file>
+                </latestreviews>
+            </updates>
+        </layout>
+    </frontend>
+</config>

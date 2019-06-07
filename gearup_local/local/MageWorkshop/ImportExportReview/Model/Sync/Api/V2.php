@@ -1,0 +1,5 @@
+<?php
+
+class MageWorkshop_ImportExportReview_Model_Sync_Api_V2 extends MageWorkshop_ImportExportReview_Model_Sync_Api
+{
+}

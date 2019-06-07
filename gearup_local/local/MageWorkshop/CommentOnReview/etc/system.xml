@@ -1,0 +1,241 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <mageworkshop_commentonreview translate="label">
+            <label>Comment On Review</label>
+            <tab>mw</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>700</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <settings translate="label">
+                    <label>Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>0</expanded>
+                    <fields>
+                        <enable translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+                        <expander translate="label comment">
+                            <label>Expander Reply</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mageworkshop_commentonreview/system_config_source_comment_expander</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </expander>
+                        <min_symbols translate="label comment">
+                            <label>Minimum Count Of Reply Symbols</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-number validate-greater-than-zero required-entry validate-digits</validate>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </min_symbols>
+                        <max_symbols translate="label">
+                            <label>Maximum Count Of Reply Symbols</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mageworkshop_commentonreview/system_config_source_comment_maxSymbols</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </max_symbols>
+                        <nickname_suffix translate="label">
+                            <label>Nickname Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>required-entry validate-length minimum-length-1 maximum-length-1</validate>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </nickname_suffix>
+                        <auto_approve translate="label comment">
+                            <label>Auto Approve Replies for Customer Group</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>detailedreview/review_autoApprove</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>1</can_be_empty>
+                        </auto_approve>
+                    </fields>
+                </settings>
+                <captcha translate="label comment">
+                    <label>Captcha Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>0</expanded>
+                    <fields>
+                        <enabled translate="label comment">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <public_key translate="label comment">
+                            <label>Public Key</label>
+                            <frontend_type>Text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                            <validate>required-entry</validate>
+                            <comment><![CDATA[Visit <a href='https://www.google.com/recaptcha/admin#list' target='_blank'>Google ReCaptcha Settings</a> to receive public key for your domain]]></comment>
+                        </public_key>
+                        <private_key translate="label comment">
+                            <label>Private Key</label>
+                            <frontend_type>Text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                            <validate>required-entry</validate>
+                            <comment><![CDATA[Visit <a href='https://www.google.com/recaptcha/admin#list' target='_blank'>Google ReCaptcha Settings</a> to receive private key for your domain]]></comment>
+                        </private_key>
+                    </fields>
+                </captcha>
+                <email_admin_notify translate="label comment">
+                    <label>Email Admin Notification</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>0</expanded>
+                    <fields>
+                        <enabled translate="label comment">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <receiver translate="label comment">
+                            <label>Default Email Receiver</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </receiver>
+                        <sender translate="label comment">
+                            <label>New Reply Email Sender</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sender>
+                        <template translate="label comment">
+                            <label>Reply Email Template</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </template>
+                        <copy_to translate="label comment">
+                            <label>New Reply Email Copy To</label>
+                            <frontend_type>Text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Comma-separated. If empty then email will be send to 'Customer Support'</comment>
+                        </copy_to>
+                        <copy_method translate="label comment">
+                            <label>New Reply Copy Method</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_method</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </copy_method>
+                    </fields>
+                </email_admin_notify>
+                <email_customer_notify translate="label comment">
+                    <label>Email Customer Notification</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[<strong style='color:red'>This field depends on 'Settings applied to Customers -> Email Field' or it is necessary that the client has been logged in system.</strong>]]></comment>
+                    <expanded>0</expanded>
+                    <fields>
+                        <enabled translate="label comment">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <sender translate="label comment">
+                            <label>Reply Email Sender</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sender>
+                        <template translate="label comment">
+                            <label>Reply Email Template</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </template>
+                        <blind_copy_to translate="label comment">
+                            <label>Reply Email Blind Copy To</label>
+                            <frontend_type>Text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Comma-separated. If empty then email will be send to 'Customer Support'</comment>
+                        </blind_copy_to>
+                    </fields>
+                </email_customer_notify>
+            </groups>
+        </mageworkshop_commentonreview>
+    </sections>
+</config>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+ <config>
+  <modules>
+    <Gearup_Paypal>
+        <version>1.0.0</version>
+    </Gearup_Paypal>
+</modules>
+<frontend>  
+    <routers>
+          <paypal>
+            <args>
+                <modules>
+                        <gearup_paypal before="Mage_Paypal">Gearup_Paypal</gearup_paypal>
+                </modules>
+             </args>
+        </paypal>
+    </routers>
+</frontend>
+</config>

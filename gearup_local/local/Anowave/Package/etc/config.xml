@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Anowave_Package>
+            <version>0.0.0.1</version>
+        </Anowave_Package>
+    </modules>
+    <global>
+    	<models>
+		    <package>
+		        <class>Anowave_Package_Model</class>
+		    </package>
+		</models>
+        <helpers>
+            <package>
+                <class>Anowave_Package_Helper</class>
+            </package>
+        </helpers>
+    </global>
+    <adminhtml>
+        <acl>
+            <resources>
+            	<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                		<package>
+											<title>Package</title>
+										</package>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+	</adminhtml>
+</config>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Mish_BankPayment>
+            <version>1.0.0</version>
+        </Mish_BankPayment>
+    </modules>
+    <global>
+        <blocks>
+            <mishbankpayment>
+                <class>Mish_BankPayment_Block</class>
+            </mishbankpayment>
+            <bankpayment>
+                <rewrite>
+                    <adminhtml_bankAccount>Mish_BankPayment_Block_Adminhtml_BankAccount</adminhtml_bankAccount>
+                </rewrite>
+            </bankpayment>
+        </blocks>
+    </global>
+</config>

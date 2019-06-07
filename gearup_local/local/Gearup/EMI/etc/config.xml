@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Gearup_EMI extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Gearup
+ * @package        Gearup_EMI
+ * @copyright      Copyright (c) 2018
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <modules>
+        <Gearup_EMI>
+            <version>1.0.1</version>
+        </Gearup_EMI>
+    </modules>
+    <global>
+        <resources>
+            <gearup_emi_setup>
+                <setup>
+                    <module>Gearup_EMI</module>
+                    <class>Gearup_EMI_Model_Resource_Setup</class>
+                </setup>
+            </gearup_emi_setup>
+        </resources>
+        <blocks>
+            <gearup_emi>
+                <class>Gearup_EMI_Block</class>
+            </gearup_emi>
+        </blocks>
+        <helpers>
+            <gearup_emi>
+                <class>Gearup_EMI_Helper</class>
+            </gearup_emi>
+        </helpers>
+        <models>
+            <gearup_emi>
+                <class>Gearup_EMI_Model</class>
+                <resourceModel>gearup_emi_resource</resourceModel>
+            </gearup_emi>
+            <gearup_emi_resource>
+                <class>Gearup_EMI_Model_Resource</class>
+                <entities>
+                    <banks>
+                        <table>gearup_emi_banks</table>
+                    </banks>
+                    <banks_store>
+                        <table>gearup_emi_banks_store</table>
+                    </banks_store>
+                </entities>
+            </gearup_emi_resource>
+        </models>
+    </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <gearup_emi>
+                    <file>gearup_emi.xml</file>
+                </gearup_emi>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Gearup_EMI>
+                    <files>
+                        <default>Gearup_EMI.csv</default>
+                    </files>
+                </Gearup_EMI>
+            </modules>
+        </translate>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Gearup_EMI before="Mage_Adminhtml">Gearup_EMI_Adminhtml</Gearup_EMI>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <frontend>
+        <routers>
+            <gearup_emi>
+                <use>standard</use>
+                <args>
+                    <module>Gearup_EMI</module>
+                    <frontName>gearup_emi</frontName>
+                </args>
+            </gearup_emi>
+        </routers>
+        <layout>
+            <updates>
+                <gearup_emi>
+                    <file>gearup_emi.xml</file>
+                </gearup_emi>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Gearup_EMI>
+                    <files>
+                        <default>Gearup_EMI.csv</default>
+                    </files>
+                </Gearup_EMI>
+            </modules>
+        </translate>
+    </frontend>
+    <default>
+        <gearup_emi>
+            <banks>
+                <breadcrumbs>1</breadcrumbs>
+                <meta_title>Banks Manager </meta_title>
+            </banks>
+        </gearup_emi>
+    </default>
+</config>

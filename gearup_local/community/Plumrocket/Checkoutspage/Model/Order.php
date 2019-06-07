@@ -1,0 +1,221 @@
+<?php
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_Checkoutspage
+ * @copyright   Copyright (c) 2015 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+
+class Plumrocket_Checkoutspage_Model_Order extends Plumrocket_Checkoutspage_Model_Order_Amasty_Pure
+{
+    const EMAIL_EVENT_NAME_NEW_ORDER    = 'new_order';
+
+    public function queueNewOrderEmail($forceMode = false)
+    {
+        return $this->_newOrderEmail($forceMode);
+    }
+
+    public function sendNewOrderEmail()
+    {
+        return $this->_newOrderEmail(true);
+    }
+
+    protected  function _newOrderEmail($forceMode)
+    {
+        $storeId = $this->getStore()->getId();
+
+        if (!Mage::helper('sales')->canSendNewOrderEmail($storeId)) {
+            return $this;
+        }
+
+        $mailer = $this->getPMailer();
+
+        if (Mage::helper('checkoutspage')->sendEmailHistoryEnabled()) {
+
+            $template = $this->getPTemplate($mailer);
+
+            Mage::getModel('sendemailhistory/history')->sendAndSave(
+                $template,
+                $this->getCustomerEmail(),
+                $this->getCustomerIsGuest() ? $this->getBillingAddress()->getName() : $this->getCustomerName(),
+                $mailer->getTemplateParams(),
+                $this->getCustomer(),
+                $this
+            );
+
+        } else {
+            /** @var $emailQueue Mage_Core_Model_Email_Queue */
+            if (@class_exists('Mage_Core_Model_Email_Queue')) {
+                $emailQueue = Mage::getModel('core/email_queue');
+                $emailQueue->setEntityId($this->getId())
+                    ->setEntityType(self::ENTITY)
+                    ->setEventType(self::EMAIL_EVENT_NAME_NEW_ORDER)
+                    ->setIsForceCheck(!$forceMode);
+
+                $mailer->setQueue($emailQueue)->send();
+             } else {
+                $mailer->send();
+             }
+        }
+
+        $this->setEmailSent(true);
+        $this->_getResource()->saveAttribute($this, 'email_sent');
+
+        return $this;
+    }
+
+    public function getPTemplate($mailer)
+    {
+        $_this = Mage::getModel('core/email_template');
+
+
+        $_this->setQueue($mailer->getQueue());
+        $templateId = $mailer->getTemplateId();
+        $sender = $mailer->getSender();
+        $storeId = $mailer->getStoreId();
+
+        $_this->setSentSuccess(false);
+        if (($storeId === null) && $_this->getDesignConfig()->getStore()) {
+            $storeId = $_this->getDesignConfig()->getStore();
+        }
+
+        if (is_numeric($templateId)) {
+            $queue = $_this->getQueue();
+            $_this->load($templateId);
+            $_this->setQueue($queue);
+        } else {
+            $localeCode = Mage::getStoreConfig('general/locale/code', $storeId);
+            $_this->loadDefault($templateId, $localeCode);
+        }
+
+        if (!$_this->getId()) {
+            throw Mage::exception('Mage_Core', Mage::helper('core')->__('Invalid transactional email code: %s', $templateId));
+        }
+
+        if (!is_array($sender)) {
+            $_this->setSenderName(Mage::getStoreConfig('trans_email/ident_' . $sender . '/name', $storeId));
+            $_this->setSenderEmail(Mage::getStoreConfig('trans_email/ident_' . $sender . '/email', $storeId));
+        } else {
+            $_this->setSenderName($sender['name']);
+            $_this->setSenderEmail($sender['email']);
+        }
+
+        return $_this;
+    }
+
+
+    public function getPMailer($newTemplate = null)
+    {
+        $storeId = $this->getStore()->getId();
+        // Get the destination email addresses to send copies to
+        $copyTo = $this->_getEmails(self::XML_PATH_EMAIL_COPY_TO);
+        $copyMethod = Mage::getStoreConfig(self::XML_PATH_EMAIL_COPY_METHOD, $storeId);
+
+        // Start store emulation process
+        /** @var $appEmulation Mage_Core_Model_App_Emulation */
+        $appEmulation = Mage::getSingleton('core/app_emulation');
+        $initialEnvironmentInfo = $appEmulation->startEnvironmentEmulation($storeId);
+
+        try {
+            // Retrieve specified view block from appropriate design package (depends on emulated store)
+            $paymentBlock = Mage::helper('payment')->getInfoBlock($this->getPayment())
+                ->setIsSecureMode(true);
+            $paymentBlock->getMethod()->setStore($storeId);
+            $paymentBlockHtml = $paymentBlock->toHtml();
+        } catch (Exception $exception) {
+            // Stop store emulation process
+            $appEmulation->stopEnvironmentEmulation($initialEnvironmentInfo);
+            throw $exception;
+        }
+
+        // Stop store emulation process
+        $appEmulation->stopEnvironmentEmulation($initialEnvironmentInfo);
+
+        // Retrieve corresponding email template id and customer name
+        if (is_null($newTemplate)) {
+            $useBetterOrderEmail = Mage::helper('checkoutspage')->useBetterOrderEmail($this->getStoreId());
+        } else {
+            $useBetterOrderEmail = (bool)$newTemplate;
+        }
+
+        $customerName = ($this->getCustomerIsGuest()) ? $this->getBillingAddress()->getName() : $this->getCustomerName();
+        $templateId = $this->_getEmailTemplateId($useBetterOrderEmail);
+
+        /** @var $mailer Mage_Core_Model_Email_Template_Mailer */
+        $mailer = Mage::getModel('core/email_template_mailer');
+        /** @var $emailInfo Mage_Core_Model_Email_Info */
+        $emailInfo = Mage::getModel('core/email_info');
+        $emailInfo->addTo($this->getCustomerEmail(), $customerName);
+        if ($copyTo && $copyMethod == 'bcc') {
+            // Add bcc to customer email
+            foreach ($copyTo as $email) {
+                $emailInfo->addBcc($email);
+            }
+        }
+        $mailer->addEmailInfo($emailInfo);
+
+        // Email copies are sent as separated emails if their copy method is 'copy'
+        if ($copyTo && $copyMethod == 'copy') {
+            foreach ($copyTo as $email) {
+                $emailInfo = Mage::getModel('core/email_info');
+                $emailInfo->addTo($email);
+                $mailer->addEmailInfo($emailInfo);
+            }
+        }
+
+        // Set all required params and send emails
+        $mailer->setSender(Mage::getStoreConfig(self::XML_PATH_EMAIL_IDENTITY, $storeId));
+        $mailer->setStoreId($storeId);
+        $mailer->setTemplateId($templateId);
+
+        $templateParams = array(
+            'order'        => $this,
+            'billing'      => $this->getBillingAddress(),
+            'payment_html' => str_replace(
+                array('<p>','</p>','<strong>','</strong>','<th>','</th>','<table'),
+                array('','','','','<td>','</td>','<table cellspacing="0" cellpadding="0" '),
+                $paymentBlockHtml
+            ),
+        );
+
+        $facebook = Mage::getStoreConfig('checkoutspage/facebook/enabled');
+        if ($facebook) {
+            $templateParams['facebookUrl'] = Mage::helper('checkoutspage')->getFacebookUrl();
+        }
+
+        if ($useBetterOrderEmail) {
+            $templateParams = Mage::helper('checkoutspage')->getAdditionalOrderEmailVars($this, $templateParams);
+        }
+
+        $mailer->setTemplateParams($templateParams);
+
+        return $mailer;
+    }
+
+
+    protected function _getEmailTemplateId($useBetterOrderEmail)
+    {
+        if ($useBetterOrderEmail) {
+            $templateId = Mage::getStoreConfig('checkoutspage/order_email/template');
+            if (!$templateId) {
+                $templateId = 'checkoutspage_order_email_template';
+            }
+        } else {
+            $storeId = $this->getStore()->getId();
+            $templatePath = ( $this->getCustomerIsGuest() ) ? self::XML_PATH_EMAIL_GUEST_TEMPLATE : self::XML_PATH_EMAIL_TEMPLATE;
+            $templateId = Mage::getStoreConfig($templatePath, $storeId);
+        }
+
+        return $templateId;
+    }
+
+}

@@ -1,0 +1,3 @@
+<?php /* added automatically by conflict fixing tool */ if (Mage::getConfig()->getNode('modules/Amasty_Email/active')) {
+            class MageWorkshop_DetailedReview_Block_Adminhtml_Customer_Grid_Amasty_Pure extends Amasty_Email_Block_Adminhtml_Customer_Grid {}
+        } else { class MageWorkshop_DetailedReview_Block_Adminhtml_Customer_Grid_Amasty_Pure extends Mage_Adminhtml_Block_Customer_Grid {} } ?>

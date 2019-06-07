@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!-- 
+  /** 
+   * Magento Module developed by EasyCommerce 
+   * 
+   * NOTICE OF LICENSE 
+	* 
+	* This source file is subject to the Open Software License (OSL 3.0) 
+	* that is bundled with this package in the file LICENSE.txt. 
+	* It is also available through the world-wide-web at this URL: 
+	* http://opensource.org/licenses/osl-3.0.php 
+	* If you did of the license and are unable to 
+	* obtain it through the world-wide-web, please send an email 
+	* to info@easycommerce.cz so we can send you a copy immediately. 
+	*
+	* @copyright Copyright (c) 2010 EasyCommerce (http://easycommerce.cz)
+   * @category EasyCommerce 
+   * @package Easy_Invoice
+	*/
+-->
+<config>
+	<modules>
+		<Easy_Invoice>
+			<version>1.0.3</version>
+		</Easy_Invoice>
+	</modules>
+	
+	<global>	
+			
+		<models>
+         <bundle>
+            <rewrite>
+               <sales_order_pdf_items_invoice>Easy_Invoice_Model_Bundle_Order_Pdf_Items_Invoice</sales_order_pdf_items_invoice>
+            </rewrite>
+         </bundle>
+         <downloadable>
+            <rewrite>
+               <sales_order_pdf_items_invoice>Easy_Invoice_Model_Downloadable_Order_Pdf_Items_Invoice</sales_order_pdf_items_invoice>
+            </rewrite>
+         </downloadable> 		
+			<sales>
+				<rewrite>
+					<order_pdf_invoice>Easy_Invoice_Model_Sales_Order_Pdf_Invoice</order_pdf_invoice>
+					<order_pdf_items_abstract>Easy_Invoice_Model_Sales_Order_Pdf_Items_Abstract</order_pdf_items_abstract>
+					<order_pdf_items_invoice_default>Easy_Invoice_Model_Sales_Order_Pdf_Items_Invoice_Default</order_pdf_items_invoice_default>
+					<order_pdf_items_invoice_grouped>Easy_Invoice_Model_Sales_Order_Pdf_Items_Invoice_Grouped</order_pdf_items_invoice_grouped>
+				</rewrite>
+			</sales>
+		</models>
+		
+	</global>
+
+	<frontend>
+		<translate>
+			<modules>
+				<Easy_Invoice>
+					<files>
+						<default>Easy_Invoice.csv</default>
+					</files>
+				</Easy_Invoice>
+			</modules>
+		</translate>
+	</frontend>
+
+	<adminhtml>
+		<translate>
+			<modules>
+				<Easy_Invoice>
+					<files>
+						<default>Easy_Invoice.csv</default>
+					</files>
+				</Easy_Invoice>
+			</modules>
+		</translate>
+	</adminhtml>
+	
+   <default>
+      <sales_pdf>
+         <invoice>
+            <show_sku>0</show_sku>
+            <show_vat>1</show_vat>
+            <replace_invoice_id>0</replace_invoice_id>
+            <vs_invoice_id>0</vs_invoice_id>
+         </invoice>
+      </sales_pdf>
+   </default>	
+	
+</config>

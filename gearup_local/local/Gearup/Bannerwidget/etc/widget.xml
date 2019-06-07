@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets>
+  <bannerwidget type="Bannerwidget/topbanner" module="bannerwidget">
+    <name>Top Banner</name>
+    <description type="desc">Top Banner Leaderboard</description>
+    <parameters>
+        <visibility>
+            <label>Visibility</label>
+            <visible>1</visible>
+            <required>1</required>
+            <type>select</type>
+            <values>
+                <yes translate="label">
+                    <value>1</value>
+                    <label>Yes</label>
+                </yes>
+                <no translate="label">
+                    <value>0</value>
+                    <label>No</label>
+                </no>
+            </values>
+        </visibility>
+        <bannerblock translate="label">
+            <visible>1</visible>
+            <required>1</required>
+            <label>Static Block</label>
+            <type>select</type>
+            <source_model>cms/mysql4_block_collection</source_model>
+        </bannerblock>
+        <!--<pagelist>
+            <required>1</required>
+            <visible>1</visible>
+            <label>Add white list URLs in new line to display banner.</label>
+            <type>textarea</type>
+            <value>/</value>
+            <comment><![CDATA[Add Page URL excluding base path in list. Enter each paht in new line.]]></comment>
+        </pagelist>-->
+        <pagelist>
+            <required>1</required>
+            <visible>1</visible>
+            <label>Select page list.</label>
+            <type>multiselect</type>
+            <source_model>bannerwidget/system_config_source_pagelist</source_model>
+        </pagelist>
+        <custompagelist>
+            <required>0</required>
+            <visible>1</visible>
+            <label>Custom page list (Copy URL, Remove domain and Paste each in new line)</label>
+            <type>textarea</type>
+        </custompagelist>
+    </parameters>
+  </bannerwidget>
+
+<leftbannerwidget type="Bannerwidget/leftbanner" module="bannerwidget">
+    <name>Left Banner</name>
+    <description type="desc">Left Banner Leaderboard</description>
+    <parameters>
+        <visibility>
+            <label>Visibility</label>
+            <visible>1</visible>
+            <required>1</required>
+            <type>select</type>
+            <values>
+                <yes translate="label">
+                    <value>1</value>
+                    <label>Yes</label>
+                </yes>
+                <no translate="label">
+                    <value>0</value>
+                    <label>No</label>
+                </no>
+            </values>
+        </visibility>
+        <bannerblock translate="label">
+            <visible>1</visible>
+            <required>1</required>
+            <label>Static Block</label>
+            <type>select</type>
+            <source_model>cms/mysql4_block_collection</source_model>
+        </bannerblock>
+        <pagelist>
+            <required>1</required>
+            <visible>1</visible>
+            <label>Select page list.</label>
+            <type>multiselect</type>
+            <source_model>bannerwidget/system_config_source_pagelist</source_model>
+        </pagelist>
+        <custompagelist>
+            <required>0</required>
+            <visible>1</visible>
+            <label>Custom page list (Copy URL, Remove domain and Paste each in new line)</label>
+            <type>textarea</type>
+        </custompagelist>
+    </parameters>
+</leftbannerwidget>
+
+<rightbannerwidget type="Bannerwidget/rightbanner" module="bannerwidget">
+    <name>Right Banner</name>
+    <description type="desc">Right Banner Leaderboard</description>
+    <parameters>
+        <visibility>
+            <label>Visibility</label>
+            <visible>1</visible>
+            <required>1</required>
+            <type>select</type>
+            <values>
+                <yes translate="label">
+                    <value>1</value>
+                    <label>Yes</label>
+                </yes>
+                <no translate="label">
+                    <value>0</value>
+                    <label>No</label>
+                </no>
+            </values>
+        </visibility>
+        <bannerblock translate="label">
+            <visible>1</visible>
+            <required>1</required>
+            <label>Static Block</label>
+            <type>select</type>
+            <source_model>cms/mysql4_block_collection</source_model>
+        </bannerblock>
+        <pagelist>
+            <required>1</required>
+            <visible>1</visible>
+            <label>Select page list.</label>
+            <type>multiselect</type>
+            <source_model>bannerwidget/system_config_source_pagelist</source_model>
+        </pagelist>
+        <custompagelist>
+            <required>0</required>
+            <visible>1</visible>
+            <label>Custom page list (Copy URL, Remove domain and Paste each in new line)</label>
+            <type>textarea</type>
+        </custompagelist>
+    </parameters>
+</rightbannerwidget>
+</widgets>

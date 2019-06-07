@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <justselling translate="label">
+            <label>Justselling</label>
+            <sort_order>105</sort_order>
+        </justselling>
+    </tabs>
+    <sections>
+        <assetminify translate="label" module="assetminify">
+            <label>Asset Minify</label>
+            <tab>justselling</tab>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <sort_order>2000</sort_order>
+            <groups>
+                <settings translate="label">
+                    <label>General settings</label>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>assetminify/check</backend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <jquerymigrate translate="label">
+                            <label>Load jQuery Migrate</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>When enabled the jQuery Migrate library will be included to be compliant with jQuery 1.9+ when using older extensions.</comment>
+                        </jquerymigrate>
+                        <bootstrap translate="label">
+                            <label>Load Bootstrap Library</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>When enabled the bootstrap library will be loaded as last javascript.</comment>
+                        </bootstrap>
+                    </fields>
+                </settings>
+            </groups>
+        </assetminify>
+    </sections>
+</config>

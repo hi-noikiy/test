@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Mish_StockOnList>
+            <version>1.0.0</version>
+        </Mish_StockOnList>
+    </modules>
+    <global>
+        <models>
+            <stockonlist>
+                <class>Mish_StockOnList_Model</class>
+            </stockonlist>
+            <cataloginventory_resource>
+                <rewrite>
+                    <stock_status>Mish_StockOnList_Model_Resource_Stock_Status</stock_status>
+                </rewrite>
+            </cataloginventory_resource>
+        </models>
+        <blocks>
+            <stockonlist>
+                <class>Mish_StockOnList_Block</class>
+            </stockonlist>
+        </blocks>
+    </global>
+</config>

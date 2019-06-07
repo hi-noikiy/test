@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Amasty_Email>
+            <version>1.0.5</version>
+        </Amasty_Email>
+    </modules>
+    
+    <global>
+        <models>
+            <amemail>
+                <class>Amasty_Email_Model</class>
+                <resourceModel>amemail_mysql4</resourceModel>
+            </amemail>
+            
+            <amemail_mysql4>
+                <class>Amasty_Email_Model_Mysql4</class>
+                <entities>
+                    <log>
+                        <table>am_email_log</table>
+                    </log> 
+                 </entities>
+            </amemail_mysql4>
+            
+        </models>
+        
+        <resources>
+            <amemail_setup>
+                <setup>
+                    <module>Amasty_Email</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </amemail_setup>
+            
+            <amemail_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </amemail_write>
+            
+            <amemail_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </amemail_read>
+        </resources>
+
+        <blocks>
+            <amemail>
+                <class>Amasty_Email_Block</class>
+            </amemail>
+            <adminhtml>
+                <rewrite>
+                    <sales_order_grid>Amasty_Email_Block_Adminhtml_Sales_Order_Grid</sales_order_grid>
+                    <sales_order_view>Amasty_Email_Block_Adminhtml_Sales_Order_View</sales_order_view>
+                    <sales_order_view_tabs>Amasty_Email_Block_Adminhtml_Sales_Order_View_Tabs</sales_order_view_tabs>
+                    <customer_grid>Amasty_Email_Block_Adminhtml_Customer_Grid</customer_grid>
+                    <customer_edit>Amasty_Email_Block_Adminhtml_Customer_Edit</customer_edit>
+                    <customer_edit_tabs>Amasty_Email_Block_Adminhtml_Customer_Edit_Tabs</customer_edit_tabs> 
+                </rewrite>
+            </adminhtml>             
+        </blocks>
+         
+        <helpers>
+            <amemail>
+                <class>Amasty_Email_Helper</class>
+            </amemail>
+        </helpers>
+        <template>
+            <email>
+               <amemail_general_template translate="label" module="amemail">
+                   <label>E-mail to customers</label>
+                   <file>amasty_email_to_customers.html</file>
+                   <type>html</type>
+               </amemail_general_template>
+            </email>
+        </template>          
+    </global>
+    
+     <admin>
+        <routers>
+			<amemail>
+				<use>admin</use>
+				<args>
+					<module>Amasty_Email</module>
+					<frontName>email2customers</frontName>
+				</args>
+			</amemail>
+        </routers>
+    </admin>  
+           
+   <adminhtml>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <amemail translate="title" module="amemail">
+                                            <title>Email to Customers</title>
+                                        </amemail>
+                                    </children>
+                                </config>
+                            </children>
+                        </system> 
+                     </children>
+                </admin> 
+			</resources>
+		</acl>
+        <translate>
+            <modules>
+                <Amasty_Email>
+                    <files>
+                        <default>Amasty_Email.csv</default>
+                    </files>
+                </Amasty_Email>
+            </modules>
+        </translate>
+    </adminhtml> 
+    
+    <default>
+        <amemail>
+           <general>
+                <identity>general</identity> 
+                <template>amemail_general_template</template> 
+                <subj><![CDATA[Notification from {{var store.getFrontendName()}} Team.]]></subj>
+                <txt><![CDATA[Dear {{var customer.getName()}}, Your order {{var order.increment_id}}. Your custom text here. ]]></txt>
+            </general>
+        </amemail>
+    </default>
+</config>

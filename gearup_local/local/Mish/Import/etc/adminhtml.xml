@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <report translate="title" module="reports">
+            <children>
+                <import translate="title" module="import">
+                    <title>Schedule Import</title>
+                    <sort_order>200</sort_order>
+                    <children>
+                        <catalog_feeds translate="title" module="import">
+                            <title>Feed Import Output</title>
+                            <action>import/adminhtml_report/feed</action>
+                        </catalog_feeds>
+                        <catalog_update translate="title" module="import">
+                            <title>Catalog update Output</title>
+                            <action>import/adminhtml_report/update</action>
+                        </catalog_update>
+                    </children>
+                </import>
+            </children>
+        </report>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <report translate="title" module="reports">
+                        <children>
+                            <import translate="title">
+                                <title>Schedule import</title>
+                                <children>
+                                    <catalog_feeds translate="title">
+                                        <title>Feed Import Output</title>
+                                    </catalog_feeds>
+                                    <catalog_update translate="title">
+                                        <title>Catalog update</title>
+                                    </catalog_update>
+                                </children>
+                            </import>
+                        </children>
+                    </report>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

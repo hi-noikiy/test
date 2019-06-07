@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<config>
+
+    <menu>
+        <sales>
+            <children>
+                <gearup_countdown_dailydeal translate="title" module="gearup_countdown">
+                    <sort_order>50</sort_order>
+                    <title>Daily Deal</title>
+                    <action>adminhtml/dailydeal</action>
+                </gearup_countdown_dailydeal>
+            </children>
+        </sales>
+    </menu>
+
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <sales>
+                        <children>
+                            <gearup_countdown_dailydeal>
+                                <title>Daily Deal</title>
+                            </gearup_countdown_dailydeal>
+                        </children>
+                    </sales>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    
+</config>

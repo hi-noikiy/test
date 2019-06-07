@@ -1,0 +1,3 @@
+<?php /* added automatically by conflict fixing tool */ if (Mage::getConfig()->getNode('modules/MageWorkshop_DetailedReview/active')) {
+            class MageWorx_SeoBase_Block_Review_Product_View_List_Amasty_Pure extends MageWorkshop_DetailedReview_Block_Product_View_List {}
+        } else { class MageWorx_SeoBase_Block_Review_Product_View_List_Amasty_Pure extends Mage_Review_Block_Product_View_List {} } ?>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <sections>
+        <rewardssocial translate="label" module="rewardssocial">
+            <label>Social Networks Settings</label>
+            <tab>mstcore</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <facebook>
+                    <label>Facebook Settings</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>10</sort_order>
+                    <!-- <frontend_model>mstcore/system_config_form_fieldset</frontend_model> -->
+                    <fields>
+                        <is_active translate="label">
+                            <label>Show Facebook Like button</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>
+                        <app_id translate="label">
+                            <label>Facebook App ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>
+                            <![CDATA[To receive App ID, please, create an application here https://developers.facebook.com/apps]]>
+                            </comment>
+                        </app_id>
+                        <app_version translate="label">
+                            <label>Facebook API Version</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>
+                            <![CDATA[You can find API Version in settings of your application, for more details please read https://developers.facebook.com/docs/apps/versions]]>
+                            </comment>
+                        </app_version>
+                    </fields>
+                </facebook>
+                <twitter>
+                    <label>Twitter Settings</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>20</sort_order>
+                    <!-- <frontend_model>mstcore/system_config_form_fieldset</frontend_model> -->
+                    <fields>
+                        <is_active translate="label">
+                            <label>Show Twitter Follow button</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>
+                        <consumer_key>
+                            <label>Twitter Consumer Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Create a twitter app via <a href="https://apps.twitter.com" target="_blank">https://apps.twitter.com/</a>. In Application Settings you’ll find a Consumer Key]]></comment>
+                        </consumer_key>
+                        <consumer_secret>
+                            <label>Twitter Consumer Secret</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Create a twitter app via <a href="https://apps.twitter.com" target="_blank">https://apps.twitter.com/</a>. In Application Settings you’ll find a Consumer Secret]]></comment>
+                        </consumer_secret>
+                    </fields>
+                </twitter>
+                <googleplus>
+                    <label>Google Plus Settings</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>30</sort_order>
+                    <!-- <frontend_model>mstcore/system_config_form_fieldset</frontend_model> -->
+                    <fields>
+                        <is_active translate="label">
+                            <label>Show Google Plus +1 button</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>
+                    </fields>
+                </googleplus>
+                <pinterest>
+                    <label>Pinterest Settings</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>40</sort_order>
+                    <!-- <frontend_model>mstcore/system_config_form_fieldset</frontend_model> -->
+                    <fields>
+                        <is_active translate="label">
+                            <label>Show Pinterest pin button</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>
+                    </fields>
+                </pinterest>
+                <refer>
+                    <label>Refer Friend Settings</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>50</sort_order>
+                    <!-- <frontend_model>mstcore/system_config_form_fieldset</frontend_model> -->
+                    <fields>
+                        <is_active translate="label">
+                            <label>Show Refer Friends button</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>
+                        <default_message translate="label">
+                            <label>Default message for link share</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </default_message>
+                    </fields>
+                </refer>
+                <display>
+                    <label>Display Settings</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>60</sort_order>
+                    <fields>
+                        <show_buttons_on_category_page translate="label">
+                            <label>Show Social Buttons block on category page</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_buttons_on_category_page>
+                        <assign_buttons_to_block translate="label">
+                            <label>Paths of templates to add Social block before</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[You may use this option to add/move Social Buttons block before any block on your product page. <br>
+                                To find out needed template file's paths to put into the field of this configuration option -
+                                please enable <b>"Template Hints"</b> in <i>System > Configuration > Advanced > Developer > Debug > Template Path Hints</i>
+                                to see the path on the frontend.<br>
+                                "product.info" block is used by default]]>
+                            </comment>
+                        </assign_buttons_to_block>
+                    </fields>
+                </display>
+            </groups>
+        </rewardssocial>
+    </sections>
+</config>

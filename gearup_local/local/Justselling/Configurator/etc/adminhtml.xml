@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config>
+		<acl>
+			<resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <productconfigurator translate="title" module="configurator">
+                                            <title>Product Configurator</title>
+                                        </productconfigurator>
+                                        <fileuploader translate="title" module="configurator">
+                                            <title>Product Configurator File Uploads</title>
+                                        </fileuploader>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+			</resources>
+		</acl>
+</config>

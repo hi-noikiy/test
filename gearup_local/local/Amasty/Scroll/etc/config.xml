@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Scroll
+ */
+-->
+<config>
+    <modules>
+        <Amasty_Scroll>
+            <version>1.0.28</version>
+        </Amasty_Scroll>
+    </modules>
+    <global>
+        <models>
+            <amscroll>
+                <class>Amasty_Scroll_Model</class>
+                <resourceModel>amscroll_mysql4</resourceModel>
+            </amscroll>
+        </models>
+        <resources>
+            <amscroll_setup>
+                <setup>
+                    <module>Amasty_Scroll</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </amscroll_setup>
+            <amscroll_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </amscroll_write>
+            <amscroll_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </amscroll_read>
+        </resources>
+        <helpers>
+            <amscroll>
+                <class>Amasty_Scroll_Helper</class>
+            </amscroll>
+        </helpers>
+        <blocks>
+            <amscroll>
+                <class>Amasty_Scroll_Block</class>
+            </amscroll>
+
+            <configurableswatches>
+                <rewrite>
+                    <catalog_media_js_list>Amasty_Scroll_Block_Catalog_Media_Js_List</catalog_media_js_list>
+                </rewrite>
+            </configurableswatches>
+        </blocks>
+    </global>
+
+    <frontend>
+        <layout>
+            <updates>
+                <amscroll>
+                    <file>amasty/amscroll.xml</file>
+                </amscroll>
+            </updates>
+        </layout>
+        <events>
+            <controller_action_layout_render_before_catalog_category_view>
+                <observers>
+                    <amscroll>
+                        <type>singleton</type>
+                        <class>amscroll/observer</class>
+                        <method>handleLayoutRender</method>
+                    </amscroll>
+                </observers>
+            </controller_action_layout_render_before_catalog_category_view>
+            <controller_action_layout_render_before_catalogsearch_result_index>
+                <observers>
+                    <amscroll>
+                        <type>singleton</type>
+                        <class>amscroll/observer</class>
+                        <method>handleLayoutRender</method>
+                    </amscroll>
+                </observers>
+            </controller_action_layout_render_before_catalogsearch_result_index>
+            <controller_action_layout_render_before_catalogsearch_advanced_result>
+                <observers>
+                    <amscroll>
+                        <type>singleton</type>
+                        <class>amscroll/observer</class>
+                        <method>handleLayoutRender</method>
+                    </amscroll>
+                </observers>
+            </controller_action_layout_render_before_catalogsearch_advanced_result>
+            <controller_action_layout_render_before_amshopby_index_index>
+                <observers>
+                    <amscroll>
+                        <type>singleton</type>
+                        <class>amscroll/observer</class>
+                        <method>handleLayoutRender</method>
+                    </amscroll>
+                </observers>
+            </controller_action_layout_render_before_amshopby_index_index>
+            <controller_action_layout_render_before_amlanding_page_view>
+                <observers>
+                    <amscroll>
+                        <type>singleton</type>
+                        <class>amscroll/observer</class>
+                        <method>handleLayoutRender</method>
+                    </amscroll>
+                </observers>
+            </controller_action_layout_render_before_amlanding_page_view>
+        </events>
+        <translate>
+            <modules>
+                <Amasty_Scroll>
+                    <files>
+                        <default>Amasty_Scroll.csv</default>
+                    </files>
+                </Amasty_Scroll>
+            </modules>
+        </translate>
+    </frontend>
+    <adminhtml>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <amscroll>
+                            <title>Ajax Scroll</title>
+                            <sort_order>10</sort_order>
+                        </amscroll>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+    <default>
+        <amscroll>
+            <general>
+                <loading><![CDATA[auto]]></loading>
+                <page_numbers>0</page_numbers>
+                <remove_hash>0</remove_hash>
+                <loading_icon><![CDATA[images/amscroll-scroll.gif]]></loading_icon>
+            </general>
+            <button>
+                <label><![CDATA[Load next]]></label>
+                <styles><![CDATA[background: #3A4F62;]]></styles>
+            </button>
+            <info>
+                <enabled><![CDATA[1]]></enabled>
+                <background><![CDATA[#3A4F62]]></background>
+                <offset><![CDATA[left: 50%;margin-left: -80px; bottom: 1%;z-index: 99999;]]></offset>
+                <width><![CDATA[194px]]></width>
+            </info>
+            <advanced>
+                <product_container_group>div.category-products</product_container_group>
+                <product_container>ul.products-grid, ol.products-list</product_container>
+                <toolbar>div.toolbar</toolbar>
+                <toolbar_bottom>div.toolbar-bottom</toolbar_bottom>
+                <pager>div.pager</pager>
+            </advanced>
+        </amscroll>
+    </default>
+</config>

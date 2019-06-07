@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Gearup_EMI extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Gearup
+ * @package        Gearup_EMI
+ * @copyright      Copyright (c) 2018
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<widgets>
+    <emi_banks_view type="gearup_emi/banks_widget_view" translate="name description" module="gearup_emi">
+        <name>Bank view</name>
+        <description>Bank view widget</description>
+        <is_email_compatible>0</is_email_compatible>
+        <parameters>
+            <banks_id type="complex" translate="label">
+                <visible>1</visible>
+                <required>1</required>
+                <label>Bank</label>
+                <type>label</type>
+                <helper_block>
+                    <type>gearup_emi/adminhtml_banks_widget_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Select Bank</open>
+                        </button>
+                    </data>
+                </helper_block>
+                <sort_order>120</sort_order>
+            </banks_id>
+        </parameters>
+    </emi_banks_view>
+    <emi_banks_link type="gearup_emi/banks_widget_link" translate="name description" module="gearup_emi">
+        <name>Bank link</name>
+        <description>Bank link widget</description>
+        <is_email_compatible>0</is_email_compatible>
+        <parameters>
+            <banks_id type="complex" translate="label">
+                <visible>1</visible>
+                <required>1</required>
+                <label>Bank</label>
+                <type>label</type>
+                <helper_block>
+                    <type>gearup_emi/adminhtml_banks_widget_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Select Bank</open>
+                        </button>
+                    </data>
+                </helper_block>
+                <sort_order>130</sort_order>
+            </banks_id>
+        </parameters>
+    </emi_banks_link>
+</widgets>

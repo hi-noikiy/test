@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Gearup_EMI extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Gearup
+ * @package        Gearup_EMI
+ * @copyright      Copyright (c) 2018
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <gearup_emi translate="title" module="gearup_emi">
+                                        <title>Installments</title>
+                                    </gearup_emi>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <gearup_emi translate="title" module="gearup_emi">
+                        <title>Installments</title>
+                        <children>
+                            <banks translate="title" module="gearup_emi">
+                                <title>Bank</title>
+                                <sort_order>0</sort_order>
+                            </banks>
+                        </children>
+                    </gearup_emi>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <menu>
+        <gearup_emi translate="title" module="gearup_emi">
+            <title>Installments</title>
+            <sort_order>999999</sort_order>
+            <children>
+                <banks translate="title" module="gearup_emi">
+                    <title>Banks Manager</title>
+                    <action>adminhtml/emi_banks</action>
+                    <sort_order>0</sort_order>
+                </banks>
+            </children>
+        </gearup_emi>
+    </menu>
+</config>

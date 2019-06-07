@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+    <name>MageWorkshop_DRCategoryRatings</name>
+    <version>1.0.0</version>
+    <stability>stable</stability>
+    <license>GPL</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Detailed Review - CategoryRatings. DO NOT UNINSTALL EXTENSION HERE. Go to extension configuration and uninstall&#xD;
+      it by clicking "Uninstall" button.</summary>
+    <description>Detailed Review  Ratings for Category</description>
+    <notes>Detailed Review Ratings for Category</notes>
+    <authors><author><name>Default Value</name><user>DV</user><email>info@mage-review.com</email></author></authors>
+    <date>2017-10-24</date>
+    <time>07:22:46</time>
+    <contents><target name="magelocal"><dir name="MageWorkshop"><dir name="DRCategoryRatings"><dir name="Block"><dir name="Adminhtml"><dir name="Review"><dir name="Rating"><file name="Detailed.php" hash="8297cac9b12a2cc6b70d77cfab515244"/></dir></dir></dir><dir name="Review"><dir name="Form"><file name="Rating.php" hash="c52640d739075bfd525c38ef3b942f8d"/></dir></dir></dir><dir name="Helper"><file name="Data.php" hash="ab2716b885c4d6e5505fb8da46aa4464"/></dir><dir name="Model"><file name="Observer.php" hash="466eda2b5f79af779c461109c4e8aa4c"/><file name="Rating.php" hash="2dbd77e8dfa5fb0fe59460bd5a83103e"/><file name="Uninstall.php" hash="93cc413dadd32087d696e86458f1bd54"/></dir><dir name="data"><dir name="drcategoryratings_setup"><file name="data-install-1.0.0.php" hash="45389833109106179da70171b8f42593"/></dir></dir><dir name="etc"><file name="MageWorkshop_DRCategoryRatings.xml" hash="d4894246b9fb88e311fc2f193be61b42"/><file name="adminhtml.xml" hash="b46320b7ae700ffa176deaf024a242be"/><file name="config.xml" hash="ccf1d1e4f0917f1d47167f5338a9c583"/><file name="system.xml" hash="b8bc03dd286bf94d55d84faaf7077756"/></dir><dir name="sql"><dir name="drcategoryratings_setup"><file name="install-1.0.0.php" hash="4f023d181b99a1f510b57e56008e71dd"/></dir></dir></dir></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><dir name="mageworkshop"><file name="drcategoryratings.xml" hash="17498bb37f02e37706f1be92c301acd3"/></dir></dir></dir></dir></dir></target><target name="magelocale"><dir name="en_US"><file name="MageWorkshop_DRCategoryRatings.csv" hash="e0b50c8da22ffa2323659cfd1bdd4567"/></dir></target><target name="mageetc"><dir name="modules"><file name="MageWorkshop_DRCategoryRatings.xml" hash="70bf2360de1b451766dbaa81b7cb2910"/></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.3.0</min><max>7.0.0</max></php><package><name>MageWorkshop_Core</name><channel>community</channel><min/><max/></package><package><name>MageWorkshop_DetailedReview</name><channel>community</channel><min/><max/></package></required></dependencies>
+</package>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<jstranslator>
+    <deactivatefrom translate="message" module="configurator">
+        <message>deactivate from:</message>
+    </deactivatefrom>
+    <nexttest translate="message" module="configurator">
+        <message>next</message>
+    </nexttest>
+    <minvalue translate="message" module="configurator">
+        <message>Input must be at least %s</message>
+    </minvalue>
+    <maxvalidate translate="message" module="configurator">
+        <message>Input must be less than %s</message>
+    </maxvalidate>
+</jstranslator>

@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <gearup_bannerwidget translate="label" module="bannerwidget">
+            <label>Top Banner Widget</label>
+            <sort_order>200</sort_order>
+        </gearup_bannerwidget>
+    </tabs>
+    <sections>
+        <bannerwidget translate="label" module="bannerwidget">
+            <label>Banner widget settings</label>
+            <tab>gearup_bannerwidget</tab>
+            <sort_order>1610</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label" module="bannerwidget">
+                    <label>General settings</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable translate="label comment" module="bannerwidget">
+                            <label>Enable Banner Widgets</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <default>1</default>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+                        <widgetid translate="label comment" module="bannerwidget">
+                            <label>Select Top Banner Widget</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>bannerwidget/system_config_source_widgetlist</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </widgetid>
+                        <leftbannerwidgetid translate="label comment" module="bannerwidget">
+                            <label>Select Left Banner Widget</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>bannerwidget/system_config_source_widgetlist</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </leftbannerwidgetid>
+                        <rightbannerwidgetid translate="label comment" module="bannerwidget">
+                            <label>Select Right Banner Widget</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>bannerwidget/system_config_source_widgetlist</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </rightbannerwidgetid>
+                        <enablesticky translate="label comment" module="bannerwidget">
+                            <label>Enable Sticky Banner</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enablesticky>
+                    </fields>
+                </general>
+            </groups>
+        </bannerwidget>
+    </sections>
+</config>

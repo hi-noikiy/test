@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+    <modules>
+        <Hatimeria_WkHtmlToPdf>
+            <version>0.1.0</version>
+        </Hatimeria_WkHtmlToPdf>
+    </modules>
+
+    <frontend>
+        <routers>
+            <hwkhtmltopdf>
+                <use>standard</use>
+                <args>
+                    <module>Hatimeria_WkHtmlToPdf</module>
+                    <frontName>hwkhtmltopdf</frontName>
+                </args>
+            </hwkhtmltopdf>
+        </routers>
+
+        <layout>
+            <updates>
+                <hwkhtmltopdf>
+                    <file>hwkhtmltopdf.xml</file>
+                </hwkhtmltopdf>
+            </updates>
+        </layout>
+    </frontend>
+
+    <global>
+        <helpers>
+            <hwkhtmltopdf>
+                <class>Hatimeria_WkHtmlToPdf_Helper</class>
+            </hwkhtmltopdf>
+        </helpers>
+
+        <blocks>
+            <hwkhtmltopdf>
+                <class>Hatimeria_WkHtmlToPdf_Block</class>
+            </hwkhtmltopdf>
+            <sales>
+                <rewrite>
+                    <order_invoice_items>Hatimeria_WkHtmlToPdf_Block_Order_Invoice_Items</order_invoice_items>
+                </rewrite>
+            </sales>
+        </blocks>
+
+        <models>
+            <hwkhtmltopdf>
+                <class>Hatimeria_WkHtmlToPdf_Model</class>
+            </hwkhtmltopdf>
+        </models>
+
+    </global>
+</config>
