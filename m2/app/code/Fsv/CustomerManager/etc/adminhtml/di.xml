@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Fsv_CustomerManager
+ *
+ * @category    Fsv
+ * @package     Fsv_CustomerManager
+ * @author      Sergey Fedosimov <sfedosimov@gmail.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Customer\Model\EmailNotificationInterface">
+        <plugin name="fsv_customer_manager_email_note_around"
+                type="Fsv\CustomerManager\Plugin\Customer\Model\EmailNotification"/>
+    </type>
+    <type name="Magento\Customer\Controller\Adminhtml\Index\Save">
+        <plugin name="fsv_customer_manager_save_around"
+                type="Fsv\CustomerManager\Plugin\Customer\Controller\Adminhtml\Index\Save"/>
+    </type>
+</config>

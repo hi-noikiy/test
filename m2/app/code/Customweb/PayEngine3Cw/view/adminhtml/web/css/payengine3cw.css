@@ -1,0 +1,111 @@
+.payengine3cw-payment-information-block {
+	margin: 0 0 3rem;
+}
+
+.payengine3cw-transaction-payment-information-block {
+	margin: 3rem 0;
+	background-color: #f1f1f1;
+	padding: 1rem;
+}
+
+.payengine3cw-transaction-information .tooltip,
+.payengine3cw-payment-information-block .tooltip {
+	float: right;
+}
+
+@media (min-width: 768px) {
+	.payengine3cw-transaction-information,
+	.payengine3cw-transaction-captures {
+		float: left;
+		width: calc( (100%) * .5 - 30px );
+	}
+	
+	.payengine3cw-transaction-history,
+	.payengine3cw-transaction-refunds {
+		float: right;
+		width: calc( (100%) * .5 - 30px );
+	}
+}
+
+.payengine3cw_form .admin__field .note,
+.payengine3cw_form .admin__field div.mage-error {
+	clear: both;
+	padding: 5px 0;
+	margin-left: calc( (100%) * .33333333 + 30px );	
+}
+.payengine3cw_form .admin__field .note {
+	font-size: 12px;
+	color: #303030;
+}
+.payengine3cw_form .admin__field div.mage-error,
+.payengine3cw_form td.value div.mage-error {
+	font-size: 12px;
+	color: #e02b27;
+}
+
+.payengine3cw_form .html-field {
+	line-height: 3.2rem;
+}
+
+.payengine3cw_form .multi-control:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.payengine3cw_form .multi-control > div > div {
+	width: auto;
+	float: left;
+	margin-right: 5px;
+	margin-top: 0;
+}
+
+
+/*** CHECKOUT ***/
+
+.payengine3cw_form .card-number .multi-control > div > div {
+	width: 100%;
+	float: none;
+	margin: 0;
+}
+
+.payengine3cw_form .card-brand-image-color.brand-is-deselected {
+	display:none;
+}
+
+.payengine3cw_form .card-brand-image-grey.brand-is-selected {
+	display:none;
+}
+
+.payengine3cw_form .card-brand-image-selection {
+	margin-top: 5px;
+}
+
+.payengine3cw_form .card-brand-image-selection img {
+	width:auto;
+	height: 20px;
+	margin-right: 3px;
+	vertical-align: middle;
+}
+
+.payengine3cw_form .invalid-card-number,
+.payengine3cw_form .invalid-cvc-number {
+	border-color: #ed8380;
+	background-image: url(../images/invalid.png) !important;
+	background-position: right 5px center;
+	background-repeat: no-repeat !important;
+}
+
+.payengine3cw_form .valid-card-number,
+.payengine3cw_form .valid-cvc-number {
+	background-image: url(../images/valid.png) !important;
+	background-position: right 5px center;
+	background-repeat: no-repeat !important;
+}
+
+.payengine3cw_form .alias select {
+	width: 100%;
+}
+
+.payengine3cw_form .alias select option:empty {
+	display: block;
+}

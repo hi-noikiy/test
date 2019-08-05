@@ -1,0 +1,192 @@
+<?php //echo '<pre />'; print_r($this->Setup()); 
+$data = $block->Setup();
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance(); 
+$FormKey = $objectManager->get('Magento\Framework\Data\Form\FormKey'); 
+$store = $objectManager->get('Magento\Store\Model\StoreManagerInterface'); 
+ 
+?>
+
+<form id="salesreport_form" method="post" action="<?php echo $block->getFormUrl() ?>" data-mage-init='{"validation":{}}'>
+    <input name="form_key" type="hidden" value="<?php echo $block->Formkey();?>">
+    <input id="storeswitcher" name="store_switcher" type="hidden" value="">
+    <?php //echo $this->getChildHtml('store_switcher');?>
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head head-payment-method"><?php echo __('Select start') ?></h4>
+        </div>
+        <fieldset>
+            <div><label><?php echo __('Start Date') ?></label>
+                    <?php 
+                 $html = '<input type="text" id="start_date" name="start_date" value="'.$data['start_date'].'" class="admin__control-text input-text valid-date required-entry validate-date-range date-range-start_date-from">';
+                 $html .= '<script type="text/javascript">
+                        require([
+                        "jquery",
+                        "mage/calendar"
+                      ], function ( $ ) {
+                        $("#start_date").calendar({
+                            dateFormat: "d-M-yy",
+                            showsTime: false,
+                            maxDate: "0d",
+                            sideBySide: true,
+                            closeText: "Done",
+                            selectOtherMonths: true, 
+                        });
+                      });
+                        
+
+                    </script>';
+                    echo $html; ?>
+                </div><div><label><?php echo __('End Date') ?></label>
+                    <?php 
+                 $html = '<input type="text" id="end_date" name="end_date" value="'.$data['end_date'].'" class="admin__control-text input-text valid-date required-entry">';
+                 $html .= '<script type="text/javascript">
+                        require([
+                        "jquery",
+                        "mage/calendar"
+                      ], function ( $ ) {
+                        $("#end_date").calendar({
+                            dateFormat: "d-M-yy",
+                            showsTime: false,
+                            maxDate: "0d",
+                            sideBySide: true,
+                            closeText: "Done",
+                            selectOtherMonths: true, 
+                        });
+                        });
+                    </script>';
+                    echo $html; ?>
+                </div>
+                
+            </fieldset>
+        </div>
+    
+    <div class="clear"></div>
+    
+    <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-payment-method"><?php echo __('Compare to') ?></h4>
+                
+            </div>
+            <fieldset>
+                <div><label><?php echo __('Start Date') ?></label>
+                    <?php 
+                 $html = '<input type="text" id="c_start_date" name="c_start_date" value="'.$data['c_start_date'].'" class="admin__control-text input-text valid-date">';
+                 $html .= '<script type="text/javascript">
+                     require([
+                        "jquery",
+                        "mage/calendar"
+                      ], function ( $ ) {
+                        $("#c_start_date").calendar({
+                            dateFormat: "d-M-yy",
+                            showsTime: false,
+                            maxDate: "0d",
+                            sideBySide: true,
+                            closeText: "Done",
+                            selectOtherMonths: true, 
+                        });
+                      });
+                    </script>';
+                    echo $html; ?>
+                </div><div><label><?php echo __('End Date') ?></label>
+                    <?php 
+                 $html = '<input type="text" id="c_end_date" name="c_end_date" value="'.$data['c_end_date'].'" class="admin__control-text input-text valid-date ">';
+                 $html .= '<script type="text/javascript">
+                        require([
+                        "jquery",
+                        "mage/calendar"
+                      ], function ( $ ) {
+                        $("#c_end_date").calendar({
+                            dateFormat: "d-M-yy",
+                            showsTime: false,
+                            maxDate: "0d",
+                            sideBySide: true,
+                            closeText: "Done",
+                            selectOtherMonths: true, 
+                        });
+                      });
+                    </script>';
+                    echo $html; ?>
+                </div>
+                
+            </fieldset>
+        </div>
+    
+     <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head head-payment-method"><?php echo __('Sales representative') ?></h4>
+        </div>
+         
+        <fieldset>
+          <?php  $admins = $block->salesrepresentative();//LucidPath_SalesRep_Model_Source_UsersList::toOptionArray(); ?>
+            <div> <label><?php echo __('Select Sr') ?></label>
+                <select name="sr[]" class="validate-select" style="width: 175px;">
+                    <?php foreach($admins as $a) { $tm = 0;
+                        if($a['value']==0){$a['value']='';}
+                        if(isset($data['sr'])){
+                            foreach($data['sr'] as $d){
+                                if($d==$a['value']) {
+                                    echo '<option value="'.$a['value'].'" selected="selected">'.$a['label'].'</option>';
+                                    $tm++;
+                                }
+                            } 
+                        }   if($tm==0){    
+                            echo '<option value="'.$a['value'].'">'.$a['label'].'</option>';
+                          }    
+                            
+                    } ?>
+                    
+                </select>
+            </div>
+        </fieldset> 
+       </div>
+ 
+ 
+     <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head head-payment-method"><?php echo __('Order status') ?></h4>
+        </div>
+         
+        <fieldset>
+            <?php $status = $block->Orderstatus(); ?>
+            <div> <label><?php echo __('Pick order status') ?></label>
+                <select name="order_status[]" class="validate-select" multiple>
+                    <?php foreach($status as $s) { $to = 0;
+                        if(isset($data['order_status'])){
+                            foreach($data['order_status'] as $dos){
+                                if($dos==$s['value']) {
+                                    echo '<option value="'.$s['value'].'" selected="selected">'.$s['label'].'</option>';
+                                    $to++;
+                                } 
+                            }
+                        }    if($to==0) {    
+                            echo '<option value="'.$s['value'].'">'.$s['label'].'</option>';
+                        }    
+                    } ?>
+                </select>
+            </div>
+        </fieldset> 
+       </div>
+<!--    <input type="submit" name="submit">-->
+    <button id="sales_submit" title="Generate report" type="button" class="scalable " onclick="salesFormSubmit()" ><span><span><span><?php echo __('Generate report') ?> </span></span></span></button>
+    
+</form>
+
+<script type="text/javascript">
+ require([
+    'jquery',
+    'mage/validation/validation',
+    "prototype"
+], function(jQuery){
+
+//<![CDATA[
+    jQuery('#storeswitcher').val (jQuery('#store_switcher').val());
+    jQuery('#salesreport_form').mage('validation', {});
+    function salesFormSubmit() {
+        if (jQuery('#salesreport_form').valid()) {
+            jQuery('#salesreport_form').submit();
+        }
+    }
+//]]>
+    window.salesFormSubmit = salesFormSubmit;
+});   
+</script>

@@ -1,0 +1,98 @@
+<?php
+$isOpenPopup = $block->isSubscribed();
+if ($isOpenPopup == 1) {
+    ?>
+    <div id="newslatter-popup" class="newslatter-content" style="display:none;">
+        <div class="newslatter-title">
+            <center>
+                <img style="margin-top:20px; margin-bottom: 5px;" alt="Vape" src="<?php echo $block->getViewFileUrl('Ktpl_Newsletterpopup::images/email_popup_5.jpg') ?>"/>
+            </center>
+        </div>
+        <div class="newslatter-offer">
+            <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('newslatter-offer')->toHtml(); ?> 
+        </div>
+        <div class="block newsletter">
+            <div class="content">
+                <form class="form subscribe"
+                      novalidate
+                      method="post"
+                      data-mage-init='{"validation": {"errorClass": "mage-error"}}'
+                      id="newsletter-validate-detail.popup" action="https://vaporizera-theprobe.com/signup.ashx">
+                    <div> 
+                        <center>
+                            <label class="label" for="newsletter"><span><?php /* @escapeNotVerified */ echo __('Sign Up for Our Newsletter:') ?></span></label>
+                            <div>
+                                <input class="text" name="cd_FIRSTNAME" placeholder="Name" type="text">
+                                <input name="email" type="email" id="newsletter"
+                                       placeholder="<?php /* @escapeNotVerified */ echo __('Your email address') ?>"
+                                       data-validate="{required:true, 'validate-email':true}"/>
+                            </div>
+                        </center>
+                    </div> 
+
+                    <div>
+                        <center>
+                            <button class="action subscribe primary" title="<?php /* @escapeNotVerified */ echo __('GET MY DISCOUNT') ?>" type="submit">
+                                <span><?php /* @escapeNotVerified */ echo __('GET MY DISCOUNT') ?></span>
+                            </button>
+                        </center>        
+                    </div>
+
+                        <!--
+                    <p class="agretext1">
+                        <input class="agreetext1" name="Agreement" value="agree" type="checkbox"> Yea man! Hook me up with sweet deals, top secret updates and wicked vapin' tips. I know I can withdraw my consent at anytime. If I need more details, I'll just check TVape's <a href="//torontovaporizer.ca/privacy-policy" target="blank">Privacy Policy</a> or <a href="//torontovaporizer.ca/contact-us" target="blank">Contact</a> them.
+                    </p>
+                        -->
+                        <?php
+                            echo $this->getChildHtml('newsletterfooter');
+                        ?>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        require(
+                [
+                    'jquery',
+                    'Magento_Ui/js/modal/modal',
+                    "mage/cookies",
+                    'domReady!'
+                ],
+                function (
+                        $,
+                        modal
+                        ) {
+                    var flag = true;
+                    var popupcoockies = $.mage.cookies.get("newslatterpopup");
+                    $(window).scroll();
+                    $(window).scroll(function (event) {
+                        var scroll = $(window).scrollTop();
+                        
+                        var options = {
+                            type: 'popup',
+                            modalClass: 'newslatter-popup-box',
+                            responsive: true,
+                            innerScroll: true,
+                            clickableOverlay: true,
+                            title: false,
+                            buttons: false
+                        };
+                    var verpage_valid = $.mage.cookies.get("verpage_valid");
+                    if (popupcoockies == null && scroll >= $('.columns').offset().top && flag == true && verpage_valid != null ) {
+                        flag = false;
+                        setTimeout(function () {
+                            /* var exdays=1; 
+                             var d = new Date();
+                             d.setTime(d.getTime() + (exdays*24*60*60*1000));
+                             var cookieExpires =d.toUTCString();  */
+                            var cookieExpires = new Date(new Date().getTime() + 86400);
+                            $.mage.cookies.set('newslatterpopup', 'Yes', {visited: true, path: '/', expires: cookieExpires});
+                            var popup = modal(options, $('#newslatter-popup'));
+                            $('#newslatter-popup').modal('openModal');
+                        }, 1000);
+                    }
+                });
+            });
+    </script>
+<?php } ?>

@@ -1,0 +1,17 @@
+<!--@subject {{trans "Your Store Credit balance has been updated"}} @-->
+<!--@vars {
+"template config_path=\"design\/email\/footer_template\"":"Email Footer Template",
+"template config_path=\"design\/email\/header_template\"":"Email Header Template"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<p class="greeting">Hello, {{var customer_name}}</p>
+<p>Your Store Credit balance at <a href="{{var store_url}}">{{var store_name|escape}}</a> has been updated:</p>
+{{depend comment}}
+    <p>{{var comment}}</p>
+{{/depend}}
+<p>Your current Store Credit balance is {{var balance}}</p>
+<p>Click here to <a href="{{var unsubscribe_url}}">unsubscribe</a></p>
+
+{{template config_path="design/email/footer_template"}}

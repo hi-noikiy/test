@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Collins Harper. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="CollinsHarper\CanadaPost\Api\Data\ManifestInterface" type="CollinsHarper\CanadaPost\Model\Manifest" />
+
+<!--
+    <type name="CollinsHarper\CanadaPost\Model\ResourceModel\Shipment\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_shipment</argument>
+            <argument name="resourceModel" xsi:type="string">CollinsHarper\CanadaPost\Model\ResourceModel\Shipment</argument>
+        </arguments>
+    </type> -->
+
+    <virtualType name="CollinsHarper\CanadaPost\Model\ResourceModel\Shipment\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <!-- <virtualType name="CollinsHarper\CanadaPost\Model\ResourceModel\Shipment\Grid\Collection" type="CollinsHarper\CanadaPost\Model\ResourceModel\Shipment\Grid\Collectiong">
+            <virtualType name="CollinsHarper\CanadaPost\Model\ResourceModel\Shipment\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+             <virtualType name="ShipmentGridAggregator" type="Magento\Sales\Model\ResourceModel\Grid"> -->
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_shipment</argument>
+            <argument name="resourceModel" xsi:type="string">CollinsHarper\CanadaPost\Model\ResourceModel\Shipment</argument>
+            <argument name="gridTableName" xsi:type="string">sales_shipment_grid</argument>
+            <argument name="orderIdField" xsi:type="string">sales_shipment.order_id</argument>
+            <argument name="joins" xsi:type="array">
+                <item name="sales_order" xsi:type="array">
+                    <item name="table" xsi:type="string">sales_order</item>
+                    <item name="origin_column" xsi:type="string">order_id</item>
+                    <item name="target_column" xsi:type="string">entity_id</item>
+                </item>
+                <item name="sales_shipping_address" xsi:type="array">
+                    <item name="table" xsi:type="string">sales_order_address</item>
+                    <item name="origin_column" xsi:type="string">shipping_address_id</item>
+                    <item name="target_column" xsi:type="string">entity_id</item>
+                </item>
+                <item name="sales_billing_address" xsi:type="array">
+                    <item name="table" xsi:type="string">sales_order_address</item>
+                    <item name="origin_column" xsi:type="string">billing_address_id</item>
+                    <item name="target_column" xsi:type="string">entity_id</item>
+                </item>
+                <item name="sales_order_payment" xsi:type="array">
+                    <item name="table" xsi:type="string">sales_order_payment</item>
+                    <item name="origin_column" xsi:type="string">order_id</item>
+                    <item name="target_column" xsi:type="string">parent_id</item>
+                </item>
+            </argument>
+            <argument name="columns" xsi:type="array">
+                <item name="entity_id" xsi:type="string">sales_shipment.entity_id</item>
+                <item name="increment_id" xsi:type="string">sales_shipment.increment_id</item>
+                <item name="store_id" xsi:type="string">sales_shipment.store_id</item>
+                <item name="order_increment_id" xsi:type="string">sales_order.increment_id</item>
+                <item name="order_created_at" xsi:type="string">sales_order.created_at</item>
+                <item name="customer_name" xsi:type="object">CustomerNameAggregator</item>
+                <item name="total_qty" xsi:type="string">sales_shipment.total_qty</item>
+                <item name="shipment_status" xsi:type="string">sales_shipment.shipment_status</item>
+                <item name="order_status" xsi:type="string">sales_order.status</item>
+                <item name="billing_address" xsi:type="object">BillingAddressAggregator</item>
+                <item name="shipping_address" xsi:type="object">ShippingAddressAggregator</item>
+                <item name="billing_name" xsi:type="object">BillingNameAggregator</item>
+                <item name="shipping_name" xsi:type="object">ShippingNameAggregator</item>
+                <item name="customer_email" xsi:type="string">sales_order.customer_email</item>
+                <item name="customer_group_id" xsi:type="string">sales_order.customer_group_id</item>
+                <item name="payment_method" xsi:type="string">sales_order_payment.method</item>
+                <item name="created_at" xsi:type="string">sales_shipment.created_at</item>
+                <item name="updated_at" xsi:type="string">sales_shipment.updated_at</item>
+                <item name="order_id" xsi:type="string">sales_shipment.order_id</item>
+                <item name="shipping_information" xsi:type="string">sales_order.shipping_description</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!--
+    <virtualType name="CpShipmentGridAggregator" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ch_canadapost_shipment</argument>
+            <argument name="resourceModel" xsi:type="string">CollinsHarper\CanadaPost\Model\ResourceModel\Shipment</argument>
+        </arguments>
+    </virtualType>
+    -->
+
+
+    <virtualType name="CollinsHarper\CanadaPost\Model\ResourceModel\Manifest\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ch_canadapost_manifest</argument>
+            <argument name="resourceModel" xsi:type="string">CollinsHarper\CanadaPost\Model\ResourceModel\Manifest</argument>
+        </arguments>
+    </virtualType>
+
+
+    <virtualType name="ManifestGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="CpShipmentGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+
+    <virtualType name="ManifestGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">CollinsHarper\CanadaPost\Model\ResourceModel\Manifest\Grid\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">ManifestGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+
+    <virtualType name="CpShipmentsGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">CollinsHarper\CanadaPost\Model\ResourceModel\Shipment\Grid\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">CpShipmentGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="manifest_listing_data_source" xsi:type="string">CollinsHarper\CanadaPost\Model\ResourceModel\Manifest\Grid\Collection</item>
+                <item name="cpshipments_listing_data_source" xsi:type="string">CollinsHarper\CanadaPost\Model\ResourceModel\Shipment\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+
+</config>

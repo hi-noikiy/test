@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_AffiliateplusProgram
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+  <!--Add column "Program Name" into Banner Grid-->
+  <event name="affiliateplus_adminhtml_add_column_banner_grid">
+    <observer name="affiliateplus_adminhtml_add_column_banner_grid" instance="Magestore\Affiliateplusprogram\Observer\Adminhtml\AddColumnBannerGrid" shared="false" />
+  </event>
+  <!--Add field "Program Name" into Banner Form-->
+  <event name="affiliateplus_adminhtml_add_field_banner_form">
+    <observer name="affiliateplus_adminhtml_add_field_banner_form" instance="Magestore\Affiliateplusprogram\Observer\Adminhtml\AddFieldBannerForm" shared="false" />
+  </event>
+  <!--Get transaction data-->
+  <event name="affiliateplus_program_transaction_data">
+    <observer name="affiliateplus_program_transaction_data" instance="Magestore\Affiliateplusprogram\Observer\Adminhtml\GetProgramTransactionData" shared="false" />
+  </event>
+  <!--Add field "Program Name" into transaction view page-->
+  <event name="affiliateplus_adminhtml_add_field_transaction_form">
+    <observer name="affiliateplus_adminhtml_add_field_transaction_form" instance="Magestore\Affiliateplusprogram\Observer\Adminhtml\AddFieldTransactionForm" shared="false" />
+  </event>
+  <!--Add tab Program into program edit form -->
+  <event name="affiliateplus_adminhtml_add_account_tab">
+    <observer name="affiliateplus_adminhtml_add_account_tab" instance="Magestore\Affiliateplusprogram\Observer\Adminhtml\AddAccountTab" shared="false" />
+  </event>
+  <!-- Calculate discount to buyer when edit order in back-end -->
+  <!--<event name="affiliateplus_address_collect_total_edit">-->
+    <!--<observer name="affiliateplus_address_collect_total_edit" instance="Magestore\Affiliateplusprogram\Observer\Adminhtml\AddressCollectTotalEdit" shared="false" />-->
+  <!--</event>-->
+  <!--Caculate commission before edit order -->
+  <!--<event name="affiliateplus_calculate_commission_before_edit">-->
+    <!--<observer name="affiliateplus_calculate_commission_before_edit" instance="Magestore\Affiliateplusprogram\Observer\Adminhtml\CalculateCommissionBeforeEdit" shared="false" />-->
+  <!--</event>-->
+
+</config>

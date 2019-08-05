@@ -1,0 +1,86 @@
+<?php
+
+/**
+ * Magestore.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+<?php
+$store_id = $this->getStoreId();
+$check_responsvie = $block->getResponsiveEnable($store_id);
+
+if($check_responsvie)
+    $class_name = 'col-lg-9 col-md-9 col-sm-12 col-xs-12';
+else
+    $class_name = 'col-lg-9 col-md-9 col-sm-9 col-xs-9';
+?>
+
+
+<div class="aff-main-content <?php echo $class_name; ?>">
+    <div class="account-login">
+        <div class="aff-title">
+            <h1><?php echo __('Login or Create an Account') ?></h1>
+        </div>
+        <?php echo $block->getLayout()->getMessagesBlock()->getGroupedHtml() ?>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="lable-title">
+                    <h2 class="legend"><?php echo __('New Account') ?></h2>
+                </div>
+                <p><?php echo $this->getRegisterDescription() ?></p>
+                <button type="button" class="button button-config action primary" title="<?php echo __('Signup') ?>" onclick="setLocation('<?php echo $this->getRegisterUrl() ?>')">
+                    <span><?php echo __('Signup') ?></span>
+                </button>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="lable-title">
+                    <h2 class="legend"><?php echo __('Registered Customers') ?></h2>
+                </div>
+                <form action="<?php echo $this->getUrl('affiliateplus/account/loginPost') ?>" method="post" id="login-form" role="form">
+                    <div class="form-group">
+                        <label for="email" class="required"><span><?php echo __('Email Address') ?></span><em>*</em></label>
+                        <input type="text" placeholder="<?php echo __('Email Address') ?>"  name="login[username]" value="<?php echo $this->getUsername() ?>" id="email" class="form-control input-text required-entry validate-email" title="<?php echo __('Email Address') ?>" />
+                    </div>
+                    <div class="form-group">
+                        <label for="pass" class="required"><span><?php echo __('Password') ?></span><em>*</em></label>
+                        <input type="password" placeholder="<?php echo __('Password') ?>" name="login[password]" class="form-control input-text required-entry validate-password" id="pass" title="<?php echo __('Password') ?>" />
+                    </div>
+                    <p class="required" ><?php echo __('* Required Fields') ?></p>
+                    <a href="<?php echo $this->getUrl('customer/account/forgotpassword/'); ?>" class="f-right"><?php echo __('Forgot Your Password?') ?></a>
+                    <button type="submit" title="<?php echo __('Login') ?>" class="button button-config action primary"  name="send" id="send2">
+                    <span>
+                        <?php echo __('Login') ?>
+                    </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    require(
+        [
+            'jquery',
+            'mage/mage',
+            'prototype'
+        ], function(jQuery){
+            var loginAffiliateAccountForm = jQuery('#login-form');
+            loginAffiliateAccountForm.mage('validation', {
+            });
+        });
+</script>

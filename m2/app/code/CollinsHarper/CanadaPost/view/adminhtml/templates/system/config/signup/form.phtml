@@ -1,0 +1,27 @@
+<?php
+/**
+ * Copyright � 2015 Collins Harper. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @see \CollinsHarper\CanadaPost\Block\Adminhtml\System\Config\Signup
+ * @var \CollinsHarper\CanadaPost\Block\Adminhtml\System\Config\Signup $block
+ */
+?>
+<p id="loading_mask_loader" class="loader">
+    <img alt="Loading..." src="<?php echo $this->getLoadingImageUrl(); ?>"><br />
+    <?php echo __('Redirecting to Canada Post ...'); ?>
+</p>
+<form name="canadapost-signup" id="canadapost-signup" method="POST" action="<?php echo $this->getPostUrl(); ?>">
+    <?php $post_data = $this->getPostData();
+    foreach ($post_data as $k => $v) {
+        echo '<input type="hidden" value="'.$v.'"  name="'.$k.'" />';
+    }
+    ?>
+</form>
+<script>
+    <?php if (!empty($post_data)): ?>
+    document.getElementById('canadapost-signup').submit();
+    <?php endif; ?>
+</script>

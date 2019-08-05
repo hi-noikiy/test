@@ -1,0 +1,67 @@
+<?php /* @var $block \Potato\AddressAutocomplete\Block\Init */?>
+<?php if ($block->canShow()): ?>
+    <script type="text/javascript">
+        require(
+            [
+                'Potato_AddressAutocomplete/js/event.simulate',
+                'Potato_AddressAutocomplete/js/google-places'
+            ], function() {
+                new Potato.AddressAutocomplete.GooglePlaces({
+                    'apiKey': '<?php echo $block->getConfig()->getGooglePlacesApiKey(); ?>',
+                    'canUseBrowserGeolocation': <?php var_export($block->getConfig()->isGoogleUseBrowserGeo()); ?>,
+                    'locale': '<?php echo $block->getLocaleCode(); ?>',
+
+                    'hidePoweredByGoogleLabel': <?php var_export($block->getConfig()->isGoogleHideLogo()); ?>,
+                    'useCountryRestriction': <?php var_export($block->getConfig()->isGoogleUseCountryRestriction()); ?>,
+                    'countryInput': '#country',
+
+                    'regionConfig': <?php echo $block->getRegionConfig(); ?>,
+
+                    'triggerAjaxList': [],
+
+                    'locationInput': '#street_1',
+
+                    'addressForm': {
+                        'country': {
+                            'inputId': '#country',
+                            'component': 'country',
+                            'name_type': 'short_name'
+                        },
+                        'region_id': {
+                            'inputId': '#region_id',
+                            'component': 'administrative_area_level_1',
+                            'name_type': 'short_name',
+                            'processorName': '_prepareRegionId'
+                        },
+                        'region': {
+                            'inputId': '#region',
+                            'component': 'administrative_area_level_1',
+                            'name_type': '<?php echo $block->getConfig()->getAddressComponentRegion(); ?>'
+                        },
+                        'city': {
+                            'inputId': '#city',
+                            'component': 'locality',
+                            'name_type': '<?php echo $block->getConfig()->getAddressComponentCity(); ?>'
+                        },
+                        'postcode': {
+                            'inputId': '#zip',
+                            'component': 'postal_code',
+                            'name_type': '<?php echo $block->getConfig()->getAddressComponentPostcode(); ?>'
+                        },
+                        'street1': {
+                            'inputId': '#street_1',
+                            'component': 'route',
+                            'name_type': '<?php echo $block->getConfig()->getAddressComponentStreetOne(); ?>',
+                            'processorName': '<?php echo ($block->getConfig()->isAddressComponentStreetCombined()) ? '_prepareCombinedStreet1' : ''; ?>'
+                        },
+                        'street2': {
+                            'inputId': '#street_2',
+                            'component': 'street_number',
+                            'name_type': '<?php echo $block->getConfig()->getAddressComponentStreetTwo(); ?>',
+                            'processorName': '<?php echo ($block->getConfig()->isAddressComponentStreetCombined()) ? '_prepareCombinedStreet2' : '_prepareStreet2'; ?>'
+                        }
+                    }
+                });
+            });
+</script>
+<?php endif; ?>

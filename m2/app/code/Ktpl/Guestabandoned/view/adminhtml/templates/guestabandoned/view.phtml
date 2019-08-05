@@ -1,0 +1,232 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+// @codingStandardsIgnoreFile
+?>
+<?php /** @var $block \Magento\Sales\Block\Adminhtml\Order\View\Tab\Info */ ?>
+<?php $_order = $block->getQuote() ?>
+
+
+<?php
+$quote = $this->getQuote();
+
+
+$statusArr = array(
+    1 => __('In Progress'),
+    2 => __('Captured'),
+    3 => __('Close')
+);
+?>
+<section class="admin__page-section order-view-account-information">
+    <div class="admin__page-section-title">
+        <span class="title"><?= __('Order &amp; Account Information'); ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item order-information">
+            <div class="admin__page-section-item-title">
+                <span class="title"><?php echo $block->getHeaderText($quote); ?></span>
+              
+            </div>
+            <div class="admin__page-section-item-content">
+                <table class="admin__table-secondary order-information-table">
+                    <tbody>
+                        <tr>
+                            <th><?= __('Order Date') ?></th>
+                            <td><?php echo $block->formateCreatedDate($quote); ?></td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Order Status'); ?></th>
+                            <td><span id="order_status"><?php if(!empty($quote->getStatus())){echo $statusArr[$quote->getStatus()];}  //$quote->getStatus();           ?></span></td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Purchased From'); ?></th>
+                            <td class="value"><strong><?php echo $quote->getStore()->getWebsite()->getName(); ?><br><?php echo $quote->getStore()->getGroup()->getName(); ?> <br><?php echo $quote->getStore()->getName(); ?></strong></td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Placed from IP'); ?></th>
+                            <td><?php echo $quote->getRemoteIp(); ?></td>
+                        </tr>
+                    </tbody></table>
+            </div>
+        </div>
+
+        <div class="admin__page-section-item order-account-information">
+            <div class="admin__page-section-item-title">
+                <span class="title"><?= __('Account Information'); ?></span>               
+            </div>
+            <div class="admin__page-section-item-content">
+                <table class="admin__table-secondary order-account-information-table">
+                    <tbody><tr>
+                            <th><?= __('Customer Name'); ?></th>
+                            <td>
+                                <a href="#" target="_blank">
+                                    <span><?php echo $quote->getCustomerFirstname() . ' ' . $quote->getCustomerLastname(); ?></span>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Email'); ?></th>
+                            <td><a href="mailto:<?php echo $quote->getCustomerEmail(); ?>"><strong><?php echo $quote->getCustomerEmail(); ?></strong></a></td>
+                        </tr>                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<div class="clear"></div>
+
+<section class="admin__page-section order-addresses">
+    <div class="admin__page-section-title">
+        <span class="title"><?= __('Address Information'); ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item order-billing-address">
+            <div class="admin__page-section-item-title">
+                <span class="title"><?= __('Billing Address'); ?></span>
+            </div>
+            <address class="admin__page-section-item-content"> <?php echo $block->format($quote->getBillingAddress()->getData(), 'html', $quote->getStore()->getId()); ?></address>
+        </div>
+        <div class="admin__page-section-item order-shipping-address">
+            <div class="admin__page-section-item-title">
+                <span class="title"><?= __('Shipping Address'); ?></span>
+            </div>
+            <address class="admin__page-section-item-content"> <?php echo $block->format($quote->getShippingAddress()->getData(), 'html', $quote->getStore()->getId()); ?></address>
+        </div>
+    </div>
+</section>
+
+<div class="clear"></div>
+
+<section class="admin__page-section order-view-billing-shipping">
+    <div class="admin__page-section-title">
+        <span class="title"><?= __('Payment &amp; Shipping Method'); ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item order-payment-method">
+            <div class="admin__page-section-item-title">
+                <span class="title"><?= __('Payment Information'); ?></span>
+            </div>
+            <div class="admin__page-section-item-content">
+                <?php if ($quote->getPayment()->getMethod()) { ?>
+                    <?php echo $quote->getPayment()->getMethodInstance()->getTitle(); ?> 
+                <?php } ?>
+            </div>
+        </div>
+
+        <div class="admin__page-section-item order-shipping-method">
+            <div class="admin__page-section-item-title">
+                <span class="title"><?= __('Shipping &amp; Handling Information'); ?></span>
+            </div>
+            <div class="admin__page-section-item-content">
+                <?php echo $quote->getShippingAddress()->getShippingDescription(); ?>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="admin__page-section">
+    <div class="admin__page-section-title">
+        <span class="title"><?= /* @escapeNotVerified */ __('Items Ordered') ?></span>
+    </div>
+    <div class="admin__table-wrapper">
+        <table class="data-table admin__table-primary edit-order-table">
+            <thead>
+                <tr class="headings">
+                    <th class="col-product"><span><?= __('Product'); ?></span></th>                  
+                    <th class="col-price-original"><span><?= __('Original Price'); ?></span></th>
+                    
+                    <th class="col-ordered-qty"><span><?= __('Qty'); ?></span></th>
+                    <th class="col-subtotal"><span><?= __('Subtotal'); ?></span></th>
+            </thead>
+            <?php $_items = $quote->getItemsCollection() ?>
+            <?php
+            $i = 0;
+            foreach ($_items as $_item):
+                ?>
+                <?php
+                if ($_item->getParentItem())
+                    continue;
+                else
+                    $i++;
+                ?>
+                <tbody class="<?php echo $i % 2 ? 'even' : 'odd' ?>">
+                    <tr>
+                        <td class="col-product">
+                            <div id="order_item_3">
+                                <div id="order_item_3_title" class="product-title">
+                                    <?php echo $_item->getName(); ?>
+                                </div>
+                                <div class="product-sku-block">
+                                    <span><?= __('SKU');?>:</span> <?php echo $_item->getSku(); ?> 
+                                </div>
+                            </div>
+                        </td>
+                        
+                        <td class="col-price-original"><span class="price"><?php echo $this->formatPrice($_item->getPrice()) ?></span></td>                      
+                        <td class="col-ordered-qty">
+                            <?php echo $_item->getQty(); ?>
+                        </td>
+                        <td class="col-subtotal">
+                            <div class="price-excl-tax">
+                                <span class="price"><?php echo $this->formatPrice($_item->getQty() * $_item->getPrice()); ?></span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</section>
+
+
+<section class="admin__page-section">
+    <div class="admin__page-section-title">
+        <span class="title"><?= __('Order Total');?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item order-totals">
+            <div class="admin__page-section-item-title">
+                <span class="title"><?= __('Order Totals'); ?></span>
+            </div>
+            <table class="data-table admin__table-secondary order-subtotal-table">
+                <tfoot>
+                    <tr class="col-0">
+                        <td class="label">
+                            <strong><?= __('Grand Total'); ?></strong>
+                        </td>
+                        <td>
+                            <strong><span class="price"><?php echo $this->formatPrice($quote->getGrandTotal(), true, false); ?></span></strong>
+                        </td>
+                    </tr>                                     
+                </tfoot>
+                <tbody>
+                    <tr class="col-0">
+                        <td class="label"><?= __('Subtotal');?> </td>
+                        <td>
+                            <span><span class="price"><?php echo $this->formatPrice($quote->getSubtotal(), true, false); ?></span></span>
+                        </td>
+                    </tr>
+                    <tr class="col-1">
+                        <td class="label"><?= __('Shipping &amp; Handling');?> </td>
+                        <td>
+                            <span><span class="price"><?php echo $this->formatPrice($quote->getShippingAddress()->getShippingAmount(), true, false); ?></span></span>
+                        </td>
+                    </tr>
+                    <tr class="col-2">
+                        <td class="label"><?php echo __('Tax') ?> </td>
+                        <td><span class="price"><?php echo $this->formatPrice($quote->getShippingAddress()->getData('tax_amount'),true,false); ?></span> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+

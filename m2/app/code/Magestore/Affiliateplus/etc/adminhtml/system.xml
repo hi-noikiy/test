@@ -1,0 +1,1061 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../Backend/etc/system_file.xsd">
+    <system>
+        <tab id="magestore" translate="label" sortOrder="1">
+            <label>Magestore Extension</label>
+        </tab>
+        <section id="affiliateplus" translate="label" sortOrder="1" showInDefault="1"
+                 showInWebsite="1" showInStore="1">
+            <label>Affiliate Plus</label>
+            <tab>magestore</tab>
+            <resource>Magestore_Affiliateplus::config_affiliateplus</resource>
+
+            <!-- Create Document and Help-->
+
+            <group id="document_help" translate="label" type="text" sortOrder="1" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>Document and Help</label>
+                <field id="affiliateplus_installation_guide_separator" translate="label" type="label" sortOrder="1"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Affiliate Plus Installation</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Separator</frontend_model>
+                </field>
+                <field id="affiliateplus_installation_guide" translate="label"  type="label" sortOrder="2"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Affiliate Plus Installation Guide</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Affiliateplusinstallation</frontend_model>
+                </field>
+                <field id="affiliateplus_plugin_installation_guide" translate="label" type="label" sortOrder="3"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Affiliate Plus Plugin Installation Guide</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Affiliateplusplugininstallation</frontend_model>
+                </field>
+                <field id="affiliateplus_user_guide_separator" translate="label" type="label" sortOrder="4"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Affiliate Plus User Guide</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Separator</frontend_model>
+                </field>
+                <field id="affiliateplus_standard_user_guide" translate="label" type="label" sortOrder="5"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Affiliate Plus Standard User Guide</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Standard</frontend_model>
+                </field>
+
+
+            </group>
+            <!-- End Document and Help-->
+
+            <!-- Create General Configuration-->
+            <group id="general" translate="label" type="text" sortOrder="4" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+
+                <field id="enable" translate="label" type="select" sortOrder="1"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Affiliate Plus Module</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="show_affiliate_link_on_frontend" translate="label" type="select" sortOrder="2"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Affiliate link in frontend</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="welcome_page" translate="label comment" type="select" sortOrder="4"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Welcome page using CMS</label>
+                    <source_model>Magento\Cms\Model\Config\Source\Page</source_model>
+                    <comment>Select Welcome page of your Affiliate system</comment>
+                </field>
+                <field id="material_enable" translate="label" type="select" sortOrder="6"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Material page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="material_page" translate="label comment" type="select" sortOrder="8"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Material page using CMS</label>
+                    <source_model>Magento\Cms\Model\Config\Source\Page</source_model>
+                    <depends>
+                        <field id="material_enable">1</field>
+                    </depends>
+                    <comment>Create CMS page and manage there</comment>
+                </field>
+                <field id="expired_time" translate="label comment" type="text" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cookie Expiration (Days)</label>
+                    <comment>The number of days for admin to store cookies of this program. Affiliates and invited customers can receive commission and discount for purchases made through affiliate link within this time.</comment>
+                </field>
+
+                <!-- Refer Friend Url Configuration-->
+                <field id="refer_url_separator" translate="label" type="label" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Affiliate URL</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Separator</frontend_model>
+                    <comment></comment>
+                </field>
+                <field id="url_param" translate="label comment" type="text" sortOrder="50"
+                        showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Afffiliate URL Parameter</label>
+                    <validate>validate-alphanum validate-length maximum-length-30</validate>
+                    <comment>Please don't use parameter as id because it will overried default parameter of system.
+                        Leave blank for default value (acc).</comment>
+                </field>
+                <field id="url_param_value" translate="label comment" type="select" sortOrder="70"
+                       showInStore="1" showInWebsite="1" showInDefault="1">
+                    <label>Value Type of Afffiliate URL Parameter</label>
+                    <source_model>Magestore\Affiliateplus\Model\System\Config\Source\Parametervalue</source_model>
+                    <comment></comment>
+                </field>
+                <!-- End code Refer Friend Url Configuration -->
+            </group>
+
+            <!-- End General Configuration-->
+
+            <!-- Create Account Configuration-->
+
+            <group id="account" translate="label" type="text" sortOrder="6" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>Account Configuration</label>
+
+                <field id="sign_up_separator" translate="label" type="text" sortOrder="1"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Affiliate Sign-up</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Separator</frontend_model>
+                    <comment>Leave blank for not showing Terms and Conditions</comment>
+                </field>
+
+                <field id="auto_create_affiliate" translate="label" type="select" sortOrder="2"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Auto create Affiliate account when Customer registers</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="terms_and_conditions" translate="label" type="textarea" sortOrder="4"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Terms and Conditions</label>
+                    <comment>Leave blank for not showing Terms and Conditions</comment>
+                </field>
+                <field id="register_description" translate="label" type="textarea" sortOrder="6"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sign-up description</label>
+                    <comment></comment>
+                </field>
+                 <field id="required_address" translate="label" type="select" sortOrder="8"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Require address to sign up</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="required_paypal" translate="label" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Require PayPal email address to sign up</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+
+                <field id="need_approved" translate="label" type="select" sortOrder="12"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Need admin's approval</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="notification_after_signing_up" translate="label" type="textarea" sortOrder="14"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Notification after signing up</label>
+                    <comment></comment>
+                </field>
+                <field id="balance_separator" translate="label" type="text" sortOrder="16"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Account Balance</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Separator</frontend_model>
+                    <comment></comment>
+                </field>
+                <field id="balance" translate="label" type="select" sortOrder="18"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Account Balance Scope</label>
+                    <source_model>Magestore\Affiliateplus\Model\System\Config\Source\Scope</source_model>
+                    <comment>Select website(s) on which affiliates can use commissions to purchase items.</comment>
+                </field>
+
+            </group>
+            <!-- End Account Configuration-->
+
+            <!-- Create Commission Configuration-->
+            <group id="commission" translate="label" type="text" sortOrder="8" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>Commission Configuration</label>
+
+                <field id="calculate_separator" translate="label" type="label" sortOrder="1"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Pay per Sales/ Profit Commission</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Separator</frontend_model>
+                    <comment></comment>
+                </field>
+                <field id="affiliate_type" translate="label" type="select" sortOrder="2"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Pay commission</label>
+                    <source_model>Magestore\Affiliateplus\Model\System\Config\Source\Type</source_model>
+                </field>
+                <field id="commission_type" translate="label" type="select" sortOrder="4"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Commission Type</label>
+                    <source_model>Magestore\Affiliateplus\Model\System\Config\Source\Fixedpercentage</source_model>
+                </field>
+                <field id="commission_value" translate="label" type="text" sortOrder="6"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Commission Value</label>
+                    <comment></comment>
+                </field>
+                <field id="use_secondary" translate="label" type="select" sortOrder="8"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use different commission from 2nd order of a Customer</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Select "No" to apply the above commission to all orders</comment>
+                </field>
+                <field id="secondary_type" translate="label" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Commission Type (from 2nd order)</label>
+                    <source_model>Magestore\Affiliateplus\Model\System\Config\Source\Fixedpercentage</source_model>
+                    <depends>
+                        <field id="use_secondary">1</field>
+                    </depends>
+                    <comment></comment>
+                </field>
+                <field id="secondary_commission" translate="label" type="text" sortOrder="12"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Commission Value (from 2nd order)</label>
+                    <depends>
+                        <field id="use_secondary">1</field>
+                    </depends>
+                </field>
+                <field id="lifetime_separator" translate="label" type="label" sortOrder="13"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Lifetime Sales Commission</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Separator</frontend_model>
+                </field>
+                <field id="life_time_sales" translate="label" type="select" sortOrder="14"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Lifetime Sales Commission</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Customer first buys through affiliate A's link, though later clicks affiliate B's link and buys, this transaction will still be counted for affiliate A.]]></comment>
+                </field>
+                <field id="process_separator" translate="label" type="label" sortOrder="15"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Process Commission</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Separator</frontend_model>
+                </field>
+                <field id="updatebalance_orderstatus" translate="label" type="select" sortOrder="16"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Add commission to affiliate account balance when order status is</label>
+                    <source_model>Magestore\Affiliateplus\Model\System\Config\Source\Orderstatus</source_model>
+                    <comment> If you select order's status as "processing", the commission just be calculate for the items that have been invoiced.</comment>
+                </field>
+                <field id="holding_period" translate="label" type="text" sortOrder="18"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Holding period</label>
+                    <comment>(days). If empty or zero, affiliates' commission will not be hold back.</comment>
+                </field>
+                <field id="decrease_commission_creditmemo" translate="label" type="select" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Subtract commission from affiliate account balance when credit memo is created</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cancel_transaction_orderstatus" translate="label" type="multiselect" sortOrder="22"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Subtract commission from account balance when order status is</label>
+                    <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                </field>
+            </group>
+
+            <!-- End Commission Configuration-->
+
+            <!-- Create Discount Configuration -->
+            <group id="discount" translate="label" type="text" sortOrder="10" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>Discount Configuration</label>
+
+                <field id="allow_discount" translate="label" type="select" sortOrder="1"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>When there's shopping cart discount, apply</label>
+                    <source_model>Magestore\Affiliateplus\Model\System\Config\Source\Discount</source_model>
+                    <comment></comment>
+                </field>
+                <field id="discount_type" translate="label" type="select" sortOrder="2"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Discount Type</label>
+                    <source_model>Magestore\Affiliateplus\Model\System\Config\Source\Discounttype</source_model>
+                </field>
+                <field id="discount" translate="label" type="text" sortOrder="4"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Discount Value</label>
+                </field>
+                <field id="use_secondary" translate="label" type="select" sortOrder="6"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use different discount from 2nd order of a Customer</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Select "No" to apply above discount for all orders</comment>
+                </field>
+                <field id="secondary_type" translate="label" type="select" sortOrder="8"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Discount Type (from 2nd order)</label>
+                    <source_model>Magestore\Affiliateplus\Model\System\Config\Source\Discounttype</source_model>
+                    <depends>
+                        <field id="use_secondary">1</field>
+                    </depends>
+                </field>
+                <field id="secondary_discount" translate="label" type="text" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Discount Value (from 2nd order)</label>
+                    <depends>
+                        <field id="use_secondary">1</field>
+                    </depends>
+                </field>
+                <field id="type_discount" translate="label" type="select" sortOrder="12"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Discount displayed</label>
+                    <source_model>Magestore\Affiliateplus\Model\System\Config\Source\Cartproduct</source_model>
+                </field>
+            </group>
+            <!-- End Discount Configuration -->
+
+            <!-- Create Payment Configuration -->
+            <group id="payment" translate="label" type="text" sortOrder="12" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>Withdrawal Configuration</label>
+
+                <field id="default_method" translate="label" type="select" sortOrder="1"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default payment method</label>
+                    <source_model>Magestore\Affiliateplus\Model\System\Config\Source\Payments</source_model>
+                    <comment><![CDATA[Select default payment method when affiliates request payment]]></comment>
+                </field>
+                <field id="store_credit" translate="label" type="select" sortOrder="2"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use commission as store credit</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Allow affiliates to use commission to check out at your store]]></comment>
+                </field>
+                <field id="withdrawals" translate="label" type="select" sortOrder="4"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow withdrawal request</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="payment_release" translate="label" type="text" sortOrder="6"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>The minimum balance in affiliate account to request withdrawal</label>
+                    <comment></comment>
+                </field>
+                <field id="tax_class" translate="label" type="select" sortOrder="8"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tax class for withdrawal</label>
+                    <source_model>Magento\Tax\Model\TaxClass\Source\Product</source_model>
+                </field>
+                <field id="reduce_balance" translate="label" type="select" sortOrder="14"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Subtract affiliate account balance immediately when a withdrawal request is created</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="who_pay_fees" translate="label" type="select" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Who pays transaction fee</label>
+                    <source_model>Magestore\Affiliateplus\Model\System\Config\Source\Whopayfees</source_model>
+                </field>
+                <field id="cancel_days" translate="label" type="text" sortOrder="22"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow affiliates to cancel withdrawal request within</label>
+                    <comment>days. 0 or empty is unlimited.</comment>
+                </field>
+
+            </group>
+            <!-- End Payment Configuration -->
+
+            <!-- Create Email Configuration -->
+            <group id="email" translate="label" type="text" sortOrder="14" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>Email Configuration</label>
+
+                <field id="sender_contact_separator" translate="label" type="label" sortOrder="1"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>System Email Sender</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Separator</frontend_model>
+                </field>
+                <field id="name_sender" translate="label" type="text" sortOrder="2"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sender Name</label>
+                </field>
+                <field id="email_sender" translate="label" type="text" sortOrder="4"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sender Email</label>
+                    <validate>validate-email</validate>
+                    <comment><![CDATA[Used to send emails from system to affiliates. If blank, affiliate system will use general store email address.]]></comment>
+                </field>
+                <field id="sign_up_separator" translate="label" type="label" sortOrder="6"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Affiliate Sign-up Email</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Separator</frontend_model>
+                    <comment></comment>
+                </field>
+                <field id="is_sent_email_new_account" translate="label" type="select" sortOrder="8"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Send email to new affiliate</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="new_account_email_template" translate="label" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email template sent to newly registered affiliates</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="approved_account_email_template" translate="label" type="select" sortOrder="12"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email template sent to newly approved affiliates</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="is_sent_to_sales_new_account" translate="label" type="select" sortOrder="14"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Send email to admin when a new affiliate registers</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="new_account_sales_email_template" translate="label" type="select" sortOrder="16"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email template sent to admin when a new affiliate registers</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="transactions_separator" translate="label" type="label" sortOrder="18"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Transaction Process Email</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Separator</frontend_model>
+                    <comment></comment>
+                </field>
+                <field id="is_sent_email_account_new_transaction" translate="label" type="select" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Send email to affiliate when a transaction is created</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="new_transaction_account_email_template" translate="label" type="select" sortOrder="22"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email template sent to affiliate when a transaction is created</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                 <field id="is_sent_email_sales_new_transaction" translate="label" type="select" sortOrder="24"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Send email to admin when a transaction is created</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="new_transaction_sales_email_template" translate="label" type="select" sortOrder="26"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email template sent to admin when a transaction is created</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="is_sent_email_account_updated_transaction" translate="label" type="select" sortOrder="28"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Send email to affiliates when transaction status is changed</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Used when transaction is canceled, completed or reduced commission</comment>
+                </field>
+                <field id="updated_transaction_account_email_template" translate="label" type="select" sortOrder="30"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email template sent to affiliates when transaction status is changed</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <comment>Applied when transaction is canceled or completed</comment>
+                </field>
+                <field id="reduce_commission_account_email_template" translate="label" type="select" sortOrder="32"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email template sent to affiliates when commission of a transaction is reduced</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                 <field id="payment_separator" translate="label" type="label" sortOrder="34"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Withdrawal Email</label>
+                     <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Separator</frontend_model>
+                     <comment>10px</comment>
+                </field>
+                <field id="is_sent_email_sales_request_payment" translate="label" type="select" sortOrder="36"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Send email to admin when an affiliate requests withdrawal</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="request_payment_email_template" translate="label" type="select" sortOrder="38"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email template sent to admin when an affiliate requests withdrawal</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="process_payment_email_template" translate="label" type="select" sortOrder="40"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email template sent to affiliate when withdrawal is processed</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="verify_payment_email" translate="label" type="select" sortOrder="42"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email template of Payment verification</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="referfriend_separator" translate="label comment" type="label" sortOrder="60"
+                       showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Friend Referring Email</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Separator</frontend_model>
+                    <comment></comment>
+                </field>
+                <field id="refer_template" translate="label comment" type="select" sortOrder="65"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Friend referring email template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <comment></comment>
+                </field>
+            </group>
+            <!-- End Email Configuration -->
+
+            <!-- Create Action Configuration -->
+            <group id="action" translate="label" type="text" sortOrder="16" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>Click/View Fraud Detection Configuration</label>
+
+                <field id="use_magento_link" translate="label" type="select" sortOrder="1"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use standard magento image link to track banner</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="resetclickby" translate="label" type="text" sortOrder="2"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>IP Reset Time (days)</label>
+                    <comment>After this time, a new click/view from each IP will be counted as an unique click/view.</comment>
+                </field>
+                <field id="detect_iframe" translate="label" type="select" sortOrder="4"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Detect By Iframe</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="detect_cookie" translate="label" type="select" sortOrder="6"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Detect By Cookie</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="detect_software" translate="label" type="select" sortOrder="8"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Detect By Software</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="detect_proxy" translate="label" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Detect Proxy By Header</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="detect_proxy_header" translate="label" type="multiselect" sortOrder="12"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select Header Variables For Proxy Detection</label>
+                    <source_model>Magestore\Affiliateplus\Model\System\Config\Source\Headerdetectproxy</source_model>
+                </field>
+                <field id="detect_proxy_hostbyaddr" translate="label" type="select" sortOrder="14"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Detect Proxy By gethostbyaddr Function</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="detect_proxy_bankip" translate="label" type="textarea" sortOrder="16"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Detect Proxy By IP Bank</label>
+                </field>
+            </group>
+            <!-- End Action Configuration -->
+
+            <!-- Create Refer Friend Configuration -->
+            <group id="refer" translate="label comment" type="text" sortOrder="17" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>Friend Referring Configuration</label>
+                <field id="show_separator" translate="label comment" type="label" sortOrder="5"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Refer Friends link</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Separator</frontend_model>
+                    <comment></comment>
+                </field>
+                <field id="show_list_refer" translate="label comment" type="multiselect" sortOrder="10"
+                       showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Allow referring friends via</label>
+                    <source_model>Magestore\Affiliateplus\Model\System\Config\Source\Refer</source_model>
+                    <comment></comment>
+                </field>
+                <field id="refer_enable_product_list" translate="label comment" type="select" sortOrder="15"
+                       showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Show on product listing page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="refer_enable_product_detail" translate="label comment" type="select" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show on product details page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="enable" translate="label comment" type="select" sortOrder="25"
+                       showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Show on My account/ Affiliate Menu</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="page_separator" translate="label comment" type="label" sortOrder="30"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Refer Friends page</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Separator</frontend_model>
+                </field>
+                <field id="url_prefix" translate="label comment" type="text" sortOrder="35"
+                       showInStore="1" showInWebsite="1" showInDefault="1">
+                    <label>Referring URL Prefix</label>
+                    <comment></comment>
+                </field>
+                <field id="refer_description" translate="label comment" type="textarea" sortOrder="40"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Description</label>
+                    <comment>Shown on the Refer Friends page. Texts can be written in HTML for better display.</comment>
+                </field>
+                <field id="sharing_description" translate="label comment" type="textarea" sortOrder="45"
+                       showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Sharing Message</label>
+                    <comment>Shown on the Sharing box's header. Texts can be written in HTML for better display.</comment>
+                </field>
+                <field id="email_subject" translate="label comment" type="text" sortOrder="50"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Subject of Invitation Email</label>
+                    <comment>Used for invitation email when referring friends</comment>
+                </field>
+                <field id="email_content" translate="label comment" type="textarea" sortOrder="55"
+                       showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Default Content of Invitation Email</label>
+                    <comment>Used for invitation email when referring friends</comment>
+                </field>
+                <field id="social_separator" translate="label" type="label" sortOrder="60"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Social Configuration</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Separator</frontend_model>
+                </field>
+                <field id="sharing_message" translate="label comment" type="textarea" sortOrder="65"
+                       showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Default Message Shared on Facebook</label>
+                    <comment></comment>
+                </field>
+                <field id="fbapp_id" translate="label comment" type="text" sortOrder="70"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Facebook Application ID</label>
+                    <comment></comment>
+                </field>
+                <field id="fbapp_secret" translate="label comment" type="text" sortOrder="75"
+                       showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Facebook Application Secret</label>
+                    <comment><![CDATA[<a href="http://developers.facebook.com/setup/" target="_bank">Register to Facebook</a>]]></comment>
+                </field>
+                <field id="twitter_message" translate="label comment" type="textarea" sortOrder="80"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Message Shared on Twitter</label>
+                    <comment></comment>
+                </field>
+            </group>
+            <!-- End Refer Friend Configuration -->
+
+            <!-- Create Style Config Configuration -->
+            <group id="style_config" translate="label" type="text" sortOrder="200" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>Style Configuration</label>
+
+                <field id="responsive_enable_separator" translate="label" type="label" sortOrder="1"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Responsive Theme</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Separator</frontend_model>
+                    <comment></comment>
+                </field>
+                <field id="responsive_enable" translate="label" type="select" sortOrder="2"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Responsive Theme</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="background_color_separator" translate="label" type="label" sortOrder="4"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>General Style</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Separator</frontend_model>
+                    <comment></comment>
+                </field>
+                <field id="background_color" translate="label" type="text" sortOrder="6"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Background Color for affiliate's pages</label>
+                    <frontend_class>aff-color</frontend_class>
+                    <comment>Default is FFFFFF</comment>
+                </field>
+                <field id="background_title" translate="label" type="text" sortOrder="8"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Background Color for titles</label>
+                    <frontend_class>aff-color</frontend_class>
+                    <comment>Default is EB7705</comment>
+                </field>
+                <field id="title_color" translate="label" type="text" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Text Color for titles</label>
+                    <frontend_class>aff-color</frontend_class>
+                    <comment>Default is FFFFFF</comment>
+                </field>
+                <field id="background_subtitle" translate="label" type="text" sortOrder="12"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Background Color for sub-titles</label>
+                    <frontend_class>aff-color</frontend_class>
+                    <comment>Default is 9D9D9D</comment>
+                </field>
+                <field id="sub_title_color" translate="label" type="text" sortOrder="14"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Text Color for sub-titles</label>
+                    <frontend_class>aff-color</frontend_class>
+                    <comment>Default is FFFFFF</comment>
+                </field>
+                <field id="button_social_background_color" translate="label" type="text" sortOrder="16"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Background Color for Social Share buttons</label>
+                    <frontend_class>aff-color</frontend_class>
+                    <comment>Default is 0081BA</comment>
+                </field>
+                 <field id="button_social_color" translate="label" type="text" sortOrder="18"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Text Color for Social Share buttons</label>
+                     <frontend_class>aff-color</frontend_class>
+                     <comment>Default is FFFFFF</comment>
+                </field>
+                <field id="lef_navigation_separator" translate="label" type="label" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Left Navigation Style</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Separator</frontend_model>
+                </field>
+                <field id="background_navigation_color" translate="label" type="text" sortOrder="22"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Background Color for inactive tabs</label>
+                    <frontend_class>aff-color</frontend_class>
+                    <comment>Default is FFFFFF</comment>
+                </field>
+                <field id="active_background_navigation_color" translate="label" type="text" sortOrder="24"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Background Color for active tabs</label>
+                    <frontend_class>aff-color</frontend_class>
+                    <comment>Default is EEEEEE</comment>
+                </field>
+                <field id="active_color_navigation_color" translate="label" type="text" sortOrder="26"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Text Color for active tabs</label>
+                    <frontend_class>aff-color</frontend_class>
+                    <comment>Default is EB7705</comment>
+                </field>
+                 <field id="text_font_size" translate="label" type="text" sortOrder="28"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Font size for tab names</label>
+                     <comment>Default is 14</comment>
+                </field>
+                <field id="popup_color_separator" translate="label" type="text" sortOrder="30"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Popup Style</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Separator</frontend_model>
+                </field>
+                <field id="background_popup_color" translate="label" type="text" sortOrder="32"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Background Color for body</label>
+                    <frontend_class>aff-color</frontend_class>
+                    <comment>Default is FFFFFF</comment>
+                </field>
+                <field id="background_popup_title" translate="label" type="text" sortOrder="34"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Background Color for title</label>
+                    <frontend_class>aff-color</frontend_class>
+                    <comment>Default is 9D9D9D</comment>
+                </field>
+                <field id="popup_title_color" translate="label" type="text" sortOrder="36"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Text Color for title</label>
+                    <frontend_class>aff-color</frontend_class>
+                    <comment>Default is FFFFFF</comment>
+                </field>
+                <field id="button_color_separator" translate="label" type="label" sortOrder="38"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Button Style (on the Affiliate Home page)</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\Field\Separator</frontend_model>
+                </field>
+                <field id="background_color_login_button" translate="label" type="text" sortOrder="40"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Background Color for Login button</label>
+                    <frontend_class>aff-color</frontend_class>
+                    <comment>Default is E05435</comment>
+                </field>
+                 <field id="background_color_signup_button" translate="label" type="text" sortOrder="42"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Background Color for Signup button</label>
+                     <frontend_class>aff-color</frontend_class>
+                     <comment>Default is 8EC549</comment>
+                </field>
+                <field id="background_color_contact_button" translate="label" type="text" sortOrder="44"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Background Color for Contact button</label>
+                    <frontend_class>aff-color</frontend_class>
+                    <comment>Default is 0081BA</comment>
+                </field>
+                <field id="color_js" translate="label" sortOrder="46" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label></label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\System\AddJs</frontend_model>
+                </field>
+            </group>
+            <!-- End Style Config Configuration -->
+        </section>
+        <section id="affiliateplus_payment" translate="label" sortOrder="2" showInDefault="1"
+                 showInStore="1" showInWebsite="1">
+            <label>Affiliate Plus Payment</label>
+            <tab>magestore</tab>
+            <resource>Magestore_Affiliateplus::config_affiliateplus_payment</resource>
+
+            <group id="recurring" translate="label" type="text" sortOrder="5" showInWebsite="1"
+                   showInStore="1" showInDefault="1">
+                <label>Recurring Payment Configuration</label>
+                <field id="enable" translate="label comment" type="select" sortOrder="10"
+                       showInStore="1" showInDefault="1" showInWebsite="1">
+                    <label>Active</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="period" translate="label comment" type="select" sortOrder="15"
+                       showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Period of auto payout</label>
+                    <source_model>Magestore\Affiliateplus\Model\System\Config\Source\Payment\Period</source_model>
+                    <comment></comment>
+                </field>
+                <field id="days" translate="label comment" type="text" sortOrder="20"
+                       showInStore="1" showInWebsite="1" showInDefault="1">
+                    <label>Custom payout days</label>
+                    <!--<depends>-->
+                    <!--<period>0</period>-->
+                    <!--</depends>-->
+                    <comment></comment>
+                </field>
+                <field id="pending_request" translate="label comment" type="select" sortOrder="25"
+                       showInStore="1" showInWebsite="1" showInDefault="1">
+                    <label>Recurring pay for account that has a pending request</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="auto_complete" translate="label comment" type="select" sortOrder="30"
+                       showInStore="1" showInWebsite="1" showInDefault="1">
+                    <label>Auto complete Withdrawal</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Yes if you want to transfer money to your affiliate account immediately through the paygate</comment>
+                </field>
+                <field id="amount_type" translate="label comment" type="select" sortOrder="35"
+                       showInStore="1" showInWebsite="1" showInDefault="1">
+                    <label>Payout type</label>
+                    <source_model>Magestore\Affiliateplus\Model\System\Config\Source\Payment\FixedPercentageType</source_model>
+                    <comment>Yes if you want to transfer money to your affiliate account immediately through the paygate</comment>
+                </field>
+                <field id="amount_value" translate="label comment" type="text" sortOrder="40"
+                       showInStore="1" showInWebsite="1" showInDefault="1">
+                    <label>Payout Amount</label>
+                    <comment></comment>
+                </field>
+                <field id="max_account" translate="label comment" type="text" sortOrder="45"
+                       showInStore="1" showInWebsite="1" showInDefault="1">
+                    <label>Maximum accounts</label>
+                    <comment>Maximum accounts can receive payout per cron. Put 0 for unlimited accounts.</comment>
+                </field>
+                <field id="admin_email" translate="label comment" type="select" sortOrder="50"
+                       showInStore="1" showInWebsite="1" showInDefault="1">
+                    <label>Send Email to Admins</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="admin_template" translate="label comment" type="select" sortOrder="55"
+                       showInStore="1" showInWebsite="1" showInDefault="1">
+                    <label>Email template sent to Admins</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <comment></comment>
+                </field>
+                <field id="account_email" translate="label comment" type="select" sortOrder="60"
+                       showInStore="1" showInWebsite="1" showInDefault="1">
+                    <label>Send Email Notification to Affiliate</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="account_template" translate="label comment" type="select" sortOrder="65"
+                       showInStore="1" showInWebsite="1" showInDefault="1">
+                    <label>Email template sent to Affiliate</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <comment></comment>
+                </field>
+            </group>
+            <group id="offline" translate="label comment" sortOrder="15" type="text"
+                   showInStore="1" showInWebsite="1" showInDefault="1">
+                <label>Offline Payment Method</label>
+                <field id="active" translate="label comment" type="select" sortOrder="5"
+                       showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Active</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="label" translate="label comment" type="text" sortOrder="10"
+                       showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Label</label>
+                    <comment></comment>
+                </field>
+                <field id="require_authentication" translate="label comment" type="select" sortOrder="15"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Require Authentication</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+            </group>
+            <group id="bank" translate="label comment" sortOrder="20" type="text"
+                   showInStore="1" showInWebsite="1" showInDefault="1">
+                <label>Bank Transfer Payment Method</label>
+                <field id="active" translate="label comment" type="select" sortOrder="5"
+                       showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Active</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="label" translate="label comment" type="text" sortOrder="10"
+                       showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Label</label>
+                    <comment></comment>
+                </field>
+                <field id="require_authentication" translate="label comment" type="select" sortOrder="15"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Require Authentication</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+            </group>
+            <group id="paypal" translate="label comment" type="text" sortOrder="25"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>PayPal Payment Method</label>
+                <field id="active" translate="label comment" type="select" sortOrder="5"
+                       showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Active</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="label" translate="label comment" type="text" sortOrder="10"
+                       showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Label</label>
+                    <comment></comment>
+                </field>
+                <field id="require_authentication" translate="label comment" type="select" sortOrder="15"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Require Authentication</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="use_for_recurring" translate="label comment" type="select" sortOrder="20"
+                       showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Use Recurring Payment PayPal API</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="user_mechant_email_default" translate="label comment" type="select" sortOrder="25"
+                       showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Use your PayPal Merchant Email Default on Paypal Config</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\System\Payment\Config\Paypal\DefaultPayment</frontend_model>
+                    <comment></comment>
+                </field>
+                <field id="paypal_email" translate="label comment" type="text" sortOrder="30"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>PayPal merchant email</label>
+                    <comment></comment>
+                </field>
+                <field id="api_username" translate="label comment" type="text" sortOrder="35"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>API Username</label>
+                    <comment></comment>
+                </field>
+                <field id="api_password" translate="label comment" type="text" sortOrder="40"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>API Password</label>
+                    <comment></comment>
+                </field>
+                <field id="api_signature" translate="label comment" type="text" sortOrder="45"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>API Signature</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\System\Payment\Config\Paypal\Signature</frontend_model>
+                    <comment></comment>
+                </field>
+                <field id="sandbox_mode" translate="label comment" type="text" sortOrder="50"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sandbox Mode</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\System\Payment\Config\Paypal\LoadDefault</frontend_model>
+                    <comment></comment>
+                </field>
+            </group>
+            <group id="moneybooker" translate="label comment" sortOrder="40" type="text"
+                   showInStore="1" showInWebsite="1" showInDefault="1">
+                <label>Moneybooker Payment Method</label>
+                <field id="active" translate="label comment" type="select" sortOrder="5"
+                       showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Active</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="label" translate="label comment" type="text" sortOrder="10"
+                       showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Label</label>
+                    <comment></comment>
+                </field>
+                <field id="require_authentication" translate="label comment" type="select" sortOrder="15"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Require Authentication</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="use_for_recurring" translate="label comment" type="select" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Recurring Payment Moneybookers API</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="user_mechant_email_default" translate="label comment" type="select" sortOrder="25"
+                       showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Use your MoneyBookers Merchant Email Default on Moneybookers Config</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\System\Payment\Config\Moneybooker\DefaultPayment</frontend_model>
+                    <comment></comment>
+                </field>
+                <field id="moneybooker_email" translate="label comment" type="text" sortOrder="30"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Moneybookers merchant email</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\System\Payment\Config\Moneybooker\Email</frontend_model>
+                    <comment></comment>
+                </field>
+                <field id="moneybooker_password" translate="label comment" type="select" sortOrder="35"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>API/MQI Password</label>
+                    <frontend_model>Magestore\Affiliateplus\Block\Adminhtml\System\Payment\Config\Moneybooker\Password</frontend_model>
+                    <comment></comment>
+                </field>
+                <field id="notification_subject" translate="label comment" type="text" sortOrder="40"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Subject of notification email</label>
+                    <comment></comment>
+                </field>
+                <field id="notification_note" translate="label comment" type="textarea" sortOrder="45"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Content of notification email</label>
+                    <comment></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

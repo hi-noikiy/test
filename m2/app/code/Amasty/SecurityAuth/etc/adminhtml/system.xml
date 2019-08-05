@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_SecurityAuth
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/system_file.xsd">
+    <system>
+        <section id="securityauth" translate="label" type="text" sortOrder="012301" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Two-Factor Authentication</label>
+            <tab>amasty</tab>
+            <resource>Amasty_SecurityAuth::securityauth</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General Settings</label>
+                <field id="active" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label><![CDATA[Enable Two-Factor Authentication]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="discrepancy" translate="label comment" type="text" sortOrder="20" canRestore="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label><![CDATA[Discrepancy]]></label>
+                    <comment><![CDATA[This is the allowed time drift in 30 second units (8 means 4 minutes before or after) for generation of verification codes]]></comment>
+                    <validate>validate-digits validate-greater-than-zero</validate>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+                <field id="ip_white_list" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label><![CDATA[Ip White List]]></label>
+                    <comment><![CDATA[Specify IP addresses separated by comma]]></comment>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

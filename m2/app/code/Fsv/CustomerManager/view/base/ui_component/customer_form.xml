@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Fsv_CustomerManager
+ *
+ * @category    Fsv
+ * @package     Fsv_CustomerManager
+ * @author      Sergey Fedosimov <sfedosimov@gmail.com>
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="buttons" xsi:type="array">
+            <item name="loginascustomer" xsi:type="string">Fsv\CustomerManager\Block\Adminhtml\Edit\LoginAsCustomerButton</item>
+        </item>
+    </argument>
+    <fieldset name="customer">
+        <field name="password">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">New password</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="template" xsi:type="string">Fsv_CustomerManager/form/element/password</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-password" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="admin_password">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Current admin password</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="template" xsi:type="string">Fsv_CustomerManager/form/element/password</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

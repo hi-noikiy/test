@@ -1,0 +1,69 @@
+<?php
+
+/**
+ * Magestore.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * Refer product for friend email form
+ *
+ * @see Magestore_AffiliateplusReferFriend_Block_Email_Form
+ */
+?>
+<form id="affiliateplus-email-form" method="post" action="">
+    <div class="lable-title" style="text-align: left;">
+        <h2 class="legend"><?php echo __('Email to friends') ?></h2>
+    </div>
+    <ul class="form-list" style="text-align: left;">
+        <li>
+            <span>
+                <?php echo __("Quickly log in to your ") ?>
+                <a href="#" onclick="popWin('http://gmail.com', 'gmail', getPopupPosition(500, 360) + ',resizable=yes,scrollbars=yes'); return false;" title="<?php echo __('get contacts from gmail') ?>"><?php echo __('Gmail') ?></a>,
+                <a href="#" onclick="popWin('http://mail.yahoo.com', 'yahoo', getPopupPosition(500, 360) + ',resizable=yes,scrollbars=yes'); return false;" title="<?php echo __('get contacts from yahoo') ?>"><?php echo __('Yahoo') ?></a>,
+                <a href="#" onclick="popWin('http://hotmail.com', 'hotmail', getPopupPosition(500, 360) + ',resizable=yes,scrollbars=yes'); return false;" title="<?php echo __('send email from Hotmail') ?>"><?php echo __('Hotmail') ?></a>
+                <?php echo __(' and send messages'); ?>
+            </span>
+        </li>
+
+        <li>
+            <label for="affiliate-email-content"><?php echo __("Your message (use the suggestion or write your own)") ?>:</label>
+            <div class="input-box">
+                <textarea rows="10" id="affiliate-email-content" name="email_content" class="required-entry">
+                    <?php echo $this->getEmailFormData()->getEmailContent() ? $this->getEmailFormData()->getEmailContent() : $this->getDefaultEmailContent() ?>
+                </textarea>
+            </div>
+        </li>
+    </ul>
+</form>
+<script type="text/javascript">
+    function retrieveContacts(mailSv, url) {
+        require(['prototype'], function(){
+            popWin(url, mailSv, getPopupPosition(500, 360) + ',resizable=yes,scrollbars=yes');
+        });
+    }
+    function getPopupPosition(width, height) {
+        var screenX = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft;
+        var screenY = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop;
+        var outerWidth = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.body.clientWidth;
+        var outerHeight = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.body.clientHeight - 22);
+        var left = parseInt(screenX + ((outerWidth - width) / 2), 10);
+        var top = parseInt(screenY + ((outerHeight - height) / 2.5), 10);
+        return 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top;
+    }
+</script>
+

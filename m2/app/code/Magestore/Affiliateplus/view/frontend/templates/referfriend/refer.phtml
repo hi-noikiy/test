@@ -1,0 +1,431 @@
+<?php
+
+/**
+ * Magestore.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * Referers history template
+ */
+?>
+<?php
+$check_responsvie = $block->isEnableResponsive();
+if($check_responsvie)
+    $class_name = 'col-lg-9 col-md-9 col-sm-12 col-xs-12';
+else
+    $class_name = 'col-lg-9 col-md-9 col-sm-9 col-xs-9';
+?>
+
+<div class="aff-main-content <?php echo $class_name; ?>">
+    <div class="aff-title">
+        <h2><?php echo __('Refer Friends and Earn Money') ?></h2>
+    </div>
+    <?php echo $block->getLayout()->getMessagesBlock()->getGroupedHtml() ?>
+    <ul class="message" id="affiliate-facebook-msg" style="display:none;">
+        <li class="success-msg">
+            <ul>
+                <li>
+                    <?php echo __('This message has been posted successfully.') ?>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <div class="aff-refer">
+        <div style="margin-bottom: 18px;">
+            <?php echo $block->getReferDescription() ?>
+        </div>
+
+        <div class="aff-title"></div>
+
+        <?php $trafficSources = $block->getTrafficSources() ?>
+        <div class="fieldset-sources">
+            <div class = "lable-title">
+                <h2 class="legend"><?php echo __('Traffic sources') ?></h2>
+            </div>
+            <table>
+                <tr>
+                    <td style="width:120px;"><?php echo __('Email') ?>:</td>
+                    <td><?php echo $trafficSources['email'] ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo __('Facebook') ?>:</td>
+                    <td><?php echo $trafficSources['facebook'] ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo __('Twitter') ?>:</td>
+                    <td><?php echo $trafficSources['twitter'] ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo __('Google+') ?>:</td>
+                    <td><?php echo $trafficSources['google'] ?></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="affiliateplus-sidebar" class="col-right sidebar col-xs-6 col-md-4">
+        <div class="block block-list">
+            <?php echo $block->getSharingDescription() ?>
+        </div>
+        <div class="block block-list">
+            <div class="block-title">
+                <strong><?php echo __('Personal URL') ?></strong>
+            </div>
+            <div class="block-content">
+                <form id="affiliate-personal-url-form" method="post" action="<?php echo $this->getUrl('*/*/personal') ?>">
+                    <?php echo $block->getBlockHtml('formkey'); ?>
+                    <div id="affiliate-opc-personal-url" class="step a-item">
+                        <ul class="form-list">
+                            <li>
+                                <label><?php echo __('Your personal affiliate URL') ?></label>
+                            </li>
+                            <li class="control">
+                                <input type="checkbox"<?php if ($block->getCustomUrl()): ?> checked="true"<?php endif ?> id="use-personal-url" value="1" class="required-entry" onclick="changePersonalUrl(this);" />
+                                <label for="use-personal-url"><?php echo __('Custom Url') ?></label>
+                                <div class="input-box" id="input-personal-url"<?php if (!$block->getCustomUrl()): ?> style="display:none;"<?php endif ?>>
+                                    <input class ="required-entry form-control" type="text" id="personal_url" name="personal_url" onchange="changeCustomUrl();" onkeyup="changeCustomUrl();" value="<?php echo $block->getCustomUrl() ?>" class="input-text required-entry"/>
+<!--                                    <span id="affiliate-please-wait-email" style="display:none;" class="opc-please-wait">-->
+<!--                                        <img src="--><?php //echo $this->getViewFileUrl('Magestore_Affiliateplus::images/pageloading.gif') ?><!--" class="v-middle" alt="" /> &nbsp; --><?php //echo __('Checking email address') ?><!--...-->
+<!--                                    </span>-->
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="buttons-set" id="button-save-personal-url"<?php if (!$block->getCustomUrl()): ?> style="display:none;"<?php endif ?>>
+                            <button type="submit" id="button-save-personal-url-submit" title="<?php echo __('Save'); ?>" class="button button-config action primary">
+                                <span>
+                                    <?php echo __('Save') ?>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <div class="actions">
+                    <a id="personal_affiliate_url" title="<?php echo __('Your personal affiliate URL') ?>"></a>
+                </div>
+                <script type="text/javascript">
+                        function changePersonalUrl(el) {
+                            require(['prototype'], function() {
+                                if (el.checked) {
+                                    $('input-personal-url').show();
+                                    $('button-save-personal-url').show();
+                                    changeCustomUrl();
+                                } else {
+                                    $('input-personal-url').hide();
+                                    $('button-save-personal-url').hide();
+                                    var urlEl = $('personal_affiliate_url');
+                                    var personalUrl = '<?php echo $block->getPersonalUrl() ?>';
+                                    if (urlEl.href != personalUrl) {
+                                        urlEl.href = personalUrl;
+                                        urlEl.innerHTML = prepareShowPersonalUrl(personalUrl, 54);
+                                    }
+                                }
+                            });
+                        }
+
+                    var process = 1;
+                    function changeCustomUrl() {
+                        require(['jquery', 'prototype'], function($j) {
+                            if (process) {
+                                process = 0;
+                                var customUrlInput = $('personal_url').value;
+
+                                    var url = '<?php echo $this->getUrl('affiliateplus/refer/refineCustomUrl') ?>';
+
+                                    if(customUrlInput.length > 0) {
+//                                        $('affiliate-please-wait-email').show();
+                                        $('button-save-personal-url-submit').disabled = true;
+                                    }
+                                    $j.ajax({
+                                        url: url,
+                                        data:{
+                                            custom_url: customUrlInput
+                                        },
+                                        type: "GET",
+                                        dataType : "json",
+                                        error: function ( xhr, status, errorThrown ) {
+
+                                        },
+                                        complete: function(xhr, status){
+                                            var customUrl = JSON.parse(xhr.responseText);
+                                            var personalUrl = '';
+                                            if (customUrl == '') {
+                                                personalUrl = '<?php echo $block->getPersonalUrl() ?>';
+                                            } else {
+                                                var prefixUrl = '<?php echo $block->getPrefixUrl() ?>';
+                                                personalUrl = prefixUrl + customUrl;
+                                                var urlInStore = '<?php echo $block->getSuffixUrl() ?>';
+                                                if (urlInStore.search('[?]') != -1)
+                                                    personalUrl += '?' + urlInStore.split('?')[1];
+                                            }
+                                            var urlEl = $('personal_affiliate_url');
+                                            if (urlEl.href != personalUrl) {
+                                                urlEl.href = personalUrl;
+                                                urlEl.innerHTML = prepareShowPersonalUrl(personalUrl, 54);
+                                            }
+//                                            $('affiliate-please-wait-email').hide();
+                                            $('button-save-personal-url-submit').disabled = false;
+                                        }
+                                    });
+                                    process = 1;
+
+                            }
+                        });
+                    }
+
+                    function prepareShowPersonalUrl(pUrl, len) {
+//                        require(['prototype'], function() {
+                            var newPUrl = '';
+                            var i;
+                            for (i = 0; i < pUrl.length - len; i += len) {
+                                newPUrl += pUrl.substr(i, len) + ' ';
+                            }
+                            newPUrl += pUrl.substr(i);
+                            return newPUrl;
+//                        });
+                    }
+                require(['prototype'], function() {
+                    changePersonalUrl($('use-personal-url'));
+                });
+                </script>
+            </div>
+        </div>
+
+        <ol class="opc affiliateplus-opc">
+            <!--add by Sally-->
+            <?php
+            $list = $block->getHelperConfig()->getReferConfig('show_list_refer');
+            $values = explode(",", $list);
+            $count = count($values);
+            for ($i = 0; $i < $count; $i++) {
+                if ($values[$i] == 'email') {
+                    ?>
+                    <!--end by Sally-->
+                    <li id="affiliate-opc-email" class="section allow<?php if ($block->isActiveTab('email')): ?> active<?php endif ?>">
+                        <div class="step-title  email-logo " onclick="toggleAffiliateRighbox('affiliate-opc-email-content')">
+                            <span class="aff-logo"><?php echo __('Email') ?></span>
+                        </div>
+                        <div id="affiliate-opc-email-content" class="step a-item"<?php if (!$block->isActiveTab('email')): ?> style="display:none;"<?php endif ?>>
+                            <form id="affiliate-email-form" method="post" action="<?php echo $this->getUrl('*/*/email') ?>">
+                                <ul class="form-list">
+                                    <li>
+                                        <span>
+                                            <?php echo __("Quickly log in to your ") ?>
+                                            <a href="#" onclick="retrieveContacts('gmail', 'http://gmail.com');
+                                                    return false;" title="<?php echo __('send email from Gmail') ?>"><?php echo __('Gmail') ?></a>,
+                                            <a href="#" onclick="retrieveContacts('yahoo', 'http://mail.yahoo.com');
+                                                    return false;" title="<?php echo __('send email from Yahoo') ?>"><?php echo __('Yahoo') ?></a>,
+                                            <a href="#" onclick="retrieveContacts('hotmail', 'http://hotmail.com');
+                                                    return false;" title="<?php echo __('send email from Hotmail') ?>"><?php echo __('Hotmail') ?></a>
+                                            <?php echo __(' and send messages'); ?>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <label for="affiliate-email-content"><?php echo __("Your message (use the suggestion or write your own)") ?>:</label>
+                                        <div class="input-box">
+                                            <textarea rows="10" id="affiliate-email-content" name="email_content" class="required-entry" style="height: 165px;"><?php echo $this->getEmailFormData()->getEmailContent() ? $this->getEmailFormData()->getEmailContent() : $this->getDefaultEmailContent() ?></textarea>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </form>
+                            <p></p>
+                            <script type="text/javascript">
+                                    function retrieveContacts(mailSv, url) {
+                                        require(['prototype'], function(){
+                                                popWin(url, mailSv, getPopupPosition(500, 360) + ',resizable=yes,scrollbars=yes');
+                                        });
+                                    }
+                            </script>
+                        </div>
+                    </li>
+                    <!--add by Sally-->
+                    <?php
+                }
+                elseif ($values[$i] == 'facebook') {
+                    ?>
+                    <!--end by Sally-->
+                    <li id="affiliate-opc-facebook" class="section allow<?php if ($block->isActiveTab('facebook')): ?> active<?php endif ?>">
+                        <div class="step-title  facebook-logo " onclick="toggleAffiliateRighbox('affiliate-opc-facebook-content')">
+                            <span class="aff-logo"><?php echo __('Facebook') ?></span>
+                        </div>
+                        <div id="affiliate-opc-facebook-content" class="step a-item"<?php if (!$block->isActiveTab('facebook')): ?> style="display:none;position:static;"<?php endif ?>>
+                            <ul class="message" id="affiliate-facebook-msg" style="display:none">
+                                <li class="success-msg">
+                                    <ul>
+                                        <li>
+                                            <?php echo __('This message has been shared successfully.') ?>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <form id="affiliate-facebook-form" method="post">
+                                <ul class="form-list">
+                                    <li>
+                                        <label for="affiliate-facebook-content"><?php echo __("Share on Facebook") ?>:</label>
+                                        <div class="input-box">
+                                            <textarea id="affiliate-facebook-content" class="required-entry"><?php echo $block->getDefaultSharingContent() ?></textarea>
+                                        </div>
+                                    </li>
+                                </ul>
+								<span style="background: url('http://www.pickonpay.com/skin/frontend/base/default/css/magestore/images/facebook-color.png') no-repeat;padding-left: 20px;float:right;" class="share share_facebook">
+									<a onclick="postOnFacebook()" title="<?php echo __('Share on Facebook') ?>">
+                                        <?php echo __('Share') ?>
+                                    </a>
+								</span>
+                            </form>
+                            <script src='//connect.facebook.net/en_US/all.js'></script>
+                            <script type="text/javascript">
+                                FB.init({appId: '<?php echo $block->getHelperConfig()->getReferConfig('fbapp_id') ?>', status: true, cookie: true});
+                                function postOnFacebook(){
+                                    require(['prototype'], function(){
+                                        $('affiliate-facebook-msg').hide();
+                                        var message = $('affiliate-facebook-content').value;
+                                        if (message) {
+                                            var obj = {
+                                                // method: 'share_open_graph',
+                                                method: 'feed',
+                                                link: '<?php echo $block->getPersonalUrl();?>',
+                                                description: message,
+                                            };
+                                            function callback(response) {
+                                                if (response && response.post_id) $('affiliate-facebook-msg').show();
+                                            }
+                                            FB.ui(obj, callback);
+                                        }
+                                    });
+                                }
+                            </script>
+                        </div>
+                    </li>
+                    <!--add by Sally-->
+                    <?php
+                }
+                elseif ($values[$i] == 'twitter') {
+                    ?>
+                    <!--end by Sally-->
+                    <li id="affiliate-opc-twitter" class="section allow<?php if ($block->isActiveTab('twitter')): ?> active<?php endif ?>">
+                        <div class="step-title twitter-logo" onclick="toggleAffiliateRighbox('affiliate-opc-twitter-content')">
+                            <span class="aff-logo "><?php echo __('Twitter') ?></span>
+                        </div>
+                        <div id="affiliate-opc-twitter-content" class="step a-item"<?php if (!$block->isActiveTab('twitter')): ?> style="display:none;"<?php endif ?>>
+                            <ul class="form-list">
+                                <li>
+                                    <label for="affiliate-twitter-content"><?php echo __("Your  tweet (use the suggestion or write your own)") ?>:</label>
+                                    <div class="input-box">
+                                        <textarea id="affiliate-twitter-content" class="required-entry"><?php echo $this->getDefaultTwitterContent() ?></textarea>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="buttons-set">
+                                <button class = "button button-config action primary" title="<?php echo __('Tweet') ?>" onclick="affiliateTweet();">
+                                    <span><?php echo __('Tweet') ?></span>
+                                </button>
+                            </div>
+                            <p></p>
+                            <script type="text/javascript">
+                                function affiliateTweet() {
+                                    require(['prototype'], function(){
+                                        var tweetUrl = 'https://twitter.com/intent/tweet?original_referer=<?php echo urlencode($block->getPersonalUrl()) ?>source=tweetbutton&text=';
+                                        tweetUrl += encodeURIComponent($('affiliate-twitter-content').value);
+                                        popWin(tweetUrl, 'tweet', getPopupPosition(480, 320) + ',resizable=yes,scrollbars=yes');
+                                    });
+                                }
+                            </script>
+                        </div>
+                    </li>
+                    <!--add by Sally-->
+                    <?php
+                }
+                elseif ($values[$i] == 'google') {
+                    ?>
+                    <!--end by Sally-->
+                    <li id="affiliate-opc-google" class="section allow<?php if ($block->isActiveTab('google')): ?> active<?php endif ?>">
+                        <div class="step-title google-logo" onclick="toggleGooglePlus()">
+                            <span class="aff-logo "><?php echo __('Google+') ?></span>
+                        </div>
+                        <div id="affiliate-opc-google-content" class="step a-item"<?php if (!$block->isActiveTab('twitter')): ?> style="display:none;"<?php endif ?>>
+                            <div class="google-plus-share">
+                                <g:plus action="share" height="24" href="<?php echo $block->getPersonalUrl() ?>"></g:plus>
+                            </div>
+                            <p></p>
+                            <script type="text/javascript">
+                                <?php if ($this->isActiveTab('google')): ?>
+                                (function() {
+                                    var po = document.createElement('script');
+                                    po.type = 'text/javascript';
+                                    po.async = true;
+                                    po.src = 'https://apis.google.com/js/plusone.js';
+                                    var s = document.getElementsByTagName('script')[0];
+                                    s.parentNode.insertBefore(po, s);
+                                })();
+                                    var loadGooglePlus = false;
+                                <?php else: ?>
+                                    var loadGooglePlus = true;
+                                <?php endif ?>
+                            </script>
+                        </div>
+                    </li>
+                    <!--add by Sally-->
+                    <?php
+                }
+            }
+            ?>
+            <!--end by Sally-->
+        </ol>
+    </div>
+    <script type="text/javascript">
+        function toggleGooglePlus() {
+            toggleAffiliateRighbox('affiliate-opc-google-content');
+            if (loadGooglePlus) {
+                (function() {
+                    var po = document.createElement('script');
+                    po.type = 'text/javascript';
+                    po.async = true;
+                    po.src = 'https://apis.google.com/js/plusone.js';
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(po, s);
+                })();
+                loadGooglePlus = false;
+            }
+        }
+            var affiliateCurrentEId = '';
+
+            function toggleAffiliateRighbox(eId) {
+                require(['prototype'], function(){
+                    if (eId != affiliateCurrentEId) {
+                        if (affiliateCurrentEId != '') {
+                            $(affiliateCurrentEId).hide();
+                            $($(affiliateCurrentEId).parentNode.id).removeClassName('active');
+                        }
+                        affiliateCurrentEId = eId;
+                    }
+                    $(eId).toggle();
+                    $($(eId).parentNode.id).toggleClassName('active');
+                });
+            }
+
+            function getPopupPosition(width, height) {
+                var screenX = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft;
+                var screenY = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop;
+                var outerWidth = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.body.clientWidth;
+                var outerHeight = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.body.clientHeight - 22);
+                var left = parseInt(screenX + ((outerWidth - width) / 2), 10);
+                var top = parseInt(screenY + ((outerHeight - height) / 2.5), 10);
+                return 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top;
+            }
+
+    </script>
+</div>

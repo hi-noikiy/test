@@ -1,0 +1,37 @@
+<!--
+/**
+ * Copyright © 2016 Magestore. All rights reserved.
+ */
+-->
+<!--@subject {{var store.getFrontendName()}}: New Affiliate Account @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image",
+"store url=\"customer/account/\"":"Customer Account Url"}
+@-->
+
+{{template config_path="design/email/header_template"}}
+    <!-- [ middle starts here] -->
+    <table cellspacing="0" cellpadding="0" border="0" width="650">
+        <tr>
+            <td valign="top">
+                <p class="greeting"><strong>{{trans 'Hello Admin'}}</strong>,<br/>
+                    {{trans 'There is a new affiliate account which has been registered in your system.
+                    Please login to your admin panel at <a href="%admin_url" style="color:#1E7EC8;">logging into admin page</a>' admin_url="$backend_url" |raw}}
+                    {{if account.isApproved()}}
+                    {{trans 'to recheck this account.'}}
+                    {{else}}
+                    {{trans 'to approve this account.'}}
+                    {{/if}}
+                </p>
+                <p style="border:1px solid #BEBCB7; padding:13px 18px; background:#F8F7F5; ">
+                    {{trans 'Affiliate Account Information'}}<br/>
+                    {{trans 'Account Name:'}} {{var account.getName()}}<br/>
+                    {{trans 'E-mail:'}} {{var account.getEmail()}}<br/>
+                    {{trans 'Paypal email:'}} {{var account.getPaypalEmail()}}
+                </p>
+                <p>{{trans 'Thank you'}}, <br/><strong>{{var sender_name}}</strong></p>
+            </td>
+        </tr>
+    </table>
+{{template config_path="design/email/footer_template"}}

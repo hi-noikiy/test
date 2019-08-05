@@ -1,0 +1,24 @@
+<?php
+/** @var $block \Magenest\Salesforce\Block\Adminhtml\Connection\Status */
+$isConnected = $block->isConnected();
+?>
+<?php if (!$block->checkAccess()): ?>
+    <script>
+        location.reload();
+    </script>
+<?php endif; ?>
+<?php if ($isConnected == 2): ?>
+    <span class="grid-severity-notice" style="width: 30%;padding: 4px 0;"><span>Connected</span></span>
+<?php else: ?>
+    <span class="grid-severity-critical" style="width: 35%;padding: 4px 0;"><span>Not Connected</span></span>
+<?php endif; ?>
+<?php if ($isConnected == 0): ?>
+    <script>
+        require(['jquery'], function ($) {
+            'use strict';
+            $(document).ready(function () {
+                location.reload();
+            });
+        });
+    </script>
+<?php endif; ?>

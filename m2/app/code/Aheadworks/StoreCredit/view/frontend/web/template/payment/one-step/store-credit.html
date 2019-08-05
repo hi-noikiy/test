@@ -1,0 +1,44 @@
+<div class="aw-onestep-sidebar-block payment-option _collapsible opc-payment-additional aw-store-credit"
+     data-role="aw-async-collapsible">
+    <div class="payment-option-title field choice" data-role="title">
+        <span class="action action-toggle" id="block-discount-heading" role="heading" aria-level="2">
+            <!-- ko i18n: 'Store Credit'--><!-- /ko -->
+        </span>
+    </div>
+    <div class="payment-option-content" data-role="content">
+        <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <!-- ko ifnot: isCustomerLoggedIn() -->
+        <div class="payment-option-inner">
+            <div class="field"><!-- ko i18n: 'Please login for use Store Credit'--><!-- /ko --></div>
+        </div>
+        <!--/ko-->
+        <!-- ko if: isCustomerLoggedIn() -->
+        <form class="form form-store-credit" id="store-credit-form" data-bind="blockLoader: isLoading">
+            <div class="payment-option-inner">
+                <!-- ko ifnot: isApplied() -->
+                <span data-bind="text: getAvailableStoreCreditText()"></span>
+                <!-- /ko -->
+                <!-- ko if: isApplied() -->
+                <span data-bind="text: getUsedStoreCreditText()"></span>
+                <!-- /ko -->
+            </div>
+            <div class="actions-toolbar">
+                <div class="primary">
+                    <!-- ko ifnot: isApplied() -->
+                        <button class="action action-apply primary" type="submit" data-bind="'value': $t('Use Store Credit'), click: apply">
+                            <span><!-- ko i18n: 'Use Store Credit'--><!-- /ko --></span>
+                        </button>
+                    <!-- /ko -->
+                    <!-- ko if: isApplied() -->
+                        <button class="action action-cancel" type="submit" data-bind="'value': $t('Remove Store Credit'), click: remove">
+                            <span><!-- ko i18n: 'Remove Store Credit'--><!-- /ko --></span>
+                        </button>
+                    <!-- /ko -->
+                </div>
+            </div>
+        </form>
+        <!--/ko-->
+    </div>
+</div>

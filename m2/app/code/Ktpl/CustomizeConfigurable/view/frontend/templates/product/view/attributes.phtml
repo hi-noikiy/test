@@ -1,0 +1,89 @@
+<?php
+
+/**
+ * To get Product's specific attributes template
+ *
+ * @var $block \Ktpl\CustomizeConfigurable\Block\Product\View\Attributes
+ */
+?>
+<?php
+    $_helper = $this->helper('Magento\Catalog\Helper\Output');
+    $_product = $block->getProduct();
+?>
+<div class="wrapper02 clearfix">
+    <div class= "specs-col2">
+        <div class="popupdiv-title"><?php echo __('Performance Specs')?></div>
+    <ul class="list-attributes--performance">
+    <?php
+        // To Performance Spec Data
+        $groupId = $block->getAttributeGroupId($_product->getAttributeSetId(),'Performance Specs');
+        $productAttributes = $_product->getAttributes();
+        foreach ($productAttributes as $attribute):
+            if ($attribute->isInGroup($_product->getAttributeSetId(), $groupId->getAttributeGroupId())): ?>
+                <?php $attributeName = $attribute->getStoreLabel(); 
+                if($attributeName != 'Best Ranking'):?>
+                <?php if($attribute->getFrontend()->getValue($_product)):?>
+                    <li>
+                        <div class="attribute-value">
+                            <?php 
+                                $attributeValue = $attribute->getFrontend()->getValue($_product);
+                                if (is_numeric($attributeValue)):
+                                    echo number_format(floatval($attributeValue), 1, '.', '') 
+                            ?>
+                            <?php else: echo $attributeValue ?>
+                            <?php endif; ?>  
+                        </div>
+                        <div class="bar">
+                            <div class="bar-down">
+                            <?php echo $attributeName; ?> 
+                            </div> 
+                            
+                            <div class="bar-up"><?php echo $attributeName; ?></div>
+                        </div>     
+                        
+                    </li> 
+                <?php endif;?>      
+                <?php endif;?>       
+            <?php endif;
+        endforeach; 
+    ?>  
+    </ul>  
+    <div class="performance-overall-score">
+        <span class="label"><?php echo __('Overall Score') ?></span>
+        <span class="value"><?php echo number_format((float)$_product->getResource()->getAttribute('overall_score')->getFrontend()->getValue($_product), 1, '.', '') ?></span>
+    </div>
+    </div>
+    <div class= "specs-col1">
+         <div class="popupdiv-title"><?php echo __('Technical Specs')?></div>
+    <ul class="list-attributes--specs">
+        <?php
+            //Tech Spec Data
+            $groupId = $block->getAttributeGroupId($_product->getAttributeSetId(),'Technical Specs');
+            $productAttributes=$_product->getAttributes();
+            foreach ($productAttributes as $attribute):
+            if ($attribute->isInGroup($_product->getAttributeSetId(), $groupId->getAttributeGroupId())): ?>
+                <?php if($attribute->getFrontend()->getValue($_product)):?>
+                        <li>   
+                            <div class="attribute">
+                                <div class="attribute-title">                  
+                                    <?php 
+                                        $attributeName = $attribute->getStoreLabel();
+                                        echo $attributeName;
+                                    ?>
+                                </div>    
+                                <div class="attribute-value">
+                                    <?php         
+                                         $attributeValue =$attribute->getFrontend()->getValue($_product);
+                                         echo $attributeValue;
+                                    ?>
+                                </div>
+                            </div>
+                        </li>                 
+                <?php endif;?>
+             <?php endif;
+            endforeach; 
+        ?>
+    </ul>
+    </div>
+    
+</div>

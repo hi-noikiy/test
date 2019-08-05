@@ -1,0 +1,78 @@
+==== 1.3.0 ====
+Reimplemented M2.3 combatibility
+Removed M2.0 M2.1 M2.2 compatibility
+Note:
+M2.0 M2.1 M2.2 will be supported with v1.2.X upgrades.
+
+==== 1.2.4 ====
+Removed 2.3 compatibility due to problems with PHP 7.0 and M2.2.6 and the CsrfValidation in M2.3
+
+==== 1.2.3 ====
+Renamed PayPal-Plus to PayPal PLUS
+
+==== 1.2.2 ====
+Renamed PayPal Plus to PayPal PLUS
+
+==== 1.2.1 ====
+Changed PaymentMethodTitle translation
+Removed processed by PayPal
+
+==== 1.2.0 ====
+Compatibility with 2.2.6 and 2.3
+Renamed third party modules config
+Added item list to patch
+
+==== 1.1.8 ====
+Fixed discount calculation on virtual quotes
+
+==== 1.1.7 ====
+Fixed minicart not empty after order success
+Fixed shipping calculation with free shipping
+Skip payment creation call if total is zero
+Removed unused file sections.xml
+
+==== 1.1.6 ====
+Hide PayPal Express in checkout if PPP is active
+
+==== 1.1.5 ====
+US address validation error handling.
+
+==== 1.1.4 ====
+Changed locale_code parsing
+Added workaround for broken shipping cost calculation in checkout
+Fixed magento/module-paypal requirement to support Magento 2.2.X
+
+==== 1.1.3 ====
+Added notice to configuration if merchant country is not set to Germany
+
+==== 1.1.2 ====
+Fix JS Script error on empty third party method array
+Fix for missing ShippingAddress on virtual orders
+
+==== 1.1.1 ====
+Added token cache to reduce API-Calls
+
+==== 1.1.0 ====
+Added third party payment modul support outside iframe
+
+==== 1.0.5 ====
+Compatibility with Amazon_Payment
+Compatibility with IWD_Opc
+Compatibility with Swissup_Firecheckout
+Compatibility with Magestore_OneStepCheckout
+
+==== 1.0.4 ====
+Fixed tax calculation with special discount settings
+
+==== 1.0.3 ====
+Fixed always failing credential validation on payment method config save.
+
+==== 1.0.2 ====
+Fixed Javascript errors with Magento 2.1 on payment method block.
+
+==== 1.0.1 ====
+Added PUI legal text
+
+==== 1.0.0 ====
+PayPal PLUS is a solution where PayPal offers PayPal, Credit Card and ELV (pay upon invoice will be added in a later phase) as individual payment options on the payment selection page.
+Based on the payment method selected by the buyer, he will at a later stage be presented with either the PayPal Login page or an input mask for bank / credit card details.

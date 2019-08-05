@@ -1,0 +1,73 @@
+<div id="popup-modal" style="display: none;">
+</div>
+<div id="popup-modal-detail" style="display: none;">
+</div>
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function(
+            $,
+            modal
+        ) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                modalClass:'addtocart_popup',
+                buttons: [{
+                    class: 'action-close',
+                    click: function () {
+                        this.closeModal();
+                    }
+                }]
+            };
+
+            var popup = modal(options, $('#popup-modal'));
+            $(".add_to_cart").on('click',function(){ 
+                var data = $(this).attr('data-id');
+                $.ajax({
+                    url:'<?php echo $this->getUrl("productdetailpopup/Content"); ?>',
+                    type:'GET',
+                    showLoader: true,
+                    data:{'id':data},
+                    complete: function(result) {
+                        $('#popup-modal').html(result.responseJSON.output);
+                        $('#popup-modal').modal('openModal');
+                    },
+                });
+            });
+            //Product detail modal
+            
+            var options_detail = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                modalClass:'pupup-detail',
+                buttons: [{
+                    class: 'action-close',
+                    click: function () {
+                        this.closeModal();
+                    }
+                }]
+            };
+
+             var popupDetail = modal(options_detail, $('#popup-modal-detail'));
+            $(".detail").on('click',function(){ 
+                var data = $(this).attr('data-id');
+                $.ajax({
+                    url:'<?php echo $this->getUrl("productdetailpopup/Content/detail"); ?>',
+                    type:'GET',
+                    showLoader: true,
+                    data:{'id':data},
+                    complete: function(result) {
+                        $('#popup-modal-detail').html(result.responseJSON.output);
+                        $('#popup-modal-detail').modal('openModal');
+                    },
+                });
+            });
+        }
+    );
+</script>

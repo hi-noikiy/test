@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * To get Product's specific attributes template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Attributes
+ */
+?>
+<?php
+    
+    $_product = $block->getProduct();
+    $mediaUrl=$block->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+    $compareImg = $_product->getResource()->getAttribute('compare_size');
+    // Get Value
+    $compareImgLink = $compareImg->getFrontend()->getValue($_product);
+    if( $compareImgLink != "no_selection" ):
+?>
+    <div class="compareimg">
+        <img alt="<?php echo $_product->getName();?>" src="<?php echo $mediaUrl."catalog/product".$compareImgLink; ?>"/>
+    </div>
+<?php endif; ?>

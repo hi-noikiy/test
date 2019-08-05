@@ -1,0 +1,416 @@
+<style>
+    .accesspointoption { position: relative; }
+    .accesspointoption:hover { border: 1px solid #2B7CAC !important; }
+    .accesspointoption.selected { border: 1px solid #2B7CAC !important; }
+    .accesspointoption.selected:after {
+        content: '✓';
+        position: absolute;
+        top: 0;
+        right: 0;
+        border-radius: 0px 0px 0px 10px;
+        background-color: #2B7CAC;
+        width: 30px;
+        height: 30px;
+        color: white;
+        text-align: center;
+        line-height: 25px;
+    }
+    #accesspointsContainer {
+        display: none;
+        width: 100%;
+        margin-top: 20px;
+    }
+    #accesspoints {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 335px;
+        width: 29%;
+        display: inline-block;
+    }
+    #map
+    {
+        width: 100%;
+        height: 280px;
+        margin-top: 10px;
+    }
+    #accesspointsmapcontainer
+    {
+        width: 70%;
+        display: inline-block;
+    }		
+    #accesspointsrangeselect
+    {
+        width: 79%;
+        display: inline-block;
+    }
+    #accesspointsrangeselectlabel
+    {
+        width: 20%;
+        display: inline-block;
+    }
+    .choosetooltipbutton
+    {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    @media only screen and (max-width: 768px) {
+        #accesspointsmapcontainer,
+        #accesspoints,
+        #range,
+        #accesspointsrangeselect,
+        #accesspointsrangeselectlabel
+        {
+            width: 100% !important;
+            text-align: center !important;
+            display: block !important;
+        }
+        #accesspointsmapcontainer
+        {
+            margin-top: 10px;
+        }
+    }
+</style>
+
+<div id="accesspointsContainer">
+    <div id="accesspoints"></div>
+    <div id="accesspointsmapcontainer">
+        <div style="text-align: right">
+            <div id="accesspointsrangeselect">
+                <select class="form-control" id="range">
+                    <option>2</option>
+                    <option>5</option>
+                    <option>10</option>
+                    <option>25</option>
+                    <option>50</option>
+                </select>
+            </div>
+            <div id="accesspointsrangeselectlabel">
+                <p style="line-height: 28px">Km</p>
+            </div>
+        </div>
+        <div id="map"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+require(['jquery', 'domReady!'], function($) {       
+    
+    var delayKeyUp = (function(){
+        var timer = 0;
+        return function(callback, ms){
+            clearTimeout (timer);
+            timer = setTimeout(callback, ms);
+        };
+    })();		
+            
+    var ShippyPro = {
+        map: null,
+        geocoder: null,
+        infoWindow: null,
+        markers: [],
+        mainPos: null,
+        accessPoints: [],
+        accessPointsCarriers: ["UPS_AccessPoint", "SDA_Punto Poste", "SDA_Punto Poste Locker", "SDA_Casella Postale", "SDA_Fermo Posta"],
+        currentCarrier: "",
+        city: null,
+        postcode: null,
+        country: null,
+        accessPointsUrl: null,
+        gMapsLoaded: false,
+        mainSelector: '#checkout-shipping-method-load .row',
+        originalAddress: {
+            firstname: null,
+			lastname: null,
+			address_1: null,
+			city: null,
+			postcode: null
+        },
+        skipSaving: false,
+        initInfoWindow: function () {
+            ShippyPro.infoWindow = new google.maps.InfoWindow();
+        },
+        setMapOnAll: function (map) {
+            for (var i = 0; i < ShippyPro.markers.length; i++) {
+                ShippyPro.markers[i].setMap(map);
+            }
+        },
+        clearMarkers: function () {
+            ShippyPro.setMapOnAll(null);
+            
+            ShippyPro.markers = [];
+        },
+        getMarkerIcon: function (url) {
+            return {
+                url: url,
+                scaledSize: new google.maps.Size(25, 25), // scaled size
+            };
+        },
+        addMarker: function (location, accessPoint) {
+            var marker = new google.maps.Marker({
+                position: location,
+                map: ShippyPro.map,
+                accessPoint: accessPoint,
+                icon: ShippyPro.getMarkerIcon('https://www.shippypro.com/sites/all/themes/shippypro_theme/assets_pannello/images/packageblack.png')
+            });
+            
+            marker.addListener('click', function () {
+                ShippyPro.infoWindow.setContent(ShippyPro.formatAccessPoint(this.accessPoint, true));
+                ShippyPro.infoWindow.open(ShippyPro.map, marker);
+            });
+            
+            ShippyPro.markers.push(marker);
+        },
+        loadGMaps: function () {
+            if (!ShippyPro.gMapsLoaded) {
+                $.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyCkm0O8jHQdOROM64FP2FoQc0SmOaSAVEI&libraries=places&callback=ShippyPro.initMap");
+                ShippyPro.gMapsLoaded = true;
+            }
+        },
+        getLocation: function () {
+            ShippyPro.geocoder.geocode({
+                'address': ShippyPro.city + ", " + ShippyPro.postcode + " " + ShippyPro.country
+            }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    ShippyPro.mainPos = results[0];
+                    
+                    ShippyPro.setCenter();
+                    ShippyPro.showMainPositionMarker();						
+                    ShippyPro.getMapAddressInfo();
+                }
+            });
+        },
+        setCenter: function () {
+            ShippyPro.infoWindow.close();
+        
+            var position = new google.maps.LatLng(ShippyPro.mainPos.geometry.location.lat(), ShippyPro.mainPos.geometry.location.lng());
+            
+            ShippyPro.map.setCenter(position);
+        },
+        showMainPositionMarker: function () {
+            new google.maps.Marker({
+                position: new google.maps.LatLng(ShippyPro.mainPos.geometry.location.lat(), ShippyPro.mainPos.geometry.location.lng()),
+                map: ShippyPro.map
+            });
+        },
+        initMap: function () {
+            if (ShippyPro.city != null && ShippyPro.postcode != null && ShippyPro.country != null) {
+                ShippyPro.markers = [];
+                ShippyPro.geocoder = new google.maps.Geocoder();
+                
+                ShippyPro.map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 14,
+                    mapTypeControl: false
+                });
+                
+                ShippyPro.initInfoWindow();
+                
+                ShippyPro.getLocation();
+            }
+        },
+        getMapAddressInfo: function () {
+            var city = ShippyPro.mainPos.address_components.find(x => x.types[0] == "locality" || x.types[0] == "postal_town" || x.types[0] == "administrative_area_level_3").short_name;
+            var country = ShippyPro.mainPos.address_components.find(x => x.types[0] == "country").short_name;
+            var zip = ShippyPro.mainPos.address_components.find(x => x.types[0] == "postal_code").short_name;
+
+            ShippyPro.loadAccessPoints(city, country, zip);
+        },
+        loadAccessPoints: function (city, country, zip) {
+            ShippyPro.clearMarkers();
+            $("#accesspoints").empty();
+            $("#accesspoints").css("background", "url(https://www.shippypro.com/sites/all/themes/shippypro_theme/assets_pannello/images/loaders/4.gif) no-repeat center");
+
+            $.get(ShippyPro.accessPointsUrl + "?city=" + city + "&country=" + country + "&zip=" + zip + "&max_distance=" + $("#range").val() + "&carrier=" + ShippyPro.currentCarrier, function (resp) {                
+                $("#accesspoints").css("background", "");
+
+                ShippyPro.accessPoints = resp;
+
+                $.each(ShippyPro.accessPoints, function (ind, accessPoint) {
+                    ShippyPro.addMarker(new google.maps.LatLng(parseFloat(accessPoint.Latitude), parseFloat(accessPoint.Longitude)), accessPoint);
+                    
+                    $("#accesspoints").append(ShippyPro.formatAccessPoint(accessPoint));
+                });
+            });
+        },
+        formatAccessPoint: function (accessPoint, marker = false) {
+            return '<div ' + ((!marker) ? 'class="accesspointoption" style="border: 1px solid lightgray; padding: 10px; margin-top: 5px"' : '') + '>' +
+                    '<input style="width: 80%" type="button" class="button action primary" name="accessPointID" access-point-id="' + accessPoint.AccessPointID + '" value="Choose"><br>' +
+                    '<b>' + accessPoint.Description + '</b><br>' +
+                    ((accessPoint.Distance != "") ? 'Distance: ' + accessPoint.Distance + '<br><br>' : '') +
+                    ((accessPoint.Hours != "") ? 'Hours: ' + accessPoint.Hours + '<br><br>' : '') +
+                    'Name: ' + accessPoint.Name + '<br>' +
+                    'Address: ' + accessPoint.Address + '<br>' +
+                    'City: ' + accessPoint.City + '<br>' +
+                    'Zip: ' + accessPoint.Zip +
+                '</div>';
+        },
+        findCarrierNameByRow: function(row) {
+            return row.find(".col-method").eq(1).attr("id").replace(/(label_|method_|_shippypro)/g, '');
+        },
+        initShippyProModule: function () {
+            $("#accesspointsContainer").insertAfter($("#checkoutSteps"));
+
+            ShippyPro.saveOriginalAddress();
+
+            jQuery(document).on('change keyup', '.form-shipping-address input', ShippyPro.saveOriginalAddress);
+
+            // Show access points on loading
+
+            $(ShippyPro.mainSelector).slice(1).each(function () {
+                var carrierName = ShippyPro.findCarrierNameByRow($(this));
+
+                if ($.inArray(carrierName, ShippyPro.accessPointsCarriers) != -1) {
+                    if ($(this).find("input[type=radio]").attr("checked") == "checked") {
+                        ShippyPro.currentCarrier = carrierName;
+
+                        ShippyPro.showAccessPointsDiv();
+                        return false;
+                    }
+                }
+            });
+
+            // Show access points on switching delivery option
+                
+            $(document).on('click', ShippyPro.mainSelector, function () {
+                var carrierName = ShippyPro.findCarrierNameByRow($(this));
+                
+                if ($.inArray(carrierName, ShippyPro.accessPointsCarriers) != -1) {
+                    ShippyPro.currentCarrier = carrierName;
+
+                    ShippyPro.showAccessPointsDiv();
+                    ShippyPro.getMapAddressInfo();
+                }
+                else ShippyPro.hideAccessPointsDiv();
+            });
+            
+            $(document).on('change', '#range', function () {
+                ShippyPro.setRange($(this).val());
+            });
+            
+            $(document).on('click', 'input[name=accessPointID]', function () {
+                ShippyPro.selectAccessPoint($(this).attr("access-point-id"));
+            });
+
+            $(document).on('click', '.continue', function () {
+                ShippyPro.hideAccessPointsDiv();
+            });
+        },
+        selectAccessPoint: function (accessPointID) {
+            ShippyPro.infoWindow.close();
+
+            var accessPointInfo = ShippyPro.accessPoints.find(x => x.AccessPointID == accessPointID);
+
+            jQuery(".accesspointoption").each(function () {
+                jQuery(this).removeClass("selected");
+            });
+
+            $.each(ShippyPro.markers, function (ind, marker) {	
+                if (ShippyPro.markers[ind].getIcon() != 'https://www.shippypro.com/sites/all/themes/shippypro_theme/assets_pannello/images/packageblack.png' && marker.accessPoint.AccessPointID != accessPointID)
+                    ShippyPro.markers[ind].setIcon(ShippyPro.getMarkerIcon("https://www.shippypro.com/sites/all/themes/shippypro_theme/assets_pannello/images/packageblack.png"));
+                else if (marker.accessPoint.AccessPointID == accessPointID)
+                {
+                    ShippyPro.markers[ind].setIcon(ShippyPro.getMarkerIcon("https://www.shippypro.com/sites/all/themes/shippypro_theme/assets_pannello/images/packagered.png"));
+                    ShippyPro.map.panTo(ShippyPro.markers[ind].getPosition ());
+                }
+            });
+
+            var elemToSelect = jQuery("input[name=accessPointID][access-point-id=" + accessPointID + "]");
+                
+            elemToSelect.parent().addClass("selected");
+
+            jQuery('#accesspoints').stop().animate({scrollTop: jQuery('#accesspoints').scrollTop() + (elemToSelect.offset().top - jQuery('#accesspoints').offset().top - 40)}, 1000);
+
+            ShippyPro.skipSaving = true;
+            $("input[name=firstname]").val($("input[name=firstname]").val() + " " + $("input[name=lastname]").val()).trigger("change");
+            $("input[name=lastname]").val("C/O " + accessPointInfo.Name).trigger("change");
+            $("input[name=street\\[0\\]]").val(accessPointInfo.Address).trigger("change");
+            $("input[name=city]").val(accessPointInfo.City).trigger("change");
+            $("input[name=postcode]").val(accessPointInfo.Zip).trigger("change");
+            ShippyPro.skipSaving = false;
+        },
+        // Generates HTML form elements
+        generateShippyProElements: function (data) {
+            elements = "";
+            for (var key in data) {
+                elements += '<input type="hidden" name="shippypro[' + key + ']" value="'+ data[key] +'" />';
+            }
+            return elements;
+        },
+        setRange: function (range) {
+            ShippyPro.setCenter();
+        
+            var newZoom = 14;
+                
+            if (range == 5) newZoom = 12;
+            if (range == 10) newZoom = 11;
+            if (range == 25) newZoom = 10;
+            if (range == 50) newZoom = 9;
+            
+            ShippyPro.map.setZoom(newZoom);
+            
+            ShippyPro.getMapAddressInfo();
+        },
+        showAccessPointsDiv: function ()
+        {
+            $("#accesspointsContainer").show();
+
+            $('html, body').animate({
+                scrollTop: $('#accesspoints').offset().top - 100
+            }, 500);
+        },
+        hideAccessPointsDiv: function()
+        {
+            $("input[name=firstname]").val(ShippyPro.originalAddress.firstname);
+            $("input[name=lastname]").val(ShippyPro.originalAddress.lastname);
+            $("input[name=street\\[0\\]]").val(ShippyPro.originalAddress.address_1);
+            $("input[name=city]").val(ShippyPro.originalAddress.city);
+            $("input[name=postcode]").val(ShippyPro.originalAddress.postcode);
+
+            $("#accesspointsContainer").hide();
+            $(".accesspointoption").removeClass("selected");
+        },
+        saveOriginalAddress: function ()
+        {
+            if (ShippyPro.skipSaving) {
+                return;
+            }
+                
+            delayKeyUp(function(){
+                ShippyPro.originalAddress.firstname = $("input[name=firstname]").val();
+                ShippyPro.originalAddress.lastname = $("input[name=lastname]").val();
+                ShippyPro.originalAddress.address_1 = $("input[name=street\\[0\\]]").val();
+                ShippyPro.originalAddress.city = ShippyPro.city = $("input[name=city]").val();
+                ShippyPro.originalAddress.postcode = ShippyPro.postcode = $("input[name=postcode]").val();
+                ShippyPro.country = $("select[name=country_id]").val();
+
+                ShippyPro.initMap();
+            }, 1000);
+        }
+    };
+
+    window.ShippyPro = ShippyPro;
+
+    $(document).ready(function() {
+        ShippyPro.accessPointsUrl = "<?php echo $block->getAccessPointsUrl(); ?>";
+
+        //wait until the last element being rendered
+        var existCondition = setInterval(function() {
+            if ($('.table-checkout-shipping-method .row').length) { 
+                clearInterval(existCondition);
+                loadShippyProModule();
+            }
+        }, 500);
+
+        function loadShippyProModule(){
+            ShippyPro.city = $("input[name=city]").val();
+            ShippyPro.postcode = $("input[name=postcode]").val();
+            ShippyPro.country = $("select[name=country_id]").val();
+
+            ShippyPro.initShippyProModule();
+            ShippyPro.loadGMaps();
+        }
+    });
+});
+    
+</script>

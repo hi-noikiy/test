@@ -1,0 +1,119 @@
+<div id="line_top_x" style="width: 100%;"></div>
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance(); 
+$date = $objectManager->get('Magento\Framework\Stdlib\DateTime\DateTime');
+if(isset($_POST['start_date'])){
+
+$from_date         = $date->gmtDate(null, strtotime($_POST['start_date'] .' 00:00:00'));
+$to_date           = $date->gmtDate(null, strtotime($_POST['end_date'] .' 23:59:59'));
+
+$cfrom_date         = $date->gmtDate(null, strtotime($_POST['c_start_date'] .' 00:00:00'));
+$cto_date           = $date->gmtDate(null, strtotime($_POST['c_end_date'] .' 23:59:59'));
+
+$cal1 = $this->getcollects($from_date,$to_date);
+$cal2 = $this->getcollects($cfrom_date,$cto_date);
+
+$date_arr = array($from_date,$to_date,$cfrom_date,$cto_date);
+
+for ($i = 0; $i < count($date_arr); $i++)
+{
+    if ($i == 0)
+    {
+        $max_date = date('Y-m-d H:i:s', strtotime($date_arr[$i]));
+        $min_date = date('Y-m-d H:i:s', strtotime($date_arr[$i]));
+    }
+    else if ($i != 0)
+    {
+        $new_date = date('Y-m-d H:i:s', strtotime($date_arr[$i]));
+        if ($new_date > $max_date)
+        {
+            $max_date = $new_date;
+        }
+        else if ($new_date < $min_date)
+        {
+            $min_date = $new_date;
+        }
+    }
+}
+$chartdata = array();
+$sum1 = $sum2 = $totalcomission1 = $totalcomission2 = 0;
+$ad = $this->getitems($from_date,$to_date);
+
+foreach($cal1 as $c1){
+    $totalcomission1 = $totalcomission1 + $c1->getRep_commission_earned();      
+    
+    @$chartdata['c1'][date("Y-m-d", strtotime($c1->getCreated_at())) ] += $c1->getGrandTotal();
+    $sum1 += $c1->getGrandTotal();
+          
+ }
+  
+foreach($cal2 as $c2){
+    $totalcomission2 = $totalcomission2 + $c2->getRep_commission_earned();
+    @$chartdata['c2'][date("Y-m-d", strtotime($c2->getCreated_at()) )] += $c2->getGrandTotal();
+    $sum2 += $c2->getGrandTotal();
+}
+
+$_coreHelper = $this->helper('Magento\Framework\Pricing\Helper\Data');
+//if($cal1->getSize() != 0 && $cal2->getSize() != 0) {
+echo '<div class="report-wrapper"><div class="report-box"><div class="heading"># of Orders </div><div class="report-box-main"><div class="label"><span class="common-format">No</span>&nbsp<span>'.$cal1->getSize().'&nbsp</span></div> <div class="value"><span class="common-format">VS</span><span> '.$cal2->getSize().'</span></div></div></div>';
+echo '<div class="report-box"><div class="heading">Average Order Value</div><div class="report-box-main">' .'<div class="label"><span>'  .$_coreHelper->currency($sum1/($cal1->getSize() ? $cal1->getSize() : 1),true,false).'</span></div><div class="value"><span class="common-format">VS</span><span>&nbsp'.$_coreHelper ->currency($sum2/($cal2->getSize() ? $cal2->getSize() :1),2) .'</span></div></div></div>';
+echo '<div class="report-box"><div class="heading">Total Commision Earned</div><div class="report-box-main"><div class="label">' .$_coreHelper->currency($totalcomission1,true,false).' </span></div> <div class="value"><span class="common-format">VS</span><span>&nbsp'.$_coreHelper->currency($totalcomission2,2) .'</span></div></div></div>';
+echo '<div class="report-box"><div class="heading">Total Revenue</div><div class="report-box-main"><div class="label"><span>'.$_coreHelper->currency($sum1,true,false).' </span></div><div class="value"><span class="common-format">VS</span><span>&nbsp'.$_coreHelper->currency($sum2,2) .'</span></div></div></div></div>';
+echo '<div id="system_messages" class="message-system" >'
+. '<div class="message-system-inner">'
+        . '<div class="message-system-short">'
+        . '<div class="message message-notice">Reports from '.date('Y-m-d', strtotime($from_date)).' To '.date('Y-m-d', strtotime($to_date))
+        . '</div></div></div></div>';
+//}
+?>
+
+    
+        
+            
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['line']});
+      google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('date', 'Month');
+      data.addColumn('number', 'Current Period');
+      data.addColumn('number', 'Previous Period');
+      
+
+      data.addRows([<?php
+      for ($i=strtotime($min_date); $i<=strtotime($max_date); $i+=86400) {  
+          ?>
+        [ new Date('<?php echo date("Y, m ,d", $i) ?>') , 
+            <?php echo isset($chartdata['c1'][@date("Y-m-d", $i)])?$chartdata['c1'][date("Y-m-d", $i)]:0 ;?>,
+            <?php echo isset($chartdata['c2'][@date("Y-m-d",$i)])?$chartdata['c2'][date("Y-m-d",$i)]:0 ; ?>
+            ],              
+            <?php
+        }       
+      ?>]);
+
+      var options = {
+        chart: {
+          title: 'Sales Representative Reports',
+          subtitle: 'SR Performance',
+        },
+        colors: ['green', 'grey'],
+        
+        height: 500,
+        
+      };
+
+      var chart = new google.charts.Line(document.getElementById('line_top_x'));
+
+      chart.draw(data, google.charts.Line.convertOptions(options));
+    }
+  </script> 
+ 
+<?php 
+  
+echo $this->getLayout()->createBlock('Ktpl\RepresentativeReport\Block\Adminhtml\Salesdata\Grid')->toHtml();
+}
+?>
+

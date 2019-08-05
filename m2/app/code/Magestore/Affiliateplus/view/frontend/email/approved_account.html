@@ -1,0 +1,50 @@
+<!--
+/**
+ * Copyright © 2016 Magestore. All rights reserved.
+ */
+-->
+<!--@subject {{var store.getFrontendName()}}: Approved Affiliate account @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image",
+"htmlescape var=$referral.getReferralName()":"Customer Name",
+"store url=\"customer/account/\"":"Customer Account Url",
+"var referral.getEmail()":"Customer Email",
+"htmlescape var=$referral.getPassword()":"Customer Password"}
+@-->
+
+{{template config_path="design/email/header_template"}}
+    <!-- [ middle starts here] -->
+    <table cellspacing="0" cellpadding="0" border="0" width="650">
+        <tr>
+            <td valign="top">
+                <p class="greeting"><strong>{{trans 'Hi %affiliate_name' affiliate_name=$account.getName()}}</strong>,<br/>
+                    {{trans 'We are glad to inform you that your affiliate account at %store_name has been approved.' store_name=$store.getFrontendName()}} <br/>
+                    {{trans 'To login to our system, please click <a href="%affiliate_account_login">Login</a>' affiliate_account_login="$this.getUrl($store, 'affiliateplus/account/login', [_nosid:1])"|raw}}
+                    {{trans 'or <a href="%affiliate_webcome_page">My Account</a> at the top right of every page in our shop.' affiliate_webcome_page="$this.getUrl($store, 'affiliateplus/index/index', [_nosid:1])"|raw}}
+                </p>
+                <br/>
+                <p style="border:1px solid #BEBCB7; padding:13px 18px; background:#F8F7F5; ">
+                    {{trans 'Then use the account email and password you set earlier to log in:'}}<br/>
+                    {{trans 'E-mail:'}} {{var account.getEmail()}}<br/>
+                    {{trans 'Password:'}} {{var account.getPassword()}}
+                </p>
+                <br/>
+                <p>
+                    {{trans 'Your account information is below. Thank you for choosing to work with'}} {{var store.getFrontendName()}}.</p>
+                <br/>
+                <p style="border:1px solid #BEBCB7; padding:13px 18px; background:#F8F7F5; ">
+                    {{trans 'Account Name:'}} {{var account.getName()}}<br/>
+                    {{trans 'PayPal Email:'}} {{var account.getPaypalEmail()}}
+                </p>
+                <br/>
+                <p>
+                    {{trans 'If you have any questions about your account, or any other matters, please feel free to contact us at'}}
+                    {{trans '<a href="mailto: %transaction_email_identity">%transaction_email_identity</a>' transaction_email_identity="$trans_email_ident_support" |raw}}.
+                </p>
+                <br/>
+                <p>{{trans 'Thanks again'}}, <br/><strong>{{var sender_name}}</strong></p>
+            </td>
+        </tr>
+    </table>
+{{template config_path="design/email/footer_template"}}

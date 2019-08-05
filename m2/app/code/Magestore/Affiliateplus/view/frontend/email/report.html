@@ -1,0 +1,37 @@
+<!--
+/**
+ * Copyright © 2016 Magestore. All rights reserved.
+ */
+-->
+<!--@subject {{var store.getFrontendName()}}: Affiliate Statistic Report@-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image",
+"htmlescape var=$transaction.getReferralName()":"Referral Name",
+"var store.getFrontendName()":"Store Name",
+"store url=\"customer/account/\"":"Customer Account Url"}
+@-->
+
+{{template config_path="design/email/header_template"}}
+    <!-- [ middle starts here] -->
+    <table cellspacing="0" cellpadding="0" border="0" width="650">
+        <tr>
+            <td valign="top">
+                <p class="greeting">
+                    <strong>{{trans 'Hi %account_name' account_name=$account.getName()}}</strong>,<br/>
+                    {{trans 'Here are your affiliate stats for %from to %to' form=form to=to}}:
+                </p>
+                {{layout handle="affiliateplus_email_report" account=$account statistic=$statistic store=$store}}
+                <p>
+                    {{trans 'If you\'d like to see more details, please '}}
+                    {{trans '<a href="%affiliate_account_edit">login</a> your account.' affiliate_account_editl=$this.getUrl($store, "affiliates/account/edit", [_nosid:1]) |raw}}<br />
+                    {{trans 'To unsubscribe these emails, please go to your '}}
+                    {{trans '<a href="%affiliate_account_login">account information</a> page and uncheck "Send me Notification Emails"' affiliate_account_login=$this.getUrl($store, "affiliateplus/account/login", [_nosid:1]) |raw}}.
+                </p>
+                <p>{{trans 'Thanks'}}, <br/>
+                    <strong>{{var sender_name}}</strong>
+                </p>
+            </td>
+        </tr>
+    </table>
+{{template config_path="design/email/footer_template"}}

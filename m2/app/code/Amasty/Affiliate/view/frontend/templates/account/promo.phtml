@@ -1,0 +1,164 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Affiliate
+ */
+?>
+<?php
+/** @var \Amasty\Affiliate\Block\Account\Promo $block */
+/** @var \Amasty\Affiliate\Model\ResourceModel\Program\Collection $_programs */
+$_coupons = $block->getCoupons();
+/** @var \Amasty\Affiliate\Model\ResourceModel\Banner\Collection $_banners */
+$_banners = $block->getBanners();
+$i = 0;
+?>
+<div class="block">
+    <div class="block-title"><strong><?php echo __('Coupon Codes') ?></strong></div>
+    <?php if ($_coupons && count($_coupons)): ?>
+        <div class="table-wrapper">
+            <table class="data table">
+                <caption class="table-caption"><?php echo __('Coupon Codes') ?></caption>
+                <thead>
+                    <tr>
+                        <th scope="col" class="col"><?php echo __('Affiliate Program') ?></th>
+                        <th scope="col" class="col"><?php echo __('Coupon Code') ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php /** @var \Amasty\Affiliate\Model\Coupon $_coupon */foreach ($_coupons as $_coupon) : ?>
+                    <tr>
+                        <?php $i++ ?>
+                        <td data-th="<?php echo $block->escapeHtml(__('Program Name')) ?>" class="col">
+                            <?php echo $block->escapeHtml($_coupon->getName()) ?>
+                        </td>
+                        <td
+                                id="post-shortlink-<?php echo $i ?>"
+                                data-th="<?php echo $block->escapeHtml(__('Coupon Code')) ?>"
+                                class="col"
+                        >
+                            <?php echo $block->escapeHtml($_coupon->getCode()) ?>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Copy')) ?>"
+                            class="col float-right">
+                            <button
+                                    class="button action primary affiliate_button"
+                                    id="copy-button"
+                                    data-clipboard-target="#post-shortlink-<?php echo $i ?>"
+                            >
+                                <?php echo __('Copy') ?>
+                            </button>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <i><?php echo __('Share the coupon and receive a commission for the purchase using this code.') ?></i>
+        </div>
+        <?php if ($block->getPagerHtml()) : ?>
+            <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+        <?php endif ?>
+    <?php else : ?>
+        <div class="message info empty"><span><?php echo __('You have no coupons.'); ?></span></div>
+    <?php endif ?>
+</div>
+<div class="block">
+    <div class="block-title"><strong><?php echo __('Referral Link') ?></strong></div>
+    <div class="field input_link">
+        <label for="input-link" class="label">
+            <span>
+                <?php echo __('Enter any URL from this store in the form below to generate a new referral link') ?>
+            </span>
+        </label>
+        <div class="control">
+            <input
+                    id="input-link-text"
+                    class="input-text"
+                    data-am-js="input-link"
+                    type="text"
+                    name="input_link"
+                    title="<?php  echo __('Enter any URL from this store 
+                    in the form below to generate a new referral link') ?>" ?>
+            <button
+                    class="button action primary affiliate_button"
+                    id="copy-button-link"
+                    data-am-js="copy-button-link"
+                    data-clipboard-target="#affiliate-link"
+            >
+                <?php echo __('Copy') ?>
+            </button>
+            <span id="affiliate-link" data-am-js="affiliate-link"></span>
+        </div>
+        <div id="link-params" data-am-js="link-params" style="display: none;"><?php echo $block->escapeHtml($block->getLinkParams()) ?></div>
+    </div>
+</div>
+<div class="block">
+    <div class="block-title"><strong><?php echo __('Banners') ?></strong></div>
+    <?php if ($_banners && count($_banners)) : ?>
+        <div class="table-wrapper">
+            <table class="data table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="col"><?php echo __('Name') ?></th>
+                        <th scope="col" class="col"><?php echo __('Type') ?></th>
+                        <th scope="col" class="col"><?php echo __('Clicks') ?></th>
+                        <th scope="col" class="col"><?php echo __('Link') ?></th>
+                        <th scope="col" class="col"><?php echo __('Preview') ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php /** @var \Amasty\Affiliate\Model\Banner $_banner */foreach ($_banners as $_banner) : ?>
+                    <tr>
+                        <td data-th="<?php echo $block->escapeHtml(__('Name')) ?>" class="col">
+                            <?php echo $block->escapeHtml($_banner->getTitle()) ?>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Type')) ?>" class="col">
+                            <?php echo $block->escapeHtml($_banner->getType()) ?>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Clicks')) ?>" class="col">
+                            <?php echo $block->escapeHtml($_banner->getCurrentAccountClickCount()) ?>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Link')) ?>" class="col">
+                            <?php echo $block->escapeHtml($_banner->getLink()) ?>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Preview')) ?>" class="col">
+                            <a
+                                <?php echo $block->escapeHtml($block->getRelNofollow($_banner)) ?>
+                               href='<?php echo $block->escapeHtml($block->getBannerLink($_banner)) ?>'>
+                                <?php if ($_banner->getType() == $_banner::TYPE_IMAGE) : ?>
+                                    <img src='<?php echo $block->escapeHtml($_banner->getImageUrl()) ?>' />
+                                <?php else : ?>
+                                    <?php echo $block->escapeHtml($_banner->getText()) ?>
+                                <?php endif; ?>
+                            </a>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Copy')) ?>" class="col float-right">
+                            <button
+                                    class="button action primary affiliate_button"
+                                    id="copy-button-preview"
+                                    data-am-js="copy-button-preview"
+                            >
+                                <?php echo __('Copy') ?>
+                            </button>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+                <caption class="table-caption"><?php echo __('Banners') ?></caption>
+            </table>
+        </div>
+    <?php else : ?>
+        <div class="message info empty"><span><?php echo __('You have no banners.'); ?></span></div>
+    <?php endif ?>
+</div>
+<span id="copy-text" data-am-js="copy-text" style="display: none;"><?php echo __('Copy') ?></span>
+<span id="copied-text" data-am-js="copied-text" style="display: none;"><?php echo __('Copied') ?></span>
+<script type="text/x-magento-init">
+        {
+            "*": {
+                "Amasty_Affiliate/js/promo": {}
+            }
+        }
+</script>

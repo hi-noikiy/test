@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+  <event name="core_block_abstract_to_html_before">
+    <observer name="core_block_abstract_adjustsubtotal" instance="Magecomp\Paymentfee\Observer\Adjustsubtotal" shared="false"/>
+  </event>
+  <event name="sales_quote_collect_totals_before">
+    <observer name="quote_collect_resetpaymentfee" instance="Magecomp\Paymentfee\Observer\Resetpaymentfeefee" shared="false"/>
+  </event>
+  <event name="sales_quote_collect_totals_after">
+    <observer name="quote_collect_totals_addpaymentfee" instance="Magecomp\Paymentfee\Observer\Addpaymentfeefee" shared="false"/>
+  </event>
+  <event name="controller_action_predispatch_checkout_onepage_index">
+    <observer name="controller_action_predispatch_checkout_onepage_index_addpaymentfee" instance="Magecomp\Paymentfee\Observer\Addpaymentfeefee" shared="false"/>
+  </event>
+</config>

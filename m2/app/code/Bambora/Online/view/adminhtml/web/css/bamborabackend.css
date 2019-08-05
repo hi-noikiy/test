@@ -1,0 +1,72 @@
+/**
+ * Copyright (c) 2017. All rights reserved Bambora Online.
+ *
+ * This program is free software. You are allowed to use the software but NOT allowed to modify the software.
+ * It is also not legal to do any changes to the software and distribute it in your own name / brand.
+ *
+ * All use of the payment modules happens at your own risk. We offer a free test account that you can use to test the module.
+ *
+ * @author    Bambora Online
+ * @copyright Bambora Online (http://bambora.com)
+ * @license   Bambora Online
+ *
+ */
+.bambora_action_container {
+    line-height: 2.6rem;
+}
+.bambora_action_container tr:nth-child(even) {
+    background: #f1f1f1;
+}
+.bambora_action_container td {
+    width: 50%;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.bambora_table_title {
+    border-bottom: 1px solid gray;
+    font-weight: bold;
+}
+.bambora_table_title_padding {
+    padding-top: 20px;
+}
+
+.bambora_table_history_td {
+    vertical-align: top;
+}
+.bambora_table_history_tr {
+    border-bottom: 1px solid gray;
+}
+
+.bambora_paymentcard {
+    max-width: 50px;
+    position: relative;
+    vertical-align: middle;
+    padding: 5px;
+}
+
+.bambora-checkout-method > .entry-edit-head > .config-heading .heading strong {
+    padding-left: 134px;
+    background: url(https://d3r1pwhfz7unl9.cloudfront.net/bambora/bambora-logo.png) no-repeat 0 0;
+    -ms-background-size: 127px 40px;
+    background-size: 127px 40px;
+    line-height: 44px;
+}
+
+.bambora-epay-method > .entry-edit-head > .config-heading .heading strong {
+    padding-left: 134px;
+    background: url(https://d3r1pwhfz7unl9.cloudfront.net/bambora/ePay-logo.png) no-repeat 0 0;
+    -ms-background-size: 127px 35px;
+    background-size: 127px 35px;
+    line-height: 35px;
+}
+
+.bambora-epay-method .heading,
+.bambora-checkout-method .heading {
+    display: inline-block !important;
+}
+
+.bambora-checkout-method .button-container,
+.bambora-epay-method .button-container {
+    float: right;
+}

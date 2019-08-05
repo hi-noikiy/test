@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <aw_storecredit>
+            <general>
+                <is_storecredit_refund_automatically>1</is_storecredit_refund_automatically>
+                <is_applying_storecredit_on_tax>1</is_applying_storecredit_on_tax>
+                <is_applying_storecredit_on_shipping>1</is_applying_storecredit_on_shipping>
+            </general>
+            <frontend>
+                <is_storecredit_balance_top_link>0</is_storecredit_balance_top_link>
+                <is_hide_if_storecredit_balance_empty>1</is_hide_if_storecredit_balance_empty>
+                <is_display_prices_by_storecredit>1</is_display_prices_by_storecredit>
+            </frontend>
+            <notifications>
+                <is_subscribe_customers_to_notifications_by_default>1</is_subscribe_customers_to_notifications_by_default>
+                <email_sender>general</email_sender>
+                <balance_update_template>aw_storecredit_notifications_balance_update_template</balance_update_template>
+                <balance_update_actions>1,2,3,4,5</balance_update_actions>
+            </notifications>
+        </aw_storecredit>
+        <sales>
+            <totals_sort>
+                <aw_store_credit>25</aw_store_credit>
+            </totals_sort>
+        </sales>
+    </default>
+</config>

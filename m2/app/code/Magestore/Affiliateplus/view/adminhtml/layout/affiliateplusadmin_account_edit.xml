@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" layout="admin-2columns-left">
+  <body>
+    <referenceContainer name="page.main.actions">
+      <block class="Magento\Backend\Block\Store\Switcher" name="category.store.switcher" template="Magento_Backend::store/switcher.phtml" />
+    </referenceContainer>
+    <referenceContainer name="content">
+      <block class="Magestore\Affiliateplus\Block\Adminhtml\Account\Edit" name="admin.block.account.form.container"/>
+    </referenceContainer>
+    <referenceContainer name="left">
+      <block class="Magestore\Affiliateplus\Block\Adminhtml\Account\Edit\Tabs" name="account_edit_tab">
+        <block class="Magestore\Affiliateplus\Block\Adminhtml\Account\Edit\Tab\GeneralTab" name="account_edit_tab_general"/>
+        <block class="Magestore\Affiliateplus\Block\Adminhtml\Account\Edit\Tab\Paymentinfo" name="account_edit_tab_paymentinfo"/>
+      </block>
+    </referenceContainer>
+  </body>
+</page>

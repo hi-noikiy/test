@@ -1,0 +1,34 @@
+<?php if ($block->getIsRecurringActive()): ?>
+	<?php if ($block->getIsCreditCardActive()): ?>
+		<div class="group"><?php echo __('Credit Card') ?></div>
+		<?php if ($block->getCustomerDataCreditCard()): ?>
+			<?php foreach ($block->getCustomerDataCreditCard() as $item) { ?>
+				<div class="group-list">
+					<div class="group-img">
+						<img src="<?php echo $block->getViewFileUrl('Paysafe_Paysafe/images').'/'.strtolower($item['brand']).'.png';?>" class="brandImage" alt="<?=$item['brand']?>">
+					</div>
+					<span class="group-info"><?php echo __('ending in').": ".$item['last_digits']."; ".__('expires on').": ".$item['expiry_month']."/".substr($item['expiry_year'],-2);?></span>
+					<div class="group-button">
+						<form action="<?php echo $block->getChangePaymentUrl() ?>" method="post">
+							<input type="hidden" name="information_id" value="<?php echo $item['information_id']; ?>"/>
+							<input type="hidden" name="payment_method" value="paysafe_creditcard"/>
+							<button class="action primary btnChange" type="submit" value="submit"><?php echo __('Change') ?></button>
+						</form>
+						<form action="<?php echo $block->getDeletePaymentUrl() ?>" method="post">
+							<input type="hidden" name="information_id" value="<?php echo $item['information_id']; ?>"/>
+							<input type="hidden" name="payment_method" value="paysafe_creditcard"/>					
+							<button class="action primary btnDelete" type="submit" value="submit"><?php echo __('Delete') ?></button>
+						</form>
+					</div>
+					<div style="clear:both"></div>
+				</div>
+			<?php } ?>
+		<?php endif; ?>
+		<div class="group-add">
+			<form action="<?php echo $block->getRegisterPaymentUrl() ?>" method="post">
+				<input type="hidden" name="payment_method" value="paysafe_creditcard"/>
+				<button class="action primary btnAdd" type="submit" value="submit"><?php echo __('Add') ?></button>
+			</form>
+		</div>
+	<?php endif; ?>
+<?php endif; ?>

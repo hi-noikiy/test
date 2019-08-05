@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+    	<add id="Customweb_PayEngine3Cw::transactions" title="Concardis PayEngine 3.0 Transactions" module="Customweb_PayEngine3Cw" sortOrder="10" parent="Customweb_Base::sales_customweb" action="payengine3cw/transaction" resource="Customweb_PayEngine3Cw::transaction" />
+
+        <add id="Customweb_PayEngine3Cw::config" title="Concardis PayEngine 3.0" module="Customweb_PayEngine3Cw" sortOrder="100" parent="Customweb_Base::config" action="payengine3cw/config" resource="Customweb_PayEngine3Cw::config"/>
+    </menu>
+</config>

@@ -1,0 +1,173 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Affiliate
+ */
+?>
+<?php
+/** @var \Amasty\Affiliate\Block\Account\Widget $block */
+?>
+
+<form id="form-validate"
+      class="form"
+      action="<?php echo $block->escapeHtml($block->getUrl('amasty_affiliate/account/widgetPost')) ?>"
+      method="post"
+      id="form-validate"
+      enctype="multipart/form-data"
+      autocomplete="off"
+      data-hasrequired="<?php echo __('* Required Fields') ?>"
+      data-mage-init='{"validation":{}}'
+>
+    <fieldset class="fieldset affiliate-widget" data-hasrequired="<?php echo __('* Required Fields') ?>">
+        <?php echo $block->getBlockHtml('formkey') ?>
+        <legend class="legend"><span><?php echo __('Settings') ?></span></legend>
+        <div class="field required">
+            <label class="label"><span><?php echo __('Title') ?></span></label>
+            <div class="control required">
+                <input
+                        data-validate="{required:true}"
+                        class="input-text"
+                        type="text"
+                        name="widget_title"
+                        title="<?php  echo __('Title') ?>"
+                        value="<?php echo $block->escapeHtml($block->getCurrentAccount()->getWidgetTitle()) ?>"
+                >
+            </div>
+        </div>
+        <div class="field required">
+            <label class="label"><span><?php echo __('Products Qty') ?></span></label>
+            <div class="control required">
+                <input
+                        data-validate="{required:true, 'validate-number':true, 'validate-greater-than-zero':true}"
+                        class="input-text" type="text"
+                        name="widget_products_num"
+                        title="<?php  echo __('Products Qty') ?>"
+                        value="<?php echo $block->escapeHtml($block->getCurrentAccount()->getWidgetProductsNum()) ?>"
+                >
+            </div>
+        </div>
+        <div class="field">
+            <label class="label"><span><?php echo __('Width, px') ?></span></label>
+            <div class="control required">
+                <input
+                        data-validate="{required:true, 'validate-greater-than-zero':true}"
+                        class="input-text" type="text"
+                        name="widget_width"
+                        title="<?php  echo __('Width, px') ?>"
+                        value="<?php echo $block->escapeHtml($block->getCurrentAccount()->getWidgetWidth()) ?>"
+                >
+            </div>
+        </div>
+        <div class="field">
+            <label class="label"><span><?php echo __('Height, px') ?></span></label>
+            <div class="control required">
+                <input
+                        data-validate="{required:true, 'validate-greater-than-zero':true}"
+                        class="input-text" type="text"
+                        name="widget_height"
+                        title="<?php  echo __('Height, px') ?>"
+                        value="<?php echo $block->escapeHtml($block->getCurrentAccount()->getWidgetHeight()) ?>"
+                >
+            </div>
+        </div>
+        <div id="show-type" class="field">
+            <label class="with_right_margin">
+                <input
+                    <?php echo $block->checkedBestsellers() ?>
+                        value="<?php echo \Amasty\Affiliate\Model\Account::WIDGET_TYPE_BESTSELLER ?>"
+                        type="radio"
+                        name="widget_type"/>
+                <?php echo __('Bestsellers'); ?>
+            </label>
+            <br>
+            <label>
+                <input
+                    <?php echo $block->checkedNew() ?>
+                        value="<?php echo \Amasty\Affiliate\Model\Account::WIDGET_TYPE_NEW ?>"
+                        type="radio"
+                        name="widget_type"/>
+                <?php echo __('New Products') ?>
+            </label>
+        </div>
+        <div class="field">
+            <label class="with_right_margin">
+                <input
+                    <?php echo $block->checked('widget_show_name') ?>
+                        type="checkbox" id="widget_show_name"
+                        name="widget_show_name"
+                        value="1"/>
+                <?php echo __('Product Name') ?>
+            </label>
+            <br>
+            <label>
+                <input
+                    <?php echo $block->checked('widget_show_price') ?>
+                        type="checkbox"
+                        id="widget_show_price"
+                        name="widget_show_price"
+                        value="1"/>
+                <?php echo __('Price') ?>
+            </label>
+        </div>
+    </fieldset>
+
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" class="action save primary affiliate_button" title="<?php echo __('Save') ?>">
+                <span><?php echo __('Save') ?></span>
+            </button>
+        </div>
+    </div>
+</form>
+
+<fieldset class="fieldset" id="affiliate-widget-part">
+    <legend class="legend"><span><?php echo __('Preview') ?></span></legend>
+    <div id="widget-area">
+        <div id="affiliate-widget" data-am-js="affiliate-widget" style="
+                width: <?php echo $block->getCurrentAccount()->getWidgetWidth() ?>px;
+                height: <?php echo $block->getCurrentAccount()->getWidgetHeight() ?>px;
+                overflow: auto;" >
+            <span id="widget-title" style="
+                width: 100%;
+                border-bottom: 1px solid;
+                font-weight: bold;
+                display: block;
+                text-align: center;
+                margin-bottom: 10px;
+            "><?php echo $block->escapeHtml($block->getCurrentAccount()->getWidgetTitle()) ?></span>
+            <?php $products = $block->getProducts() ?>
+            <?php /** @var \Magento\Catalog\Model\Product $product */foreach ($products as $product) : ?>
+                <div class="widget-product" style="width: 100px; display: inline-block">
+                    <a href="<?php echo $block->escapeHtml($block->getProductUrl($product)) ?>">
+                        <div class="product-image">
+                            <img src="<?php echo $block->escapeHtml($block->getProductImageUrl($product)) ?>">
+                        </div>
+                        <?php if ($block->getCurrentAccount()->getWidgetShowName()) : ?>
+                            <div class="product-name">
+                                <?php echo $block->escapeHtml($product->getName()); ?>
+                            </div>
+                        <?php endif; ?>
+                        <?php if ($block->getCurrentAccount()->getWidgetShowPrice()) : ?>
+                            <div class="product-price">
+                                <?php echo $block->escapeHtml($block->convertToPrice($product)); ?>
+                            </div>
+                        <?php endif; ?>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</fieldset>
+<span id="copy-text" data-am-js="copy-text" style="display: none;"><?php echo __('Copy') ?></span>
+<span id="copied-text" data-am-js="copied-text" style="display: none;"><?php echo __('Copied') ?></span>
+<div id="copy-button" data-am-js="copy-button" class="control">
+    <button class="button affiliate_button" id="copy-widget" data-am-js="copy-widget"><?php echo __('Copy') ?></button>
+</div>
+<script type="text/x-magento-init">
+        {
+            "*": {
+                "Amasty_Affiliate/js/promo": {}
+            }
+        }
+</script>

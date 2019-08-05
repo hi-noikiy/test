@@ -1,0 +1,153 @@
+<div id="verpage" class="block" style="display:none;">
+
+
+
+    <div class="verpage_text">
+        <strong><?php echo __('Must be at least 19 years old to enter'); ?></strong>
+    </div>
+
+
+    <div class="verpage_actions">
+        <button class="button exit" title="Exit" type="submit">
+            <span>
+                <span><?php echo __('Under 19'); ?></span>
+            </span>
+        </button>
+        <button class="button enter" title="Enter" type="submit">
+            <span>
+                <span><?php echo __('Enter 19+'); ?></span>
+            </span>
+        </button>
+    </div>
+
+
+</div>
+
+<script type="text/javascript">
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal',
+            "mage/cookies",
+            'domReady!'
+        ],
+        function (jQblvg,modal) {
+
+            var verpage = {
+                age: 0,
+                cookieLifetime: 0,
+                rimageWidth: 0,
+                rimageHeight: 0,
+                setCookie: function (name, value, path, domain, secure) {
+                    if (!name || !value)
+                        return false;
+                    var str = name + '=' + encodeURIComponent(value);
+                    if (path)
+                        str += '; path=' + path;
+                    if (domain)
+                        str += '; domain=' + domain;
+                    if (secure)
+                        str += '; secure';
+                    if (this.cookieLifetime) {
+                        var date = new Date(new Date().getTime() + this.cookieLifetime * 1000);
+                        str += '; expires=' + date.toUTCString();
+                    }
+                    document.cookie = str;
+                    return true;
+                },
+                getCookie: function (name) {
+                    var pattern = "(?:; )?" + name + "=([^;]*);?";
+                    var regexp = new RegExp(pattern);
+
+                    if (regexp.test(document.cookie))
+                        return decodeURIComponent(RegExp["$1"]);
+
+                    return false;
+                },
+                isValid: function () {
+                    if (this.getCookie('verpage_valid') || localStorage.getItem("verpage_valid"))
+                        return true;
+                    return false;
+                },
+                setValid: function () {
+                    this.setCookie('verpage_valid', 1, jQblvg.mage.cookies.path, jQblvg.mage.cookies.domain);
+                    localStorage.setItem("verpage_valid", 1);
+                },
+                checkEnterButton: function () {
+                    here = this;
+                    var curDate = new Date();
+                    var flag = true;
+                    if (jQblvg('.verpage_select select').length) {
+                        var birth = [];
+                        jQblvg('.verpage_select select').each(function (i) {
+                            birth[i] = jQblvg(this).val();
+                        });
+                        var birthDate = new Date(parseInt(birth[2]) + parseInt(here.age), birth[1] - 1, birth[0]);
+                    };
+                    if (typeof (birthDate) == 'object') {
+                        flag = (curDate.getTime() > birthDate.getTime()) ? true : false;
+                    };
+                    if (jQblvg('#verpage_confirm').length && flag) {
+                        if ((jQblvg('#verpage_confirm').attr('checked') != 'checked') || !flag) {
+                            flag = false;
+                        }
+                    };
+                    if (flag) {
+                        here.activateEnterButton()
+                    } else {
+                        jQblvg('.verpage_actions .enter').addClass('disabled').unbind('click')
+                    }
+                },
+                activateEnterButton: function () {
+                    here = this;
+                    jQblvg('.verpage_actions .enter').removeClass('disabled');
+                    jQblvg('.verpage_actions .enter').click(function () {
+                        here.setValid();
+
+                        jQblvg('#root-wrapper').css({"height": 'auto'});
+                        jQblvg('#root-wrapper').show();
+                        jQblvg('.item').css({"height": 'auto'});
+
+                        //jQblvg.fancybox.close();
+                        jQblvg('#verpage').modal('closeModal');
+                    });
+                },
+            };
+            if (!verpage.isValid()) {
+
+                jQblvg(document).ready(function () {
+                    verpage.age = 18;
+                    verpage.cookieLifetime = 604800;
+                    jQblvg(document).ready(function () {
+                        var options = {
+                            type: 'popup',
+                            modalClass: 'agevarification-popup-box',
+                            responsive: true,
+                            innerScroll: true,
+                            clickableOverlay: true,
+                            title: false,
+                            buttons: false
+                        };
+                        var popup = modal(options, jQblvg('#verpage'));
+                        jQblvg('#verpage').modal('openModal');
+                        jQblvg('#root-wrapper').css({'height': '100%'});
+                        jQblvg('#root-wrapper').hide();
+
+                    });
+                    jQblvg('.verpage_actions .exit').click(function () {
+                        window.location = '';
+                        history.back();
+                    });
+
+                    verpage.checkEnterButton();
+                    jQblvg('.verpage_select select').change(function () {
+                        verpage.checkEnterButton();
+                    });
+                    jQblvg('#verpage_confirm').change(function () {
+                        verpage.checkEnterButton();
+                    });
+                });
+            };
+        });
+</script>
+

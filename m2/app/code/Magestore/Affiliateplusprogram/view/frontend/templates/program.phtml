@@ -1,0 +1,48 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplusprogram
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * @var \Magestore\Affiliateplusprogram\Block\Program $block
+ */
+?>
+<?php
+$storeId = $block->getStoreId();
+$check_responsvie = $block->getStyleConfig($storeId);
+if($check_responsvie)
+    $class_name = 'col-lg-9 col-md-9 col-sm-12 col-xs-12';
+else
+    $class_name = 'col-lg-9 col-md-9 col-sm-9 col-xs-9';
+?>
+
+<div class="aff-main-content <?php echo $class_name; ?>">
+    <div class="aff-title">
+        <h1><?php echo __('My Programs') ?></h1>
+    </div>
+    <?php echo $block->getLayout()->getMessagesBlock()->getGroupedHtml(); ?>
+    <?php echo $block->getGridHtml() ?>
+
+    <div class="buttons-set">
+        <button class="button button-config action primary" type="button" onclick='setLocation("<?php echo $block->getAllProgramUrl() ?>")'>
+            <span>
+                <?php echo __('Other Programs') ?>
+            </span>
+        </button>
+    </div>
+</div>

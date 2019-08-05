@@ -1,0 +1,383 @@
+<?php
+/*
+    Template file for configurable product's tab management
+*/
+?>
+<?php
+    $mediaUrl = $block->getBaseUrl();
+    $hasUpsale=0;
+    $_product=$block->getCurrentProduct();
+    $upSellProducts = $_product->getUpSellProducts();
+    $crossSellProducts = $_product->getCrossSellProducts();
+       
+?>
+<div class="bodypart">
+    <div class="product-view">
+		<div class="box-additional second box-tabs grid12-12"> 
+			<div id ="product-tabs" class="gen-tabs gen-tabs-style1">
+				<div class="fullwidthtabline clearfix">
+					<div class="wrapper clearfix rwdmaintab">
+						<ul class="mobile-rwd tabs tabviewlinks clearer">
+							<li id="tab-media_tab" class="listitem">
+								<a id="protablinks-media_tab" href="javascript:void(0);" data-tab="#tabcontent-media_tab"><?php echo __('Gallery'); ?></a>
+							</li>
+							<li id="tab-additional" class="listitem">
+								<a id="protablinks-additional" href="javascript:void(0);" data-tab="#tabcontent-additional"><?php echo __('Specs'); ?></a>
+							</li>
+							<?php if( trim($this->getChildHtml('how_to')) != "" ): ?>
+							<li id="tab-how_to" class="listitem">
+								<a id="protablinks-how_to" href="javascript:void(0);" data-tab="#tabcontent-how_to"><?php echo __('How to'); ?></a>
+							</li>
+							<?php endif; ?>
+							<li id="tab-related_products" class="listitem">
+								<a id="protablinks-related_products" href="javascript:void(0);" data-tab="#tabcontent-related_products" class=""><?php echo __('In the box'); ?></a>
+							</li>
+							<li id="tab-tabreviews" class="listitem">
+								<a id="protablinks-tabreviews" href="javascript:void(0);" data-tab="#tabcontent-tabreviews"><?php echo __('Reviews'); ?></a>
+							</li>
+							<?php if (!empty($upSellProducts)) : ?>
+							<li id="tab-upsell_products" class="listitem">
+								<a id="protablinks-upsell_products" href="javascript:void(0);" data-tab="#tabcontent-upsell_products"><?php echo __('Add ons'); ?></a>
+							</li>
+							<?php endif; ?>
+							<?php if (!empty($crossSellProducts)) : ?>
+							<li id="tab-crosssell_products" class="listitem visible-mobile">
+								<a id="protablinks-crosssell_products" href="javascript:void(0);" data-tab="#tabcontent-crosssell_products"><?php echo __('Recommended for you'); ?></a>
+							</li>
+							<?php endif; ?>
+						</ul>
+						<?php if (!empty($upSellProducts)) : ?>
+							<div class="likealsoblack clearfix linkpro-three" id="tabcontent-upsell_products" >
+								<?php echo $this->getChildHtml('product_info_upsell_configurable');?>     
+							</div>
+						<?php endif; ?>
+						<div class="rgdev-mobile">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</div>
+						<div class="rgdev-text">More Info</div>
+					</div>
+				</div>
+				<div class="tabs-panels">
+					<div class="popupdiv" id="tabcontent01"></div>
+					<h2 class="acctab" id="acctab-media_tab"><?php echo __('Gallery')?></h2>
+					<div class="popupdiv" id="tabcontent-media_tab">
+						<span class="closeicon"></span>
+						<div class="gallerypopupdiv popupopener02" id="viewgalleryid01">
+							<div id="slideshow" class="clearfix">
+								 <?php echo $this->getChildHtml('product.gallery.gift');?>
+							</div>
+						</div>
+						<div class="full-view-section gallerypopupdiv" id="viewgalleryid02">
+							<div class="wrapper02 clearfix"></div>
+						</div>
+						<div class="compare-sizes-section gallerypopupdiv" id="viewgalleryid03">
+							<div class="wrapper02 clearfix">
+								<?php echo $this->getChildHtml('comparesizeimage');?>
+							</div>
+						</div>
+						<div class="fullwidthtabgallery clearfix">
+							<div class="wrapper clearfix">
+								<div class="gallerytabview clearfix">
+									<div class="listitemgly">
+										<a class="active" href="#galyid" id="openviewgalleryid01"> 
+											<img src="<?php echo $mediaUrl."wysiwyg/view-galleryicon.png"; ?>" alt="gallery"/>
+										</a>
+									</div>
+									<div class="listitemgly">
+										<a href="#showgalleryview" id="openviewgalleryid02"> 
+											<img src="<?php echo $mediaUrl."wysiwyg/360view.png"; ?>" alt="gallery"/>
+										</a>
+									</div>
+									<?php if($this->getChildHtml('comparesizeimage') != ''): ?>
+										<div class="listitemgly" id="compare">
+											<a href="#showgalleryview" id="openviewgalleryid03"> 
+												<img src="<?php echo $mediaUrl."wysiwyg/compare-size-icon.png"; ?>" alt="gallery-compare"/>
+											</a>
+										</div>
+									<?php endif; ?>
+								</div>
+							</div>
+						</div>
+					</div> <!-- End first tab -->
+					<h2 class="acctab" id="acctab-additional">Specs</h2>
+					<div class="popupdiv gridviewimg" id="tabcontent-additional">
+						<span class="closeicon"></span>
+						<?php echo $this->getChildHtml('attributes');?>    
+					</div><!-- End 2rd tab -->
+					<h2 class="acctab" id="acctab-how_to">How to</h2>
+					<div class="popupdiv" id="tabcontent-how_to">
+						<span class="closeicon"></span>
+						<?php echo $this->getChildHtml('how_to');?> 
+					</div><!-- End 3rd tab -->
+					<h2 class="acctab" id="acctab-related_products"><?php echo __('In the box')?></h2>
+					<div class="popupdiv" id="tabcontent-related_products">
+						<span class="closeicon"></span>                      
+						<?php echo $this->getChildHtml('relatedtab');?>      
+					</div><!-- End 4th tab -->
+					<h2 class="acctab" id="acctab-tabreviews"><?php echo __('Reviews')?></h2>
+					<div class="popupdiv" id="tabcontent-tabreviews">
+						<span class="closeicon"></span>                              
+						<?php echo $this->getChildHtml('reviews'); ?>   
+					</div><!-- End 5th tab --> 
+					<h2 class="acctab" id="acctab-upsell_products"><?php echo __('Add ons 1')?></h2>
+				</div>
+			</div> 
+		</div>  
+	</div>  
+</div>  
+<script type="text/javascript">
+/* require(['jquery'],function($){
+
+    var OSName="Unknown OS";
+        if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
+        if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
+        if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
+        if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
+
+    $(document).on('mousedown','.tabviewlinks .listitem a', function() {
+
+        $('.tabviewlinks .listitem a').removeClass('active');  
+        $(this).addClass('active');
+            var tabContent = $($(this).attr('data-tab'));
+            if($(this).attr("id")!= 'protablinks-upsell_products'){
+                $('.product-essential').css({
+                    'min-height': tabContent.outerHeight(true) - 10 + 'px'
+                });
+            }
+            
+            var elId = $(this).attr('id');
+            if( elId == "openviewgalleryid01" || elId == "openviewgalleryid02" || elId == "openviewgalleryid03" ) {
+                $('.bodypart').addClass( "protablinks-media_tab").addClass(elId);
+            }
+            else {
+                $('.bodypart').removeClass("openviewgalleryid01").removeClass("openviewgalleryid02").removeClass("openviewgalleryid03");
+                $('.bodypart').attr( 'class', 'bodypart ' + elId );
+            }
+
+            $('.popupdiv').css("height","none");
+            $('.tabtarget').addClass('fixed');
+            
+        if(jQuery(window).width() >= 768){ 
+            var offset = parseInt( $($(this).attr("data-tab")).offset().top );
+            if($(this).attr("id")=='protablinks-upsell_products'){
+                $("html, body").animate({ scrollTop: $($(this).attr("data-tab")).offset().top }, 500);
+            }else{
+                if (jQuery(window).width() >= 768) {
+                    $("html, body").animate({ scrollTop: 125 }, 700, function () { $("header.page-header").removeClass("sticky"); $("header.page-header").css("z-index","1"); return false; });
+                    setTimeout(function(){
+                        $("header.page-header").removeClass("sticky");
+                        $("header.page-header").css("z-index","1");
+                    }, 700);
+                }
+                else{
+                    $("html, body").animate({ scrollTop: offset }, 700, function () { return false; });
+                }
+            }
+        }
+
+        $(window).trigger("resize");
+    });
+    
+    if( jQuery(window).width() >= 768 ) {
+    
+        $(document).on('mousedown','.tabviewlinks .listitem a#protablinks-add-ons', function() {
+            $('.tabtarget').removeClass('fixed');
+        });
+    
+        $(".closeicon").on("click", function() {
+            $('.product-essential').css({ 
+                'min-height': '0px'
+            });
+            $('.bodypart').attr('class', 'bodypart')
+            $('.tabviewlinks .listitem a').removeClass('active');
+            $('.tabtarget').removeClass('fixed');
+        });
+
+
+        $('.product-reviews-summary .reviews-actions .action.add ,.product-reviews-summary .reviews-actions .action.view').click(function(e) {
+            e.preventDefault();
+            $('#tab-tabreviews a').trigger("mousedown");
+        });
+
+       $('#product-image-anchor').click(function(e){
+            e.preventDefault();
+            $('#tab-media_tab a').trigger("mousedown");
+        });
+
+        // For Open Gallery popup
+       $('#viewgalleryid11').click(function(){
+            $('#showgalleryview').css("display","block")
+        });
+
+       $('.closeicon').click(function(){
+            $('.maingallrydiv').css("display","none")
+        });
+        // 3 TAB Gallery links popup
+       
+
+        $(".gallerytabview .listitemgly #openviewgalleryid01").on("click", function() {
+            $('.gallerypopupdiv').removeClass('popupopener02');
+            $('#viewgalleryid01').addClass('popupopener02');
+            $(this).addClass('active').parent().siblings().children().removeClass('active');
+        });
+
+        $(".gallerytabview .listitemgly #openviewgalleryid02").on("click", function() {
+            $('.gallerypopupdiv').removeClass('popupopener02');
+            $('#viewgalleryid02').addClass('popupopener02');
+            $(this).addClass('active').parent().siblings().children().removeClass('active');
+        });
+
+        $(".gallerytabview .listitemgly #openviewgalleryid02").click(function() {
+            $(window).trigger("resize");
+        });
+
+        $(".gallerytabview .listitemgly #openviewgalleryid03").on("click", function() {
+            $('.gallerypopupdiv').removeClass('popupopener02');
+            $('#viewgalleryid03').addClass('popupopener02');
+            $(this).addClass('active').parent().siblings().children().removeClass('active');
+        });
+    }
+
+    // Click to reveal the rgdev
+    $('.rgdev-mobile').click(function(){
+        $('.tabviewlinks').slideToggle('slow');
+    });    
+
+    $(document).on('click',function(event){
+        if(event.target.nodeName == 'IMG')
+            $(window).trigger("resize");
+    });
+
+    $(document).on('click',function(event){
+       if (event.target.nodeName == 'IMG' && $(event.target).hasClass("fotorama__img") && event.target.naturalHeight >= 400){
+            $('#tab-media_tab a').trigger("mousedown");
+        }
+    });
+
+});
+
+// Mobile Js Starts
+require(['jquery', 'mage/gallery/gallery'],function($, gallery){
+    let deviceWidth = $(window).width();
+    if( deviceWidth < 768 ){
+        $('#product-tabs .tabs-panels').hide();
+        // Gallery Accordian Effect Starts
+        $("#tabcontent-upsell_products").hide().appendTo($("#tab-upsell_products"));
+        var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+        var BindEvent = supportsTouch ? 'tap' : 'click';
+
+        $(document).on(BindEvent, '#product-tabs .fullwidthtabline ul.tabviewlinks li a', function(e){
+            e.preventDefault();
+            if( $(this).attr('id') == 'showdiv01' || $(this).attr('id') == 'showdiv02' ){
+                return false;
+            }
+
+            if($(this).hasClass('active') && $(this).attr('id') != "protablinks-upsell_products" && $(this).attr('id') != "protablinks-crosssell_products" ){
+                $(this).removeClass('active');
+                $('#product-tabs .tabs-panels').slideUp();
+            }
+            else if( $(this).attr('id') != "protablinks-upsell_products" ){
+                $('.tabviewlinks li a').removeClass('active');
+                if( $(this).hasClass('active') ){
+                    $(this).removeClass('active');
+                }
+                else {
+                    $(this).addClass('active');
+                }
+                if( $(this).attr('id') == "openviewgalleryid01" || $(this).attr('id') == "openviewgalleryid02" || $(this).attr('id') == "openviewgalleryid03" ) {
+
+                }
+                else {
+                    $("#product-tabs .tabs-panels .popupdiv").hide();
+                    var tabToggle = $(this).data('tab');
+                    if( $(this).hasClass('active') ){
+                        $(tabToggle).show();
+                    }
+                }
+            }
+            else {
+                $('.tabviewlinks li a').removeClass('active');
+                $(this).addClass('active');
+            }
+
+            if( $(this).attr('id') == "protablinks-upsell_products" ){
+                if( $("#tabcontent-upsell_products").is(":visible") ){
+                    $(this).removeClass('active');
+                }
+                $("#addon-popup").hide();
+                $('#product-tabs .tabs-panels').hide();
+                $("#tabcontent-upsell_products").slideToggle();
+            } else if( $(this).attr('id') == "protablinks-crosssell_products" ){
+                if( $("#addon-popup").is(":visible") ){
+                    $(this).removeClass('active');
+                }
+                $("#tabcontent-upsell_products").hide();
+                $('#product-tabs .tabs-panels').hide();
+                $("#addon-popup").slideToggle();
+            }
+            else if( $(this).hasClass('active') && $(this).attr('id') == "protablinks-media_tab" || $(this).attr('id') == "openviewgalleryid01" || $(this).attr('id') == "openviewgalleryid02" || $(this).attr('id') == "openviewgalleryid03" ){
+                if( $(this).attr('id') == "protablinks-media_tab" ){
+                    $('.gallerypopupdiv').removeClass('popupopener02');
+                    $('.gallerypopupdiv').first().addClass('popupopener02');
+                    $("#openviewgalleryid01").tap();
+                    window.dispatchEvent(new Event('resize'));
+                }
+                $(this).parent('li').append($('#product-tabs .tabs-panels'));
+                $(".configurable-inner .bodypart").addClass("protablinks-media_tab");
+                $('#product-tabs .tabs-panels').slideDown();
+            }
+            else {
+                if( $(this).hasClass('active') ){
+                    $(this).parent('li').append($('#product-tabs .tabs-panels'));
+                    $('#product-tabs .tabs-panels').slideDown();
+                    $('.gallerypopupdiv').removeClass('popupopener02');
+                    $('.bodypart').attr('class', $(this).attr('id')+' bodypart');
+                }
+            }
+
+            if($(this).attr('id') != "openviewgalleryid01" && $(this).attr('id') != "openviewgalleryid02" && $(this).attr('id') != "openviewgalleryid03") {
+                $('html, body').animate({
+                    scrollTop: $(this).offset().top - 60
+                }, 500);
+            }
+        });
+
+        $(document).on(BindEvent, '#openviewgalleryid02', function(e){
+            e.preventDefault();
+            $('.gallerypopupdiv').removeClass('popupopener02');
+            $('#viewgalleryid01').removeClass('popupopener02');
+            $('#viewgalleryid03').removeClass('popupopener02');
+            $('#viewgalleryid02').addClass('popupopener02');
+            $(this).addClass('active').parent().siblings().children().removeClass('active');
+            $('#product-tabs .tabs-panels').show();
+            window.dispatchEvent(new Event('resize'));
+            $("#protablinks-media_tab").addClass('active');
+        });
+
+        $(document).on(BindEvent, '#openviewgalleryid01', function(e) {
+            e.preventDefault();
+            $('.gallerypopupdiv').removeClass('popupopener02');
+            $('#viewgalleryid02').removeClass('popupopener02');
+            $('#viewgalleryid03').removeClass('popupopener02');
+            $('#viewgalleryid01').addClass('popupopener02');
+            $(this).addClass('active').parent().siblings().children().removeClass('active');
+            window.dispatchEvent(new Event('resize'));
+            $("#protablinks-media_tab").addClass('active');
+        });
+
+        $(document).on(BindEvent, '#openviewgalleryid03', function(e) {
+            e.preventDefault();
+            $('.gallerypopupdiv').removeClass('popupopener02');
+            $('#viewgalleryid02').removeClass('popupopener02');
+            $('#viewgalleryid01').removeClass('popupopener02');
+            $('#viewgalleryid03').addClass('popupopener02');
+            $(this).addClass('active').parent().siblings().children().removeClass('active');
+            window.dispatchEvent(new Event('resize'));
+            $("#protablinks-media_tab").addClass('active');
+        });
+
+    }
+}); */
+</script>

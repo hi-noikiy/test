@@ -1,0 +1,40 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Storelocator
+ */
+?>
+<?php
+/**
+ * @var \Amasty\Storelocator\Block\View\Schedule $this
+ * @var \Amasty\Storelocator\Model\Location $location
+ */
+$location = $this->getLocation();
+$workToday = $location->getWorkingTimeToday();
+?>
+
+<div class="amlocator-schedule-container">
+    <div class="amlocator-today"  data-amlocator-js="collapse-trigger">
+        <strong><?= $this->escapeHtml(__('Work Time Today:')); ?></strong>
+        <span class="amlocator-time">
+            <span><?= $this->escapeHtml($workToday); ?></span>
+            <span class="amlocator-arrow -down"></span>
+        </span>
+    </div>
+
+    <div class="amlocator-week" data-amlocator-js="collapse-content" id="schedule<?= $location->getId(); ?>">
+        <div class="amlocator-schedule-table">
+            <?php foreach ($location->dayNames as $key => $item) {
+                $workingTime = $location->getWorkingTime($key);
+                ?>
+                <div class="amlocator-row">
+                    <?php foreach ($workingTime as $keyTime => $time) { ?>
+                        <span class="amlocator-cell -day"><?= $this->escapeHtml($keyTime) ?></span>
+                        <span class="amlocator-cell -time"><?= $this->escapeHtml($time) ?></span>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+</div>

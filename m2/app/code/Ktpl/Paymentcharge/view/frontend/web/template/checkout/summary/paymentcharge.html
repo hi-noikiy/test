@@ -1,0 +1,8 @@
+<!-- ko if: isDisplayedCustomdiscount() -->
+<tr class="totals customdiscount excl">
+   <th class="mark" colspan="1" scope="row" data-bind="text: paymentcharge"></th>
+   <td class="amount">
+       <span class="price" data-bind="text: getPaymentCharge(), attr: {'data-th': paymentcharge}"></span>
+   </td>
+</tr>
+<!-- /ko -->

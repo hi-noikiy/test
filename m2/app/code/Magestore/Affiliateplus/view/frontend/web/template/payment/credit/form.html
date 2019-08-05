@@ -1,0 +1,60 @@
+<!--
+* Magestore
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Magestore.com license that is
+* available through the world-wide-web at this URL:
+* http://www.magestore.com/license-agreement.html
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade this extension to newer
+* version in the future.
+*
+* @category    Magestore
+* @package     Magestore_Affiliateplus
+* @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+* @license     http://www.magestore.com/license-agreement.html
+-->
+
+<!-- ko if: affiliateCreditInfo()['enableCredit'] -->
+<dl id="affiliateplus_container" style="float: left;width: 103%;">
+    <dt class="affiliateplus_credit">
+        <input type="checkbox" id="affiliateplus_credit" name="payment['affiliateplus_credit']" data-bind="checked: usedAffiliateCredit, click: changeUseAffiliateCredit"/>
+        <label for="affiliateplus_credit" style="font-weight: bold; color: #666;">
+            <!-- ko text: $t('Check out with affiliate account balance: ')--><!-- /ko -->
+            <span class="price" data-bind="text: affiliateCreditInfo()['formatedBalance']"></span>
+        </label>
+        <p id="affiliateplus_credit_ajaxload" style="display:none; font-weight: normal; font-style: italic;">
+            <img class="v-middle"
+                 data-bind="attr:{alt: $t('Loading...'),title: $t('Loading...'), src: $t(affiliateCreditInfo()['opcAjaxLoader'])} " />
+            <!-- ko text: $t('Loading...' )--><!-- /ko -->
+        </p>
+    </dt>
+    <dd class="form-group affiliateplus_credit" data-bind="if: usedAffiliateCredit">
+        <ul id="payment_form_affiliateplus_credit">
+            <li id="affiliateplus_credit_message"></li>
+            <li class="affiliateplus-discount-code">
+                <strong>
+                    <!-- ko text: $t('You are spending' )--><!-- /ko -->
+					<span>
+						<span style="width: 10%;" class="using_credit style-form" style="cursor: pointer;" title="Edit" data-bind="ifnot: showCreditInput, click: showCreditInput">
+							<a href="#" onclick="return false;"><span data-bind="text: affiliateCreditInfo()['usingAmount']"></span></a>
+							<img style="width: 21%;" class="ajax-loader v-middle"
+                                 data-bind="attr:{alt: $t('Edit'), src: $t(affiliateCreditInfo()['editButtonImage'])} " />
+						</span>
+						<span class="credit_input" data-bind="if: showCreditInput">
+							<input class="input-text" type="text" style="width: 68px;"
+                                   data-bind="event: {keypress: enterUpdateCreditInput}, value: affiliateCreditInfo()['affiliateCredit'], attr:{alt: $t('Apply'), title: $t('Credit')}"
+                                   data-validate="{'validate-zero-or-greater':true}" />
+							<img data-bind="attr:{alt: $t('Apply'), title: $t('Apply'), src: $t(affiliateCreditInfo()['seccessMsgImage'])}, click: updateCreditInput"
+                                    class="v-middle"  style="cursor: pointer;" />
+						</span>
+					</span>
+                </strong>
+            </li>
+        </ul>
+    </dd>
+</dl>
+<!-- /ko -->

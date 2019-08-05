@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+  <event name="sales_order_load_after">
+    <observer name="sales_order_load_after" instance="Magestore\Affiliateplus\Observer\SalesOrderLoadAfter" shared="false" />
+  </event>
+  <!-- Use event to create transaction for affiliate and switch transaction status base on order status-->
+  <event name="sales_order_save_after">
+    <observer name="sales_order_save_after" instance="Magestore\Affiliateplus\Observer\SalesOrderSaveAfter" shared="false" />
+  </event>
+  <event name="paypal_prepare_line_items">
+    <observer name="paypal_prepare_line_items" instance="Magestore\Affiliateplus\Observer\PaypalPrepareLineItems" shared="false" />
+  </event>
+  <event name="customer_save_after">
+    <observer name="customer_save_after" instance="Magestore\Affiliateplus\Observer\CustomerSaveAfter" shared="false" />
+  </event>
+  <!-- Use event to reduce commission from affiliate's balance when customer refund order (patial refund) -->
+  <event name="sales_order_creditmemo_save_after">
+    <observer name="sales_order_creditmemo_save_after" instance="Magestore\Affiliateplus\Observer\CreditmemoSaveAfter" shared="false" />
+  </event>
+    <event name="affiliateplus_request_payment_action_moneybooker">
+    <observer name="affiliateplus_request_payment_action_moneybooker" instance="Magestore\Affiliateplus\Observer\RequestPaymentActionMoneybooker" shared="false" />
+  </event>
+    <event name="affiliateplus_request_payment_action_offline">
+    <observer name="affiliateplus_request_payment_action_offline" instance="Magestore\Affiliateplus\Observer\RequestPaymentActionOffline" shared="false" />
+  </event>
+    <event name="affiliateplus_request_payment_action_bank">
+    <observer name="affiliateplus_request_payment_action_bank" instance="Magestore\Affiliateplus\Observer\RequestPaymentActionBank" shared="false" />
+  </event>
+    <event name="affiliateplus_payment_prepare_data">
+    <observer name="affiliateplus_payment_prepare_data" instance="Magestore\Affiliateplus\Observer\AffiliateplusPaymentPrepare" shared="false" />
+  </event>
+</config>

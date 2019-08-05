@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+		<css src="Customweb_PayEngine3Cw::css/payengine3cw.css"/>
+	</head>
+    <body>
+        <referenceBlock name="checkout.root">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="steps" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="billing-step" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="payment" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="renders" xsi:type="array">
+                                                            <!-- merge payment method renders here -->
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="payengine3cw-payments" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Customweb_PayEngine3Cw/js/view/payment/payengine3cw-payments</item>
+                                                                    <item name="methods" xsi:type="array">
+                                                                    	
+                                                                    	<item name="payengine3cw_creditcard" xsi:type="array">
+                                                                    		<item name="isBillingAddressRequired" xsi:type="boolean">true</item>
+                                                                    	</item>
+                                                                    	<item name="payengine3cw_paypal" xsi:type="array">
+                                                                    		<item name="isBillingAddressRequired" xsi:type="boolean">true</item>
+                                                                    	</item>
+                                                                    	<item name="payengine3cw_paydirekt" xsi:type="array">
+                                                                    		<item name="isBillingAddressRequired" xsi:type="boolean">true</item>
+                                                                    	</item>
+                                                                    	<item name="payengine3cw_ratepayopeninvoice" xsi:type="array">
+                                                                    		<item name="isBillingAddressRequired" xsi:type="boolean">true</item>
+                                                                    	</item>
+                                                                    	<item name="payengine3cw_ratepaydirectdebits" xsi:type="array">
+                                                                    		<item name="isBillingAddressRequired" xsi:type="boolean">true</item>
+                                                                    	</item>
+                                                                    	<item name="payengine3cw_ratepayinstallments" xsi:type="array">
+                                                                    		<item name="isBillingAddressRequired" xsi:type="boolean">true</item>
+                                                                    	</item>
+                                                                    	<item name="payengine3cw_sofortueberweisung" xsi:type="array">
+                                                                    		<item name="isBillingAddressRequired" xsi:type="boolean">true</item>
+                                                                    	</item>
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

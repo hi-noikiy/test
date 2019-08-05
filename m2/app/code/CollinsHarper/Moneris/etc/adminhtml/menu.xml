@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="CollinsHarper_Moneris::moneris" title="Moneris" translate="title" module="CollinsHarper_Moneris" sortOrder="50" parent="Magento_Sales::sales" resource="CollinsHarper_Moneris::moneris"/>
+        <add id="CollinsHarper_Moneris::moneris_recurring_payments" title="Recurring Payments" translate="title" module="CollinsHarper_Moneris" sortOrder="50" parent="CollinsHarper_Moneris::moneris" action="moneris/recurringpayment" resource="CollinsHarper_Moneris::moneris_recurring_payments"/>
+    </menu>
+</config>

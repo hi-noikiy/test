@@ -1,0 +1,94 @@
+<?php
+
+/**
+ * Magestore.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+<?php
+/**
+ * @var $block Magestore\Affiliateplus\Block\Credit\Cart
+ */
+$store_id = $block->getStoreViewId();
+?>
+<?php $_code = 'affiliateplus' ?>
+<div class="block discount">
+<form id="discount-affiliateplus-form" action="<?php echo $block->getUrl('affiliateplus/checkout/creditPost') ?>" method="post" data-mage-init='{"validation":{}}'>
+    <div class="discount">
+        <div class="lable-title">
+            <h2 class="legend"><?php echo __('Affiliate Store Credit') ?></h2>
+        </div>
+        <div class="discount-form">
+            <dl id="<?php echo $_code ?>_container">
+                <dt class="<?php echo $_code ?>_credit">
+                    <input type="checkbox" name="<?php echo $_code ?>_credit" id="<?php echo $_code ?>_credit"<?php if ($block->getUseAffiliateCredit()): ?> checked="checked"<?php endif ?> value="1" onclick="showAffiliateCreditInput(this)" />
+                    <label for="<?php echo $_code ?>_credit" style="font-weight: bold; color: #666;"><?php echo __('Check out with affiliate account balance (%1)', $block->getFormatedBalance()) ?></label>
+                </dt>
+                <dd id="<?php echo $_code ?>_credit_input" class="<?php echo $_code ?>_credit"<?php if (!$block->getUseAffiliateCredit()): ?> style="margin-top: 5px;display: none;"<?php endif ?>>
+                    <div>
+                        <label>
+                            <?php echo __('Enter an amount in your balance to spend on this order') ?>
+                        </label>
+                        <div class="input-box">
+                            <input style="width: 100%;" data-validate="{required:true, 'validate-zero-or-greater':true}" class="input-text" type="text" value="<?php echo $block->getAffiliateCredit() ?>" title="<?php echo __('Affiliate Store Credit') ?>" name="credit_amount" id="credit_form_credit_amount"  onchange="checkAffiliateCredit(this)"/>
+                        </div>
+                    </div>
+                    <br />
+                    <div>
+                        <div class="buttons-set">
+                            <button type="submit" class="button button-config action primary" id="credit_form_button_config">
+                                <span>
+                                    <?php echo __('Apply') ?>
+                                </span>
+                            </button>
+                        </div>
+                        <p></p>
+                    </div>
+                </dd>
+                <dt></dt>
+            </dl>
+        </div>
+
+    </div>
+</form>
+</div>
+<script type="text/javascript">
+    function showAffiliateCreditInput(el) {
+        require(['prototype'], function() {
+            if (el.checked) {
+                $('<?php echo $_code ?>_credit_input').show();
+            } else {
+                $('<?php echo $_code ?>_credit_input').hide();
+            }
+        });
+    }
+    function checkAffiliateCredit(el){
+        require(['prototype'], function(){
+            var balance = '<?php echo $block->convertPrice($block->getBalance())?>';
+            if(Math.abs(el.value) > balance){
+                el.value = balance;
+            }
+        });
+    }
+</script>
+<style>
+    #discount-affiliateplus-form h2.legend{
+        background-color: #<?php echo $block->_getHelper()->getStyleConfig('background_subtitle', $store_id) ?>;
+        color:#<?php echo $block->_getHelper()->getStyleConfig('sub_title_color', $store_id) ?>;
+    }
+</style>

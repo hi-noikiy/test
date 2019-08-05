@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Affiliate
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\Affiliate\Api\Data\AccountInterface" type="Amasty\Affiliate\Model\Account" />
+    <preference for="Amasty\Affiliate\Api\Data\TransactionInterface" type="Amasty\Affiliate\Model\Transaction" />
+    <preference for="Amasty\Affiliate\Api\Data\BannerInterface" type="Amasty\Affiliate\Model\Banner" />
+    <preference for="Amasty\Affiliate\Api\Data\LifetimeInterface" type="Amasty\Affiliate\Model\Lifetime" />
+    <preference for="Amasty\Affiliate\Api\Data\LinksInterface" type="Amasty\Affiliate\Model\Links" />
+    <preference for="Amasty\Affiliate\Api\Data\ProgramInterface" type="Amasty\Affiliate\Model\Program" />
+    <preference for="Amasty\Affiliate\Api\Data\WithdrawalInterface" type="Amasty\Affiliate\Model\Withdrawal" />
+
+    <preference for="Amasty\Affiliate\Api\AccountRepositoryInterface" type="Amasty\Affiliate\Model\AccountRepository" />
+    <preference for="Amasty\Affiliate\Api\TransactionRepositoryInterface" type="Amasty\Affiliate\Model\TransactionRepository" />
+    <preference for="Amasty\Affiliate\Api\BannerRepositoryInterface" type="Amasty\Affiliate\Model\BannerRepository" />
+    <preference for="Amasty\Affiliate\Api\LifetimeRepositoryInterface" type="Amasty\Affiliate\Model\LifetimeRepository" />
+    <preference for="Amasty\Affiliate\Api\LinksRepositoryInterface" type="Amasty\Affiliate\Model\LinksRepository" />
+    <preference for="Amasty\Affiliate\Api\ProgramRepositoryInterface" type="Amasty\Affiliate\Model\ProgramRepository" />
+    <preference for="Amasty\Affiliate\Api\WithdrawalRepositoryInterface" type="Amasty\Affiliate\Model\WithdrawalRepository" />
+
+    <virtualType name="AmastyAffiliateAccountTransactionReporting" type="Magento\Framework\View\Element\UiComponent\DataProvider\Reporting">
+        <arguments>
+            <argument name="filterPool" xsi:type="object">Amasty\Affiliate\Ui\Component\DataProvider\FilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AmastyAffiliateAccountTransactionDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="reporting" xsi:type="object">AmastyAffiliateAccountTransactionReporting</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="amasty_affiliate_program_listing_data_source" xsi:type="string">Amasty\Affiliate\Model\ResourceModel\Program\Grid\Collection</item>
+                <item name="amasty_affiliate_account_listing_data_source" xsi:type="string">Amasty\Affiliate\Model\ResourceModel\Account\Grid\Collection</item>
+                <item name="amasty_affiliate_banner_listing_data_source" xsi:type="string">Amasty\Affiliate\Model\ResourceModel\Banner\Grid\Collection</item>
+                <item name="amasty_affiliate_withdrawal_listing_data_source" xsi:type="string">Amasty\Affiliate\Model\ResourceModel\Withdrawal\Grid\Collection</item>
+                <item name="amasty_affiliate_transaction_listing_data_source" xsi:type="string">Amasty\Affiliate\Model\ResourceModel\Transaction\Grid\Collection</item>
+                <item name="amasty_affiliate_account_transaction_listing_data_source" xsi:type="string">Amasty\Affiliate\Model\ResourceModel\Account\Transaction\Grid\Collection</item>
+                <item name="amasty_affiliate_account_withdrawal_listing_data_source" xsi:type="string">Amasty\Affiliate\Model\ResourceModel\Account\Withdrawal\Grid\Collection</item>
+                <item name="amasty_affiliate_account_coupon_listing_data_source" xsi:type="string">Amasty\Affiliate\Model\ResourceModel\Account\Coupon\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Affiliate\Model\ResourceModel\Program\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">amasty_affiliate_program</argument>
+            <argument name="eventPrefix" xsi:type="string">amasty_affiliate_program_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">program_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Amasty\Affiliate\Model\ResourceModel\Program</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Affiliate\Model\ResourceModel\Account\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">amasty_affiliate_account</argument>
+            <argument name="eventPrefix" xsi:type="string">amasty_affiliate_account_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">account_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Amasty\Affiliate\Model\ResourceModel\Account</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Affiliate\Model\ResourceModel\Banner\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">amasty_affiliate_banner</argument>
+            <argument name="eventPrefix" xsi:type="string">amasty_affiliate_banner_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">banner_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Amasty\Affiliate\Model\ResourceModel\Banner</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Affiliate\Model\ResourceModel\Account\Transaction\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">amasty_affiliate_transaction</argument>
+            <argument name="eventPrefix" xsi:type="string">amasty_affiliate_account_transaction_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">account_transaction_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Amasty\Affiliate\Model\ResourceModel\Transaction</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Affiliate\Model\ResourceModel\Account\Withdrawal\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">amasty_affiliate_transaction</argument>
+            <argument name="eventPrefix" xsi:type="string">amasty_affiliate_account_withdrawal_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">account_withdrawal_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Amasty\Affiliate\Model\ResourceModel\Withdrawal</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Affiliate\Model\ResourceModel\Account\Coupon\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">amasty_affiliate_coupon</argument>
+            <argument name="eventPrefix" xsi:type="string">amasty_affiliate_account_coupon_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">account_coupon_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Amasty\Affiliate\Model\ResourceModel\Coupon</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Affiliate\Model\ResourceModel\Withdrawal\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">amasty_affiliate_transaction</argument>
+            <argument name="eventPrefix" xsi:type="string">amasty_affiliate_withdrawal_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">withdrawal_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Amasty\Affiliate\Model\ResourceModel\Withdrawal</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Affiliate\Model\ResourceModel\Transaction\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">amasty_affiliate_transaction</argument>
+            <argument name="eventPrefix" xsi:type="string">amasty_affiliate_transaction_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">transaction_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Amasty\Affiliate\Model\ResourceModel\Transaction</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Amasty\Affiliate\Api\Data\AccountInterface" xsi:type="string">Amasty\Affiliate\Api\AccountRepositoryInterface</item>
+                <item name="Amasty\Affiliate\Api\Data\BannerInterface" xsi:type="string">Amasty\Affiliate\Api\BannerRepositoryInterface</item>
+                <item name="Amasty\Affiliate\Api\Data\LifetimeInterface" xsi:type="string">Amasty\Affiliate\Api\LifetimeRepositoryInterface</item>
+                <item name="Amasty\Affiliate\Api\Data\LinksInterface" xsi:type="string">Amasty\Affiliate\Api\LinksRepositoryInterface</item>
+                <item name="Amasty\Affiliate\Api\Data\ProgramInterface" xsi:type="string">Amasty\Affiliate\Api\ProgramRepositoryInterface</item>
+                <item name="Amasty\Affiliate\Api\Data\TransactionInterface" xsi:type="string">Amasty\Affiliate\Api\TransactionRepositoryInterface</item>
+                <item name="Amasty\Affiliate\Api\Data\WithdrawalInterface" xsi:type="string">Amasty\Affiliate\Api\WithdrawalRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Amasty\Affiliate\Api\Data\ProgramInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">amasty_affiliate_program</item>
+                    <item name="identifierField" xsi:type="string">program_id</item>
+                </item>
+                <item name="Amasty\Affiliate\Api\Data\AccountInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">amasty_affiliate_account</item>
+                    <item name="identifierField" xsi:type="string">account_id</item>
+                </item>
+                <item name="Amasty\Affiliate\Api\Data\BannerInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">amasty_affiliate_banner</item>
+                    <item name="identifierField" xsi:type="string">banner_id</item>
+                </item>
+                <item name="Amasty\Affiliate\Api\Data\WithdrawalInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">amasty_affiliate_withdrawal</item>
+                    <item name="identifierField" xsi:type="string">transaction_id</item>
+                </item>
+                <item name="Amasty\Affiliate\Api\Data\TransactionInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">amasty_affiliate_transaction</item>
+                    <item name="identifierField" xsi:type="string">transaction_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Customer\Model\Customer">
+        <plugin name="save_affiliate_data" type="Amasty\Affiliate\Plugin\User\SaveAccount"/>
+    </type>
+    <type name="Magento\Sales\Model\Order">
+        <plugin name="sales_order_status_changing" type="Amasty\Affiliate\Plugin\Sales\Model\Order"/>
+    </type>
+    <type name="Magento\Sales\Model\Service\CreditmemoService">
+        <plugin name="creditmemo_refund" type="Amasty\Affiliate\Plugin\Sales\Model\Service\CreditmemoService"/>
+    </type>
+    <type name="Magento\Quote\Model\CouponManagement">
+        <plugin name="set_coupon" type="Amasty\Affiliate\Plugin\Quote\Model\CouponManagement"/>
+    </type>
+    <type name="Magento\Framework\View\Layout">
+        <plugin name="is_cacheable" type="Amasty\Affiliate\Plugin\View\Layout"/>
+    </type>
+    <type name="Magento\Framework\App\Action\AbstractAction">
+        <plugin name="action_context_dispatch" type="Amasty\Affiliate\Plugin\App\Action\ContextPlugin"/>
+    </type>
+    <type name="Magento\SalesRule\Block\Adminhtml\Promo\Quote\Edit\DeleteButton">
+        <plugin name="cart_rule_delete_button" type="Amasty\Affiliate\Plugin\SalesRule\Block\Adminhtml\Promo\Quote\Edit\DeleteButton"/>
+    </type>
+    <type name="Magento\SalesRule\Model\ResourceModel\Rule\Collection">
+        <plugin name="cart_rule_collection" type="Amasty\Affiliate\Plugin\Promo\Model\ResourceModel\Rule\Collection"/>
+    </type>
+    <virtualType name="Amasty\Affiliate\BannerImageUpload" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">amasty_affiliate/tmp/banner</argument>
+            <argument name="basePath" xsi:type="string">amasty_affiliate/banner</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Amasty\Affiliate\Controller\Adminhtml\Banner\Image\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Amasty\Affiliate\BannerImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Affiliate\Model\Banner">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Amasty\Affiliate\BannerImageUpload</argument>
+        </arguments>
+    </type>
+</config>

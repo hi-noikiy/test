@@ -1,0 +1,297 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Collins Harper. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="carriers">
+            <group id="cpcanadapost" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Canada Post Rates & Labels Provided by CollinsHarper.com]]></label>
+                <field id="active" translate="label_tooltip" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip>Please ensure to read the latest user manual from CollinsHarper.com for setup and configuration.</tooltip>
+
+                </field>
+                <!-- @TODO to get this to work we need to intercept the rates at the phtml level so the quote still gets them;  for now disable FE removes rates from the FE
+               <field id="frontend_disabled" translate="label_tooltip" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Disabled for Checkout</label>
+
+                   <tooltip>Setting this to yes; will disable displaying rates on the customer side of the site; however it will still collect rate quotes.</tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                 -->
+                <field id="signup" translate="button_label_tooltip" sortOrder="14" showInDefault="1" showInWebsite="1">
+                    <label></label>
+                    <tooltip>Click here to sign up for Canada Post services, or retrieve/change your existing Canada Post account information/API details.</tooltip>
+                    <button_label>Signup To Canada Post Now</button_label>
+                    <button_url>canadapost.ca</button_url>
+                    <frontend_model>CollinsHarper\CanadaPost\Block\Adminhtml\System\Config\Signup</frontend_model>
+                </field>
+               <field id="test" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Test Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="debug" translate="label_tooltip" type="select" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Debug</label>
+                    <tooltip>Enables verbose logging to help with errors; not advised for production</tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <!-- @TODO deprecate this and use the dev / prod core setting -->
+                <field id="enable_cache" translate="label_tooltip" type="select" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Use Cache</label>
+                    <tooltip>Enabled for Production - Disable for Debugging</tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                </field>
+
+                <field id="api_url" translate="label_tooltip" type="label" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API URL (Production)</label>
+                    <tooltip>This URL is not customizable.</tooltip>
+                </field>
+                <field id="api_login" translate="label_tooltip" type="label" sortOrder="42" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API Login (Production)</label>
+                    <tooltip>The login credentials are not editable. Please use the Signup Button to update your api credentials.</tooltip>
+                </field>
+                <field id="api_password" translate="label_tooltip" type="label" sortOrder="44" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API Password (Production)</label>
+                    <tooltip>The login credentials are not editable. Please use the Signup Button to update your api credentials.</tooltip>
+                </field>
+
+
+                <field id="api_test_url" translate="label_tooltip" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API URL (Testing)</label>
+                </field>
+                <field id="api_test_login" translate="label_tooltip" type="text" sortOrder="52" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API Login (Testing)</label>
+                    <tooltip>This URL is not customizable. Please use the Signup Button to change this value.</tooltip>
+                </field>
+                <field id="api_test_password" translate="label_tooltip" type="text" sortOrder="54" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API Password (Testing)</label>
+                    <tooltip></tooltip>
+                </field>
+
+                <field id="api_customer_number" translate="label_tooltip" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API Customer Number</label>
+                </field>
+
+                <field id="contract" translate="label_tooltip" type="text" sortOrder="65" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Contract Number</label>
+                </field>
+              
+
+
+
+                <field id="allowed_methods" translate="label" type="multiselect" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Allowed Methods</label>
+                    <source_model>CollinsHarper\CanadaPost\Model\Source\Method\Lists</source_model>
+                </field>
+
+                <field id="return_lang" translate="label_tooltip" type="select" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Default French</label>
+                    <tooltip>Default to French Language for Canada Post communications</tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="locale" translate="label tooltip" type="select" sortOrder="183" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Default Locale</label>
+                    <tooltip>When yes: If the store language is french; the return will be set to match.</tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="showmethod" translate="label" type="select" sortOrder="186" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Show Method if Not Applicable</label>
+                    <frontend_class>shipping-skip-hide</frontend_class>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                
+                
+                <field id="specificerrmsg" translate="label" type="textarea" sortOrder="187" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Displayed Error Message</label>
+                </field>
+                <field id="sallowspecific" translate="label" type="select" sortOrder="190" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Ship to Applicable Countries</label>
+                    <frontend_class>shipping-applicable-country</frontend_class>
+                    <source_model>Magento\Shipping\Model\Config\Source\Allspecificcountries</source_model>
+                </field>
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="191" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Ship to Specific Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+
+                <field id="free_method" translate="label" type="multiselect" sortOrder="192" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label> Free Services</label>
+                    <source_model>CollinsHarper\CanadaPost\Model\Source\Method\Lists</source_model>
+                </field>
+                 <field id="free_shipping_enable" translate="label" type="select" sortOrder="193" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label> Free shipping with minimum order amount</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="194" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label> Minimum order amount for free shipping</label>
+                </field>
+
+                <field id="quote_type" translate="label_tooltip" type="select" sortOrder="1915" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Quote Type</label>
+                    <tooltip>Select the shipping quote type to display during estimates in quotes/checkout.</tooltip>
+                    <source_model>CollinsHarper\CanadaPost\Model\Source\Quotetype</source_model>
+                </field>
+
+
+                <field id="date_format" translate="label_tooltip" type="select" sortOrder="1921" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Estimated Date format</label>
+                    <tooltip>Format for Estimated Delivery Date'</tooltip>
+                    <source_model>CollinsHarper\CanadaPost\Model\Source\Date\Formats</source_model>
+                </field>
+
+                <field id="back_order_no_estimate" translate="label_tooltip" type="select" sortOrder="1923" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Disable Backordered Delivery Date</label>
+                    <tooltip>When set to yes: On rate checks for orders that have any products that are 'backordered' the estimated delivery date will not be show.</tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+
+                <field id="lead_time_days" translate="label_tooltip" type="text" sortOrder="1925" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Order Processing Lead Time</label>
+                    <tooltip>Adds a lead time (in days) to all 'Expected Delivery Dates' to account for order processing.</tooltip>
+                </field>
+
+                <field id="show_delivery_date" translate="label_tooltip" type="select" sortOrder="1926" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Display Estimated Date</label>
+                    <tooltip>Display 'Estimated Delivery Date' during rate requests</tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="nondelivery_preference" translate="label_tooltip" type="select" sortOrder="1930" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Non-Delivery</label>
+                    <tooltip>Preferences for Canada Post during a Non-Delivery event of a package.</tooltip>
+                    <source_model>CollinsHarper\CanadaPost\Model\Source\Nondelivery</source_model>
+                </field>
+
+
+                <field id="require_signature" translate="label_tooltip" type="select" sortOrder="1940" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Require Signature</label>
+                    <tooltip>Forces 'Require Signature' option for all shipments over the threshold value (*when applicable)</tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="signature_threshhold" translate="label_tooltip" type="text" sortOrder="1945" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Require Signature Threshhold</label>
+                    <tooltip>Threshold value to check against the subtotal for forcing 'Require Signature'</tooltip>
+                </field>
+
+
+
+                <field id="require_coverage" translate="label_tooltip" type="select" sortOrder="1950" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Require Coverage</label>
+                    <tooltip>Forces 'Require Coverage' option for all shipments over the threshold value (*when applicable up to the documented max of coverage for Service / Destination combinations)</tooltip>
+                    <source_model>CollinsHarper\CanadaPost\Model\Source\Coverage</source_model>
+                </field>
+
+                <field id="coverage_threshhold" translate="label_tooltip" type="text" sortOrder="1955" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Require Threshhold</label>
+                    <tooltip>Threshold value to check against the subtotal for forcing 'Require Signature'</tooltip>
+                </field>
+
+
+                <field id="deliver_to_postoffice" translate="label_tooltip" type="select" sortOrder="1960" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Display 'Deliver to Post Office' option</label>
+                    <tooltip>Allows customer to have parcel delivered to a post office within Canada</tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="postoffice_list_size" translate="label_tooltip" type="text" sortOrder="1965" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>'Deliver to Post Office' list size</label>
+                    <tooltip>Max. number of locations to display in the 'Deliver to Post Office' list</tooltip>
+                </field>
+
+
+
+                <field id="card_for_pickup" translate="label_tooltip" type="select" sortOrder="1970" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Require 'Card for Pickup'</label>
+                    <tooltip>Some Required options are not compatible, please read the manual on collinsharper.com for details</tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="do_not_safe_drop" translate="label_tooltip" type="select" sortOrder="1975" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Require 'do Not Safe Drop'</label>
+                    <tooltip>Some Required options are not compatible, please read the manual on collinsharper.com for details</tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="leave_at_door" translate="label_tooltip" type="select" sortOrder="1980" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Require 'Leave At Door'</label>
+                    <tooltip>Some Rrequired options are not compatible, please read the manual on collinsharper.com for details</tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="notify_on_shipment" translate="label_tooltip" type="select" sortOrder="1990" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Notify Customer on Shipment</label>
+                    <tooltip><![CDATA[Would you like to Canada Post to send the customer tracking information on shipment creation? Note: If 'Deliver to Post Office' is used, then the customer will be emailed
+                                when their parcel is ready for pickup, regardless of these notification settings.]]></tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="notify_on_exception" translate="label_tooltip" type="select" sortOrder="1992" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Notify Customer on Exception</label>
+                    <tooltip><![CDATA[Should Canada Post notify the customer when a problem with the shipment occurs.
+                                Note: If 'Deliver to Post Office' is used, then the customer will be emailed
+                                when their parcel is ready for pickup, regardless of these notification settings.]]></tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="notify_on_delivery" translate="label_tooltip" type="select" sortOrder="1994" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Notify Customer on Delivery</label>
+                    <tooltip><![CDATA[Should Canada Post notify the customer when a the package is delivered?. Note: If 'Deliver to Post Office' is used, then the customer will be emailed
+                                when their parcel is ready for pickup, regardless of these notification settings.]]></tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="output_format" translate="label_tooltip" type="select" sortOrder="2000" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Output Format</label>
+                    <tooltip><![CDATA[Should Canada Post notify the customer when a the package is delivered?. Note: If 'Deliver to Post Office' is used, then the customer will be emailed
+                                when their parcel is ready for pickup, regardless of these notification settings.]]></tooltip>
+                    <source_model>CollinsHarper\CanadaPost\Model\Source\Output</source_model>
+                </field>
+
+
+                <field id="reason_for_export" translate="label_tooltip" type="select" sortOrder="2002" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Reason For Export</label>
+                    <tooltip>Related to Customs.</tooltip>
+                    <source_model>CollinsHarper\CanadaPost\Model\Source\Reason</source_model>
+                </field>
+
+                <field id="other_reason" translate="label_tooltip" type="text" sortOrder="2003" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>'Other' Reason for Export</label>
+                    <tooltip>Related to Customs.</tooltip>
+                </field>
+
+                <field id="sort_order" translate="label" type="text" sortOrder="20000" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Sort Order</label>
+                </field>
+                  <!-- Handling Fee -->
+                  <field id="handling_type" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Calculate Handling Fee</label>
+                    <source_model>Magento\Shipping\Model\Source\HandlingType</source_model>
+                </field>
+                <field id="handling_action" translate="label" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Handling Applied</label>
+                    <source_model>Magento\Shipping\Model\Source\HandlingAction</source_model>
+                </field>
+                <field id="handling_fee" translate="label" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Handling Fee</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,18 @@
+<?php
+/**
+ * Copyright � 2015 Collins Harper. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @see \CollinsHarper\CanadaPost\Block\Adminhtml\System\Config\Signup
+ * @var \CollinsHarper\CanadaPost\Block\Adminhtml\System\Config\Signup $block
+ */
+?>
+<div class="cp-buttons-container">
+    <button onclick="javascript:window.location = '<?php echo $block->getButtonUrl(); ?>';"
+            class="scalable" type="button" id="<?php echo $block->escapeHtml($block->getHtmlId()); ?>">
+        <span><span><span><?php echo $block->escapeHtml($block->getButtonLabel()); ?></span></span></span>
+    </button>
+</div>
+

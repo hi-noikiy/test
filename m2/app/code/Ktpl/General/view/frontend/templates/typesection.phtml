@@ -1,0 +1,33 @@
+<?php 
+   $_product = $block->getProduct();
+   $_getAttrCode = "type_section";
+   $currentVal=$_product->getData('type_section');
+   $_getAttr = $_product->getResource()->getAttribute($_getAttrCode);
+   $attrValue = $_getAttr->getFrontend()->getValue($_product);
+   $options = $_getAttr->getSource()->getAllOptions();
+   $selectedValArray=explode(',', $currentVal);
+/*   if(count($options) > 1  && $currentVal!=''){ ?>
+   <div class="type-section <?php echo "default"; ?>">
+   <?php   
+   		$activeClass='';	
+      		foreach ($options as $key => $optionArray) {
+      		if(isset($optionArray['label']) && trim($optionArray['label'])!='' ){
+      				$typeSectionLable = $optionArray['label'];?>
+      				<?php 
+                  if(in_array($optionArray['value'], $selectedValArray)){
+                  
+      					$activeClass='active';		
+      				}else{
+      					$activeClass='';			
+      				} ?>
+      				<div class="type <?php echo $typeSectionLable.' '.$activeClass ?>">
+      				</div>
+      			<?php
+      			}
+      		}
+            ?>
+      </div>      
+      <?php }
+*/      
+   ?>
+

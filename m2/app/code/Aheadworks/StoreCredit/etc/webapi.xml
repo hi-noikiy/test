@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/carts/mine/aw-get-customer-store-credit" method="GET">
+        <service class="Aheadworks\StoreCredit\Api\CustomerStoreCreditManagementInterface" method="getCustomerStoreCreditDetails"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    
+    <!-- Managing mine Cart Store Credit -->
+    <route url="/V1/carts/mine/aw-store-credit" method="GET">
+        <service class="Aheadworks\StoreCredit\Api\StoreCreditCartManagementInterface" method="get"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/carts/mine/apply-aw-store-credit" method="PUT">
+        <service class="Aheadworks\StoreCredit\Api\StoreCreditCartManagementInterface" method="set"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/carts/mine/remove-aw-store-credit" method="DELETE">
+        <service class="Aheadworks\StoreCredit\Api\StoreCreditCartManagementInterface" method="remove"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+</routes>
+        

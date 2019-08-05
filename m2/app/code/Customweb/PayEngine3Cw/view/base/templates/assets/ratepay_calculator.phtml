@@ -1,0 +1,241 @@
+<div class="payengine3-calculator-container">
+	<style type="text/css">
+		@import url("<?php echo $cssUrl;?>");
+	</style>
+	<script type="text/javascript" src="<?php echo $calculatorJs; ?>"></script>
+	<script type="text/javascript" src="<?php echo $ratepayJs; ?>"></script>
+	<script type="text/javascript">
+		var payengine3Options = {
+				initialAmount: <?php echo $initial_amount; ?>,
+				rateTypeId: '<?php echo $rate_type_control_id; ?>',
+				ibanId: '<?php echo $iban_control_id; ?>',
+				bicId: '<?php echo $bic_control_id; ?>',
+				mandateId: '<?php echo $mandate_control_id; ?>',
+				rateResultId: '<?php echo $rate_result_control_id; ?>',
+				validationErrors: {
+					maxTime: "<?php echo $maxtime_error; ?>", 
+					minTime: "<?php echo $mintime_error; ?>",
+					minRate: "<?php echo $minrate_error; ?>",
+					rateRequired: "<?php echo $rate_required_error; ?>",
+					monthRequired: "<?php echo $month_required_error; ?>"
+				},
+				calculatorCurrency: " <?php echo $currency_symbol; ?>"
+		};
+		function payengine3Load() {
+			if(typeof payengine3InitInstallmentCalculator === 'undefined' || typeof PayEngine === 'undefined') {
+				setTimeout(payengine3Load, 200);
+			}
+			else {
+				payengine3InitInstallmentCalculator('<?php echo $publishable_key; ?>', payengine3Options);
+			}
+		}
+		setTimeout(payengine3Load, 200);
+    </script>
+
+	<div id="payengine3Loading"></div>
+	<div id="payengine3GeneralError" class="payengine3-error">
+		<?php echo $error_connection; ?>
+	</div>
+	<div>
+		<div class="cwbs-row">
+			<div class="cwbs-col-sm-6">
+				<div class="cwbs-panel cwbs-panel-default">
+					<div class="cwbs-panel-heading cwbs-text-center">
+						<h2><?php echo $runtime_text; ?></h2>
+					</div>
+					<div class="cwbs-panel-body">
+						<div id="rate-months"
+							class="cwbs-btn-group cwbs-btn-group-justified"></div>
+					</div>
+				</div>
+			</div>
+			<div class="cwbs-col-sm-6">
+				<div class="cwbs-panel cwbs-panel-default">
+					<div class="cwbs-panel-heading cwbs-text-center">
+						<h2><?php echo $monthly_text; ?></h2>
+					</div>
+					<div class="cwbs-panel-body">
+						<div class="cwbs-input-group cwbs-input-group-sm">
+							<span class="cwbs-input-group-addon"><?php echo $currency_symbol; ?></span>
+							<input type="text" id="rp-rate-value" class="cwbs-form-control"
+								aria-label="Amount" oninput="payengine3SetCalculable()" /> <span
+								class="cwbs-input-group-btn">
+								<button id="rp-btn-calculate-rate"
+									class="cwbs-btn cwbs-btn-default rp-btn-rate" type="button"
+									disabled onclick="payengine3CalculateRateInstallment()"><?php echo $calculate_text; ?></button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cwbs-row" id="payengine3CalculationResult"
+			style="display: none">
+			<table class="cwbs-table cwbs-table-striped">
+				<tbody>
+					<tr>
+						<td class="cwbs-text-center cwbs-text-uppercase" colspan="2"><?php echo $calculated_rates_text; ?></td>
+					</tr>
+					<tr>
+						<td class="cwbs-warning cwbs-small cwbs-text-center" colspan="2"><?php echo $warning_conditions; ?></td>
+					</tr>
+					<tr>
+						<td colspan="2" class="cwbs-small cwbs-text-right"><a
+							class="rp-link" id="rp-show-installment-plan-details" style=""
+							onclick="payengine3ShowCalculation()"><?php echo $show_rates_text; ?> <img
+								src="<?php echo $icon_enlarge; ?>" class="rp-details-icon" alt="show icon"></a>
+							<a class="rp-link" id="rp-hide-installment-plan-details"
+							style="display: none;" onclick="payengine3HideCalculation()"><?php echo $hide_rates_text; ?><img
+								src="<?php echo $icon_shrink; ?>" class="rp-details-icon" alt="hide icon"></a></td>
+					</tr>
+
+					<tr class="rp-installment-plan-details" style="display: none;">
+						<td class="rp-installment-plan-title">
+                                <?php echo $total_purchase_amount_title; ?>
+                                <p
+								class="rp-installment-plan-description cwbs-small"><?php echo $total_purchase_amount_description; ?></p>
+						</td>
+						<td class="cwbs-text-right"><span id="payengine3Amount"></span>
+						</td>
+					</tr>
+
+					<tr class="rp-installment-plan-details" style="display: none;">
+						<td class="rp-installment-plan-title">
+                                <?php echo $contract_fee_title; ?>
+                                <p
+								class="rp-installment-plan-description small"><?php echo $contract_fee_description; ?></p>
+						</td>
+						<td class="cwbs-text-right"><span id="payengine3ServiceCharge"></span>
+						</td>
+					</tr>
+
+					<tr class="rp-installment-plan-details" style="display: none;">
+						<td class="rp-installment-plan-title">
+                                <?php echo $annual_rate_title; ?>
+                                <p
+								class="rp-installment-plan-description small"><?php echo $annual_rate_description; ?></p>
+						</td>
+						<td class="cwbs-text-right"><span id="payengine3InterestRate"></span>
+						</td>
+					</tr>
+
+					<tr class="rp-installment-plan-details" style="display: none;">
+						<td class="rp-installment-plan-title">
+                                <?php echo $monthly_debit_interest_title; ?>
+                                <p
+								class="rp-installment-plan-description small"><?php echo $monthly_debit_interest_description; ?></p>
+						</td>
+						<td class="cwbs-text-right"><span
+							id="payengine3MonthlyDebitInterest"></span></td>
+					</tr>
+
+					<tr class="rp-installment-plan-details" style="display: none;">
+					</tr>
+
+					<tr class="rp-installment-plan-details" style="display: none;">
+						<td class="rp-installment-plan-title">
+                                <?php echo $interest_amount_title; ?>
+                                <p
+								class="rp-installment-plan-description small"><?php echo $interest_amount_description; ?></p>
+						</td>
+						<td class="cwbs-text-right"><span
+							id="payengine3InterestAmount"></span></td>
+					</tr>
+
+					<tr class="rp-installment-plan-details" style="display: none;">
+						<td colspan="2"></td>
+					</tr>
+
+					<tr class="rp-installment-plan-no-details" style="">
+						<td class="rp-installment-plan-title"><span
+							id="payengine3AllMonthText"
+							data-original-text="<?php echo $all_monthly_rate_title; ?>"><?php echo $all_monthly_rate_title; ?></span>
+							<p class="rp-installment-plan-description small"><?php echo $monthly_rate_description; ?></p>
+						</td>
+						<td class="cwbs-text-right"><span id="payengine3AllRate"></span>
+						</td>
+					</tr>
+
+					<tr class="rp-installment-plan-details" style="display: none;">
+						<td class="rp-installment-plan-title"><span
+							id="payengine3MonthText"
+							data-original-text="<?php echo $monthly_rate_title; ?>"><?php echo $monthly_rate_title; ?></span>
+							<p class="rp-installment-plan-description small"><?php echo $monthly_rate_description; ?></p>
+						</td>
+						<td class="cwbs-text-right"><span id="payengine3Rate"></span>
+						</td>
+					</tr>
+
+					<tr class="rp-installment-plan-details" style="display: none;">
+						<td class="rp-installment-plan-title"><span
+							id="payengine3LastRateText"
+							data-original-text="<?php echo $last_rate_title; ?>"><?php echo $last_rate_title; ?></span>
+							<p class="rp-installment-plan-description small"><?php echo $last_rate_description; ?></p>
+						</td>
+						<td class="cwbs-text-right"><span id="payengine3LastRate"></span>
+						</td>
+					</tr>
+					<tr>
+						<td class="rp-installment-plan-title">
+                                <?php echo $total_amount_title; ?>
+                                <p
+								class="rp-installment-plan-description small"><?php echo $total_amount_description; ?></p>
+						</td>
+						<td class="cwbs-text-right"><span id="payengine3TotalAmount"></span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div style="display: none">
+		<input type="hidden" name="calculation-type" value="calculation-rate">
+		<input type="hidden" id="payengine3CalculationMonth"
+			name="payengine3CalculationMonth"> <input type="hidden"
+			id="payengine3CalculationRate"
+			name="payengine3CalculationRate">
+	</div>
+	<div>
+		<div id="payengine3ValidationError" class="payengine3-error"></div>
+		<div id="payengine3-payment-selection" style="display: none">
+			<div class="cwbs-form-group">
+				<label for="installment_type_invoice"><?php echo $label_invoice; ?></label>
+				<input id="installment_type_invoice" type="radio"
+					name="installment_type_tmp" value="invoice"
+					onchange="payengine3ToggleInstallmentPaymentType()">
+			</div>
+			<div class="cwbs-form-group">
+				<label for="installment_type_debit"><?php echo $label_debit; ?></label>
+				<input id="installment_type_debit" type="radio"
+					name="installment_type_tmp" value="debit" checked
+					onchange="payengine3ToggleInstallmentPaymentType()">
+			</div>
+			<fieldset id="payengine3-debit-form">
+				<div class="cwbs-form-group">
+					<p><?php echo $subtext_mandate; ?></p>
+				</div>
+				<div class="cwbs-form-group">
+					<p><?php echo $instruction_mandate; ?></p>
+				</div>
+				<div class="cwbs-form-group">
+					<label for="payengine3-iban-temp"><?php echo $label_iban; ?></label>
+					<input id="payengine3-iban-temp" type="text"
+						class="cwbs-form-control" onchange="payengine3SetIban()">
+				</div>
+				<div class="cwbs-form-group">
+					<label for="payengine3-bic-temp"><?php echo $label_bic; ?></label>
+					<input id="payengine3-bic-temp" type="text"
+						class="cwbs-form-control" onchange="payengine3SetBic()">
+				</div>
+				<div class="cwbs-form-check">
+					<input id="payengine3-mandate-temp" type="checkbox"
+						class="cwbs-form-check-input"
+						onchange="payengine3SetMandate()"> <label
+						for="payengine3-mandate-temp" class="cwbs-form-check-label"><?php echo $text_mandate; ?></label>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+	<div class="payengine3-f-c"></div>
+</div>

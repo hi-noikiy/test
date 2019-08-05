@@ -1,0 +1,75 @@
+<!--
+/**
+ * Copyright © 2016 Magestore. All rights reserved.
+ */
+-->
+<!--@subject {{var store.getFrontendName()}}: New Transaction #{{var transaction.getId()}} @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image",
+"htmlescape var=$transaction.getReferralName()":"Referral Name",
+"var store.getFrontendName()":"Store Name",
+"store url=\"customer/account/\"":"Customer Account Url"}
+@-->
+
+{{template config_path="design/email/header_template"}}
+<!-- [ middle starts here] -->
+<table cellspacing="0" cellpadding="0" border="0" width="650">
+    <tr>
+        <td valign="top">
+            <p class="greeting">
+                <strong>{{trans 'Hi %account_name' account_name=$transaction.getAccountName()}}</strong>,<br/>
+                {{trans 'A customer referred by you has just placed an order at %store_name' store_name=$store.getFrontendName()}}.
+                {{trans 'Thus, it was credited to your affiliate account. You can check the order status anytime by '}}
+                {{trans '<a href="%customer_account_url">logging into your account</a>' customer_account_url=$this.getUrl($store,'customer/account/', [_nosid:1]) |raw}}.
+                {{trans "When the order is complete, we'll transfer the commission to your account balance in our system and then, you can withdraw the money whenever you want"}}.<br/>
+                {{trans 'If you have any questions about this transaction, please contact us at '}}
+                {{trans "<a href="mailto: %transaction_email_identity">%transaction_email_identity</a>" transaction_email_identity=$transaction.getTransEmailIdentSupport() |raw}}.
+            </p>
+            <p>{{trans 'The transaction details are below. Thanks for choosing to work with %store_name' store_name=$store.getFrontendName()}}.</p>
+
+            <h3 style="border-bottom:2px solid #eee; font-size:1.05em; padding-bottom:1px; ">{{trans 'Transaction'}} <small>({{trans 'on %created_at' created_at=$transaction.getCreatedAtFormated() |raw}})</small></h3>
+            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                <thead>
+                <tr>
+                    <th align="left" width="23.5%" bgcolor="#d9e5ee" style="font-size:12px;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">{{trans 'Product(s)'}}</th>
+                    <th width="2%"></th>
+                    <th align="left" width="23.5%" bgcolor="#d9e5ee" style="font-size:12px;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">{{trans 'Total Amount'}}</th>
+                    <th width="2%"></th>
+                    <th align="left" width="23.5%" bgcolor="#d9e5ee" style="font-size:12px;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">{{trans 'Commission'}}</th>
+                    {{depend transaction.getPlusCommission()>0}}
+                    <th width="2%"></th>
+                    <th align="left" width="23.5%" bgcolor="#d9e5ee" style="font-size:12px;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">{{trans 'Additional Commission'}}</th>
+                    {{/depend}}
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+
+                    <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">
+                        {{var transaction.getProducts() |raw}}
+                    </td>
+                    <td>&nbsp;</td>
+                    <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">
+                        {{var transaction.getTotalAmountFormated()|raw}}
+                    </td>
+                    <td>&nbsp;</td>
+                    <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">
+                        {{var transaction.getCommissionFormated()|raw}}
+                    </td>
+                    {{depend transaction.getPlusCommission()>0}}
+                    <td>&nbsp;</td>
+                    <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">
+                        {{var transaction.getPlusCommissionFormated()|raw}}
+                    </td>
+                    {{/depend}}
+                </tr>
+                </tbody>
+            </table>
+            <br/>
+
+            <p>{{trans 'Thanks again'}}, <br/><strong>{{var sender_name}}</strong></p>
+        </td>
+    </tr>
+</table>
+{{template config_path="design/email/footer_template"}}

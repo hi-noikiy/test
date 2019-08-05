@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Fsv_CustomerManager
+ *
+ * @category    Fsv
+ * @package     Fsv_CustomerManager
+ * @author      Sergey Fedosimov <sfedosimov@gmail.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="customer_manager" frontName="customer_manager">
+            <module name="Fsv_CustomerManager"/>
+        </route>
+    </router>
+</config>

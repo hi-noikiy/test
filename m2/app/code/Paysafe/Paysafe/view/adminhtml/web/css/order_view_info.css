@@ -1,0 +1,9 @@
+.additional-information-item{
+    margin-top: 10px;
+}
+.success{
+    color: green;
+}
+.failed{
+    color: red;
+}

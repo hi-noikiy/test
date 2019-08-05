@@ -1,0 +1,59 @@
+<?php
+
+$helper = $this->helper('\Ktpl\General\Helper\Data');
+$current_storeId = $helper->getCurrentStoreId();
+$store_url_canada = $helper->getStoreUrl(2);
+$store_url_fr = $helper->getStoreUrl(4);
+$store_url_usa = $helper->getStoreUrl(3);
+$store_url_de = $helper->getStoreUrl(5);
+
+$moduleName = $block->getRequest()->getModuleName();
+$controller = $block->getRequest()->getControllerName();
+$action     = $block->getRequest()->getActionName();
+$url = ($moduleName.'/'.$controller.'/'.$action);
+if($action == "index")
+{
+	$url = ($moduleName.'/'.$controller);
+	if($controller == "index")
+	{
+		$url = ($moduleName);
+	}
+}
+
+
+?>
+
+<?php if($current_storeId == 2) : ?>
+
+<link rel="canonical" src="<?= $store_url_canada ?><?= $url ?>" src_type="url" />
+<link rel="alternate" hreflang="en-ca" src="<?= $store_url_canada ?><?= $url ?>" src_type="url"  />
+<link rel="alternate" hreflang="fr-ca" src="<?= $store_url_fr ?><?= $url ?>" src_type="url"  />
+<link rel="alternate" hreflang="en-us" src="<?= $store_url_usa ?><?= $url ?>" src_type="url"  />
+<link rel="alternate" hreflang="de" src="<?= $store_url_de ?><?= $url ?>" src_type="url"  />
+
+<?php elseif($current_storeId == 4) : ?>
+
+<link rel="canonical" src="<?= $store_url_fr ?><?= $url ?>" src_type="url" />
+<link rel="alternate" hreflang="en-ca" src="<?= $store_url_canada ?><?= $url ?>" src_type="url"  />
+<link rel="alternate" hreflang="fr-ca" src="<?= $store_url_fr ?><?= $url ?>" src_type="url"  />
+<link rel="alternate" hreflang="en-us" src="<?= $store_url_usa ?><?= $url ?>" src_type="url"  />
+<link rel="alternate" hreflang="de" src="<?= $store_url_de ?><?= $url ?>" src_type="url"  />
+
+<?php elseif($current_storeId == 3) : ?>
+
+<link rel="canonical" src="<?= $store_url_usa ?><?= $url ?>" src_type="url" />
+<link rel="alternate" hreflang="en-ca" src="<?= $store_url_canada ?><?= $url ?>" src_type="url"  />
+<link rel="alternate" hreflang="fr-ca" src="<?= $store_url_fr ?><?= $url ?>" src_type="url"  />
+<link rel="alternate" hreflang="en-us" src="<?= $store_url_usa ?><?= $url ?>" src_type="url"  />
+<link rel="alternate" hreflang="de" src="<?= $store_url_de ?><?= $url ?>" src_type="url"  />
+
+<?php elseif($current_storeId == 5) : ?>
+
+<link rel="canonical" src="<?= $store_url_de ?><?= $url ?>" src_type="url" />
+<link rel="alternate" hreflang="en-ca" src="<?= $store_url_canada ?><?= $url ?>" src_type="url"  />
+<link rel="alternate" hreflang="fr-ca" src="<?= $store_url_fr ?><?= $url ?>" src_type="url"  />
+<link rel="alternate" hreflang="en-us" src="<?= $store_url_usa ?><?= $url ?>" src_type="url"  />
+<link rel="alternate" hreflang="de" src="<?= $store_url_de ?><?= $url ?>" src_type="url"  />
+
+<?php endif; ?>
+

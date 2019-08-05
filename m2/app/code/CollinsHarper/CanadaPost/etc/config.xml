@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Collins Harper. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <cpcanadapost>
+                <model>CollinsHarper\CanadaPost\Model\Carrier</model>
+                <account />
+                <active>0</active>
+                <test>1</test>
+                <enable_cache>1</enable_cache>
+                <show_delivery_date>1</show_delivery_date>
+                <title>Canada Post - Provided by CollinsHarper.com</title>
+                <sallowspecific>0</sallowspecific>
+                <free_method></free_method>
+                <methods>DOM.EP,DOM.LIB,DOM.PC,DOM.RP,DOM.XP,DOM.XP.CERT,USA.EP,USA.PW.ENV,USA.PW.PAK,USA.PW.PARCEL,USA.SP.AIR,USA.TP,USA.TP.LVM,USA.XP,INT.IP.AIR,INT.IP.SURF,INT.PW.ENV,INT.PW.PAK,INT.PW.PARCEL,INT.SP.AIR,INT.SP.SURF,INT.TP,INT.XP</methods>
+                <allowed_methods>DOM.EP,DOM.LIB,DOM.PC,DOM.RP,DOM.XP,DOM.XP.CERT,USA.EP,USA.PW.ENV,USA.PW.PAK,USA.PW.PARCEL,USA.SP.AIR,USA.TP,USA.TP.LVM,USA.XP,INT.IP.AIR,INT.IP.SURF,INT.PW.ENV,INT.PW.PAK,INT.PW.PARCEL,INT.SP.AIR,INT.SP.SURF,INT.TP,INT.XP</allowed_methods>
+                <cpc_id backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <specificerrmsg>This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.</specificerrmsg>
+                <handling_type>F</handling_type>
+                <handling_action>O</handling_action>
+                <active_rma>0</active_rma>
+                <is_online>1</is_online>
+                <platform_id>0008004925</platform_id>
+                <platform_api_login>247a823a246b71c5</platform_api_login>
+                <platform_api_password>ab347a8da40d5b57e8941e</platform_api_password>
+                <api_customer_number>2004381</api_customer_number>
+                <api_url>https://soa-gw.canadapost.ca</api_url>
+                <api_test_url>https://ct.soa-gw.canadapost.ca</api_test_url>
+                <contract>0042264519</contract>
+                <api_customer_number>0008004925</api_customer_number>
+                <api_test_login>59e8337d48c7fb8d</api_test_login>
+                <api_test_password>ea40b93238751b895c4966</api_test_password>
+                <signup_url_prod>https://www.canadapost.ca/cpotools/apps/drc/merchant</signup_url_prod>
+                <output_format>8.5x11</output_format>
+                <require_coverage>never</require_coverage>
+
+
+                <nondelivery_preference>RTS</nondelivery_preference>
+                <has_default_credit_card>0</has_default_credit_card>
+                <postoffice_list_size>10</postoffice_list_size>
+
+
+            </cpcanadapost>
+        </carriers>
+    </default>
+</config>

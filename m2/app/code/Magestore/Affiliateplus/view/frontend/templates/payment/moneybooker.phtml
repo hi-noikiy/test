@@ -1,0 +1,86 @@
+<?php
+
+/**
+ * Magestore.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * Moneybooker Payment Method template
+ * @var \Magestore\Affiliateplus\Block\Moneybooker $block
+ */
+
+$account = $block->getAffiliateAcount();
+$moneybookerEmail = $account->getMoneybookerEmail();
+$data = $this->getRequest()->getParams();
+if(isset($data['moneybooker_email']) && $data['moneybooker_email'])
+    $moneybookerEmail = $data['moneybooker_email'];
+?>
+<?php $require = $block->getPaymentHelper()->isRequireAuthentication('moneybooker');?>
+<?php $isVerified = $block->isVerified($account->getId(),$account->getMoneybookerEmail());?>
+<?php
+$store_id = $block->getStoreManager()->getStore()->getStoreId();
+$check_responsvie = $block->getConfig('affiliateplus/style_config/responsive_enable', $store_id);
+if($check_responsvie){
+    $class_name_col = 'col-lg-6 col-md-6 col-sm-12 col-xs-12';
+}
+else{
+    $class_name_col = 'col-lg-6 col-md-6 col-sm-6 col-xs-6';
+}
+?>
+<ul>
+    <li class="form-group">
+        <div class="<?php echo $class_name_col; ?>">
+            <label class="required"><span><?php echo __('Email');?></span><em>*</em></label>
+
+            <input type="text" class="input-text required-entry validate-email form-control" id="moneybooker_email" name="moneybooker_email" title="<?php echo __('Moneybooker Email')?>" onchange="hideMoneybookerVerifyLink()" value="<?php echo $moneybookerEmail;?>"/>
+            <small style="float:left;"><?php echo __('This field will be updated to your profile.') ?></small>
+
+        </div>
+        <?php if($require):?>
+            <?php if($isVerified): ?>
+                <div class="<?php echo $class_name_col; ?>">
+                    <label for="paypal_email" class="required"><?php echo __('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;') ?></label>
+                    <div class="input-box verified" >
+                        <a href="javascript:void()"><?php echo __('Verified');?></a>
+                        <!--small><?php echo __('This field will be updated to your profile.') ?></small-->
+                    </div>
+                </div>
+            <?php else: ?>
+                <div class="<?php echo $class_name_col; ?> field">
+                    <div class="input-box not-verified" >
+                        <a href="javascript:void()"><?php echo __('Not verified');?></a>
+                        <!--small><?php echo __('This field will be updated to your profile.') ?></small-->
+                    </div>
+                    <label for="paypal_email" class="required not-verified-1"><?php echo __('') ?></label>
+                </div>
+            <?php endif;?>
+        <?php endif;?>
+    </li>
+</ul>
+<script type="text/javascript">
+    function hideMoneybookerVerifyLink(){
+        var verifiedDiv = $('moneybooker-verified-div');
+        var notverifiedDiv = $('moneybooker-notverified-div');
+        if(verifiedDiv){
+            verifiedDiv.style.display = 'none';
+        }
+        if(notverifiedDiv){
+            notverifiedDiv.style.display = 'none';
+        }
+    }
+</script>

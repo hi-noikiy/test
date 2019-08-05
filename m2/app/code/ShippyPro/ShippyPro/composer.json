@@ -1,0 +1,24 @@
+{
+  "name": "shippypro/module-shippypro",
+  "description": "ShippyPro Shipping Estimate",
+  "type": "magento2-module",
+  "version": "0.0.2",
+  "license": "OSL-3.0",
+  "authors": [
+    {
+      "email": "developer@shippypro.com",
+      "name": "ShippyPro"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "ShippyPro\\ShippyPro\\": ""
+    }
+  }
+}

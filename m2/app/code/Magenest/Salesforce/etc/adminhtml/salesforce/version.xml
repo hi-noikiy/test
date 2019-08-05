@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="salesforce_module_info" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+        <label>Salesforce Integratinon Version</label>
+        <frontend_model>Magenest\Salesforce\Block\System\Config\Version\Info</frontend_model>
+    </group>
+</include>

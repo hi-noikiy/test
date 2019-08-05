@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Sales/etc/pdf_file.xsd">
+    <totals>
+        <total name="affiliateplus">
+            <title translate="true">Affiliate Discount</title>
+            <source_field>affiliateplus_discount</source_field>
+            <model>Magestore\Affiliateplus\Model\Total\Pdf\Discount</model>
+            <font_size>7</font_size>
+            <display_zero>false</display_zero>
+            <sort_order>220</sort_order>
+        </total>
+        <total name="affiliateplus_credit">
+            <title translate="true">Paid by Affiliate Credit</title>
+            <source_field>affiliate_credit</source_field>
+            <model>Magestore\Affiliateplus\Model\Total\Pdf\Credit</model>
+            <font_size>7</font_size>
+            <display_zero>false</display_zero>
+            <sort_order>210</sort_order>
+        </total>
+    </totals>
+</config>

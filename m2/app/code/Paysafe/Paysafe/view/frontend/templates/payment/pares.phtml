@@ -1,0 +1,10 @@
+<style type="text/css">
+	body { display: none; }
+</style>
+<form id="paysafe_form" action="<?php echo (string)$block->getAcsURL(); ?>" method="POST">
+	<input type="hidden" name="PaReq" value="<?php echo (string)$block->getPaReq(); ?>">
+	<input type="hidden" name="TermUrl" value="<?php echo $block->getPaResResponseUrl(); ?>">
+</form>
+<script type="text/javascript">
+	document.getElementById('paysafe_form').submit();
+</script>

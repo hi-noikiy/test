@@ -1,0 +1,133 @@
+<?php $order = $block->getOrder(); ?>
+<!-- start -->
+<?php if ($order->getShippingAddress()->getData('company')) : ?>
+    <tr>
+        <th><?= $block->escapeHtml(__('Company ')) ?></th>
+        <td><?= $block->escapeHtml($order->getShippingAddress()->getData('company')) ?></td>
+    </tr>
+<?php endif; ?>
+<?php if ($order->getShippingAddress()->getData('vat_id')) : ?>
+    <tr>
+        <th><?= $block->escapeHtml(__('Vat No ')) ?></th>
+        <td><?= $block->escapeHtml($order->getShippingAddress()->getData('vat_id')) ?></td>
+    </tr>
+<?php endif; ?>
+
+<?php if ($order->getSamples()) : ?>
+    <tr>
+        <th><?= $block->escapeHtml(__('Samples ')) ?></th>
+        <td><?= $block->escapeHtml($order->getSamples()) ?></td>
+    </tr>
+<?php endif; ?>
+
+<?php if ($order->getBusinessDevelopement()) : ?>
+    <tr>
+        <th><?= $block->escapeHtml(__('Business Development Manager ( BDM ) ')) ?></th>
+        <td><?= $block->escapeHtml($order->getBusinessDevelopement()) ?></td>
+    </tr>
+<?php endif; ?>
+
+<?php if ($order->getTerms()) : ?>
+    <tr>
+        <th><?= $block->escapeHtml(__('Terms ')) ?></th>
+        <td><?= $block->escapeHtml($order->getTerms()) ?><?= '&nbsp' ?><?= __('days') ?></td>
+    </tr>
+<?php endif; ?>
+
+<?php if ($order->getBinno()) : ?>
+    <tr>
+        <th><?= $block->escapeHtml(__('Bin No ')) ?></th>
+        <td><?= $block->escapeHtml($order->getBinno()) ?></td>
+    </tr>
+<?php endif; ?>
+<?php if ($order->getPo()) : ?>
+    <tr>
+        <th><?= $block->escapeHtml(__('Po')) ?></th>
+        <td><?= $block->escapeHtml($order->getPo()) ?></td>
+    </tr>
+<?php endif; ?>
+<?php if ($order->getShippingNotes()) : ?>
+    <tr>
+        <th><?= $block->escapeHtml(__('Shipping Notes')) ?></th>
+        <td><?= $block->escapeHtml($order->getShippingNotes()) ?></td>
+    </tr>
+<?php endif; ?>
+<?php if ($order->getTaxCode()) : ?>
+    <tr>
+        <th><?= $block->escapeHtml(__('Tax Code')) ?></th>
+        <td><?= $block->escapeHtml($order->getTaxCode()) ?></td>
+    </tr>
+<?php endif; ?>
+<?php if ($order->getOrderType()) : ?>
+    <tr>
+        <th><?= $block->escapeHtml(__('Order Type')) ?></th>
+        <td><?= $block->escapeHtml($order->getOrderType()) ?></td>
+    </tr>
+<?php endif; ?>
+<!-- end -->
+ <tr>
+    <td colspan="2" style="text-align: left;">
+        <label><?php echo __("Shipdate: "); ?></label>&nbsp;&nbsp;
+        <input name="date" id="shipdate" readonly="readonly" class="datepicker" value="<?php echo $this->getOrder()->getShipDate(); ?>" type="text">
+        <button id="saveShipdate" style="float: right;" title="<?php echo __("Save Shipdate"); ?>" type="button" class="shipdate-button" data-ui-id="widget-button-0"><span><?php echo __("Save Shipdate"); ?></span></button>
+        <script type="text/javascript">
+            require([
+                "jquery",
+                'mage/url',
+                'Magento_Ui/js/modal/alert',
+                "mage/calendar"
+            ], function($,url,malert) {
+                $('#shipdate').datepicker({
+                        dateFormat : "yy-mm-dd",
+                        timeFormat : "H:m:s",
+                        changeMonth: true,
+                        changeYear :true,
+                        numberOfMonths: 1,
+                        showsTime: true,
+                    }
+                );
+
+                let showAlert = function($title, $content) {
+                    malert({
+                        title: $title,
+                        content: $content,
+                        clickableOverlay: false,
+                        actions: {
+                            always: function () {}
+                        }
+                    });
+                }
+
+                $("#shipdate").change(function() {
+                    if($(this).val() != ''){
+                        $("#shipdate").css({"border-color": "initial"});
+                    }else {
+                        $("#shipdate").css({"border-color": "red"});
+                    }
+                });
+
+                $("#saveShipdate").on('click', function(){
+              		var linkUrl = "<?php echo $this->getUrl('ktplsalesorder/order/updateshipdate'); ?>";
+                    dataval = {};
+                    dataval.shipdate = $("#shipdate").val();
+                    dataval.orderId  = $('input[name="order_id"]').val();
+                    if(dataval.shipdate == ''){
+                        alert("Please Add Shipping Date");
+                        $("#shipdate").css({"border-color": "red"}).focus();
+                        return false;
+                    }
+                    $.ajax({
+                        url  : linkUrl,
+                        type : "POST",
+                        showLoader: true,
+                        data : dataval,
+                        success: function (response) {
+                            response = JSON.parse(response);
+                            showAlert(response.status, response.message);
+                        }
+                    });
+            	});
+            });
+        </script>
+    </td>
+</tr>

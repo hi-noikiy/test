@@ -1,0 +1,130 @@
+<!--
+/**
+ * Copyright © 2016 Magestore. All rights reserved.
+ */
+-->
+<!--@subject {{var store.getFrontendName()}}: Proceeded payment #{{var payment.getId()}} @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image",
+"var store.getFrontendName()":"Store Name",
+"store url=\"customer/account/\"":"Customer Account Url"}
+@-->
+{{template config_path="design/email/header_template"}}
+    <!-- [ middle starts here] -->
+    <table cellspacing="0" cellpadding="0" border="0" width="650">
+        <tr>
+            <td valign="top">
+                <p class="greeting">
+                    <strong>{{trans 'Hi %account_name' account_name=$payment.getAccountName()}}</strong>,<br/>
+                {{if payment.isRequest()}}
+                    {{trans 'We have received your withdrawal request and completed the payment.'}}
+                    {{trans 'Please login to check your withdrawal at '}}
+                    {{trans '<a href="%affiliate_index_payment" style="color:#1E7EC8;">View Withdrawals</a>' affiliate_index_payment=$this.getUrl($store, 'affiliateplus/index/payments',[_nosid:1]) |raw}}<br/>
+                    {{trans 'If you have any questions about your balance please contact us at '}}
+                    {{trans '<a href="mailto: %transaction_email_identity">%transaction_email_identity</a>' transaction_email_identity="$trans_email_ident_support" |raw}}.
+                    {{trans 'or call us at <span class="nobr">%store_phone_information</span>' store_phone_information=$store_phone_information |raw}}
+                    {{trans 'Monday - Friday, 8am - 5pm PST.'}}
+                </p>
+                <p>{{trans 'Your withdrawal confirmation is below. Thank you for doing business with us.'}}</p>
+
+                <p style="border-bottom:2px solid #eee; font-size:1.05em; padding-bottom:1px; ">{{trans 'Requested Payment'}}<small>({{trans 'on %created_time' created_time=$payment.getCreatedTimeFormated()}})</small></p>
+                <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th align="left" width="15%" bgcolor="#d9e5ee" style="font-size:12px;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">{{trans 'PayPal Account Email'}}</th>
+                        <th width="2%"></th>
+                        <th align="left" width="15%" bgcolor="#d9e5ee" style="font-size:12px;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">{{trans 'Requested Amount'}}</th>
+                        <th width="2%"></th>
+                        <th align="left" width="15%" bgcolor="#d9e5ee" style="font-size:12px;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">{{trans 'Date Requested'}}</th>
+                        <th width="2%"></th>
+                        <th align="left" width="15%" bgcolor="#d9e5ee" style="font-size:12px;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">{{trans 'Amount Paid'}}</th>
+                        <th width="2%"></th>
+                        <th align="left" width="15%" bgcolor="#d9e5ee" style="font-size:12px;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">{{trans 'PayPal Fees'}}</th>
+                        <th width="2%"></th>
+                        <th align="left" width="15%" bgcolor="#d9e5ee" style="font-size:12px;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">{{trans 'Remaining Balance'}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">
+                            {{var payment.getAccountPaypalEmail() |raw}}
+                        </td>
+                        <td>&nbsp;</td>
+                        <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">
+                            {{var payment.getRequestPayment() |raw}}
+                        </td>
+                        <td>&nbsp;</td>
+                        <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">
+                            {{var payment.getRequestDateFormated() |raw}}
+                        </td>
+                        <td>&nbsp;</td>
+                        <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">
+                            {{var payment.getPayPayment() |raw}}
+                        </td>
+                        <td>&nbsp;</td>
+                        <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">
+                            {{var payment.getFeeFormated() |raw}}
+                        </td>
+                        <td>&nbsp;</td>
+                        <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">
+                            {{var payment.getBalanceFormated() |raw}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                {{else}}
+                {{trans 'Your balance has reached the withdrawal threshold and we conducted withdrawal for you'}}.
+                {{trans 'Please login to check your withdrawal at '}}
+                {{trans '<a href="%affiliate_index_payment" style="color:#1E7EC8;">View Withdrawals</a>' affiliate_index_payment=$this.getUrl($store, 'affiliateplus/index/payments',[_nosid:1]) |raw}}<br/>
+                {{trans 'If you have any questions about your balance please contact us at'}}
+                {{trans '<a href="mailto: %transaction_email_identity">%transaction_email_identity</a>' transaction_email_identity="$trans_email_ident_support" |raw}}.
+                {{trans 'or call us at <span class="nobr">%store_phone_information</span>' store_phone_information=$store_phone_information |raw}}
+                {{trans 'Monday - Friday, 8am - 5pm PST.'}}
+                </p>
+                <p>{{trans 'Your withdrawal confirmation is below. Thank you for your participation.'}}</p>
+
+                <p style="border-bottom:2px solid #eee; font-size:1.05em; padding-bottom:1px; ">
+                    {{trans 'Withdrawal'}}
+                    <small>({{trans "on %created_time" created_time=$payment.getCreatedTimeFormated() |raw}})</small>
+                </p>
+                <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th align="left" width="15%" bgcolor="#d9e5ee" style="font-size:12px;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">{{trans 'Payment Method'}}</th>
+                        <th width="2%"></th>
+                        <th align="left" width="15%" bgcolor="#d9e5ee" style="font-size:12px;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">{{trans 'Paid Amount'}}</th>
+                        <th width="2%"></th>
+                        <th align="left" width="15%" bgcolor="#d9e5ee" style="font-size:12px;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">{{trans 'Fee Amount'}}</th>
+                        <th width="2%"></th>
+                        <th align="left" width="15%" bgcolor="#d9e5ee" style="font-size:12px;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">{{trans 'Rest Balance'}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">
+                            {{var payment.getPaymentMethodHtml() |raw}}
+                        </td>
+                        <td>&nbsp;</td>
+                        <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">
+                            {{var payment.getPayPayment() |raw}}
+                        </td>
+                        <td>&nbsp;</td>
+                        <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">
+                            {{var payment.getFeeFormated() |raw}}
+                        </td>
+                        <td>&nbsp;</td>
+                        <td valign="top" style="padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">
+                            {{var payment.getBalanceFormated() |raw}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                {{/if}}
+                <br/>
+                <p>{{trans 'Thanks again'}}, <br/><strong>{{var sender_name}}</strong></p>
+            </td>
+        </tr>
+    </table>
+{{template config_path="design/email/footer_template"}}

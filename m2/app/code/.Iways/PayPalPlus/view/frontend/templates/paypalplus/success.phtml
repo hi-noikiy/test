@@ -1,0 +1,94 @@
+<?php
+/**
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * Author Robert Hillebrand - hillebrand@i-ways.de - i-ways sales solutions GmbH
+ * Copyright i-ways sales solutions GmbH © 2015. All Rights Reserved.
+ * License http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * @var \Iways\PayPalPlus\Block\Onepage\Success $block
+ */
+?>
+<?php if($block->isPUI()) : ?>
+    <div class="ppp-pui">
+        <p><?php /* @noEscape */ echo __(
+                'Please transfer the invoice amount to the given account within the payment deadline.'
+            ); ?></p>
+        <table>
+            <tbody>
+                <tr>
+                    <td class="ppp-pui-label">
+                        <?php /* @noEscape */ echo __('Account holder:'); ?>
+                    </td>
+                    <td class="ppp-pui-value">
+                        <?php  echo $block->escapeHtml($block->getAdditionalInformation('ppp_account_holder_name')); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ppp-pui-label">
+                        <?php /* @noEscape */ echo __('Bank:'); ?>
+                    </td>
+                    <td class="ppp-pui-value">
+                        <?php echo $block->escapeHtml($block->getAdditionalInformation('ppp_bank_name')); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ppp-pui-label">
+                        <?php /* @noEscape */ echo __('IBAN:'); ?>
+                    </td>
+                    <td class="ppp-pui-value">
+                        <?php echo $block->escapeHtml($block->getAdditionalInformation('ppp_international_bank_account_number')); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ppp-pui-label">
+                        <?php /* @noEscape */ echo __('BIC:'); ?>
+                    </td>
+                    <td class="ppp-pui-value">
+                        <?php echo $block->escapeHtml($block->getAdditionalInformation('ppp_bank_identifier_code')); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ppp-pui-label">
+                        <?php /* @noEscape */ echo __('Reference number:'); ?>
+                    </td>
+                    <td class="ppp-pui-value">
+                        <?php echo $block->escapeHtml($block->getAdditionalInformation('ppp_reference_number')); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ppp-pui-label">
+                        <?php /* @noEscape */ echo __('Payment due date:'); ?>
+                    </td>
+                    <td class="ppp-pui-value">
+                        <?php echo $block->escapeHtml($block->getAdditionalInformation('ppp_payment_due_date')); ?>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p><?php /* @noEscape */ echo __(
+                '%1 has assigned the claim against you on basis of a factoring agreement to PayPal (Europe) S.à r.l. et Cie, S.C.A. You will only be released from your debt by paying to PayPal (Europe) S.à r.l. et Cie, S.C.A.', $block->getStoreName()
+            ); ?></p>
+    </div>
+<?php endif; ?>
+<?php if ($block->isPPP()): ?>
+    <script>
+        require([
+            'Magento_Customer/js/customer-data',
+            'jquery'
+        ], function (customerData, $) {
+            $(function(){
+                customerData.invalidate(['cart', 'customer', 'last-ordered-items']);
+            });
+        });
+    </script>
+<?php endif; ?>

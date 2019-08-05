@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Sales:etc/pdf_file.xsd">
+    <renderers>
+        <page type="invoice">
+            <renderer product_type="default">Magento\Sales\Model\Order\Pdf\Items\Invoice\DefaultInvoice</renderer>
+        </page>
+    </renderers>
+    <totals>
+        <total name="aw_store_credit">
+            <title translate="true">Store Credit</title>
+            <source_field>aw_store_credit_amount</source_field>
+            <font_size>7</font_size>
+            <display_zero>false</display_zero>
+            <sort_order>150</sort_order>
+        </total>
+        <total name="aw_store_credit_refunded">
+            <title translate="true">Returned to Store Credit</title>
+            <source_field>aw_store_credit_refunded</source_field>
+            <font_size>7</font_size>
+            <display_zero>false</display_zero>
+            <sort_order>160</sort_order>
+        </total>
+        <total name="aw_store_credit_reimbursed">
+            <title translate="true">Reimbursed spent Store Credit</title>
+            <source_field>aw_store_credit_reimbursed</source_field>
+            <font_size>7</font_size>
+            <display_zero>false</display_zero>
+            <sort_order>170</sort_order>
+        </total>
+    </totals>
+</config>

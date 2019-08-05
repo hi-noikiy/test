@@ -1,0 +1,41 @@
+<!--
+* Magestore
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Magestore.com license that is
+* available through the world-wide-web at this URL:
+* http://www.magestore.com/license-agreement.html
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade this extension to newer
+* version in the future.
+*
+* @category    Magestore
+* @package     Magestore_Affiliateplus
+* @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+* @license     http://www.magestore.com/license-agreement.html
+-->
+
+<!-- ko if: isDisplayed() -->
+
+<tr class="totals afffiliate excl">
+    <th class="mark" colspan="1" scope="row" data-bind="text: title"></th>
+    <td class="amount">
+        <span class="price" data-bind="text: getValue()"></span>
+    </td>
+</tr>
+
+<!-- /ko -->
+
+<!-- ko if: isDisplayedCredit() -->
+
+<tr class="totals afffiliate excl">
+    <th class="mark" colspan="1" scope="row" data-bind="text: $t(_('Paid by Affiliate Credit'))"></th>
+    <td class="amount">
+        <span class="price" data-bind="text: getCreditValue(), attr: {'data-th': $t(_('Paid by Affiliate Credit'))}"></span>
+    </td>
+</tr>
+
+<!-- /ko -->

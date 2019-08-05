@@ -1,0 +1,35 @@
+<?php $additionalInformation = $block->getArrayAdditionalInformation(); ?>
+<?php if (array_key_exists('SETTLEMENT_STATUS', $additionalInformation)) : ?>
+    <div class="additional-information-item">
+        <?php echo __('Settlement Status') .' : ' . $additionalInformation['SETTLEMENT_STATUS'];?>
+    </div>
+<?php endif; ?>
+<?php if (array_key_exists('REFUND_STATUS', $additionalInformation)) : ?>
+    <div class="additional-information-item">
+        <?php echo __('Refund Status') .' : ' . $additionalInformation['REFUND_STATUS']; ?>
+    </div>
+<?php endif; ?>
+<?php if (array_key_exists('TRANSACTION_ID', $additionalInformation)) : ?>
+    <div class="additional-information-item">
+        <?php echo __('TXN ID') .' : ' . $additionalInformation['TRANSACTION_ID']; ?>
+    </div>
+<?php endif; ?>
+<?php if (isset($additionalInformation['AUTHORIZATION_STATUS']) ||
+          isset($additionalInformation['SETTLEMENT_STATUS']) ||
+          isset($additionalInformation['REFUND_STATUS'])) : ?>
+    <?php if ($additionalInformation['AUTHORIZATION_STATUS'] == 'RECEIVED' ||
+              $additionalInformation['AUTHORIZATION_STATUS'] == 'HELD' ||
+              ($additionalInformation['AUTHORIZATION_STATUS'] == 'COMPLETED' &&
+                    isset($additionalInformation['SETTLEMENT_STATUS']) &&
+                    $additionalInformation['SETTLEMENT_STATUS'] != 'COMPLETED') ||
+              (isset($additionalInformation['SETTLEMENT_STATUS']) &&
+                    $additionalInformation['SETTLEMENT_STATUS'] == 'COMPLETED' &&
+                    isset($additionalInformation['REFUND_STATUS']) &&
+                    $additionalInformation['REFUND_STATUS'] != 'COMPLETED')) : ?>
+        <div style="margin-top: 30px"></div>
+        <a href="<?php echo $block->getUpdateOrderUrl() ?>"
+            class="action-default scalable action-save action-secondary">
+            <?php echo __('Update Order') ?>
+        </a>
+    <?php endif; ?>
+<?php endif; ?>

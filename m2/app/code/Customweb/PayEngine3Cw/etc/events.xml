@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+	<event name="sales_order_place_after">
+		<observer name="payengine3cw_order_place_after" instance="Customweb\PayEngine3Cw\Observer\OrderPlaceAfter" />
+	</event>
+	<event name="checkout_submit_all_after">
+		<observer name="payengine3cwcheckout_submit_after" instance="Customweb\PayEngine3Cw\Observer\CheckoutSubmitAfter" />
+	</event>
+	<event name="sales_order_payment_capture">
+		<observer name="payengine3cw_order_payment_capture" instance="Customweb\PayEngine3Cw\Observer\OrderPaymentCapture" />
+	</event>
+	<event name="email_order_set_template_vars_before">
+    	<observer name="payengine3cw_email_order_vars" instance="Customweb\PayEngine3Cw\Observer\EmailOrderVars" />
+    </event>
+	
+	<event name="customweb_payengine_cw_transaction_save_after">
+        <observer name="customweb_payengine3cw_transaction_grid_sync_insert" instance="CustomwebPayEngine3CwIndexGridSyncInsert" />
+    </event>
+    <event name="customweb_payengine_cw_transaction_delete_after">
+        <observer name="customweb_payengine3cw_transaction_grid_sync_remove" instance="CustomwebPayEngine3CwIndexGridSyncRemove" />
+    </event>
+    <event name="config_data_dev_grid_async_indexing_disabled">
+        <observer name="customweb_payengine3cw_transaction_grid_async_insert" instance="CustomwebPayEngine3CwIndexGridAsyncInsertObserver" />
+    </event>
+    
+    <event name="controller_action_predispatch_checkout_onepage_index">
+    		<observer name="customweb_payengine3cw_cancel_payment" instance="Customweb\PayEngine3Cw\Observer\CancelPayment" />
+    </event>
+    
+    <event name="store_add">
+        <observer name="customweb_payengine3cw_sequence" instance="Customweb\PayEngine3Cw\Observer\SequenceCreatorObserver" />
+    </event>
+</config>

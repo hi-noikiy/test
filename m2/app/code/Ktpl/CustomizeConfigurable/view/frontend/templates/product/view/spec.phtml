@@ -1,0 +1,161 @@
+<?php
+
+/**
+ * To get Product's specific attributes template
+ *
+ * @var $block \Ktpl\CustomizeConfigurable\Block\Product\View\Attributes
+ */
+?>
+<?php
+    $_helper = $this->helper('Magento\Catalog\Helper\Output');
+    $_product = $block->getProduct();
+    $ObjectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $filterManger=$ObjectManager->create('Magento\Cms\Model\Template\FilterProvider');
+?>
+<div class="wrapper02 clearfix">
+    <div class= "specs-col2">
+        <div class="popupdiv-title"><?php echo __('Performance Specs')?></div>
+    <ul class="list-attributes--performance">
+    <?php
+        // To Performance Spec Data
+        $groupId = $block->getAttributeGroupId($_product->getAttributeSetId(),'Performance Specs');
+        $productAttributes = $_product->getAttributes();
+        foreach ($productAttributes as $attribute):
+            if ($attribute->isInGroup($_product->getAttributeSetId(), $groupId->getAttributeGroupId())): ?>
+                <?php 
+                    $attributeName = $attribute->getStoreLabel(); 
+                    $attributeCodeCus = $attribute->getAttributeCode(); 
+                    if($attributeCodeCus != 'overall_score'):
+                ?>
+                <?php if($attribute->getFrontend()->getValue($_product)):?>
+                    <li data-attribute-code="<?php echo $attribute->getAttributeCode(); ?>">
+                        <div class="attribute-value">
+                            <?php 
+                                $attributeValue = $attribute->getFrontend()->getValue($_product);
+                                if (is_numeric($attributeValue)):
+                                    echo number_format(floatval($attributeValue), 1, '.', '') ;
+
+                            $attributeName; 
+                            $myNumber =$attributeValue;
+                            $percentToGet = 10;
+                            $percentInDecimal = $percentToGet;
+                            $widthPr = $percentInDecimal * $myNumber;
+                            ?>
+                            <?php else: echo $attributeValue ?>
+                            <?php endif; ?>  
+                        </div>
+                        <div class="bar">
+                            <div class="bar-down">
+                            <?php echo $attributeName; ?> 
+                            </div> 
+                            
+                            <div class="bar-up" style="width:<?php echo $widthPr ?>%"><?php echo $attributeName; ?></div>
+                        </div>     
+                        
+                    </li> 
+                <?php endif;?>      
+                <?php endif;?>       
+            <?php endif;
+        endforeach; 
+    ?>  
+    </ul>  
+    <div class="performance-overall-score">
+        <span class="label"><?php echo __('Overall Score') ?></span>
+        <span class="value"><?php echo number_format((float)$_product->getResource()->getAttribute('overall_score')->getFrontend()->getValue($_product), 1, '.', '') ?></span>
+    </div>
+    </div>
+    <div class= "specs-col1">
+         <div class="popupdiv-title"><?php echo __('Technical Specs')?></div>
+    <ul class="list-attributes--specs">
+        <?php
+            //Tech Spec Data
+            $groupId = $block->getAttributeGroupId($_product->getAttributeSetId(),'Technical Specs');
+            $productAttributes=$_product->getAttributes();
+            foreach ($productAttributes as $attribute):
+            $attributeCode=$attribute->getAttributeCode();
+            if ($attribute->isInGroup($_product->getAttributeSetId(), $groupId->getAttributeGroupId())): ?>
+                <?php if($attribute->getFrontend()->getValue($_product)):?>
+                        <li data-attribute-code="<?php echo $attributeCode; ?>">  
+                            <div class="attribute">
+                                <div class="attribute-title">                  
+                                    <?php 
+                                        $attributeName = $attribute->getStoreLabel();
+                                        echo $attributeName;
+                                    ?>
+                                </div>    
+                                <div class="attribute-value">
+                                    <?php         
+                                         $attributeValue =$attribute->getFrontend()->getValue($_product);
+                                          if (is_numeric($attributeValue)): 
+                                         echo number_format(floatval($attributeValue), 2, '.', '');
+                                         else:
+                                         
+                                       ?>
+                                       <?php if ($attributeCode == 'versions'): ?>
+                                            <div class="wrap-simplebar">
+                                                <div class="demo1 simplebar pateu galeata scandal" data-simplebar-direction="vertical" data-was-here="frankie">
+                                                    <?php
+                                                    $a = explode("\r\n", $attributeValue);
+                                                    echo implode('<br />', $a);
+                                                    ?>
+                                                </div>
+                                            </div>
+                                        <?php elseif (($attributeCode == 'materials') || ($attributeCode == 'key_features')): ?>
+                                            <?php
+                                                $a = explode("\r\n", $attributeValue);
+                                                echo implode('<br />', $a);
+                                            ?>
+
+                                        <?php elseif ($attributeCode == 'warranty_manual'): ?>    
+                                        <a href="javascript:void(0)" id="warranty_manual_link" class="warranty_manual_fancybox"><?php echo __('Read more'); ?></a>    
+                                        <div style="display:none" id="warranty_manual_content">
+                                            <div  id="warranty_manual_fancybox">
+                                                <?php 
+                                                echo $filterManger->getPageFilter()->filter($attributeValue);
+                                                ?>
+                                            </div>
+                                        </div>
+                                        <script type="text/javascript">
+                                      
+                                            require(
+                                                [
+                                                    'jquery',
+                                                    'Magento_Ui/js/modal/modal'
+                                                ],
+                                                function(
+                                                    $,
+                                                    modal
+                                                ) {
+                                                    var options = {
+                                                        type: 'popup',
+                                                        responsive: true,
+                                                        innerScroll: true,
+                                                        title: '',
+                                                        modalClass:'warranty_manual_popup'
+                                                    };
+
+                                                    var popup = modal(options, $('#warranty_manual_content'));
+                                                    $("#warranty_manual_link").on("click", function() {
+                                                        $('#warranty_manual_content').modal('openModal');
+                                                    });
+                                                }
+                                            );
+                                            </script>  
+                                     
+                                        <?php else: ?>
+                                            <?php echo $attributeValue ?>
+                                        <?php endif; ?>
+                                       <?php 
+                                         endif;
+                                    ?>
+                                </div>
+                            </div>
+                        </li>                 
+                <?php endif;?>
+             <?php endif;
+            endforeach; 
+        ?>
+    </ul>
+    </div>
+    
+</div>

@@ -1,0 +1,56 @@
+<?php
+/**
+ * Copyright © 2018 Magmodules.eu. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+ * @var $block \Magmodules\AlternateHreflang\Block\Product
+ */
+$currentFullAction = $block->getRequest()->getFullActionName();
+$cmspages = array('cms_index_index','cms_page_view');
+$is_page = false;
+$is_categoryPage = false;
+$is_product = false;
+if(in_array($currentFullAction, $cmspages)){
+    $is_page = true;
+}
+if( $currentFullAction == "catalog_category_view" ){
+    $is_categoryPage = true;
+}
+if( $currentFullAction == "catalog_product_view" ){
+    $is_product = true;
+}
+
+if ($alternate = $block->getAlternateData()) {
+    if (isset($alternate['urls'])) {
+        $alternateUrls = $alternate['urls'];
+        if (count($alternateUrls) > 1 && empty($alternate['error'])) {
+            if ($block->showCommentTags()) {
+                echo PHP_EOL . '<!-- MM: START ALTERNATE TAGS -->';
+            }
+            foreach ($alternateUrls as $language => $url) {
+                if( $is_product &&  $language == "de" ){
+                    continue;
+                }
+                echo PHP_EOL . '<link rel="alternate" hreflang="' . $language . '" href="' . $url . '" />';
+            }
+            if ($block->showCommentTags()) {
+                echo PHP_EOL . '<!-- MM: END ALTERNATE TAGS -->';
+            }
+            if ($block->getAlternateDebug()) {
+                $debugRow = '<div class="message info">%s</div>';
+                echo '<div class="alternate-debug">';
+                foreach ($alternateUrls as $language => $url) {
+                    $at = htmlentities('<link rel="alternate" hreflang="' . $language . '" href="' . $url . '" />');
+                    echo sprintf($debugRow, $at);
+                }
+                echo '</div>';
+            }
+            echo PHP_EOL;
+        }
+    }
+    if ($block->getAlternateDebug()) {
+        if (isset($alternate['error'])) {
+            echo '<div class="message info">' . $alternate['error'] . '</div>';
+        }
+    }
+}

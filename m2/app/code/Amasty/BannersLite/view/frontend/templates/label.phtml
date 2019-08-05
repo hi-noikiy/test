@@ -1,0 +1,15 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_BannersLite
+ */
+?>
+<?php /** @var \Amasty\BannersLite\Block\Banner $this */?>
+<?php foreach ($this->getBanners() as $banner) : ?>
+    <?php if ($this->isEnableBannerPosition()  && $img = $this->getImage($banner)) : ?>
+        <img class="am-banners-lite-label"
+             alt="<?= $this->escapeHtml($this->getAlt($banner)) ?>"
+             src="<?= $this->escapeUrl($img) ?>">
+    <?php endif;?>
+<?php endforeach; ?>

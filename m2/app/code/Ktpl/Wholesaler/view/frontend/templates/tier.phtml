@@ -1,0 +1,47 @@
+<?php     
+    
+    $priceHelper = $block->getPriceHelper();
+    $subtotal    = $block->getSubtotal();
+    $discounts   = $block->getDiscounts();
+
+    foreach ($discounts as $discount) {
+        $temp[$discount['total']] = array($discount['discount'],$discount['name']);
+    }
+    krsort($temp);
+
+    foreach ($temp as $key => $t) {
+        if ($key <= $subtotal) {
+            $percentage = $t[0];
+            $label = $t[1]; 
+            $increment_flag = (array_search($key, array_keys($temp),true) - 1);
+            break;
+        }
+        $percentage = 0;
+        $label = 'Tier0'; 
+        $increment_flag = (array_search($key, array_keys($temp),true));
+    }
+    
+     ?>
+    
+    <div class="offer-content">
+        <?php $val = 0;
+        if($increment_flag >= 0 ) { $val = array_keys($temp)[$increment_flag] - $subtotal; } 
+        if($val > 0) { ?>
+            <div class="total-all">
+                <span><?php echo __('Add %1 for %2',$priceHelper->currency($val, true, false),'<span class="big">'.$temp[array_keys($temp)[$increment_flag]][0].'% OFF </span>'); ?> </span>
+            </div>
+        <?php } else { ?>
+            <div class="total-all">
+                <span><?php echo __('No more Discount %1','<span>to Apply.</span>'); ?> </span>
+            </div>
+        <?php } ?>
+    </div>
+    <div class="offer-wrapper">
+        <div class="subtotal">
+            <span class="label"><?php echo __('SUBTOTAL:') ?></span><span class="total"><?php echo $priceHelper->currency($subtotal, true, false); ?></span>
+	</div>
+        <span><?php echo __('Discount Applied: %1',$percentage.'%'); ?></span>
+    </div>
+    <div class="caret"></div>
+
+  <?php  //} ?>

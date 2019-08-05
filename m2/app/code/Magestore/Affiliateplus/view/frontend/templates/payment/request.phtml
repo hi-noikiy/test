@@ -1,0 +1,366 @@
+<?php
+
+/**
+ * Magestore.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * @var \Magestore\Affiliateplus\Block\Payment\Request $block
+ */
+?>
+<?php $paymentMethods = $block->getAllPaymentMethod(); ?>
+<?php $data = $this->getRequest()->getParams() ?>
+<?php
+$store_id = $this->getStoreId();
+$check_responsvie = $this->getResponsiveEnable($store_id);
+if($check_responsvie)
+    $class_name = 'col-lg-9 col-md-9 col-sm-12 col-xs-12';
+else
+    $class_name = 'col-lg-9 col-md-9 col-sm-9 col-xs-9';
+?>
+<div class="aff-main-content <?php echo $class_name; ?>">
+    <div class="aff-title affiliate-request">
+        <h1><?php echo __('Request Withdrawal'); ?></h1>
+    </div>
+    <?php echo $block->getLayout()->getMessagesBlock()->getGroupedHtml() ?>
+    <form id="affiliateplus_payment_request_form" action="<?php echo $block->getFormActionUrl() ?>" method="post" enctype="multipart/form-data">
+        <div class="fieldset">
+            <div class = "lable-title" >
+                <h2 class="legend"><?php echo __('Request Information') ?></h2>
+            </div>
+            <ul>
+                <div class="form-group">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <?php if ($this->getTaxRate()): ?>
+                            <?php $_amount = $this->getRequest()->getParam('amount_incl_tax') ? $this->getRequest()->getParam('amount_incl_tax') : $this->getAmount() ?>
+                            <label for="amount_incl_tax" class="required"><span><?php echo __('Request Amount') ?></span><em>*</em></label>
+
+                            <input id="amount_incl_tax" type="text" name="amount_incl_tax" class="input-text required-entry validate-greater-than-zero form-control" onchange="checkAmountBalance(this);" value="<?php echo $_amount ?>" />
+
+                        <?php else: ?>
+                            <label for="amount" class="required"><span><?php echo __('Request Amount') ?></span><em>*</em></label>
+
+                            <input id="amount" type="text" name="amount" class="input-text required-entry validate-greater-than-zero form-control" onchange="checkAmountBalance(this);" value="<?php echo $this->getAmount() ?>" />
+
+                        <?php endif ?>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <label for="balance"><?php echo __('My Balance') ?></label>
+
+                        <strong id="balance"><?php echo $this->getFormatedBalance() ?></strong>
+
+                    </div>
+                </div>
+                <?php if ($this->getTaxRate()): ?>
+                    <?php $_taxAmount = $_amount * $this->getTaxRate() / (100 + $this->getTaxRate()) ?>
+                    <div class="form-group">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <label for="amount" class="required"><span><?php echo __('Amount (Excl. Tax)') ?></span><em>*</em></label>
+
+                            <input id="amount" type="text" name="amount" class="input-text required-entry validate-greater-than-zero form-control" onchange="changeRealAmount(this);" value="<?php echo $_amount - round($_taxAmount, 2) ?>" />
+
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <label><?php echo __('Tax (%1)', round($this->getTaxRate(), 2) . '%') ?></label>
+
+                            <strong id="withdrawal_tax"><?php echo $this->formatPrice($_taxAmount) ?></strong>
+
+                        </div>
+                    </div>
+                <?php endif ?>
+                <?php if (count($paymentMethods) == 1): ?>
+                    <?php foreach ($paymentMethods as $code => $method): ?>
+                        <div class="form-group">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <input type="hidden" id="payment_method_<?php echo $code ?>" value="<?php echo $code ?>" name="payment_method" />
+                            </div>
+                        </div>
+                        <div class="form-group" id="payment_method_<?php echo $code ?>_form">
+
+                            <?php echo $this->getChildHtml("payment_method_form_$code") ?>
+
+                        </div>
+                    <?php endforeach ?>
+                <?php else: ?>
+                    <?php if (!isset($data['payment_method']) || !$data['payment_method']): ?>
+                        <?php foreach ($paymentMethods as $code => $method): ?>
+                            <?php $isFirst = $block->methodSelected($code); ?>
+                            <div class="form-group">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <input type="radio" id="payment_method_<?php echo $code ?>" value="<?php echo $code ?>" name="payment_method" title="<?php echo $method->getLabel() ?>" class="radio" onclick="changeMethod();" <?php if ($isFirst): ?>checked<?php endif ?> />
+                                    <label for="payment_method_<?php echo $code ?>" style="float:center;"><?php echo $method->getLabel() ?></label>
+                                </div>
+                            </div>
+                            <div class="form-group payment_method_form" id="payment_method_<?php echo $code ?>_form" <?php if (!$isFirst) echo 'style="display:none"'; ?>>
+                                <?php echo $this->getChildHtml("payment_method_form_$code") ?>
+
+                            </div>
+                        <?php endforeach ?>
+                    <?php else: ?>
+                        <?php foreach ($paymentMethods as $code => $method): ?>
+                            <div class="form-group">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <input type="radio" id="payment_method_<?php echo $code ?>" value="<?php echo $code ?>" name="payment_method" title="<?php echo $method->getLabel() ?>" class="radio" onchange="changeMethod();" <?php if ($data['payment_method'] == $code): ?>checked<?php endif ?> />
+                                    <label for="payment_method_<?php echo $code ?>" style="float:center;"><?php echo $method->getLabel() ?></label>
+                                </div>
+                            </div>
+                            <div class="form-group payment_method_form" id="payment_method_<?php echo $code ?>_form" <?php if ($data['payment_method'] != $code) echo 'style="display:none"'; ?>>
+
+                                <?php echo $this->getChildHtml("payment_method_form_$code") ?>
+
+                            </div>
+                        <?php endforeach ?>
+                    <?php endif; ?>
+                <?php endif ?>
+            </ul>
+        </div>
+        <div class="clear"></div>
+        <div class="buttons-set">
+            <p class="required">* <?php echo __('Required Fields'); ?></p>
+            <span id="affiliate-please-wait-request" style="display:none;" class="opc-please-wait">
+                <img src="<?php echo $this->getViewFileUrl('Magestore_Affiliateplus::images/pageloading.gif') ?>" class="v-middle" alt="" />
+            </span>
+            <button style="float:right;" title="<?php echo __('Send Request'); ?>"  class="button button-config action primary" type="button" onclick="submitPayment(this);">
+                <span>
+                    <?php echo __('Send Request'); ?>
+                </span>
+            </button>
+            <button type="button" style="float:left;" onclick="javascript:cancelRequest()" class="button button-config action primary">
+                <span><?php echo __('Cancel') ?></span>
+            </button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+
+    function submitPayment(element) {
+        require([
+            "jquery",
+            "mage/mage",
+            "prototype"
+        ], function(jQuery){
+
+            var affiliateplusPaymentRequestForm = jQuery('#affiliateplus_payment_request_form');
+            if(jQuery('#amount').val() != ''){
+                jQuery('#affiliate-please-wait-request').show();
+            }
+            var amount = $('amount').value;
+            $$('input[type="radio"][name="payment_method"]').each(function(el) {
+                if (el.checked) {
+                    var payment_method = el.value;
+                    if (payment_method == 'paypal' || payment_method == 'moneybooker') {
+                        if(affiliateplusPaymentRequestForm.valid()){
+                            var email = $(payment_method + '_email').value;
+                        var url = '<?php echo $this->getUrl('affiliateplus/index/checkVerify') ?>?payment_method=' + payment_method + '&email=' + email + '&amount=' + amount;
+                        jQuery.ajax({
+                            url: url,
+                            success: function(data, textStatus, xhr) {
+                                var result = xhr.responseText;
+                                if (result) {
+                                    jQuery('#affiliate-please-wait-request').hide();
+                                    <?php if (count($paymentMethods) == 1): ?>
+                                    affiliateplusPaymentRequestForm.submit();
+                                    <?php else: ?>
+                                    if ($$('input:checked[type="radio"][name="payment_method"]').pluck('value')[0]){
+                                        affiliateplusPaymentRequestForm.submit();
+                                    } else{
+                                        alert('<?php echo __('Please specify a payment method') ?>');
+                                    }
+                                    <?php endif ?>
+                                } else {
+                                    jQuery('#affiliate-please-wait-request').hide();
+                                    showVerifyForm(payment_method, email, amount, element);
+                                    return false;
+                                }
+                            }
+
+                        });
+                    };
+                    } else {
+                        <?php if (count($paymentMethods) == 1): ?>
+                        affiliateplusPaymentRequestForm.submit();
+                        <?php else: ?>
+                        if ($$('input:checked[type="radio"][name="payment_method"]').pluck('value')[0]){
+                            affiliateplusPaymentRequestForm.submit();
+                        } else{
+                            alert('<?php echo __('Please specify a payment method') ?>');
+                        }
+                        <?php endif ?>
+                    }
+                }
+            });
+            <?php if (count($paymentMethods) == 1): ?>
+            <?php foreach ($paymentMethods as $code => $value): ?>
+            <?php if ($code == 'paypal' || $code == 'moneybooker'): ?>
+            var email = $('paypal_email').value;
+                if(affiliateplusPaymentRequestForm.valid()){
+                var url = '<?php echo $this->getUrl('affiliateplus/index/checkVerify') ?>?payment_method=paypal&email=' + email + '&amount=' + amount;
+                var request = new Ajax.Request(url, {
+                    'onSuccess': function(response) {
+                        var result = response.responseText;
+                        if (result) {
+                            <?php if (count($paymentMethods) == 1): ?>
+                            affiliateplusPaymentRequestForm.submit();
+                            <?php else: ?>
+                            if ($$('input:checked[type="radio"][name="payment_method"]').pluck('value')[0])
+                                affiliateplusPaymentRequestForm.submit();
+                            else
+                                alert('<?php echo __('Please specify a payment method') ?>');
+                            <?php endif ?>
+                        } else {
+                            showVerifyForm('paypal', email, element);
+                            return false;
+                        }
+
+                    }
+                });
+            };
+            <?php else: ?>
+            affiliateplusPaymentRequestForm.submit();
+            <?php endif; ?>
+            <?php endforeach; ?>
+            <?php else: ?>
+            <?php endif ?>
+
+        });
+
+
+    }
+
+    function showVerifyForm(method, email, amount, element) {
+        var url = '<?php echo $this->getUrl('affiliateplus/index/verifyPayment'); ?>' + '?method=' + method + '&email=' + email + '&amount=' + amount;
+        ajaxPopup(url, null, element);
+    }
+
+    function changeMethod() {
+        require([
+            "prototype"
+        ], function(){
+            $$('input[type="radio"][name="payment_method"]').each(function(el) {
+                if (el.checked) {
+                    $('payment_method_' + el.value + '_form').show();
+                } else {
+                    $('payment_method_' + el.value + '_form').hide();
+                }
+            });
+        });
+
+    }
+
+    var request_amount_max = <?php echo $this->getBalance() ?>;
+    function checkAmountBalance(el) {
+        require([
+            "prototype"
+        ], function(){
+            el.value = parseFloat(el.value);
+            if (el.value < 0)
+                el.value = 0;
+            else if (el.value > request_amount_max || el.value == 'NaN')
+                el.value = request_amount_max;
+
+            <?php if ($this->getTaxRate()): ?>
+            var taxRate = <?php echo $this->getTaxRate() ?>;
+            var taxAmount = el.value * taxRate / (100 + taxRate);
+            taxAmount = Math.round(taxAmount * 100) / 100;
+            $('withdrawal_tax').innerHTML = formatCurrency(taxAmount, <?php echo $this->getPriceFormatJs() ?>);
+            $('amount').value = el.value - taxAmount;
+            <?php endif ?>
+        });
+    }
+
+    <?php if ($this->getTaxRate()): ?>
+    function changeRealAmount(el) {
+
+        require([
+            "prototype"
+        ], function(){
+            var taxRate = <?php echo $this->getTaxRate() ?>;
+            var maxRequestAmount = request_amount_max * 100 / (100 + taxRate);
+            maxRequestAmount = Math.round(maxRequestAmount * 100) / 100;
+
+            // Refine real amount
+            el.value = parseFloat(el.value);
+            if (el.value < 0)
+                el.value = 0;
+            else if (el.value > maxRequestAmount || el.value == 'NaN')
+                el.value = maxRequestAmount;
+
+            // update Tax Amount
+            var taxAmount = Math.round(el.value * taxRate) / 100;
+            $('withdrawal_tax').innerHTML = formatCurrency(taxAmount, <?php echo $this->getPriceFormatJs() ?>);
+
+            // update Amount
+            var totalAmount = parseFloat(el.value) + parseFloat(taxAmount);
+            totalAmount = Math.round(totalAmount * 100) / 100;
+            $('amount_incl_tax').value = totalAmount;
+        });
+    }
+    <?php endif ?>
+
+    function cancelRequest() {
+        var url = '<?php echo $this->getUrl('affiliateplus/index/index'); ?>';
+        window.location.href = url;
+    }
+
+    function submitForm() {
+        require([
+            "jquery",
+            "mage/mage",
+            'prototype'
+        ], function (jQuery) {
+            var verifyForm = jQuery('#verify-email-form');
+            if(verifyForm.valid() && jQuery('#authentication_code').val() != '') {
+                jQuery('#verify-email-form').submit();
+            }
+            if($('authentication_code-error')){
+                $('authentication_code').insert({
+                    after: "<hr>"
+                });
+            }
+        });
+    }
+
+    function notNow() {
+        closeAffPopup();
+    }
+
+    function sendMail() {
+        require([
+            "jquery",
+            "prototype"
+        ], function(jQuery){
+            var method = $('payment_method').value;
+            var email = $('email').value;
+            var url = '<?php echo $this->getUrl('affiliateplus/index/sendVerifyEmail') ?>?payment_method=' + method + '&email=' + email;
+            jQuery.ajax({
+                url: url,
+                success: function(data, textStatus, xhr) {
+                    var result = xhr.responseText;
+                    if (result) {
+                        alert('An authentication code was sent to your email. Please check it again!');
+                    } else {
+                        alert("Can\'t send email. Please check your email is right.");
+                    }
+                }
+            });
+
+        });
+
+    }
+
+</script>

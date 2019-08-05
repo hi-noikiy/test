@@ -1,0 +1,27 @@
+<?php
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+
+// @codingStandardsIgnoreFile
+/** @var Aheadworks\StoreCredit\Block\Customer\Subscribe $block */
+?>
+<?php if ($block->canShow()): ?>
+    <legend class="legend">
+        <span><?php /* @noEscape */ echo __('Store Credit &amp; Refund') ?></span>
+    </legend>
+    <br>
+    <div class="field choice">
+        <input type="checkbox"
+               name="aw_storecedit_is_balance_update_subscribed"
+               id="aw_storecedit_balance_update_subscription"
+               value="1"
+               title="<?php echo $block->escapeHtml(__('Subscribe to balance update notifications')) ?>"
+               <?php if ($block->isSubscribed()): ?> checked="checked"<?php endif; ?>
+               class="checkbox">
+        <label for="aw_storecedit_balance_update_subscription" class="label">
+            <span><?php echo $block->escapeHtml(__('Subscribe to balance update notifications')) ?></span>
+        </label>
+    </div>
+<?php endif; ?>

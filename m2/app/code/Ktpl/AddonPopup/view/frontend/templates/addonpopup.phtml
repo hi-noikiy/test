@@ -1,0 +1,93 @@
+<?php 
+if ($crossSellCollection = $this->getCrossSellProducts()) {
+	$limitCrossSell = 0;
+	$_helper = $this->helper('Magento\Catalog\Helper\Output');
+    $_helpers = $this->helper('Magento\Catalog\Helper\Image');
+    $priceHelper = $this->helper('Magento\Framework\Pricing\Helper\Data');
+    $_addonHelper = $this->helper('Ktpl\AddonPopup\Helper\Data');
+
+    $helper = $this->helper('\Ktpl\General\Helper\Data');
+    $stores = $helper->getListLocaleForAllStores();
+    $currentStoreID = $helper->getCurrentStoreId();
+?>
+
+<div class="cart-url" data-url="<?php echo $this->getUrl("addonpopup/Cart/Addtocartcustom/"); ?>" ></div>
+<div class="addonpopup-inner" id="addon-popup" style="display: none;">
+    <div class="addonpopup-loader"></div>
+    <div class="popup-title">
+        <span><?php echo __('CONNOISSEURS WHO BOUGHT THIS PRODUCT ALSO BOUGHT');?></span>
+    </div>
+    <div class="addonpopup-content">
+     <?php foreach ($crossSellCollection as $crossSell): ?>
+        <?php $crossSellProduct=$this->getCrossSellProductById($crossSell->getId()) ?>
+        <?php if ($limitCrossSell < 4 && $crossSellProduct->getStatus() == 1 && in_array($crossSellProduct->getVisibility(),array(2,4))) : ?>
+            <?php $isInCart = 0;?>
+            <?php
+            if(!$crossSellProduct->isAvailable()) {
+                continue;
+            }
+            ?>
+			<div class="popup-product" id="popup-product-id-<?php echo $crossSellProduct->getId() ?>" data-mage-init='{"addonpopup":{"addPopupButton": "#product-<?php echo $crossSellProduct->getId(); ?>"} }'>
+				<?php $image_url = $_helpers->init($crossSellProduct, 'product_page_main_image')->setImageFile($crossSellProduct->getFile())->resize(201)->getUrl();?>
+				<img src="<?php echo $image_url ?>" alt="$crossSellProduct->getName()">
+        		<h3 class="popup-product-name"><?php echo ($crossSellProduct->getUpsellAltTitle()) ? $crossSellProduct->getUpsellAltTitle() : $crossSellProduct->getName(); ?>
+        		</h3>
+        		<?php /** Price section */ ?>
+        		<div class="popup-prices">
+        			<?php if ($crossSellProduct->getAddonsPopupSpecialPrice()): ?>
+                            <span class="regular-price regular-special"><strike><?php echo $priceHelper->currency($crossSellProduct->getPrice(), true, false);?></strike></span>
+                            <span class="special-price"><?php echo $priceHelper->currency($crossSellProduct->getAddonsPopupSpecialPrice(), true, false);
+                            ?></span>
+                        <?php else: ?>
+                            <span class="regular-price"><?php echo $priceHelper->currency($crossSellProduct->getPrice(), true, false);?></span>
+                    <?php endif; ?>
+                    <?php if($currentStoreID == 5): ?>
+                        <br/>
+                        <span class="includemust">inkl. MwSt.</span><br/>
+                        <span class="zversandkosten">zzgl. Versandkosten</span>
+                    <?php endif; ?>
+        		</div>
+        		<?php /** Add to Cart section */ ?>
+                    <?php /*Start Code*/
+                        if ($crossSellProduct->getIsInStorePurchase()):
+                    ?>
+                        <button type="button"
+                                class="action tocart primary"
+                                onclick="location.href = '<?= $this->getBaseUrl() ?>locations';">
+                                <?= /* @escapeNotVerified */ __('In Store Purchase') ?>
+                        </button>
+                    <?php
+                        else:
+                    ?>
+                    <?php if($crossSellProduct->getTypeId() == "configurable") : ?>
+                        <button id="product-<?php echo $crossSellProduct->getId(); ?>" onclick="setLocation('<?php echo $crossSellProduct->getProductUrl(); ?>')" type="button" title="<?php echo __("Add to cart");?>" class="btn-add">
+                            <span><?php echo __("Add to cart"); ?></span>
+                        </button>
+                    <?php else : ?>
+                        <?php if ($isInCart): ?>
+                            <button type="button" title="<?php echo __("Added");?>" class="btn-add added">
+                                <span><?php echo __("Added"); ?></span>
+                            </button>
+                        <?php else: ?>
+                            <?php $isAvailable = $crossSellProduct->isAvailable(); ?>
+                            <?php if($isAvailable) : ?>
+                                <button id="product-<?php echo $crossSellProduct->getId(); ?>" type="button" data-id="<?php echo $crossSellProduct->getId(); ?>" data-addonprice="<?php echo ($crossSellProduct->getAddonsPopupSpecialPrice()) ? $crossSellProduct->getAddonsPopupSpecialPrice() : ''?>" data-url="<?php echo $this->getUrl("addonpopup/Cart/Addtocart/"); ?>" title="<?php echo __("Add to cart");?>" class="btn-add btn-popup-add-product">
+                                    <span><?php echo __("Add to cart"); ?></span>
+                                </button>
+                            <?php else : ?>
+                                <span><?php echo __("Out of stock"); ?></span>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <?php endif; ?>
+                <br/><a class="more-info" id="<?php echo $crossSellProduct->getId(); ?>" data-url="<?php echo $this->getUrl("addonpopup/Cart/Moreinfo/"); ?>"><?php echo __("More Info"); ?> </a>
+        	</div>
+         <?php endif; ?>
+        <?php $limitCrossSell++; ?>
+        <?php endforeach; ?>
+    </div>
+        <div id="moreinfo" style="display: none"></div>
+</div>
+ 
+<?php } ?>
+

@@ -1,0 +1,128 @@
+<?php /* @var $block \Potato\AddressAutocomplete\Block\Init */?>
+<?php if ($block->canShow()): ?>
+    <script type="text/javascript">
+        require(
+            [
+                'jquery',
+                'Potato_AddressAutocomplete/js/event.simulate',
+                'Potato_AddressAutocomplete/js/google-places'
+            ], function(jQuery) {
+                    new Potato.AddressAutocomplete.GooglePlaces({
+                        'readySelector': '#co-shipping-form',
+                        'apiKey': '<?php echo $block->getConfig()->getGooglePlacesApiKey(); ?>',
+                        'canUseBrowserGeolocation': <?php var_export($block->getConfig()->isGoogleUseBrowserGeo()); ?>,
+                        'locale': '<?php echo $block->getLocaleCode(); ?>',
+
+                        'hidePoweredByGoogleLabel': <?php var_export($block->getConfig()->isGoogleHideLogo()); ?>,
+                        'useCountryRestriction': <?php var_export($block->getConfig()->isGoogleUseCountryRestriction()); ?>,
+                        'countryInput': '#co-shipping-form  [name="country_id"]',
+
+                        'regionConfig': <?php echo $block->getRegionConfig(); ?>,
+
+                        'triggerAjaxList': [],
+
+                        'locationInput': '#co-shipping-form [name="street[0]"]',
+
+                        'addressForm': {
+                            'country': {
+                                'inputId': '#co-shipping-form  [name="country_id"]',
+                                'component': 'country',
+                                'name_type': 'short_name'
+                            },
+                            'region_id': {
+                                'inputId': '#co-shipping-form [name="region_id"]',
+                                'component': 'administrative_area_level_1',
+                                'name_type': 'short_name',
+                                'processorName': '_prepareRegionId'
+                            },
+                            'region': {
+                                'inputId': '#co-shipping-form [name="region"]',
+                                'component': 'administrative_area_level_1',
+                                'name_type': '<?php echo $block->getConfig()->getAddressComponentRegion(); ?>'
+                            },
+                            'city': {
+                                'inputId': '#co-shipping-form [name="city"]',
+                                'component': 'locality',
+                                'name_type': '<?php echo $block->getConfig()->getAddressComponentCity(); ?>'
+                            },
+                            'postcode': {
+                                'inputId': '#co-shipping-form [name="postcode"]',
+                                'component': 'postal_code',
+                                'name_type': '<?php echo $block->getConfig()->getAddressComponentPostcode(); ?>'
+                            },
+                            'street1': {
+                                'inputId': '#co-shipping-form [name="street[0]"]',
+                                'component': 'route',
+                                'name_type': '<?php echo $block->getConfig()->getAddressComponentStreetOne(); ?>',
+                                'processorName': '<?php echo ($block->getConfig()->isAddressComponentStreetCombined()) ? '_prepareCombinedStreet1' : ''; ?>'
+                            },
+                            'street2': {
+                                'inputId': '#co-shipping-form [name="street[1]"]',
+                                'component': 'street_number',
+                                'name_type': '<?php echo $block->getConfig()->getAddressComponentStreetTwo(); ?>',
+                                'processorName': '<?php echo ($block->getConfig()->isAddressComponentStreetCombined()) ? '_prepareCombinedStreet2' : '_prepareStreet2'; ?>'
+                            }
+                        }
+                    });
+
+                    new Potato.AddressAutocomplete.GooglePlaces({
+                        'readySelector': '#billing-new-address-form',
+                        'apiKey': '<?php echo $block->getConfig()->getGooglePlacesApiKey(); ?>',
+                        'canUseBrowserGeolocation': <?php var_export($block->getConfig()->isGoogleUseBrowserGeo()); ?>,
+                        'locale': '<?php echo $block->getLocaleCode(); ?>',
+
+                        'hidePoweredByGoogleLabel': <?php var_export($block->getConfig()->isGoogleHideLogo()); ?>,
+                        'useCountryRestriction': <?php var_export($block->getConfig()->isGoogleUseCountryRestriction()); ?>,
+                        'countryInput': '#billing-new-address-form [name="country_id"]',
+
+                        'regionConfig': <?php echo $block->getRegionConfig(); ?>,
+
+                        'triggerAjaxList': [],
+
+                        'locationInput': '#billing-new-address-form [name="street[0]"]',
+
+                        'addressForm': {
+                            'country': {
+                                'inputId': '#billing-new-address-form [name="country_id"]',
+                                'component': 'country',
+                                'name_type': 'short_name'
+                            },
+                            'region_id': {
+                                'inputId': '#billing-new-address-form [name="region_id"]',
+                                'component': 'administrative_area_level_1',
+                                'name_type': 'short_name',
+                                'processorName': '_prepareRegionId'
+                            },
+                            'region': {
+                                'inputId': '#billing-new-address-form [name="region"]',
+                                'component': 'administrative_area_level_1',
+                                'name_type': '<?php echo $block->getConfig()->getAddressComponentRegion(); ?>'
+                            },
+                            'city': {
+                                'inputId': '#billing-new-address-form [name="city"]',
+                                'component': 'locality',
+                                'name_type': '<?php echo $block->getConfig()->getAddressComponentCity(); ?>'
+                            },
+                            'postcode': {
+                                'inputId':  '#billing-new-address-form [name="postcode"]',
+                                'component': 'postal_code',
+                                'name_type': '<?php echo $block->getConfig()->getAddressComponentPostcode(); ?>'
+                            },
+                            'street1': {
+                                'inputId': '#billing-new-address-form [name="street[0]"]',
+                                'component': 'route',
+                                'name_type': '<?php echo $block->getConfig()->getAddressComponentStreetOne(); ?>',
+                                'processorName': '<?php echo ($block->getConfig()->isAddressComponentStreetCombined()) ? '_prepareCombinedStreet1' : ''; ?>'
+                            },
+                            'street2': {
+                                'inputId': '#billing-new-address-form [name="street[1]"]',
+                                'component': 'street_number',
+                                'name_type': '<?php echo $block->getConfig()->getAddressComponentStreetTwo(); ?>',
+                                'processorName': '<?php echo ($block->getConfig()->isAddressComponentStreetCombined()) ? '_prepareCombinedStreet2' : '_prepareStreet2'; ?>'
+                            }
+                        }
+                    });
+
+            });
+</script>
+<?php endif; ?>

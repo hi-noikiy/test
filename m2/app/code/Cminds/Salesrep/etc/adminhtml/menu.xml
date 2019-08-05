@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add
+                id="Cminds_Salesrep::report_salesrep"
+                title="Sales Representative"
+                module="Cminds_Salesrep"
+                sortOrder="120"
+                parent="Magento_Reports::report"
+                resource="Cminds_Salesrep::sales_and_commission_reports"
+        />
+        <add
+                id="Cminds_Salesrep::commissions"
+                title="Commissions"
+                module="Cminds_Salesrep"
+                sortOrder="60"
+                parent="Cminds_Salesrep::report_salesrep"
+                action="salesrep/report/commissions"
+                resource="Cminds_Salesrep::sales_and_commission_reports"
+        />
+        <add
+                id="Cminds_Salesrep::gross_sales"
+                title="Gross Sales by Rep"
+                module="Cminds_Salesrep"
+                sortOrder="60"
+                parent="Cminds_Salesrep::report_salesrep"
+                action="salesrep/report/gross"
+                resource="Cminds_Salesrep::sales_and_commission_reports"
+        />
+    </menu>
+</config>

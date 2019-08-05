@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<payment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Payment:etc/payment.xsd">
+    <groups>
+        <group id="payengine3cw">
+            <label>Concardis PayEngine 3.0</label>
+        </group>
+    </groups>
+    <methods>
+        <method name="payengine3cw_creditcard">
+			<allow_multiple_address>1</allow_multiple_address>
+		</method><method name="payengine3cw_paypal">
+			<allow_multiple_address>1</allow_multiple_address>
+		</method><method name="payengine3cw_paydirekt">
+			<allow_multiple_address>1</allow_multiple_address>
+		</method><method name="payengine3cw_ratepayopeninvoice">
+			<allow_multiple_address>1</allow_multiple_address>
+		</method><method name="payengine3cw_ratepaydirectdebits">
+			<allow_multiple_address>1</allow_multiple_address>
+		</method><method name="payengine3cw_ratepayinstallments">
+			<allow_multiple_address>1</allow_multiple_address>
+		</method><method name="payengine3cw_sofortueberweisung">
+			<allow_multiple_address>1</allow_multiple_address>
+		</method>
+    </methods>
+</payment>

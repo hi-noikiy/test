@@ -1,0 +1,31 @@
+<?php
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\StoreCredit\Block\Product\View\Discount */
+$canShow = true;
+if (!$block->isAjax()): ?>
+    <?php $canShow = false ?>
+    <div data-aw-store-credit-block-name="<?php /* @noEscape */ echo $block->getNameInLayout() ?>"></div>
+<?php endif; ?>
+
+<?php if ($canShow && $block->isDisplayBlock() && $block->getAvailableStoreCredit() > 0) : ?>
+    <div class="product-store-credit-discount">
+        <?php if ($block->isDisplayOnlyAvailableStoreCredit()) : ?>
+            <?php /* @noEscape */ echo __('Your Store Credit balance is <strong>%1</strong>. You can apply Store Credit on checkout.',
+                $block->getFormattedAvailableAmount()); ?>
+        <?php elseif ($block->getPriceWithDiscount() > 0) : ?>
+            <?php /* @noEscape */ echo __('<strong>%1</strong> - Price discounted by your Store Credit.',
+                $block->getFormattedPriceWithDiscount()); ?><br />
+            <?php /* @noEscape */ echo __('Your Store Credit balance is <strong>%1</strong>. You can apply Store Credit on checkout.',
+                $block->getFormattedAvailableAmount()); ?>
+        <?php else : ?>
+            <?php /* @noEscape */ echo __('Your Store Credit balance is <strong>%1</strong>. You can purchase this product <strong>for FREE.</strong> You can apply Store Credit on checkout.',
+                $block->getFormattedAvailableAmount()); ?>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>

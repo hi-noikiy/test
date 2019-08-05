@@ -1,0 +1,36 @@
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplusprogram
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/* Affiliateplus Program Plugin stylesheet */
+
+.affiliate-clear { min-height: 18px; clear: both; }
+
+.affiliateplusprogram_total_commission { color: #ff0000; }
+
+.affiliateplus-form-search .input-box .label { font-weight: bold; }
+.affiliateplus-form-search .input-box .left input { margin-left: 10px; }
+
+.affiliateplus-anchor {color: #1e7ec8; text-decoration: underline; cursor: pointer;}
+.pager .div-left{
+    float: left;
+}
+.pager .div-right {
+    float: right;
+    margin-right: 4%;
+}

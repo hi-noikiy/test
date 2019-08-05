@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ktpl_Guestabandoned::guestabandoned" title="Guestabandoned" module="Ktpl_Guestabandoned" action="guestabandoned/guestabandoned/index" parent="Magento_Customer::customer" sortOrder="20" dependsOnModule="Ktpl_Guestabandoned" resource="Ktpl_Guestabandoned::guestabandoned"/>
+    </menu>
+</config>

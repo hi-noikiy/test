@@ -1,0 +1,23 @@
+{
+    "name": "exto/module-potato-zendesk",
+    "description": "N/A",
+    "type": "magento2-module",
+    "version": "1.2.0",
+    "license": [
+        "proprietary"
+    ],
+    "require": {
+        "php": "~5.5.0|~5.6.0|~7.0.0",
+        "magento/framework": "*",
+        "magento/magento-composer-installer": "*",
+        "zendesk/zendesk_api_client_php": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Potato\\Zendesk\\": ""
+        }
+    }
+}

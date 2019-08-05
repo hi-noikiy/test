@@ -1,0 +1,29 @@
+<!--
+/**
+ * Copyright © 2016 Magestore. All rights reserved.
+ */
+-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{{template config_path="design/email/header_template"}}
+    <!-- [ middle starts here] -->
+    <table cellspacing="0" cellpadding="0" border="0" width="650">
+        <tr>
+            <td valign="top">
+                <p>
+                    <strong>
+                        {{trans 'Dear %var account' account=$account}}
+                    </strong>
+                </p>
+                <p>
+                    {{trans 'There is someone who has just verified your domain <strong>%domain</strong>' domain=$domain |raw}}.
+                </p>
+                <p>
+                    {{trans 'Please check it again. If it is still yours, you can click on this link to verify again '}}
+                    {{trans '<a href="%affiliate_direct_link_url" style="color:#1E7EC8;">%domain</a>' affiliate_direct_link_url=$this.getUrl($store, 'affiliateplusdirectlink', [_nosid:1]) domain=$domain |raw}}.
+                <p>
+                    {{trans 'Thank you very much!'}}
+                </p>
+            </td>
+        </tr>
+    </table>
+{{template config_path="design/email/footer_template"}}

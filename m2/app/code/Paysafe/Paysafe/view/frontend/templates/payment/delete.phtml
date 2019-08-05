@@ -1,0 +1,13 @@
+<p><?php echo __('Are you sure to delete this payment information?'); ?></p>
+<div class="group-list">
+	<div class="group-img">
+		<img src="<?php echo $block->getViewFileUrl('Paysafe_Paysafe/images').'/'.strtolower($block->getDeleteInformation()[0]['brand']).'.png';?>" class="brandImage" alt="<?=$block->getDeleteInformation()[0]['brand']?>">
+	</div>
+	<span class="group-info"><?php echo __('ending in').": ".$block->getDeleteInformation()[0]['last_digits']."; ".__('expires on').": ".$block->getDeleteInformation()[0]['expiry_month']."/".substr($block->getDeleteInformation()[0]['expiry_year'],-2);?></span>
+</div>
+<form action="<?php echo $block->getResponseUrl() ?>" method="post" class="btnDeleteCancel">
+	<input type="hidden" name="information_id" value="<?php echo $block->getInformationId(); ?>"/>
+	<input type="hidden" name="payment_method" value="<?php echo $block->getPaymentMethod(); ?>"/>
+	<button class="action primary" type="submit" name="action" value="confirm"><?php echo __('Yes') ?></button>
+</form>
+<a class="action primary btnDeleteCancel" href="<?php echo $block->getCancelUrl() ?>"><?php echo __('No') ?></a>

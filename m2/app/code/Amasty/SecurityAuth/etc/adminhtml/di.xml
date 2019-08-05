@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_SecurityAuth
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\User\Controller\Adminhtml\User\Save">
+        <plugin name="Amasty_SecurityAuth::user_save_post_dispatch" type="Amasty\SecurityAuth\Plugin\UserSave" />
+    </type>
+    <type name="Magento\Backend\Model\Auth">
+        <plugin name="Amasty_SecurityAuth::user_success_auth" type="Amasty\SecurityAuth\Plugin\UserAuth" />
+    </type>
+</config>

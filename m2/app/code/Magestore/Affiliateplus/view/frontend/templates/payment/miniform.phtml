@@ -1,0 +1,82 @@
+<?php
+
+/**
+ * Magestore.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * Payments miniform request template
+ */
+?>
+    <form id="affiliateplus_payment_request_miniform" action="<?php echo $this->getFormActionUrl() ?>" method="post">
+        <div class="affiliateplus_form_request">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 my-blance">
+                <strong><?php echo __('My Balance: ') ?></strong>
+                <?php echo $this->getFormatedBalance() ?>
+            </div>
+            <?php if ($this->canRequest()): ?>
+
+                <div class="input_fields_form form-inline request-amount-money col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+
+
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 input-blance">
+                        <input id="request_amount"  name="amount" value="<?php echo __('Request Amount') ?>" data-validate="{'required-number':true, 'validate-greater-than-zero':true}" type="text" onchange="checkAmountBalance(this);" onfocus="if (this.value == this.defaultValue)
+                                    this.value = '';" onblur="if (this.value == '')
+                                                this.value = this.defaultValue;" />
+                        <input type="hidden" id="from_request_page" name="from_request_page" value="1" />
+                    </div>
+                    <div class="request-withrawal col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <button class="button button-config request-amount action primary" title="<?php echo __('Request Withdrawal') ?>" type="submit">
+                            <span><?php echo __('Request Withdrawal') ?></span>
+                        </button>
+                    </div>
+                </div>
+            <?php endif ?>
+        </div>
+    </form>
+<?php if ($this->canRequest()): ?>
+    <script type="text/javascript">
+
+        function checkAmountBalance(el) {
+            require(
+                [
+                    'jquery',
+                    'prototype'
+                ], function(jQuery){
+                    var request_amount_max = <?php echo $this->getMaxAmount() ?>;
+                    el.value = parseFloat(el.value);
+                    if (el.value < 0)
+                        el.value = 0;
+                    else if (el.value > request_amount_max || el.value == 'NaN')
+                        el.value = request_amount_max;
+                });
+
+
+        }
+    </script>
+    <div class="clear"></div>
+    <?php
+endif ?>
+
+<script type="text/x-magento-init">
+    {
+        "#affiliateplus_payment_request_miniform": {
+            "validation": {}
+        }
+    }
+</script>

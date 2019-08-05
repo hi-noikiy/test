@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+ <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Controller\Product\View">
+      <plugin name="ktpl-general-product-block" type="Ktpl\General\Plugin\ProductPlugin" sortOrder="5" />
+    </type>
+
+    <type name="Magento\Customer\Block\Widget\Dob">
+      <plugin name="ktpl-general-widget-dob" type="Ktpl\General\Plugin\Dob" sortOrder="5" />
+    </type>
+    <!-- canada post shipping method-->
+    <type name="CollinsHarper\CanadaPost\Helper\AbstractHelp">
+      <plugin name="ktpl-canada-abstracthelp" type="Ktpl\General\Plugin\AbstractHelpPlugin" sortOrder="5" />
+    </type>
+
+    <preference for="Magento\CatalogUrlRewrite\Model\Category\Plugin\Storage" type="Ktpl\General\Plugin\Storage" />
+    <preference for="\Magento\Catalog\Block\Product\ProductList\Upsell" type="Ktpl\General\Block\Product\ProductList\Upsell" />
+     <type name="Magento\SalesSequence\Model\Sequence">
+        <arguments>
+            <argument name="pattern" xsi:type="string">%s%'.07d%s</argument>
+        </arguments>
+    </type>
+
+    <preference for="Magento\Contact\Controller\Index\Post" type="Ktpl\General\Plugin\Post" />
+
+    <type name="Magento\Directory\Model\ResourceModel\Region\Collection">
+        <plugin name="plugin_for_dropdown"
+                type="Ktpl\General\Plugin\Collection"
+                sortOrder="10"/>
+    </type>
+
+    <preference for="Magento\Checkout\Controller\Cart\CouponPost" type="Ktpl\General\Controller\Cart\CouponPost" />
+
+    <type name="\Magento\Framework\Locale\ResolverInterface">
+        <plugin name="mage_localeresolver_reload" type="Magento\Framework\Translate\Locale\Resolver\Plugin" sortOrder="1" disabled="false"/>
+    </type>
+
+    <!-- <type name="Magento\Payment\Model\Method\AbstractMethod">
+        <plugin sortOrder="5" name="disable_btp_front" type="Ktpl\General\Plugin\Model\Method\Available" disabled="false" />
+    </type> -->
+
+    <preference for="Magento\Sales\Model\Order\Pdf\Config" type="Ktpl\General\Model\Order\Pdf\Config" />
+
+    <preference for="Magento\Sales\Model\Order\Pdf\Invoice" type="Ktpl\General\Model\Order\Pdf\Invoice" />
+    <preference for="Magento\Sales\Model\Order\Pdf\Shipment" type="Ktpl\General\Model\Order\Pdf\Shipment" />
+    <preference for="Magento\Sales\Model\Order\Pdf\Creditmemo" type="Ktpl\General\Model\Order\Pdf\Creditmemo" />
+    <preference for="Fooman\PrintOrderPdf\Model\Pdf\Order" type="Ktpl\General\Model\Order\Pdf\Order" />
+
+    <type name="Magento\Contact\Model\Config">
+        <plugin name="recipient_email_wholesale" type="Ktpl\General\Plugin\Config" sortOrder="1" />
+    </type>
+ </config>

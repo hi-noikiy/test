@@ -1,0 +1,109 @@
+<?php
+
+/**
+ * Magestore.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * Paypal Payment Method Form template
+ * @var \Magestore\Affiliateplus\Block\Payment\Paypal $block
+ */
+?>
+<?php $acount = $block->getAcount() ?>
+<?php $isVerified = $block->isVerified($acount->getId(),$acount->getPaypalEmail());?>
+<?php $require = $block->getPaymentHelper()->isRequireAuthentication('paypal');?>
+<?php
+$store_id = $block->getStoreManager()->getStore()->getStoreId();
+$check_responsvie = $block->getConfig('affiliateplus/style_config/responsive_enable', $store_id);
+if($check_responsvie){
+    $class_name_col = 'col-lg-6 col-md-6 col-sm-12 col-xs-12';
+}
+else{
+    $class_name_col = 'col-lg-6 col-md-6 col-sm-6 col-xs-6';
+}
+?>
+<ul>
+    <li class="form-group">
+        <div class="<?php echo $class_name_col; ?>">
+            <label for="paypal_email" class="required"><span><?php echo __('Email') ?></span><em>*</em></label>
+
+            <input type="text" class="form-control input-text validate-email required-entry" id="paypal_email" onchange="hideVerifyLink()" name="paypal_email" title="<?php echo __('Paypal Email') ?>" value="<?php echo $acount->getPaypalEmail() ?>" />
+            <small style="float:left;"><?php echo __('This field will be updated to your profile.') ?></small>
+
+        </div>
+        <?php if($require):?>
+            <?php if($isVerified): ?>
+                <div class="<?php
+                echo $class_name_col; ?>" id="verified-div">
+                    <label for="paypal_email" class="required"><?php echo __('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;') ?></label>
+                    <div class="input-box verified" >
+                        <a href="javascript:void()"><?php echo __('Verified');?></a>
+                        <!--small><?php echo __('This field will be updated to your profile.') ?></small-->
+                    </div>
+                </div>
+            <?php else: ?>
+                <div class="field" id="notverified-div" style="margin-left:15px;">
+                    <div class="input-box not-verified" >
+                        <a href="javascript:void()"><?php echo __('Not verified');?></a>
+                        <!--small><?php echo __('This field will be updated to your profile.') ?></small-->
+                    </div>
+                    <label for="paypal_email" class="required required-email"><?php echo __('') ?></label>
+                </div>
+            <?php endif;?>
+        <?php endif;?>
+    </li>
+</ul>
+<script type="text/javascript">
+    function showVerifyForm(){
+        require([
+            "jquery",
+            "prototype"
+        ], function(jQuery){
+            var email = $('paypal_email').value;
+            if(!email){
+                alert('Please fill paypal email!');
+                return;
+            }
+            var url='<?php echo $this->getUrl('affiliateplus/index/verifyPayment');?>'+'?method=paypal&email='+email;
+            ajaxPopup(url,null,null);
+        });
+    }
+    function hideVerifyLink(){
+        require([
+            "jquery",
+            "prototype"
+        ], function(jQuery){
+            var verifiedDiv = $('verified-div');
+            var notverifiedDiv = $('notverified-div');
+            if(verifiedDiv){
+                verifiedDiv.style.display = 'none';
+            }
+            if(notverifiedDiv){
+                notverifiedDiv.style.display = 'none';
+            }
+        });
+
+    }
+</script>
+<script type="text/x-magento-init">
+        {
+            "#affiliateplus_payment_request_form": {
+                "validation": {}
+            }
+        }
+    </script>

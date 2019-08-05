@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+        <event name="currency_display_options_forming">
+        <observer name="change_currency_position" instance="Ktpl\General\Model\Observer\ChangeCurrencyPosition" />
+    </event>
+    <event name="sales_order_status_history_save_after">
+        <observer name="After_comment" instance="Ktpl\General\Observer\Commnet" />
+    </event>
+    <event name="payment_method_is_active">
+        <observer name="payment_method_available" instance="Ktpl\General\Observer\PaymentMethodAvailable" />
+    </event>
+</config>

@@ -1,0 +1,46 @@
+<?php
+/* @var $block \Mirasvit\Rma\Block\Rma\View\History */
+$messages = $block->getMessages();
+$isCustomer = 0;
+?>
+<?php if (count($messages)): ?>
+    <div class="block">
+        <div class="title">
+            <strong><?= __('RMA History') ?></strong>
+        </div>
+        <div class="block-content">
+            <?php foreach ($messages as $message): ?>
+                <div class="rma-message <?php if ($message->getCustomerName()): ?>customer<?php else: ?>user<?php endif ?>">
+                    <div class="rma-message-title">
+                        <?php if ($message->getCustomerName()): ?>
+                            <?php $isCustomer = 1; ?>
+                            <strong><?= $block->escapeHtml($message->getCustomerName()) ?></strong>
+                        <?php elseif (($user = $block->getUser($message)) && trim($user->getName())): ?>
+                            <?php $isCustomer = 0; ?>
+                            <strong><?= $block->escapeHtml($user->getName()) ?></strong>
+                        <?php endif ?>
+
+                        <?= $block->formatDate($message->getCreatedAt(), \IntlDateFormatter::MEDIUM) ?> <?= $block->formatTime($message->getCreatedAt(), \IntlDateFormatter::SHORT) ?>
+                    </div>
+
+                    <div class="rma-message-text">
+                        <?php if ($isCustomer): ?>
+                            <?= $block->escapeHtml($block->getTextHtml($message), ['br']) ?>
+                        <?php else: ?>
+                            <?= $block->getTextHtml($message) ?>
+                        <?php endif ?>
+
+                        <?php if ($attachments = $block->getAttachments($message)): ?>
+                            <?php foreach ($attachments as $attachment): ?>
+                                <br>
+                                <a href="<?= $block->getAttachmentUrl($attachment) ?>">
+                                    <?= $block->escapeHtml($attachment->getName()) ?>
+                                </a>
+                            <?php endforeach ?>
+                        <?php endif ?>
+                    </div>
+                </div>
+            <?php endforeach ?>
+        </div>
+    </div>
+<?php endif ?>

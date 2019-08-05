@@ -1,0 +1,26 @@
+"Two-Factor Settings","Two-Factor Settings"
+"Two-Factor Authentication available only for existing Users","Two-Factor Authentication available only for existing Users"
+General,General
+"Enable TFA","Enable TFA"
+Status,Status
+Configured,Configured
+"Not Configured","Not Configured"
+"Insert this secret key into Google Authenticator or scan QR code to generate Security Code","Insert this secret key into Google Authenticator or scan QR code to generate Security Code"
+"Secret Key","Secret Key"
+"QR Code","QR Code"
+"Scan QR code above with Google Authenticator application,
+         then enter the security code in this field and click Check Code link","Scan QR code above with Google Authenticator application,
+         then enter the security code in this field and click Check Code link"
+"Security Code","Security Code"
+"Check Code","Check Code"
+"Two-Factor Authentication Tab is only available when editing users.","Two-Factor Authentication Tab is only available when editing users."
+"Security Code is Incorrect.","Security Code is Incorrect."
+Valid!,Valid!
+Invalid!,Invalid!
+"Two-Factor Authentication","Two-Factor Authentication"
+"General Settings","General Settings"
+"Enable Two-Factor Authentication","Enable Two-Factor Authentication"
+Discrepancy,Discrepancy
+"This is the allowed time drift in 30 second units (8 means 4 minutes before or after) for generation of verification codes","This is the allowed time drift in 30 second units (8 means 4 minutes before or after) for generation of verification codes"
+"Ip White List","Ip White List"
+"Specify IP addresses separated by comma","Specify IP addresses separated by comma"

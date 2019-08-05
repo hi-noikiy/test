@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_SecurityAuth
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <link src="Amasty_SecurityAuth::js/functions.js"/>
+    </head>
+    <body>
+        <referenceBlock name="adminhtml.user.edit.tabs">
+            <block class="Amasty\SecurityAuth\Block\User\Edit\Tab\Auth" name="adminhtml.user.tab.amasty_auth.edit" />
+            <action method="addTabAfter">
+                <argument name="name" xsi:type="string">amasty_auth.edit</argument>
+                <argument name="block" xsi:type="string">adminhtml.user.tab.amasty_auth.edit</argument>
+                <argument name="after" xsi:type="string">roles_section</argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

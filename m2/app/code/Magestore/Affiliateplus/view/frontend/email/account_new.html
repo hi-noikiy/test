@@ -1,0 +1,72 @@
+
+<!--
+/**
+ * Copyright © 2016 Magestore. All rights reserved.
+ */
+-->
+<!--@subject {{var store.getFrontendName()}}: Welcome to Affiliate system @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image",
+"htmlescape var=$referral.getReferralName()":"Customer Name",
+"store url=\"customer/account/\"":"Customer Account Url",
+"var referral.getEmail()":"Customer Email",
+"htmlescape var=$referral.getPassword()":"Customer Password"}
+@-->
+
+{{template config_path="design/email/header_template"}}
+
+    <!-- [ middle starts here] -->
+    <table cellspacing="0" cellpadding="0" border="0" width="650">
+        <tr>
+            <td valign="top">
+                <p class="greeting">
+                    <strong>
+                        {{trans "Hi %account_name" account_name=$account.getName()}}
+                    </strong>,
+                    <br/>
+                    {{trans 'Thanks for joining the %store_name' store_name=$store.getFrontendName()}}
+                    {{trans '<a href="%affiliate_welcome_page">affiliate program!</a>' affiliate_welcome_page="$this.getUrl($store, 'affiliateplus/index/index',[_nosid:1])"|raw}}
+
+                    {{if account.isApproved()}}
+                    <br/>
+                    {{trans 'To login to our system, please click <a href="%affiliate_account_login">Login</a>' affiliate_account_login="$this.getUrl($store, 'affiliateplus/account/login', [_nosid:1])"|raw}}
+                    {{trans 'or <a href="%affiliate_webcome_page">My Account</a> at the top right of every page in our shop.' affiliate_webcome_page="$this.getUrl($store, 'affiliateplus/index/index', [_nosid:1])"|raw}}
+                </p>
+                <br/>
+                <p style="border:1px solid #BEBCB7; padding:13px 18px; background:#F8F7F5; ">
+                    {{trans 'Use the account email and password you set earlier to login:'}}<br/>
+                    {{trans 'E-mail: %affiliate_email' affiliate_email=$account.getEmail()}}<br/>
+                    {{trans 'Password: ******** (<a href="%customer_forget_password">I've forgotten my password</a>)' customer_forget_password=$this.getUrl($store, 'customer/account/forgotpassword', [_nosid:4])|raw}}
+                </p>
+                <br/>
+                <p>{{trans 'Your account information is below.'}}</p>
+                <br/>
+                <p style="border:1px solid #BEBCB7; padding:13px 18px; background:#F8F7F5; ">
+                    {{trans 'Account Name: %account_name' account_name=$account.getName()}}<br/>
+                    {{trans 'PayPal Email: %affiliate_paypal_email' affiliate_paypal_email=$account.getPaypalEmail()}}
+                </p>
+                <br/>
+                <p>{{trans 'Receive a unique affiliate link:'}}</p>
+                <br/>
+                <p style="border:1px solid #BEBCB7; padding:13px 18px; background:#F8F7F5; ">
+                    {{trans '<a href="%affiliate_link">%affiliate_link</a>'
+                    affiliate_link="$this.getUrl($store, '',[_query:[acc:$account.getIdentifyCode()],_nosid:1])"|raw
+                    }}
+                </p>
+                {{else}}
+                    {{trans "We'll review your account information and will let you know as soon as it's been approved."}}<br/>
+                {{/if}}
+                <br/>
+                <p>
+                    {{trans 'Thank you for choosing to work with %store_name. If you have any questions about your account, or any other matters, please feel free to contact us at' store_name=$store.getFrontendName()}}
+                    {{trans '<a href="mailto: %transaction_email_identity">%transaction_email_identity</a>' transaction_email_identity="$trans_email_ident_support" |raw}}
+                    {{trans 'or call us within the working time (Monday - Friday, 8 a.m. - 5 p.m. PST).'}}
+                </p>
+                <br/>
+                <p>{{trans 'Thanks again'}}, <br/><strong>{{trans '%sender_name' sender_name=$sender_name}}</strong></p>
+            </td>
+        </tr>
+    </table>
+
+{{template config_path="design/email/footer_template"}}

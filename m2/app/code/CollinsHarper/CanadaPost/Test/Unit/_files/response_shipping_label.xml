@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © 2015 Collins Harper. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<shipment-info xmlns="http://www.canadapost.ca/ws/shipment">
+    <shipment-id>106011455055754015</shipment-id>
+    <shipment-status>created</shipment-status>
+    <tracking-pin>123456789012</tracking-pin>
+    <links>
+        <link rel="self" href="https://ct.soa-gw.canadapost.ca/rs/0008004925/0008004925/shipment/106011455055754015" media-type="application/vnd.cpc.shipment-v2+xml"/>
+        <link rel="details" href="https://ct.soa-gw.canadapost.ca/rs/0008004925/0008004925/shipment/106011455055754015/details" media-type="application/vnd.cpc.shipment-v2+xml"/>
+        <link rel="group" href="https://ct.soa-gw.canadapost.ca/rs/0008004925/0008004925/shipment?groupId=1455055749" media-type="application/vnd.cpc.shipment-v2+xml"/>
+        <link rel="price" href="https://ct.soa-gw.canadapost.ca/rs/0008004925/0008004925/shipment/106011455055754015/price" media-type="application/vnd.cpc.shipment-v2+xml"/>
+        <link rel="label" href="https://ct.soa-gw.canadapost.ca/ers/artifact/59e8337d48c7fb8d/418168/0" media-type="application/pdf" index="0"/>
+    </links>
+</shipment-info>

@@ -1,0 +1,187 @@
+<?php
+
+/**
+ * To get Product's specific attributes template
+ *
+ * @var $block \Ktpl\CustomizeConfigurable\Block\Product\View\Attributes
+ */
+?>
+<?php
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+$_product = $block->getProduct();
+
+$objectManager  = \Magento\Framework\App\ObjectManager::getInstance();
+$store = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore();
+
+$howToUseVideo = $_product->getHowtoVideo();
+if($_product->getHowtoImage()!='no_selection'){
+    $howToUseImage = $_product->getHowtoImage();
+}else{
+    $howToUseImage = '';
+}
+
+if($howToUseVideo && strrpos($howToUseVideo, 'embed') === false) {
+    parse_str( parse_url( $howToUseVideo, PHP_URL_QUERY ), $params );
+    $videoId =  $params['v'];
+    $howToUseVideo = "https://www.youtube.com/embed/$videoId";
+}
+$howToUseTranscript = $_product->getHowtoTranscript();
+
+    // how to clean vars
+$howToCleanVideo = $_product->getHowtoCleanVideo();
+if($_product->getHowtoCleanImage()!='no_selection'){
+    $howToCleanImage = $_product->getHowtoCleanImage();
+}else{
+    $howToCleanImage = '';
+}
+if($howToCleanVideo && strrpos($howToCleanVideo, 'embed') === false) {
+    parse_str( parse_url( $howToCleanVideo, PHP_URL_QUERY ), $params );
+    $videoId = $params['v'];
+    $howToCleanVideo = "https://www.youtube.com/embed/$videoId";
+}
+
+$howToCleanTranscript = $_product->getHowtoCleanTranscript();
+
+
+?>
+
+<?php if ($howToUseVideo): ?>
+    <div class="wrapper02 clearfix">
+        <div class="popupheader"><?php echo __('How to'); ?></div>
+        <div class="std">
+           <?php if ($howToUseVideo): ?>
+            <div class="popleftarea02">
+                <div class="videodiv clearfix">
+                    <div class="overlimg overlay clearfix">
+                        <?php if($howToUseImage != ''):?>
+                            <img src="<?php echo $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA).'catalog/product'.$howToUseImage ?>" alt=""/>
+                            <!-- <img src="https://torontovaporizer.ca/media/catalog/product/h/o/how-to-clean-utillian-720.png" alt=""> --><span id="circle"><?php echo __('How to use') ?><i class="fa fa-play-circle"></i></span>
+                        <?php endif; ?>    
+                    </div>
+                    <div class="video-box">
+                        <iframe
+                        src="<?php echo $howToUseVideo ?>"
+                        frameborder="0" width="320"
+                        height="240"></iframe>
+                    </div>
+                </div>
+                <div class="videoreadmoremain clearfix"><a id="showdiv01" class="videoreadmore clearfix"><?php echo __('READ THE TRANSCRIPT') ?> <i class="fa fa-angle-down"></i></a>
+                    <div id="hidediv01" class="demo1 transcriptdiv"
+                    data-simplebar-direction="vertical" >
+                        <?php echo $howToUseTranscript ?>
+                    </div>
+                    <script type="text/javascript">// <![CDATA[
+                             require(['jquery','simplebar'],function($) {
+                                if ($(window).width() > 768) {
+
+                                    $('#hidediv01').simplebar({
+                                            autoHide: true,
+                                            classNames: {
+                                            content: 'simplebar-content',
+                                            scrollContent: 'simplebar-scroll-content',
+                                            scrollbar: 'simplebar-scrollbar',
+                                            track: 'simplebar-track'
+                                            },
+                                            scrollbarMinSize: 25
+                                            });
+
+                                }
+                                $("#hidediv01").hide();
+                                
+                                if ($(window).width() > 768) {
+
+                                    $('#showdiv01').click(function () {
+                                        $('.demo1').scroll();
+                                        $("#hidediv01").slideToggle();
+                                    });
+
+                                }
+                                else {
+                                  
+                                    $(document).on('tap', '#showdiv01', function () {
+                                        $("#hidediv01").slideToggle();
+                                    });
+
+                                }
+                                $("#circle").click(function () {
+                                    $(".overlay").css("display", "none");
+                                });  
+                                 
+                             });
+                            // ]]>
+                    </script>
+
+            </div>
+        </div>
+    <?php endif; ?>
+    <?php if ($howToCleanVideo): ?>
+        <div class="popleftarea02">
+            <div class="videodiv clearfix">
+                <div class="overlimg overlays clearfix">
+                    <?php if($howToCleanImage != ''): ?>
+                        <img src="<?php echo $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA).'catalog/product'.$howToCleanImage ?>" alt=""/>
+                        <span id="circles"><?php echo __('How to clean') ?><i class="fa fa-play-circle"></i></span>
+                    <?php endif; ?>
+                </div>        
+                <div class="video-box">
+                    <iframe src="<?php echo $howToCleanVideo; ?>"
+                        frameborder="0" width="320"
+                        height="320"></iframe>
+                    </div>
+                </div>
+                <div class="videoreadmoremain  clearfix">
+                    <a id="showdiv02" class="videoreadmore clearfix">
+                        <?php echo __('READ THE TRANSCRIPT'); ?>
+                        <i class="fa fa-angle-down"></i></a>
+                        <div id="hidediv02" class="demo1 transcriptdiv"
+                        data-simplebar-direction="vertical">
+                            <?php echo $howToCleanTranscript ?>
+                        </div>
+                        <script type="text/javascript">// <![CDATA[
+                             require(['jquery','simplebar'],function($){
+                                if ($(window).width() > 768) {
+
+                                    $('#hidediv02').simplebar({
+                                        autoHide: true,
+                                        classNames: {
+                                        content: 'simplebar-content',
+                                        scrollContent: 'simplebar-scroll-content',
+                                        scrollbar: 'simplebar-scrollbar',
+                                        track: 'simplebar-track'
+                                        },
+                                        scrollbarMinSize: 25
+                                    });
+
+                                }
+                                
+                                $("#hidediv02").hide();
+
+                                if ($(window).width() > 768) {
+                                    $('#showdiv02').click(function () {
+                                        $("#hidediv02").slideToggle();
+                                    });
+                                }
+                                else {
+
+                                    $(document).on('tap', '#showdiv02', function () {
+                                        $("#hidediv02").slideToggle();
+                                    });
+                                    
+                                }
+
+                                    $("#circles").click(function () {
+                                    $(".overlays").css("display", "none");
+                                });  
+                             });
+                            // ]]>
+                        </script>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+        </div>
+    </div>
+<?php endif; ?> 
+
+
+

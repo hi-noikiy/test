@@ -1,0 +1,129 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Magento\Catalog\Block\Product\AbstractProduct */
+?>
+
+<?php
+    $currentProduct = $this->getProduct();
+    $listValue = '';
+
+        /** @var \Magento\Catalog\Block\Product\ProductList\Upsell $block */
+        if ($exist = count($block->getItemCollection()->getItems())) {
+            $type = 'upsell';
+            $class = $type;
+
+            $image = 'configurable_upsell_products_list';
+            $title = __('You May Also Like');
+            $items = $block->getItemCollection()->getItems();
+            $limit = $block->getItemLimit('upsell');
+            $shuffle = 0;
+
+            $showAddTo = false;
+            $showCart = false;
+            $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+            $description = false;
+            $canItemsAddToCart = false;
+            $listValue = $currentProduct->getName() . ' ' . __('Upsell Products');
+?>
+<div class="container">
+    <h3 class="linkheader"><span>+</span>
+    <span><?php echo __('YOU MAY ALSO LIKE');?></span></h3> 
+    <div class="linkheader02">
+        <?php
+            if(!empty($this->getProduct()->getUpsellAltTitle())){
+                echo __($this->getProduct()->getUpsellAltTitle());
+            }else{
+                echo __('Legendary ZEUS accessory items to complete your arsenal.');
+            }
+        ?>
+    </div>
+    <div class="linkpros">
+    <?php $iterator = 1; ?>
+    <?php foreach ($items as $_item): ?>
+        <?php
+        if($iterator > $limit): break;endif;
+         ?>
+        <?php if ($iterator % 2 == 0) {
+            $oddEven='linkpro-even';
+        }else{
+            $oddEven='linkpro-odd';
+        }
+        $iterator++; ?>
+        <div class="linkpro <?php echo $oddEven; ?>">
+            <div class="linkproimg">
+               <a <?php echo $this->helper('WeltPixel\GoogleTagManager\Helper\Data')->addProductClick($_item, $iterator-1, $listValue); ?> href="<?php /* @escapeNotVerified */ echo $block->getProductUrl($_item) ?>" class="product photo product-item-photo">
+                        <?= $block->getImage($_item, $image)->toHtml() ?>
+                </a>
+            </div>
+            <div class="linkproinfo">
+                <div class="linkproinfoleft">
+                    <div class="smlheaderproname">
+                        <a title="<?= $block->escapeHtml($_item->getName()) ?>" href="<?= /* @escapeNotVerified */ $block->getProductUrl($_item) ?>">
+                            <?= $block->escapeHtml($_item->getData('upsell_alt_title')) ? $block->escapeHtml($_item->getData('upsell_alt_title')) : $block->escapeHtml($_item->getName()) ?></a>
+                    </div>
+                    <div class="smldisc"><?php echo $_item->getShortDescription(); ?></div>
+                    <div class="stardiv">
+                        <?php if ($templateType): ?>
+                            <?= $block->getReviewsSummaryHtml($_item, $templateType) ?>
+                        <?php endif; ?>
+                    </div>
+
+                </div>
+                <div class="linkproinforight">
+                    <div class="linkproinforight-col2">
+                        <?= /* @escapeNotVerified */ $block->getProductPrice($_item) ?>
+                    </div>
+                    <div class="linkproinforight-col1">
+                         <div class="actions-primary">
+                        <?php if ($_item->isSaleable()): ?>
+
+                                <?php /*Start Code*/
+                                    if ($_item->getIsInStorePurchase()):
+                                ?>
+                                    <button type="button"
+                                            class="action tocart primary"
+                                            onclick="location.href = '<?= $block->getBaseUrl() ?>locations';">
+                                            <?= /* @escapeNotVerified */ __('In Store Purchase') ?>
+                                    </button>
+                                <?php
+                                    else:
+                                ?>
+                                    <?php if ($_item->getTypeInstance()->hasRequiredOptions($_item)): ?>
+                                        <button class="action tocart primary" data-mage-init='{"redirectUrl": {"url": "<?= /* @escapeNotVerified */ $block->getAddToCartUrl($_item) ?>"}}' type="button" title="<?= /* @escapeNotVerified */ __('Add to Cart') ?>">
+                                            <span><?= /* @escapeNotVerified */ __('Add to Cart') ?></span>
+                                        </button>
+                                    <?php else: ?>
+                                        <?php $postDataHelper = $this->helper('Magento\Framework\Data\Helper\PostHelper');
+                                        $postData = $postDataHelper->getPostData($block->getAddToCartUrl($_item), ['product' => $_item->getEntityId()])
+                                        ?>
+                                        <button class="action tocart primary"
+                                                data-post='<?= /* @escapeNotVerified */ $postData ?>'
+                                                type="button" title="<?= /* @escapeNotVerified */ __('Add to Cart') ?>">
+                                            <span><?= /* @escapeNotVerified */ __('Add to Cart') ?></span>
+                                        </button>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            <?php else: ?>
+                                <?php if ($_item->getIsSalable()): ?>
+                                    <div class="stock available"><span><?= /* @escapeNotVerified */ __('In stock') ?></span></div>
+                                <?php else: ?>
+                                    <div class="stock unavailable"><span><?= /* @escapeNotVerified */ __('Out of stock') ?></span></div>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <?php endforeach; ?>
+
+    </div>
+</div>
+<?php } ?>

@@ -1,0 +1,13 @@
+
+20160629 -- MengChi Tsai <mtsai@collinsharper.com>
+
+/app/code/CollinsHarper/CanadaPost/Helper/Data.php
+/app/code/CollinsHarper/CanadaPost/Helper/Rest/GetRates.php
+/app/code/CollinsHarper/CanadaPost/Model/Carrier.php
+
+Fixed "required coverage issue" (Enabling coverage caused quotation failed)
+Fixed "Default dimension issue" (The dimensions of package couldn't have more than two decimal place)
+
+20160425 -- Steve Harper <stharper@collinsharper.com>
+
+Created Change log .txt in etc folder for notes on future upgrades. 

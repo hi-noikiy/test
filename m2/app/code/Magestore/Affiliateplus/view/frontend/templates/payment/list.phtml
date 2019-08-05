@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * Magestore.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * @var \Magestore\Affiliateplus\Block\Payment\ListPayment $block
+ */
+?>
+<?php
+$store_id = $block->getStoreManager()->getStore()->getStoreId();
+$check_responsvie = $block->_getHelper()->getConfig('affiliateplus/style_config/responsive_enable', $store_id);
+if($check_responsvie)
+    $class_name = 'col-lg-9 col-md-9 col-sm-12 col-xs-12';
+else
+    $class_name = 'col-lg-9 col-md-9 col-sm-9 col-xs-9';
+?>
+
+<div class="aff-main-content <?php echo $class_name; ?>">
+    <div class="aff-title">
+        <h2>
+            <?php if ($block->getAccountHelper()->disableWithdrawal()): ?>
+                <?php echo __('Store Credits History') ?>
+            <?php else: ?>
+                <?php echo __('Withdrawal History') ?>
+            <?php endif ?>
+        </h2>
+    </div>
+    <?php echo $block->getLayout()->getMessagesBlock()->getGroupedHtml() ?>
+    <?php echo $this->getChildHtml('payment_miniform') ?>
+
+    <div class="clear">&nbsp;</div>
+    <?php echo $this->getGridHtml() ?>
+</div>

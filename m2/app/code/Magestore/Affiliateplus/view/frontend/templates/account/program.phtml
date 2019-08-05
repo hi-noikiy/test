@@ -1,0 +1,285 @@
+<?php
+
+/**
+ * Magestore.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * @var \Magestore\Affiliateplus\Block\Account\Program $block
+ */
+?>
+<?php $listPrograms = $block->getListProgram() ?>
+<?php if (count($listPrograms)): ?>
+    <br/><br/>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover no-margin" id="list-program-table">
+            <col width="1"/>
+            <col width="1"/>
+            <thead>
+            <tr>
+                <th colspan="4" height="40">
+                    <?php if (count($listPrograms) == 1): ?>
+                        <?php echo __('OUR PROGRAM') ?>
+                    <?php else: ?>
+                        <?php echo __('OUR PROGRAMS') ?>
+                    <?php endif ?>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php $i = 0 ?>
+            <?php foreach ($listPrograms as $program): ?>
+                <?php if ($i > 0): ?>
+                    <tr><td colspan="4" height="5">&nbsp;</td></tr>
+                <?php endif; ?>
+                <?php if ($program->getCustomStyle() == '1'): ?>
+                    <?php if ($program->getBlock()): ?>
+                        <?php echo $this->getLayout()->createBlock($program->getBlock())->toHtml(); ?>
+                    <?php endif; ?>
+                    <?php continue ?>
+                <?php endif; ?>
+                <?php if ($program->getCode() == 'payperlead'): ?>
+                    <tr>
+                        <td><strong><?php echo $program->getName() ?></strong></td>
+                        <td><strong><?php echo __('Commission Type') ?></strong></td>
+                        <td colspan="2">
+                            <?php echo $program->getCommissionText() ?>
+                        </td>
+                    </tr>
+                    <?php continue ?>
+                <?php endif ?>
+                <tr>
+                    <?php $rowspan = 3; ?>
+                    <?php if ($program->getLevelCount()) $rowspan += $program->getLevelCount()+1;?>
+                    <?php if ($program->getSecLevelCount()) $rowspan += $program->getSecLevelCount()+1; ?>
+
+                    <?php if ($program->getValidFrom()) $rowspan++; ?>
+                    <?php if ($program->getValidTo()) $rowspan++; ?>
+                    <td rowspan="<?php echo $rowspan ?>" width="25%"><strong><?php echo $program->getName(); ?></strong></td>
+                    <td width="25%">
+                        <?php $commission = $program->getCommission() ?>
+                        <?php $secCommission = $program->getSecondaryCommission() ?>
+                        <strong><?php echo __('Commission Type') ?></strong>
+                    </td>
+                    <td width="50%" colspan="2">
+                        <?php
+                        if ($program->getCommissionType() == 'fixed') {
+                            $commissionText = $block->formatPrice($commission);
+                        } elseif ($program->getCommissionType() == 'cart_fixed') {
+                            $commissionText = $block->formatPrice($commission) . ' ' . __('');
+                        } else {
+                            $commissionText = rtrim(rtrim(sprintf("%.2f", $commission), '0'), '.') . '%';
+                        }
+                        if ($program->getSecCommissionType() == 'fixed') {
+                            $secText = $block->formatPrice($secCommission);
+                        } elseif ($program->getSecCommissionType() == 'cart_fixed') {
+                            $secText = $block->formatPrice($secCommission) . ' ' . __('');
+                        } else {
+                            $secText = rtrim(rtrim(sprintf("%.2f", $secCommission), '0'), '.') . '%';
+                        }
+
+                        $typeIsProfit = $this->affiliateTypeIsProfit();
+                        if ($program->getAffiliateType()) {
+                            $typeIsProfit = (bool) ($program->getAffiliateType() == 'profit');
+                        }
+                        ?>
+                        <?php if ($typeIsProfit): ?>
+                            <?php $profitText = __('Pay-per-Profit') ?>
+                        <?php else: ?>
+                            <?php $profitText = __('Pay-per-Sale') ?>
+                        <?php endif; ?>
+
+                        <?php if (!$this->hasSecondaryCommission($program)): ?>
+                            <?php if ($program->getCommissionType() == 'cart_fixed'): ?>
+                                <?php echo __(' %1 %2 for whole cart you deliver', $commissionText, $profitText) ?>
+                            <?php else: ?>
+                                <?php echo __(' %1 %2 for each sale you deliver', $commissionText, $profitText) ?>
+                            <?php endif; ?>
+                        <?php else: ?>
+                            <?php if ($program->getCommissionType() == 'cart_fixed' && $program->getSecCommissionType() == 'cart_fixed'):  ?>
+                                <?php echo __('%1 %2 for whole cart for the first order of a customer, %3 for next orders', $commissionText, $profitText, $secText) ?>
+                            <?php else: ?>
+                                <?php echo __('%1 %2 for the first order of a customer, %3 for next orders', $commissionText, $profitText, $secText) ?>
+                            <?php endif; ?>
+                        <?php endif; ?>
+
+                        <?php
+                        $addText = '';
+                        $obj = new \Magento\Framework\DataObject(
+                            [
+                                'text' => $addText
+                            ]
+                        );
+
+                       $this->getEventManager()->dispatch('affiliateplus_show_program_on_welcome',
+                            [
+                                'text_object' => $obj,
+                                'program' => $program,
+                            ]
+                        );
+                        $addText = $obj->getText();
+                        if ($addText)
+                            echo $addText;
+                        ?>
+                    </td>
+                </tr>
+                <?php if ($program->getLevelCount()): ?>
+                    <tr>
+                        <td rowspan="<?php echo $program->getLevelCount() + 1 ?>">
+                            <strong><?php echo __('Tier Commission') ?></strong>
+                            <?php if ($program->getSecLevelCount()): ?>
+                                <br />
+                                (<?php echo __('for the first order of a customer') ?>)
+                            <?php endif ?>
+                        </td>
+                        <td>
+                            <strong><?php echo __('Level %1', 1) ?></strong>
+                        </td>
+                        <td>
+                            <?php
+                            if (!$program->getSecLevelCount() && $this->hasSecondaryCommission($program)) {
+                                echo __('%1 for the first order of a customer', $commissionText);
+                                echo '<br/>';
+                                echo __('%1 for next orders', $secText);
+                            } else {
+                                if ($program->getCommissionType() == 'fixed') {
+                                    echo __('%1 per sale', $commissionText);
+                                } elseif ($program->getCommissionType() == 'cart_fixed') {
+                                    echo __('%1 for whole cart', $commissionText);
+                                } else {
+                                    echo __('%1 of sales amount', $commissionText);
+                                }
+                            }
+                            ?>
+                        </td>
+                    </tr>
+                    <?php foreach ($program->getTierCommission() as $tierCommission): ?>
+                        <tr>
+                            <td>
+                                <strong><?php echo $tierCommission['level'] ?></strong>
+                            </td>
+                            <td><?php echo $tierCommission['commission'] ?></td>
+                        </tr>
+                    <?php endforeach ?>
+                <?php endif ?>
+                <?php if ($program->getSecLevelCount()): ?>
+                    <tr>
+                        <td rowspan="<?php echo $program->getSecLevelCount() + 1 ?>">
+                            <strong><?php echo __('Tier Commission') ?></strong>
+                            <br />
+                            (<?php echo __('for next orders') ?>)
+                        </td>
+                        <td>
+                            <strong><?php echo __('Level %1', 1) ?></strong>
+                        </td>
+                        <td>
+                            <?php if ($this->hasSecondaryCommission($program)) $commissionText = $secText; ?>
+                            <?php if ($program->getSecCommissionType() == 'fixed') { ?>
+                                <?php echo __('%1 per sale', $commissionText); ?>
+                            <?php } else if ($program->getSecCommissionType() == 'cart_fixed') {    ?>
+                                <?php echo __('%1 for whole cart', $commissionText); ?>
+                            <?php } else { ?>
+                                <?php echo __('%1 of sales amount', $commissionText); ?>
+                            <?php } ?>
+                        </td>
+                    </tr>
+                    <?php foreach ($program->getSecTierCommission() as $tierCommission): ?>
+                        <tr>
+                            <td>
+                                <strong><?php echo $tierCommission['level'] ?></strong>
+                            </td>
+                            <td><?php echo $tierCommission['commission'] ?></td>
+                        </tr>
+                    <?php endforeach ?>
+                <?php endif ?>
+                <tr>
+                    <td>
+                        <strong><?php echo __('Payout Requirements') ?></strong>
+                    </td>
+                    <td colspan="2">
+                        <?php echo __('%1 - Minimum balance required for payout.', $block->formatPrice($this->getMinPaymentRelease())) ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong><?php echo __('Discount policy') ?></strong>
+                    </td>
+                    <td colspan="2">
+                        <?php
+                        $discount = $program->getDiscount();
+                        $secDiscount = $program->getSecondaryDiscount();
+                        if ($program->getDiscountType() == 'fixed') {
+                            $discountText = $block->formatPrice($discount);
+                            $discountText .= ' ' . __('discount on each purchased item');
+                        } else if ($program->getDiscountType() == 'percentage') {
+                            $discountText = rtrim(rtrim(sprintf("%.2f", $discount), '0'), '.') . '%';
+                            $discountText .= ' ' . __('discount on each purchased item');
+                        } else if ($this->hasSecondaryDiscount($program)) {
+                            $discountText = $block->formatPrice($discount);
+                            $discountText .= ' ' . __('discount');
+                        } else {
+                            $discountText = $block->formatPrice($discount);
+                            $discountText .= ' ' . __('discount on each order');
+                        }
+
+                        if ($program->getSecDiscountType() == 'fixed') {
+                            $secText = $block->formatPrice($secDiscount);
+                            $secText .= ' ' . __('on each purchased item');
+                        } else if ($program->getSecDiscountType() == 'percentage') {
+                            $secText = rtrim(rtrim(sprintf("%.2f", $secDiscount), '0'), '.') . '%';
+                            $secText .= ' ' . __('on each purchased item');
+                        } else {
+                            $secText = $block->formatPrice($secDiscount);
+                            $secText .= ' ';
+                        }
+                        ?>
+                        <?php if (!$this->hasSecondaryDiscount($program)): ?>
+                            <?php echo $discountText ?>
+                        <?php else: ?>
+                            <?php echo __('%1 on the first order, %2 of next orders', $discountText, $secText) ?>
+                        <?php endif ?>
+                    </td>
+                </tr>
+                <?php if ($program->getValidFrom()): ?>
+                    <tr>
+                        <td>
+                            <strong><?php echo __('From Date') ?></strong>
+                        </td>
+                        <td colspan="2">
+                            <?php echo $this->formatDate($program->getValidFrom(), \IntlDateFormatter::MEDIUM, false) ?>
+                        </td>
+                    </tr>
+                <?php endif ?>
+                <?php if ($program->getValidTo()): ?>
+                    <tr>
+                        <td>
+                            <strong><?php echo __('To Date') ?></strong>
+                        </td>
+                        <td colspan="2">
+                            <?php echo $this->formatDate($program->getValidTo(), \IntlDateFormatter::MEDIUM, false) ?>
+                        </td>
+                    </tr>
+                <?php endif ?>
+                <?php $i++ ?>
+            <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+    <div class="clear">&nbsp;</div>
+    <?php
+endif ?>

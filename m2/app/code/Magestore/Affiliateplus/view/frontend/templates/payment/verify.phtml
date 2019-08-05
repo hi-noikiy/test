@@ -1,0 +1,70 @@
+<?php
+
+/**
+ * Magestore.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * Payments verify template
+ */
+?>
+<?php $email = $this->getEmail();?>
+<?php $paymentMethod = $this->getRequest()->getParam('method');?>
+<?php $email = $this->getRequest()->getParam('email');?>
+<?php $amount = $this->getRequest()->getParam('amount');?>
+
+<form id="verify-email-form" style="*line-height:1.3" action="<?php echo $this->getUrl('affiliateplus/index/verifyCode') ?>" method="post">
+    <div class="">
+        <div class="lable-title" ><h2 class="legend"><?php echo __('Verification Form') ?></h2></div>
+        <ul class="form-list">
+            <li class="wide">
+                <label style="text-align:left; color: red;"><?php echo __('An authentication code has been sent to you. Please take the following steps to verify your email address.');?></label>
+            </li>
+            <li class="wide">
+                <label style="text-align:left;"><?php echo __('1. Log in to your email and get your authentication code.') ?></label>
+            </li>
+            <li class="wide">
+                <label ><?php echo __('2. Put authentication code into the blank below.') ?></label>
+            </li>
+            <li class="wide">
+                <label style="text-align:left;"><?php echo __('3. Click on Verify button.') ?></label>
+            </li>
+            <li class="form-group">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <label style="text-align:left;" class="required"><em>*</em><?php echo __('Authentication Code') ?></label>
+                    <input type="text" name="authentication_code" style="float:left; width: 94%" id="authentication_code" class="input-text required-entry form-control"  />
+                    <p style="text-align: left; float: left; clear: both"><?php echo __('Please click %1 if you have not received your verification email.','<a href="javascript:sendMail()">here</a>');?></p>
+                </div>
+                <input type="hidden" name="payment_method" id="payment_method" value="<?php echo $paymentMethod;?>" />
+                <input type="hidden" name="email" id="email" value="<?php echo $email;?>" />
+                <input type="hidden" name="amount" id="amount" value="<?php echo $amount;?>" />
+            </li>
+        </ul>
+    </div>
+
+</form>
+<div class="buttons-set">
+
+    <button style="float:left" id="button-notnow" type="button" class="button button-config action primary" title="<?php echo __('Not Now') ?>" onclick="notNow()">
+        <span><span><?php echo __('Not Now') ?></span></span>
+    </button>
+    <button style="float:right" id="domain-button-verify"  onclick="submitForm();" class="button button-config action primary" title="<?php echo __('Verify Domain') ?>">
+        <span><span><?php echo __('Verify') ?></span></span>
+    </button>
+</div>
+

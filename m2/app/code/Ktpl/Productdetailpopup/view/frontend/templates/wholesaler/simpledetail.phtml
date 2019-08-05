@@ -1,0 +1,60 @@
+<?php 
+/**
+* Ktpl\Productdetailpopup\Block\Product\View\Type\Configurable
+*
+**/
+$product = $this->getCustomProduct();
+
+$objectManager  = \Magento\Framework\App\ObjectManager::getInstance();
+$store = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore();
+
+$productdata = $block->getJsonConfig1($product);
+$productdata = json_decode($productdata);
+if(!empty($productdata->simple_product)){
+foreach ($productdata->simple_product as $simple_product) {
+    $sku = $simple_product->sku;
+    $name = $simple_product->name;
+    $image = $simple_product->image;
+    $price = $simple_product->showprice;
+    $description = $simple_product->description;
+    $id = $simple_product->id;
+
+    $img = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA).'catalog/product'.$image;
+?>
+    <div class="product-img-box">
+        <img src="<?php echo $img;?>">
+    </div>
+    <div class="product-shop">
+        <h3 class="product-name"><?= __('Name : '.$name);?></h3>
+        <div class="price-box"><?= __($price);?></div>
+        <div class="sku"><?= __('SKU : '.$sku);?></div>
+        <?php if ($description != "") { ?>
+            <div class="short-description"><?= __('Description :'.$description);?></div>         
+        <?php } ?>
+    </div>
+<?php }
+}
+if(!empty($productdata->config_product)){
+    foreach ($productdata->config_product as $config_product) {
+    $sku = $config_product->sku;
+    $name = $config_product->name;
+    $image = $config_product->image;
+    $price = $config_product->price;
+    $description = $config_product->description;
+    $id = $config_product->id;
+
+    $img = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA).'catalog/product'.$image;
+?>
+    <div class="product-img-box">
+        <img src="<?php echo $img;?>">
+    </div>
+    <div class="product-shop">
+        <h3 class="product-name"><?= __('Name : '.$name);?></h3>
+        <div class="price-box"><?= __($price);?></div>
+        <div class="sku"><?= __('SKU : '.$sku);?></div>
+        <?php if ($description != "") { ?>
+            <div class="short-description"><?= __('Description :'.$description);?></div>         
+        <?php } ?>
+    </div>
+<?php }
+}

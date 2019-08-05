@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="magestore_affiliateplus_default"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magestore\Affiliateplus\Block\Payment\ListPayment" name="affiliateplus_payment_list"
+                   template="Magestore_Affiliateplus::payment/list.phtml">
+                <block class="Magestore\Affiliateplus\Block\Payment\Miniform" name="payment_miniform" />
+            </block>
+        </referenceContainer>
+    </body>
+</page>

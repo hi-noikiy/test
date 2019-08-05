@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ktpl_SalesOrder::ktplsalesorder" title="Shipdate" translate="title" module="Ktpl_SalesOrder" sortOrder="195" resource="Ktpl_SalesOrder::ktplsalesorder"/>
+ 		<add id="Ktpl_SalesOrder::shipdate" title="Shipdate" module="Ktpl_SalesOrder" sortOrder="20" parent="Ktpl_SalesOrder::ktplsalesorder" action="ktplsalesorder/order/updateshipdate" resource="Ktpl_SalesOrder::ktplsalesorder"/>
+    </menu>
+</config>

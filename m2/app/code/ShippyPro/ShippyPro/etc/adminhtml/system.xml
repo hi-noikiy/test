@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="carriers">
+            <group id="shippypro" translate="label" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>ShippyPro</label>
+                <field id="help" translate="label" type="hidden" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">                   
+                    <frontend_model>ShippyPro\ShippyPro\Model\Config\Source\Help</frontend_model>
+                </field>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Enabled for Checkout</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="apikey" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>ShippyPro API key</label>
+                    <comment>Find API Key inside your ShippyPro profile</comment>
+                </field>
+                <field id="markup" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Add a mark-up on the shipment cost</label>
+                    <comment>Add a markup to the real price and show the marked up price</comment>
+                </field>
+                <field id="markupType" translate="label" type="select" sortOrder="25" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Markup Type</label>
+                    <source_model>ShippyPro\ShippyPro\Model\Config\Source\MarkupType</source_model>
+                </field>
+                <field id="offerfreeshipping" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Offer free shipping over order value</label>
+                    <comment>The cheapest shipping service will be proposed for free for orders over the selected threshold</comment>
+                </field>
+                <field id="displayDropoffLocations" translate="label" type="select" sortOrder="35" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Display dropoff locations on the map</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

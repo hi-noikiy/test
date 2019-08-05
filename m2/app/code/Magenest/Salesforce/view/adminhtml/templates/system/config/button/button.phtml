@@ -1,0 +1,63 @@
+<?php
+/**
+ * Copyright © 2015 Magenest. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+ *
+ * Magenest_Salesforce extension
+ * NOTICE OF LICENSE
+ *
+ * @category  Magenest
+ * @package   Magenest_Salesforce
+ * @author ThaoPV
+ */
+?>
+<?php
+    /** @var $block \Magenest\Salesforce\Block\System\Config\Form\Button */
+?>
+<div class="actions button-container">
+        <button  class="button action-configure"
+                 type="button"
+                 data-ui-id="<?php /* @escapeNotVerified */ echo $block->getHtmlId() ?>"
+                 data-role="<?php /* @escapeNotVerified */ echo $block->getHtmlId() ?>"
+                 id="<?php /* @escapeNotVerified */ echo $block->getHtmlId() ?>" disabled="disabled">
+            <span><?php /* @escapeNotVerified */ echo $block->escapeHtml($block->getButtonLabel()) ?></span>
+        </button>
+</div>
+
+
+<script type="text/javascript">
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/alert'
+    ], function (jQuery, alert) {
+        jQuery('[data-ui-id="<?php echo $block->getHtmlId() ?>"]').click(function () {
+            var url = '<?php echo $block->getUrl($block->escapeHtml($block->getAjaxUrl())) ?>';
+            jQuery.ajax({
+                type: 'GET',
+                url: url,
+                showLoader: true,
+                success: function (response) {
+                    var responseObj = JSON.parse(response);
+                    var clickLink = responseObj.error?'':' <a href="'+ url +'">Click here</a> to go to check out sync queue.';
+                    alert({
+                        title: 'Message',
+                        content: responseObj.message + clickLink,
+                    });
+                },
+                error: function (response) {
+                    console.log(response);
+                    alert({
+                        title: 'Error',
+                        content: 'Can\'t add record(s) to queue. Check at console log',
+                        actions: {
+                            always: function () {
+                                location.reload();
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    })
+</script>

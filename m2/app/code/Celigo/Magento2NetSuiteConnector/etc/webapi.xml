@@ -1,0 +1,29 @@
+<!--
+/**
+ * @author Celigo
+ * @copyright Copyright (c) 2016 Celigo (https://www.celigo.com)
+ * @package Celigo_Magento2NetSuiteConnector
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/updateCeligoOrderInfo" method="POST">
+        <service class="Celigo\Magento2NetSuiteConnector\Api\CeligoOrderRepositoryInterface" method="update"/>
+        <resources>
+            <resource ref="Celigo_Magento2NetSuiteConnector::celigo"/>
+        </resources>
+    </route>
+
+    <route url="/V1/getCeligoModuleVersion" method="GET">
+        <service class="Celigo\Magento2NetSuiteConnector\Api\CeligoModuleInfoInterface" method="get"/>
+        <resources>
+            <resource ref="Celigo_Magento2NetSuiteConnector::celigo"/>
+        </resources>
+    </route>
+<route url="/V1/celigoImageImport" method="POST">
+        <service class="Celigo\Magento2NetSuiteConnector\Api\CeligoImageImportInterface" method="importImage"/>
+        <resources>
+            <resource ref="Celigo_Magento2NetSuiteConnector::celigo"/>
+        </resources>
+    </route>
+</routes>

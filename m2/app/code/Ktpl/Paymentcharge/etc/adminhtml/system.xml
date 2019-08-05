@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        
+        <section id="ktpl_wholesaler_section" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Wholesaler configuration</label>
+            <tab>ktpl_general</tab>
+            <resource>Ktpl_Wholesaler::ktpl_wholesaler_config</resource>
+            <group id="payment" translate="label"  sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+		<label>Wholesaler Payment Charge</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="payment_charge" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment Charge</label>
+                </field>
+                <field id="payment_charge_type" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment Charge Type</label>
+                    <source_model>Ktpl\Paymentcharge\Model\Config\Paymenttype</source_model>
+                </field>
+                <field id="customergroup" translate="label" type="multiselect" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Payment Customer Group</label>
+                    <source_model>Magento\Customer\Model\ResourceModel\Group\Collection</source_model>
+                </field>
+            </group>
+            
+        </section>
+        
+    </system>
+</config>

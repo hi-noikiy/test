@@ -1,0 +1,26 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_BannersLite
+ */
+?>
+<?php /** @var \Amasty\BannersLite\Block\Banner $this */ ?>
+<?php foreach ($this->getBanners() as $banner) : ?>
+    <?php if ($this->isEnableBannerPosition() && $img = $this->getImage($banner)) : ?>
+        <div data-role="am-banners-lite">
+            <p class="am-banners-lite-img">
+                <a href="<?= $this->getLink($banner); ?>"
+                   title="<?= $this->escapeHtml($this->getHoverText($banner)) ?>">
+                    <img src="<?= $this->escapeUrl($img) ?>"
+                         alt="<?= $this->escapeHtml($this->getAlt($banner)) ?>"
+                         title="<?= $this->escapeHtml($this->getHoverText($banner)) ?>"/>
+                </a>
+            </p>
+        </div>
+    <?php endif; ?>
+<?php endforeach; ?>
+<?php if ($this->isEnableBannerPosition() && ($afterBlock = $this->getChildBlock('after_banners'))) : ?>
+    <?= $afterBlock->toHtml() ?>
+<?php endif; ?>
+

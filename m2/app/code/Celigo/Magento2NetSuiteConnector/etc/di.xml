@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Celigo
+ * @copyright Copyright (c) 2016 Celigo (https://www.celigo.com)
+ * @package Celigo_Magento2NetSuiteConnector
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <preference for="Celigo\Magento2NetSuiteConnector\Api\CeligoOrderRepositoryInterface" type="Celigo\Magento2NetSuiteConnector\Model\CeligoOrderRepository"/>
+    <preference for="Celigo\Magento2NetSuiteConnector\Api\Data\CeligoSalesOrderInterface" type="Celigo\Magento2NetSuiteConnector\Model\CeligoSalesOrder"/>
+    <preference for="Celigo\Magento2NetSuiteConnector\Api\Data\CeligoImageImportDataInterface" type="Celigo\Magento2NetSuiteConnector\Model\CeligoImageImportData"/>
+    <preference for="Celigo\Magento2NetSuiteConnector\Api\CeligoModuleInfoInterface" type="Celigo\Magento2NetSuiteConnector\Model\CeligoModuleInfo"/>
+    <preference for="Celigo\Magento2NetSuiteConnector\Api\CeligoImageImportInterface" type="Celigo\Magento2NetSuiteConnector\Model\CeligoImageImport"/>
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="get_celigo_info" type="Celigo\Magento2NetSuiteConnector\Model\Plugin\OrderGet"/>
+        <plugin name="get_celigo_list" type="Celigo\Magento2NetSuiteConnector\Model\Plugin\OrderList"/>
+        <plugin name="save_celigo_info" type="Celigo\Magento2NetSuiteConnector\Model\Plugin\OrderPlace"/>
+    </type>
+
+    <type name="Celigo\Magento2NetSuiteConnector\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Celigo\Magento2NetSuiteConnector\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">celigo</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Celigo\Magento2NetSuiteConnector\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,60 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Affiliate
+ */
+?>
+<?php
+/** @var \Amasty\Affiliate\Block\Account\Program $block */
+/** @var \Amasty\Affiliate\Model\ResourceModel\Program\Collection $_programs */
+$_programs = $block->getPrograms();
+?>
+<?php echo $block->getChildHtml('info');?>
+<?php if ($_programs && count($_programs)): ?>
+    <div class="table-wrapper">
+        <table class="data table table-order-items history" id="my-orders-table">
+            <caption class="table-caption"><?php echo __('Orders') ?></caption>
+            <thead>
+            <tr>
+                <th scope="col" class="col"><?php echo __('Program') ?></th>
+                <th scope="col" class="col"><?php echo __('Type') ?></th>
+                <th scope="col" class="col"><?php echo __('Commission') ?></th>
+                <th scope="col" class="col"><?php echo __('Commission from 2nd order') ?></th>
+                <th scope="col" class="col"><?php echo __('Discount Type') ?></th>
+                <th scope="col" class="col"><?php echo __('Discount') ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php /** @var \Amasty\Affiliate\Model\Program $_program */foreach ($_programs as $_program) : ?>
+                <?php $_program->preparePrices() ?>
+                <tr>
+                    <td data-th="<?php echo $block->escapeHtml(__('Program')) ?>" class="col">
+                        <?php echo $block->escapeHtml($_program->getName()) ?>
+                    </td>
+                    <td data-th="<?php echo $block->escapeHtml(__('Type')) ?>" class="col">
+                        <?php echo $block->escapeHtml($block->prepareWithdrawalType($_program->getWithdrawalType())) ?>
+                    </td>
+                    <td data-th="<?php echo $block->escapeHtml(__('Commission')) ?>" class="col">
+                        <?php echo $block->escapeHtml($_program->getCommissionValue()) ?>
+                    </td>
+                    <td data-th="<?php echo $block->escapeHtml(__('Commission(from 2nd order)')) ?>" class="col">
+                        <?php echo $block->escapeHtml($_program->getCommissionValueSecond()) ?>
+                    </td>
+                    <td data-th="<?php echo $block->escapeHtml(__('Discount Type')) ?>" class="col">
+                        <?php echo $block->escapeHtml($block->prepareDiscountType($_program->getSimpleAction())) ?>
+                    </td>
+                    <td data-th="<?php echo $block->escapeHtml(__('Discount')) ?>" class="col">
+                        <?php echo $block->escapeHtml($_program->getDiscountAmount()) ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php if ($block->getPagerHtml()) : ?>
+        <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+    <?php endif ?>
+<?php else : ?>
+    <div class="message info empty"><span><?php echo __('You have no programs.'); ?></span></div>
+<?php endif ?>

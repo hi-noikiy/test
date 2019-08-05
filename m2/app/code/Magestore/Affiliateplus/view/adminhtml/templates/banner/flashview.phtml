@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * Magestore.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+<?php $file = $this->getFile() ?>
+<?php if($file): ?>
+    <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="checkbox" id="file_delete" class="checkbox" value="1" name="source_file[delete]">
+<?php echo __('Delete File') ?>-->
+<embed width="<?php echo $this->getWidth()?>" height="<?php echo $this->getHeight() ?>"
+       pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
+       type="application/x-shockwave-flash"
+       wmode="transparent"
+       quality="high" src="<?php echo $file ?>"
+       name="banner">
+<?php endif; ?>

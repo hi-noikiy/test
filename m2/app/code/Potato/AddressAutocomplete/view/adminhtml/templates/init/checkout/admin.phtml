@@ -1,0 +1,152 @@
+<?php /* @var $block \Potato\AddressAutocomplete\Block\Adminhtml\Init */?>
+<?php if ($block->canShow()): ?>
+    <script type="text/javascript">
+        require(
+            [
+                'Potato_AddressAutocomplete/js/event.simulate',
+                'Potato_AddressAutocomplete/js/google-places'
+            ], function() {
+                var initBilling = function() {
+                    new Potato.AddressAutocomplete.GooglePlaces({
+                        'apiKey': '<?php echo $block->getConfig()->getGooglePlacesApiKey(); ?>',
+                        'canUseBrowserGeolocation': <?php var_export(
+                        $block->getConfig()->isGoogleUseBrowserGeo()
+                    ); ?>,
+                        'locale': '<?php echo $block->getLocaleCode(); ?>',
+
+                        'hidePoweredByGoogleLabel': <?php var_export($block->getConfig()->isGoogleHideLogo()); ?>,
+                        'useCountryRestriction': <?php var_export(
+                        $block->getConfig()->isGoogleUseCountryRestriction()
+                    ); ?>,
+                        'countryInput': '#order-billing_address_country_id',
+
+                        'regionConfig': <?php echo $block->getRegionConfig(); ?>,
+
+                        'triggerAjaxList': [
+                            'sales_order_create/loadBlock'
+                        ],
+
+                        'locationInput': '#order-billing_address_street0',
+
+                        'addressForm': {
+                            'country': {
+                                'inputId': '#order-billing_address_country_id',
+                                'component': 'country',
+                                'name_type': 'short_name'
+                            },
+                            'region_id': {
+                                'inputId': '#order-billing_address_region_id',
+                                'component': 'administrative_area_level_1',
+                                'name_type': 'short_name',
+                                'processorName': '_prepareRegionId'
+                            },
+                            'region': {
+                                'inputId': '#order-billing_address_region',
+                                'component': 'administrative_area_level_1',
+                                'name_type': '<?php echo $block->getConfig()->getAddressComponentRegion(); ?>'
+                            },
+                            'city': {
+                                'inputId': '#order-billing_address_city',
+                                'component': 'locality',
+                                'name_type': '<?php echo $block->getConfig()->getAddressComponentCity(); ?>'
+                            },
+                            'postcode': {
+                                'inputId': '#order-billing_address_postcode',
+                                'component': 'postal_code',
+                                'name_type': '<?php echo $block->getConfig()->getAddressComponentPostcode(); ?>'
+                            },
+                            'street1': {
+                                'inputId': '#order-billing_address_street0',
+                                'component': 'route',
+                                'name_type': '<?php echo $block->getConfig()->getAddressComponentStreetOne(); ?>',
+                                'processorName': '<?php echo ($block->getConfig()->isAddressComponentStreetCombined(
+                                )) ? '_prepareCombinedStreet1' : ''; ?>'
+                            },
+                            'street2': {
+                                'inputId': '#order-billing_address_street1',
+                                'component': 'street_number',
+                                'name_type': '<?php echo $block->getConfig()->getAddressComponentStreetTwo(); ?>',
+                                'processorName': '<?php echo ($block->getConfig()->isAddressComponentStreetCombined(
+                                )) ? '_prepareCombinedStreet2' : ''; ?>'
+                            }
+                        }
+                    });
+                };
+
+                var initShipping = function() {
+                    new Potato.AddressAutocomplete.GooglePlaces({
+                        'apiKey': '<?php echo $block->getConfig()->getGooglePlacesApiKey(); ?>',
+                        'canUseBrowserGeolocation': <?php var_export($block->getConfig()->isGoogleUseBrowserGeo()); ?>,
+                        'locale': '<?php echo $block->getLocaleCode(); ?>',
+
+                        'hidePoweredByGoogleLabel': <?php var_export($block->getConfig()->isGoogleHideLogo()); ?>,
+                        'useCountryRestriction': <?php var_export($block->getConfig()->isGoogleUseCountryRestriction()); ?>,
+                        'countryInput': '#order-shipping_address_country_id',
+
+                        'regionConfig': <?php echo $block->getRegionConfig(); ?>,
+
+                        'triggerAjaxList': [
+                            'sales_order_create/loadBlock'
+                        ],
+
+                        'locationInput': '#order-shipping_address_street0',
+
+                        'addressForm': {
+                            'country': {
+                                'inputId': '#order-shipping_address_country_id',
+                                'component': 'country',
+                                'name_type': 'short_name'
+                            },
+                            'region_id': {
+                                'inputId': '#order-shipping_address_region_id',
+                                'component': 'administrative_area_level_1',
+                                'name_type': 'short_name',
+                                'processorName': '_prepareRegionId'
+                            },
+                            'region': {
+                                'inputId': '#order-shipping_address_region',
+                                'component': 'administrative_area_level_1',
+                                'name_type': '<?php echo $block->getConfig()->getAddressComponentRegion(); ?>'
+                            },
+                            'city': {
+                                'inputId': '#order-shipping_address_city',
+                                'component': 'locality',
+                                'name_type': '<?php echo $block->getConfig()->getAddressComponentCity(); ?>'
+                            },
+                            'postcode': {
+                                'inputId': '#order-shipping_address_postcode',
+                                'component': 'postal_code',
+                                'name_type': '<?php echo $block->getConfig()->getAddressComponentPostcode(); ?>'
+                            },
+                            'street1': {
+                                'inputId': '#order-shipping_address_street0',
+                                'component': 'route',
+                                'name_type': '<?php echo $block->getConfig()->getAddressComponentStreetOne(); ?>',
+                                'processorName': '<?php echo ($block->getConfig()->isAddressComponentStreetCombined()) ? '_prepareCombinedStreet1' : ''; ?>'
+                            },
+                            'street2': {
+                                'inputId': '#order-shipping_address_street1',
+                                'component': 'street_number',
+                                'name_type': '<?php echo $block->getConfig()->getAddressComponentStreetTwo(); ?>',
+                                'processorName': '<?php echo ($block->getConfig()->isAddressComponentStreetCombined()) ? '_prepareCombinedStreet2' : ''; ?>'
+                            }
+                        }
+                    });
+                };
+                var currentElementBilling;
+                var currentElementShipping;
+                setInterval(function(){
+                    var billingEl = $$('#order-billing_address_street0').first();
+                    if (billingEl && billingEl !== currentElementBilling) {
+                        initBilling();
+                        currentElementBilling = billingEl;
+                    }
+                    var shippingEl = $$('#order-shipping_address_street0').first();
+                    if (shippingEl && shippingEl !== currentElementShipping) {
+                        initShipping();
+                        currentElementShipping = shippingEl;
+                    }
+                }, 200);
+            });
+    </script>
+<?php endif; ?>

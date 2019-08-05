@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+        label="Salesrep Email Report"
+        design_abstraction="custom"
+>
+    <body>
+        <block
+                class="Cminds\Salesrep\Block\Email\Report"
+                name="salesrep.report.email"
+                template="email/report.phtml"
+                cacheable="false"
+                output="toHtml"
+        />
+    </body>
+</page>

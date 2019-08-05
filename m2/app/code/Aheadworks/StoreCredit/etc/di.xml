@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Aheadworks\StoreCredit\Api\TransactionRepositoryInterface" type="Aheadworks\StoreCredit\Model\TransactionRepository" />
+    <preference for="Aheadworks\StoreCredit\Api\TransactionManagementInterface" type="Aheadworks\StoreCredit\Model\Service\TransactionService" />
+    <preference for="Aheadworks\StoreCredit\Api\SummaryRepositoryInterface" type="Aheadworks\StoreCredit\Model\SummaryRepository" />
+    <preference for="Aheadworks\StoreCredit\Api\CustomerStoreCreditManagementInterface" type="Aheadworks\StoreCredit\Model\Service\CustomerStoreCreditService" />
+    <preference for="Aheadworks\StoreCredit\Api\StoreCreditCartManagementInterface" type="Aheadworks\StoreCredit\Model\Service\StoreCreditCartService" />
+    <preference for="Aheadworks\StoreCredit\Api\Data\CustomerStoreCreditDetailsInterface" type="Aheadworks\StoreCredit\Model\CustomerStoreCreditDetails" />
+    <preference for="Aheadworks\StoreCredit\Api\Data\TransactionInterface" type="Aheadworks\StoreCredit\Model\Transaction" />
+    <preference for="Aheadworks\StoreCredit\Api\Data\TransactionSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Aheadworks\StoreCredit\Api\Data\SummaryInterface" type="Aheadworks\StoreCredit\Model\Summary" />
+    <preference for="Aheadworks\StoreCredit\Model\Comment\CommentPoolInterface" type="Aheadworks\StoreCredit\Model\Comment\CommentPool" />
+    <preference for="Aheadworks\StoreCredit\Model\Comment\CommentInterface" type="Aheadworks\StoreCredit\Model\Comment\CommentDefault" />
+
+    <type name="Aheadworks\StoreCredit\Model\Comment\CommentPool">
+        <arguments>
+            <argument name="comments" xsi:type="array">
+                <item name="default" xsi:type="string">Aheadworks\StoreCredit\Model\Comment\CommentDefault</item>
+                <item name="comment_spend_on_checkout" xsi:type="string">Aheadworks\StoreCredit\Model\Comment\CommentSpendOnCheckout</item>
+                <item name="comment_refund_to_store_credit" xsi:type="string">Aheadworks\StoreCredit\Model\Comment\CommentRefundToStoreCredit</item>
+                <item name="comment_reimbursed_spent_store_credit" xsi:type="string">Aheadworks\StoreCredit\Model\Comment\CommentReimbursedSpentStoreCredit</item>
+                <item name="comment_reimbursed_spent_sс_on_order_cancel" xsi:type="string">Aheadworks\StoreCredit\Model\Comment\CommentReimbursedSpentStoreCreditOrderCancel</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Aheadworks\StoreCredit\Model\Comment\CommentSpendOnCheckout" type="Aheadworks\StoreCredit\Model\Comment\CommentDefault">
+        <arguments>
+            <argument name="type" xsi:type="const">Aheadworks\StoreCredit\Model\Source\TransactionType::STORE_CREDIT_USED_IN_ORDER</argument>
+            <argument name="label" xsi:type="string">Spent Store Credit on order %order_id</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\StoreCredit\Model\Comment\CommentRefundToStoreCredit" type="Aheadworks\StoreCredit\Model\Comment\CommentDefault">
+        <arguments>
+            <argument name="type" xsi:type="const">Aheadworks\StoreCredit\Model\Source\TransactionType::REFUND_BY_STORE_CREDIT</argument>
+            <argument name="label" xsi:type="string">Refund to Store Credit from order %order_id, Credit Memo %creditmemo_id</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\StoreCredit\Model\Comment\CommentReimbursedSpentStoreCredit" type="Aheadworks\StoreCredit\Model\Comment\CommentDefault">
+        <arguments>
+            <argument name="type" xsi:type="const">Aheadworks\StoreCredit\Model\Source\TransactionType::REIMBURSE_OF_SPENT_STORE_CREDIT</argument>
+            <argument name="label" xsi:type="string">Reimbursed spent Store Credit from order %order_id, Credit Memo %creditmemo_id</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\StoreCredit\Model\Comment\CommentReimbursedSpentStoreCreditOrderCancel" type="Aheadworks\StoreCredit\Model\Comment\CommentDefault">
+        <arguments>
+            <argument name="type" xsi:type="const">Aheadworks\StoreCredit\Model\Source\TransactionType::ORDER_CANCELED</argument>
+            <argument name="label" xsi:type="string">Reimbursed spent Store Credit from cancel order %order_id</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Aheadworks\StoreCredit\Api\Data\TransactionInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">aw_sc_transaction</item>
+                    <item name="identifierField" xsi:type="string">transaction_id</item>
+                </item>
+                <item name="Aheadworks\StoreCredit\Api\Data\SummaryInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">aw_sc_summary</item>
+                    <item name="identifierField" xsi:type="string">summary_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\Operation\ExtensionPool">
+        <arguments>
+            <argument name="extensionActions" xsi:type="array">
+                <item name="Aheadworks\StoreCredit\Api\Data\TransactionInterface" xsi:type="array">
+                    <item name="create" xsi:type="array">
+                        <item name="storeCreditSummaryCreator" xsi:type="string">Aheadworks\StoreCredit\Model\ResourceModel\Transaction\Relation\Summary\SaveHandler</item>
+                        <item name="entityCreator" xsi:type="string">Aheadworks\StoreCredit\Model\ResourceModel\Transaction\Relation\Entity\SaveHandler</item>
+                    </item>
+                    <item name="read" xsi:type="array">
+                        <item name="entityReader" xsi:type="string">Aheadworks\StoreCredit\Model\ResourceModel\Transaction\Relation\Entity\ReadHandler</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Aheadworks\StoreCredit\Api\Data\TransactionInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Aheadworks\StoreCredit\Api\Data\SummaryInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Filter\FilterManager\Config">
+        <arguments>
+            <argument name="factories" xsi:type="array">
+                <item name="Aheadworks\StoreCredit\Model\Filters\Factory" xsi:type="string">Aheadworks\StoreCredit\Model\Filters\Factory</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\StoreCredit\Model\ResourceModel\Transaction\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">aw_sc_transaction</argument>
+            <argument name="eventPrefix" xsi:type="string">aw_sc_transaction_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">transaction_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Aheadworks\StoreCredit\Model\ResourceModel\Transaction</argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\StoreCredit\Model\ResourceModel\Summary\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">customer_entity</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Customer\Model\ResourceModel\Customer</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="aw_store_credit_transaction_grid_data_source" xsi:type="string">Aheadworks\StoreCredit\Model\ResourceModel\Transaction\Grid\Collection</item>
+                <item name="aw_store_credit_transaction_customers_listing_data_source" xsi:type="string">Magento\Customer\Model\ResourceModel\Grid\Collection</item>
+                <item name="aw_store_credit_customers_grid_data_source" xsi:type="string">Aheadworks\StoreCredit\Model\ResourceModel\Summary\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Layout\ScheduledStructure\Helper">
+        <plugin name="aw_store_credit_scheduled_structure" type="Aheadworks\StoreCredit\Plugin\Magento\Framework\View\Layout\ScheduledStructure\HelperPlugin"/>
+    </type>
+    <type name="Magento\Sales\Model\Service\CreditmemoService">
+        <plugin name="refund_store_credit_on_creditmemo" type="Aheadworks\StoreCredit\Plugin\Model\Service\CreditmemoServicePlugin"/>
+    </type>
+    <type name="Magento\Sales\Model\Service\OrderService">
+        <plugin name="spend_store_credit_on_checkout" type="Aheadworks\StoreCredit\Plugin\Model\Service\OrderServicePlugin"/>
+    </type>
+    <type name="Magento\Sales\Controller\Adminhtml\Order\MassCancel">
+        <plugin name="refund_store_credit_mass_cancel" type="Aheadworks\StoreCredit\Plugin\Controller\Adminhtml\Order\MassCancelPlugin"/>
+    </type>
+    <type name="Magento\Quote\Model\Cart\CartTotalRepository">
+        <plugin name="store_credit_total" type="Aheadworks\StoreCredit\Plugin\Model\Cart\CartTotalRepositoryPlugin" />
+    </type>
+</config>

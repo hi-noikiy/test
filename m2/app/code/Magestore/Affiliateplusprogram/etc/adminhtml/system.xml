@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_AffiliateplusProgram
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../Backend/etc/system_file.xsd">
+  <system>
+    <section id="affiliateplus">
+      <group id="document_help">
+        <field id="affiliateplusprogram_user_guide" translate="label"  type="label" sortOrder="45"
+               showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>Affiliate Plus Program User Guide</label>
+          <frontend_model>Magestore\Affiliateplusprogram\Block\Adminhtml\Field\Affiliateplusprogram</frontend_model>
+        </field>
+      </group>
+      <group id="program" translate="label" type="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Multi-program Configuration</label>
+        <field id="enable" translate="label comment" type="select" sortOrder="5"
+               showInDefault="1" showInStore="1" showInWebsite="1">
+          <label>Enable Module Multi Program</label>
+          <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+        </field>
+        <field id="show_default" translate="label comment" type="select" sortOrder="10"
+               showInWebsite="1" showInDefault="1" showInStore="1">
+          <label>Show default affiliate program in frontend</label>
+          <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+        </field>
+      </group>
+    </section>
+  </system>
+</config>

@@ -1,0 +1,31 @@
+<?php
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+
+// @codingStandardsIgnoreFile
+
+/** @var Aheadworks\StoreCredit\Block\Customer\StoreCreditBalance\Account $block */ ?>
+<div class="block store-credit">
+    <div class="block-content">
+        <span class="base">
+            <?php /* @noEscape */ echo __('Your current balance is <strong>%1</strong>', $block->getCustomerStoreCreditBalanceFormatted()) ?>
+        </span>
+    </div>
+</div>
+
+<?php echo $block->getTransactionHtml() ?>
+
+<div class="secondary">
+    <a class="action edit-email-preferences" href="<?php echo $block->escapeUrl($block->getUrl('newsletter/manage')) ?>">
+        <span><?php echo $block->escapeHtml(__('Edit Email Preferences')) ?></span>
+    </a>
+</div>
+<div class="actions-toolbar">
+    <div class="secondary">
+        <a class="action back" href="<?php echo $block->escapeUrl($block->getBackUrl()) ?>">
+            <span><?php echo $block->escapeHtml(__('Back')) ?></span>
+        </a>
+    </div>
+</div>

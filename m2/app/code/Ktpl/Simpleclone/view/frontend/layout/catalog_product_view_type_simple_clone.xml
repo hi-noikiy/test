@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <attribute name="class" value="page-product-configurable"/>
+        <referenceBlock name="product.attributes" remove="true" />
+        <referenceBlock name="product.info.details" remove="true" />
+        <referenceBlock name="product.info.upsell" remove="true" />
+         <referenceContainer name="product.info.stock.sku">
+            <block class="Magento\Catalog\Block\Product\View\Type\Simple" name="product.info.simple" as="product_type_data" template="Magento_Catalog::product/view/type/default.phtml"/>
+            <container name="product.info.simple.extra" after="product.info.simple" as="product_type_data_extra" label="Product Extra Info"/>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <container name="configurable-inner" as="configurable-inner" htmlTag="div" htmlClass="configurable-inner">
+
+            <block class="Ktpl\CustomizeConfigurable\Block\ConfigurablePopup" name="ConfigurablePopup" after="content" template="Ktpl_CustomizeConfigurable::configurablepopup.phtml">
+                <block class="Magento\Catalog\Block\Product\View\Gallery" name="product.gallery" template="Ktpl_CustomizeConfigurable::product/view/popup_gallery.phtml" group="detailed_info">
+                <arguments>
+                    <argument translate="true" name="title" xsi:type="string">Gallery</argument>
+                </arguments>
+                </block>
+                <block class="Magento\Catalog\Block\Product\View\Attributes" name="product.info.compare_size" as= "comparesizeimage" template="Ktpl_CustomizeConfigurable::product/view/compareimage.phtml"> 
+                </block>
+                <block class="Magento\Review\Block\Product\View\ListView" name="product.info.product_additional_data" as="reviews" template="Magento_Review::product/view/configproduct_tab_list.phtml">
+                   <block class="Magento\Review\Block\Form" name="product.review.form" as="review_form"> </block> 
+                </block>  
+                <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.how_to" as= "how_to" template="Ktpl_CustomizeConfigurable::product/view/howto.phtml" group="how_to">
+                    <arguments>
+                        <argument name="at_call" xsi:type="string">getHowtoVideo</argument>
+                        <argument name="at_code" xsi:type="string">howto_video</argument>
+                    </arguments>
+                </block>
+               
+                <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.in_the_box_extra_title" as= "intheboxextratitle" template="Magento_Catalog::product/view/attribute.phtml" group="how_to"> 
+                    <arguments>
+                        <argument name="at_call" xsi:type="string">getInTheBoxExtraTitle</argument>
+                        <argument name="at_code" xsi:type="string">in_the_box_extra_title</argument>
+                    </arguments>  
+                </block>
+                <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.in_the_box_extra" as= "intheboxextra" template="Magento_Catalog::product/view/attribute.phtml" group="how_to"> 
+                    <arguments>
+                        <argument name="at_call" xsi:type="string">getInTheBoxExtra</argument>
+                        <argument name="at_code" xsi:type="string">in_the_box_extra</argument>
+                    </arguments>  
+                </block>  
+                <block class="Ktpl\CustomizeConfigurable\Block\Product\ProductList\Related" name="relatedtab" template="Ktpl_CustomizeConfigurable::product/list/related-tab.phtml"> 
+                </block>
+                <block class="Ktpl\CustomizeConfigurable\Block\Product\View\Attributes" name="attributes" template="Ktpl_CustomizeConfigurable::product/view/spec.phtml"> 
+                </block>  
+                <block class="Magento\Catalog\Block\Product\ProductList\Upsell" name="product.info.upsell.configurable" as="product_info_upsell_configurable" template="Ktpl_CustomizeConfigurable::product/list/upsell.phtml" />        
+            </block> 
+        </container>
+        </referenceContainer>
+
+        <referenceContainer name="content">         
+            <block class="Magento\Catalog\Block\Product\View\Attributes" after="product.info.form.content" name="product.info.type_section" as= "type_section" template="Ktpl_General::typesection.phtml"> 
+            </block>       
+        </referenceContainer>
+
+       <referenceContainer name="product.info.form.content">
+        <block  before="product.info.addtocart" class="Amasty\Promo\Block\Banner" name="amasty.promo.banner.above_cart.simple" template="gift.phtml" >
+                <action method="setPosition">
+                    <argument name="position" xsi:type="string">after_product</argument>
+                </action>
+            </block>
+            <block  after="product.info.addtocart" class="Ktpl\AddonPopup\Block\Addon" name="ktpl.AddonPopup.simple" template="addonpopup.phtml" >
+            </block>
+        </referenceContainer>
+
+        <move element="product.info.type_section" destination="product.info.main" before="product.info.addto"/>
+        <referenceBlock name="product.info.addto" remove="true" />
+        
+        <referenceBlock name="product.info.mailto" remove="true" />
+
+          
+
+        <container name="configurable.product" label="configurable product" htmlTag="div" htmlClass="configurable-product-container" />
+
+        <container name="upsell.product" label="upsell product" htmlTag="div" htmlClass="upsell-product" />
+        
+        <move element="configurable.product" destination="content" before="-"  />
+        <move element="product.info.main" destination="configurable.product" before="-"/>
+        <move element="product.info.media" destination="configurable.product" before="product.info.main"/>
+        <move element="product.info.upsell" destination="upsell.product" after="-" />
+        <move element="product.info.overview" destination="product.info.main" before="product.price.tier" />
+
+        <move element="product.price.final" destination="product.info.main" after="page.main.title" /> 
+        <move element="product.info.stock.sku" destination="product.info.main" after="product.info.addtocart" />
+        <move element="upsell.product" destination="page.bottom.container" after="configurable-inner" />
+        
+        <!-- <move element="configurable-inner" destination="page.bottom.container" before="-" /> -->
+
+        <referenceBlock name="catalog.product.related" remove="true" />
+        <referenceBlock name="product.info.social" remove="true" />
+        
+        <referenceBlock name="breadcrumbs" remove="true" /> 
+
+       </body>
+</page>

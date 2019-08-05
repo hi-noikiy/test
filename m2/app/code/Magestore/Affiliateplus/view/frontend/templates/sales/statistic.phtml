@@ -1,0 +1,59 @@
+<?php
+/**
+ * Magestore.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * Statistic transactions template
+ */
+?>
+<?php $totalStatistic = $this->getTotalStatistic() ?>
+<div class="box-account box-info">
+    <div class="statistic-transactions block-content" style="padding-left: 0px;">
+
+        <div class="left">
+            <p>
+                <strong>
+                    <?php echo __('Total Transactions: ') ?>
+                    <?php echo $totalStatistic['number_commission'] ?>
+                </strong>
+            </p>
+            <?php foreach($this->getStatisticInfo() as $staticInfo): ?>
+                <p>
+                    <?php echo $staticInfo['transactions'] ?>:
+                    <?php echo $staticInfo['number_commission'] ?>
+                </p>
+            <?php endforeach ?>
+        </div>
+        <div class="right">
+            <p>
+                <strong>
+                    <?php echo __('Total Earnings: ') ?>
+                    <?php echo $this->getFormatedCurreny($totalStatistic['commissions']) ?>
+                </strong>
+            </p>
+            <?php foreach($this->getStatisticInfo() as $staticInfo): ?>
+                <p>
+                    <?php echo $staticInfo['earning'] ?>:
+                    <?php echo $this->getFormatedCurreny($staticInfo['commissions']) ?>
+                </p>
+            <?php endforeach ?>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>

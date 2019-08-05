@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_AffiliateplusProgram
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+  <!-- Assign affiliate to program automatically when customer register affiliate account  -->
+  <event name="customer_save_after">
+    <observer name="customer_save_after" instance="Magestore\Affiliateplusprogram\Observer\AccountSaveAfter" shared="false" />
+  </event>
+  <!-- Assign affiliate to program that enable auto join function -->
+  <event name="affiliateplus_account_save_after">
+    <observer name="affiliateplus_account_save_after" instance="Magestore\Affiliateplusprogram\Observer\AccountSaveAfter" shared="false" />
+  </event>
+  <!-- Create program transaction after create transaction -->
+  <event name="affiliateplus_created_transaction">
+    <observer name="affiliateplus_created_transaction" instance="Magestore\Affiliateplusprogram\Observer\CreatedTransaction" shared="false" />
+  </event>
+  <!-- Change the number of account in programs when customer is deleted-->
+  <event name="customer_delete_before">
+    <observer name="customer_delete_before" instance="Magestore\Affiliateplusprogram\Observer\CustomerDeleteBefore" shared="false" />
+  </event>
+  <!-- Calculate discount to buyer in shopping cart page base on program -->
+  <event name="affiliateplus_address_collect_total">
+    <observer name="affiliateplus_address_collect_total" instance="Magestore\Affiliateplusprogram\Observer\AddressCollectTotal" shared="false" />
+  </event>
+  <!-- Calculate discount to buyer when edit order in back-end -->
+  <!--<event name="affiliateplus_address_collect_total_edit">-->
+    <!--<observer name="affiliateplus_address_collect_total_edit" instance="Magestore\Affiliateplusprogram\Observer\AddressCollectTotalEdit" shared="false" />-->
+  <!--</event>-->
+  <!-- Calculate commission to affiliate base on program -->
+  <event name="affiliateplus_calculate_commission_before">
+    <observer name="affiliateplus_calculate_commission_before" instance="Magestore\Affiliateplusprogram\Observer\CalculateCommissionBefore" shared="false" />
+  </event>
+  <!-- Update program transaction when customer make partial invoice -->
+  <event name="update_commission_to_affiliateplusprogram_transaction_partial_invoice">
+    <observer name="update_commission_to_affiliateplusprogram_transaction_partial_invoice" instance="Magestore\Affiliateplusprogram\Observer\UpdateProgramTransactionPartialInvoice" shared="false" />
+  </event>
+  <!-- Update program transaction when customer make partial refund -->
+  <event name="update_affiliateplusprogram_transaction_partial_refund">
+    <observer name="update_affiliateplusprogram_transaction_partial_refund" instance="Magestore\Affiliateplusprogram\Observer\UpdateProgramTransactionPartialRefund" shared="false" />
+  </event>
+</config>

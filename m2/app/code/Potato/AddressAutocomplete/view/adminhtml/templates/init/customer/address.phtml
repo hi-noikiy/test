@@ -1,0 +1,83 @@
+<?php /* @var $block \Potato\AddressAutocomplete\Block\Adminhtml\Init */?>
+<?php if ($block->canShow()): ?>
+<script type="text/javascript">
+    require(
+        [
+            'Potato_AddressAutocomplete/js/event.simulate',
+            'Potato_AddressAutocomplete/js/google-places'
+        ], function() {
+            var initFn = function(el) {
+                new Potato.AddressAutocomplete.GooglePlaces({
+                    'apiKey': '<?php echo $block->getConfig()->getGooglePlacesApiKey(); ?>',
+                    'canUseBrowserGeolocation': <?php var_export($block->getConfig()->isGoogleUseBrowserGeo()); ?>,
+                    'locale': '<?php echo $block->getLocaleCode(); ?>',
+
+                    'hidePoweredByGoogleLabel': <?php var_export($block->getConfig()->isGoogleHideLogo()); ?>,
+                    'useCountryRestriction': <?php var_export($block->getConfig()->isGoogleUseCountryRestriction()); ?>,
+                    'countryInput': "#" + el.select('div[data-index="country_id"] select').first().id,
+
+                    'regionConfig': <?php echo $block->getRegionConfig(); ?>,
+
+                    'triggerAjaxList': [],
+
+                    'locationInput': "#" + el.select('div[data-index="street_0"] input').first().id,
+
+                    'addressForm': {
+                        'country': {
+                            'inputId': "#" + el.select('div[data-index="country_id"] select').first().id,
+                            'component': 'country',
+                            'name_type': 'short_name'
+                        },
+                        'region_id': {
+                            'inputId': "#" + el.select('div[data-index="region_id"] select').first().id,
+                            'component': 'administrative_area_level_1',
+                            'name_type': 'short_name',
+                            'processorName': '_prepareRegionId'
+                        },
+                        'region': {
+                            'inputId': "#" + el.select('div[data-index="region_id_input"] input').first().id,
+                            'component': 'administrative_area_level_1',
+                            'name_type': '<?php echo $block->getConfig()->getAddressComponentRegion(); ?>'
+                        },
+                        'city': {
+                            'inputId': "#" + el.select('div[data-index="city"] input').first().id,
+                            'component': 'locality',
+                            'name_type': '<?php echo $block->getConfig()->getAddressComponentCity(); ?>'
+                        },
+                        'postcode': {
+                            'inputId': "#" + el.select('div[data-index="postcode"] input').first().id,
+                            'component': 'postal_code',
+                            'name_type': '<?php echo $block->getConfig()->getAddressComponentPostcode(); ?>'
+                        },
+                        'street1': {
+                            'inputId': "#" + el.select('div[data-index="street_0"] input').first().id,
+                            'component': 'route',
+                            'name_type': '<?php echo $block->getConfig()->getAddressComponentStreetOne(); ?>',
+                            'processorName': '<?php echo ($block->getConfig()->isAddressComponentStreetCombined()) ? '_prepareCombinedStreet1' : ''; ?>'
+                        },
+                        'street2': {
+                            'inputId': "#" + el.select('div[data-index="street_1"] input').first().id,
+                            'component': 'street_number',
+                            'name_type': '<?php echo $block->getConfig()->getAddressComponentStreetTwo(); ?>',
+                            'processorName': '<?php echo ($block->getConfig()->isAddressComponentStreetCombined()) ? '_prepareCombinedStreet2' : ''; ?>'
+                        }
+                    }
+                });
+            };
+            var processedList = [];
+            setInterval(function(){
+                $$('.address-item-edit').each(function(el){
+                    if (processedList.indexOf(el) > -1) {
+                        return;
+                    }
+                    try{
+                        initFn(el);
+                    } catch (e) {
+                        return;
+                    }
+                    processedList.push(el);
+                });
+            }, 200);
+        });
+</script>
+<?php endif; ?>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Fsv_CustomerManager
+ *
+ * @category    Fsv
+ * @package     Fsv_CustomerManager
+ * @author      Sergey Fedosimov <sfedosimov@gmail.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="adminhtml_customer_save_after">
+        <observer name="change_password_observer" instance="Fsv\CustomerManager\Observer\ChangePasswordObserver" />
+    </event>
+</config>

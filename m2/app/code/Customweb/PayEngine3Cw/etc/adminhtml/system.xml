@@ -1,0 +1,723 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<section id="payengine3cw" type="text" sortOrder="800" showInDefault="1" showInWebsite="1" showInStore="1">
+			<label>PayEngine3Cw</label>
+			<tab>sales</tab>
+			<resource>Customweb_PayEngine3Cw::config_payengine3cw</resource>
+			<group id="information" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="0" translate="label">
+				<label><![CDATA[Information]]></label>
+				<field id="version" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="0" translate="label" type="label">
+					<label><![CDATA[Version]]></label>
+				</field>
+				<field id="more" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" type="label">
+					<frontend_model>Customweb\PayEngine3Cw\Block\Backend\System\Config\Information\More</frontend_model>
+				</field>
+			</group>
+			<group id="shop" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label><![CDATA[Shop]]></label>
+				<field id="alias_management" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="0" translate="label" type="select">
+					<label><![CDATA[Customer Alias Management]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[You can allow the customers to manage/delete their aliases in the their account.]]></comment>
+				</field>
+				<field id="await_notification" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label><![CDATA[Await Notification]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[In some cases it may take a few seconds until the transaction is successfully authorized. When this option is enabled, the notification is awaited.]]></comment>
+				</field>
+				
+			</group>
+			<group id="general" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label">
+				<label><![CDATA[General]]></label>
+				<field id="operating_mode" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="0" translate="label comment" type="select">
+					<label><![CDATA[Operation Mode]]></label>
+					<comment><![CDATA[Operation mode of the shop.
+						]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\OperatingMode</source_model>
+				</field>
+				<field id="merchant_id_live" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label comment" type="text">
+					<label><![CDATA[Merchant ID (Live)]]></label>
+					<comment><![CDATA[Merchant ID for the test environment, provided by
+							Concardis PayEngine 3.0.
+						]]></comment>
+				</field>
+				<field id="merchant_password_live" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label comment" type="text">
+					<label><![CDATA[API Private Key (Live)]]></label>
+					<comment><![CDATA[The API private key can be found in the backend of
+							Concardis PayEngine 3.0 under My Account > API Keys >
+							Private Key.
+						]]></comment>
+				</field>
+				<field id="merchant_id_test" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label comment" type="text">
+					<label><![CDATA[Merchant ID (Test)]]></label>
+					<comment><![CDATA[Merchant ID for the test environment, provided by
+							Concardis PayEngine 3.0.
+						]]></comment>
+				</field>
+				<field id="merchant_password_test" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label comment" type="text">
+					<label><![CDATA[API Private Key (Test)]]></label>
+					<comment><![CDATA[The API private key can be found in the backend of
+							Concardis PayEngine 3.0 under My Account > API Keys >
+							Private Key.
+						]]></comment>
+				</field>
+				<field id="order_schema" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="50" translate="label comment" type="text">
+					<label><![CDATA[Order ID Schema]]></label>
+					<comment><![CDATA[Here you can set a schema for the reference transmitted
+							to identify the payment. The placeholder {id} will be replaced using
+							the transaction id. Will default to {id} if left empty.
+						]]></comment>
+				</field>
+			</group>
+			<group id="logging" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label">
+				<label><![CDATA[Logging]]></label>
+				<field id="level" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label><![CDATA[Level]]></label>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\LoggingLevel</source_model>
+					<comment><![CDATA[Messages of this or a higher level will be logged.]]></comment>
+				</field>
+			</group>
+		</section>
+		<section id="payment">
+			<group id="payengine3cw_creditcard" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Concardis PayEngine 3.0 Credit Card</label>
+				<field id="model"/>
+				<field id="active" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="0" translate="label" type="select">
+					<label><![CDATA[Enabled]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="title" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label><![CDATA[Title]]></label>
+				</field>
+				<field id="description" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="textarea">
+					<label><![CDATA[Description]]></label>
+				</field>
+				<field id="show_image" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="select">
+					<label><![CDATA[Show Image]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_payment_id" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label" type="select">
+					<label><![CDATA[Show Payment Id]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Show the payment id in the order information]]></comment> 
+				</field>
+				<field id="currency" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="50" translate="label" type="multiselect">
+					<label><![CDATA[Allowed Currencies]]></label>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Creditcard\Currency</source_model>
+					<can_be_empty>1</can_be_empty>
+				</field>
+				<field id="base_currency" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="60" translate="label" type="select">
+					<label><![CDATA[Use Base Currency]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Send amounts to Concardis PayEngine 3.0 in store's base currency.]]></comment>
+				</field>
+				<field id="allowspecific" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="70" translate="label" type="allowspecific">
+					<label><![CDATA[Payment from Applicable Countries]]></label>
+					<source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+				</field>
+				<field id="specificcountry" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="80" translate="label" type="multiselect">
+					<label><![CDATA[Payment from Specific Countries]]></label>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Creditcard\Country</source_model>
+					<can_be_empty>1</can_be_empty>
+				</field>
+				<field id="min_order_total" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="90" translate="label" type="text">
+					<label><![CDATA[Minimum Order Total]]></label>
+				</field>
+				<field id="max_order_total" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="100" translate="label" type="text">
+					<label><![CDATA[Maximum Order Total]]></label>
+				</field>
+				<field id="sort_order" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="120" translate="label" type="text">
+					<label><![CDATA[Sort Order]]></label>
+					<frontend_class>validate-number</frontend_class>
+				</field>
+				<field id="settlement" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="130" translate="label" type="select">
+					<label><![CDATA[Invoice Settlement]]></label>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Settlement</source_model>
+					<comment><![CDATA[Choose settlement after order in case you want an invoice to be created with your oder. The state of the invoice will set according to your capture status.]]></comment>
+				</field>
+				<field id="invoice_email" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="140" translate="label" type="select">
+					<label><![CDATA[Send Invoice Email]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Send the invoice email automatically after invoice creation.]]></comment>
+					<depends>
+						<field id="settlement">direct</field>
+					</depends>
+				</field>
+			<field id="capturing" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="150" translate="label comment" type="select">
+					<label><![CDATA[Capturing]]></label>
+					<comment><![CDATA[Should the amount be captured automatically (debit) or
+									should the amount only be reserved (deferred)?
+								]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Creditcard\Capturing</source_model>
+				</field>
+				<field id="iframe_height" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="160" translate="label comment" type="text">
+					<label><![CDATA[Iframe height]]></label>
+					<comment><![CDATA[Height of the iframe, in 'em' units.
+								]]></comment>
+				</field>
+				<field id="device_id" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="170" translate="label comment" type="select">
+					<label><![CDATA[Device tracking]]></label>
+					<comment><![CDATA[Should device tracking be used, and if, when?
+								]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\DeviceId</source_model>
+				</field>
+				<field id="device_id_minimum" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="180" translate="label comment" type="text">
+					<label><![CDATA[Device tracking minimum amount]]></label>
+					<comment><![CDATA[Minimum cart amount which must be reached for device
+									tracking to be used, when configured to only run above certain
+									amounts.
+								]]></comment>
+				</field>
+				<field id="element_style" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="190" translate="label comment" type="select">
+					<label><![CDATA[Container Element]]></label>
+					<comment><![CDATA[Should the element which contains the credit cards be rendered inline with other elements, or wide?
+								]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\ElementStyle</source_model>
+				</field>
+				<field id="authorizationMethod" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="200" translate="label comment" type="select">
+					<label><![CDATA[Authorization Method]]></label>
+					<comment><![CDATA[Select the authorization method to use for processing this payment method.]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Creditcard\Authorizationmethod</source_model>
+				</field>
+				<field id="alias_manager" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="210" translate="label comment" type="select">
+					<label><![CDATA[Alias Manager]]></label>
+					<comment><![CDATA[The alias manager allows the customer to select from a credit card previously stored. The sensitive data is stored by Concardis PayEngine 3.0.]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\AliasManager</source_model>
+				</field>
+			</group><group id="payengine3cw_paypal" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label">
+				<label>Concardis PayEngine 3.0 PayPal</label>
+				<field id="model"/>
+				<field id="active" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="0" translate="label" type="select">
+					<label><![CDATA[Enabled]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="title" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label><![CDATA[Title]]></label>
+				</field>
+				<field id="description" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="textarea">
+					<label><![CDATA[Description]]></label>
+				</field>
+				<field id="show_image" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="select">
+					<label><![CDATA[Show Image]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_payment_id" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label" type="select">
+					<label><![CDATA[Show Payment Id]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Show the payment id in the order information]]></comment> 
+				</field>
+				<field id="currency" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="50" translate="label" type="multiselect">
+					<label><![CDATA[Allowed Currencies]]></label>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Paypal\Currency</source_model>
+					<can_be_empty>1</can_be_empty>
+				</field>
+				<field id="base_currency" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="60" translate="label" type="select">
+					<label><![CDATA[Use Base Currency]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Send amounts to Concardis PayEngine 3.0 in store's base currency.]]></comment>
+				</field>
+				<field id="allowspecific" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="70" translate="label" type="allowspecific">
+					<label><![CDATA[Payment from Applicable Countries]]></label>
+					<source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+				</field>
+				<field id="specificcountry" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="80" translate="label" type="multiselect">
+					<label><![CDATA[Payment from Specific Countries]]></label>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Paypal\Country</source_model>
+					<can_be_empty>1</can_be_empty>
+				</field>
+				<field id="min_order_total" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="90" translate="label" type="text">
+					<label><![CDATA[Minimum Order Total]]></label>
+				</field>
+				<field id="max_order_total" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="100" translate="label" type="text">
+					<label><![CDATA[Maximum Order Total]]></label>
+				</field>
+				<field id="sort_order" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="120" translate="label" type="text">
+					<label><![CDATA[Sort Order]]></label>
+					<frontend_class>validate-number</frontend_class>
+				</field>
+				<field id="settlement" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="130" translate="label" type="select">
+					<label><![CDATA[Invoice Settlement]]></label>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Settlement</source_model>
+					<comment><![CDATA[Choose settlement after order in case you want an invoice to be created with your oder. The state of the invoice will set according to your capture status.]]></comment>
+				</field>
+				<field id="invoice_email" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="140" translate="label" type="select">
+					<label><![CDATA[Send Invoice Email]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Send the invoice email automatically after invoice creation.]]></comment>
+					<depends>
+						<field id="settlement">direct</field>
+					</depends>
+				</field>
+			<field id="capturing" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="150" translate="label comment" type="select">
+					<label><![CDATA[Capturing]]></label>
+					<comment><![CDATA[Should the amount be captured automatically (debit) or
+									should the amount only be reserved (deferred)?
+								]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Paypal\Capturing</source_model>
+				</field>
+				<field id="device_id" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="160" translate="label comment" type="select">
+					<label><![CDATA[Device tracking]]></label>
+					<comment><![CDATA[Should device tracking be used, and if, when?
+								]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\DeviceId</source_model>
+				</field>
+				<field id="device_id_minimum" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="170" translate="label comment" type="text">
+					<label><![CDATA[Device tracking minimum amount]]></label>
+					<comment><![CDATA[Minimum cart amount which must be reached for device
+									tracking to be used, when configured to only run above certain
+									amounts.
+								]]></comment>
+				</field>
+				<field id="authorizationMethod" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="180" translate="label comment" type="select">
+					<label><![CDATA[Authorization Method]]></label>
+					<comment><![CDATA[Select the authorization method to use for processing this payment method.]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Paypal\Authorizationmethod</source_model>
+				</field>
+			</group><group id="payengine3cw_paydirekt" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label">
+				<label>Concardis PayEngine 3.0 paydirekt</label>
+				<field id="model"/>
+				<field id="active" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="0" translate="label" type="select">
+					<label><![CDATA[Enabled]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="title" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label><![CDATA[Title]]></label>
+				</field>
+				<field id="description" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="textarea">
+					<label><![CDATA[Description]]></label>
+				</field>
+				<field id="show_image" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="select">
+					<label><![CDATA[Show Image]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_payment_id" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label" type="select">
+					<label><![CDATA[Show Payment Id]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Show the payment id in the order information]]></comment> 
+				</field>
+				<field id="currency" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="50" translate="label" type="multiselect">
+					<label><![CDATA[Allowed Currencies]]></label>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Paydirekt\Currency</source_model>
+					<can_be_empty>1</can_be_empty>
+				</field>
+				<field id="base_currency" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="60" translate="label" type="select">
+					<label><![CDATA[Use Base Currency]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Send amounts to Concardis PayEngine 3.0 in store's base currency.]]></comment>
+				</field>
+				<field id="allowspecific" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="70" translate="label" type="allowspecific">
+					<label><![CDATA[Payment from Applicable Countries]]></label>
+					<source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+				</field>
+				<field id="specificcountry" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="80" translate="label" type="multiselect">
+					<label><![CDATA[Payment from Specific Countries]]></label>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Paydirekt\Country</source_model>
+					<can_be_empty>1</can_be_empty>
+				</field>
+				<field id="min_order_total" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="90" translate="label" type="text">
+					<label><![CDATA[Minimum Order Total]]></label>
+				</field>
+				<field id="max_order_total" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="100" translate="label" type="text">
+					<label><![CDATA[Maximum Order Total]]></label>
+				</field>
+				<field id="sort_order" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="120" translate="label" type="text">
+					<label><![CDATA[Sort Order]]></label>
+					<frontend_class>validate-number</frontend_class>
+				</field>
+				<field id="settlement" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="130" translate="label" type="select">
+					<label><![CDATA[Invoice Settlement]]></label>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Settlement</source_model>
+					<comment><![CDATA[Choose settlement after order in case you want an invoice to be created with your oder. The state of the invoice will set according to your capture status.]]></comment>
+				</field>
+				<field id="invoice_email" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="140" translate="label" type="select">
+					<label><![CDATA[Send Invoice Email]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Send the invoice email automatically after invoice creation.]]></comment>
+					<depends>
+						<field id="settlement">direct</field>
+					</depends>
+				</field>
+			<field id="capturing" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="150" translate="label comment" type="select">
+					<label><![CDATA[Capturing]]></label>
+					<comment><![CDATA[Should the amount be captured automatically (debit) or
+									should the amount only be reserved (deferred)?
+								]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Paydirekt\Capturing</source_model>
+				</field>
+				<field id="device_id" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="160" translate="label comment" type="select">
+					<label><![CDATA[Device tracking]]></label>
+					<comment><![CDATA[Should device tracking be used, and if, when?
+								]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\DeviceId</source_model>
+				</field>
+				<field id="device_id_minimum" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="170" translate="label comment" type="text">
+					<label><![CDATA[Device tracking minimum amount]]></label>
+					<comment><![CDATA[Minimum cart amount which must be reached for device
+									tracking to be used, when configured to only run above certain
+									amounts.
+								]]></comment>
+				</field>
+				<field id="authorizationMethod" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="180" translate="label comment" type="select">
+					<label><![CDATA[Authorization Method]]></label>
+					<comment><![CDATA[Select the authorization method to use for processing this payment method.]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Paydirekt\Authorizationmethod</source_model>
+				</field>
+			</group><group id="payengine3cw_ratepayopeninvoice" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label">
+				<label>Concardis PayEngine 3.0 RatePay Open Invoice</label>
+				<field id="model"/>
+				<field id="active" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="0" translate="label" type="select">
+					<label><![CDATA[Enabled]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="title" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label><![CDATA[Title]]></label>
+				</field>
+				<field id="description" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="textarea">
+					<label><![CDATA[Description]]></label>
+				</field>
+				<field id="show_image" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="select">
+					<label><![CDATA[Show Image]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_payment_id" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label" type="select">
+					<label><![CDATA[Show Payment Id]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Show the payment id in the order information]]></comment> 
+				</field>
+				<field id="currency" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="50" translate="label" type="multiselect">
+					<label><![CDATA[Allowed Currencies]]></label>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Ratepayopeninvoice\Currency</source_model>
+					<can_be_empty>1</can_be_empty>
+				</field>
+				<field id="base_currency" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="60" translate="label" type="select">
+					<label><![CDATA[Use Base Currency]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Send amounts to Concardis PayEngine 3.0 in store's base currency.]]></comment>
+				</field>
+				<field id="allowspecific" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="70" translate="label" type="allowspecific">
+					<label><![CDATA[Payment from Applicable Countries]]></label>
+					<source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+				</field>
+				<field id="specificcountry" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="80" translate="label" type="multiselect">
+					<label><![CDATA[Payment from Specific Countries]]></label>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Ratepayopeninvoice\Country</source_model>
+					<can_be_empty>1</can_be_empty>
+				</field>
+				<field id="min_order_total" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="90" translate="label" type="text">
+					<label><![CDATA[Minimum Order Total]]></label>
+				</field>
+				<field id="max_order_total" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="100" translate="label" type="text">
+					<label><![CDATA[Maximum Order Total]]></label>
+				</field>
+				<field id="sort_order" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="120" translate="label" type="text">
+					<label><![CDATA[Sort Order]]></label>
+					<frontend_class>validate-number</frontend_class>
+				</field>
+				<field id="settlement" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="130" translate="label" type="select">
+					<label><![CDATA[Invoice Settlement]]></label>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Settlement</source_model>
+					<comment><![CDATA[Choose settlement after order in case you want an invoice to be created with your oder. The state of the invoice will set according to your capture status.]]></comment>
+				</field>
+				<field id="invoice_email" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="140" translate="label" type="select">
+					<label><![CDATA[Send Invoice Email]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Send the invoice email automatically after invoice creation.]]></comment>
+					<depends>
+						<field id="settlement">direct</field>
+					</depends>
+				</field>
+			<field id="device_id" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="150" translate="label comment" type="select">
+					<label><![CDATA[Device tracking]]></label>
+					<comment><![CDATA[Should device tracking be used, and if, when?
+								]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\DeviceId</source_model>
+				</field>
+				<field id="device_id_minimum" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="160" translate="label comment" type="text">
+					<label><![CDATA[Device tracking minimum amount]]></label>
+					<comment><![CDATA[Minimum cart amount which must be reached for device
+									tracking to be used, when configured to only run above certain
+									amounts.
+								]]></comment>
+				</field>
+				<field id="capturing" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="170" translate="label comment" type="select">
+					<label><![CDATA[Capturing]]></label>
+					<comment><![CDATA[Should the amount be confirmed automatically or
+									should the amount only be authorised? Please note that
+									the automatic confirmation should only be used for digital goods and similar cases.
+									Once the payment has been made the goods should be immediately
+									available.
+								]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Ratepayopeninvoice\Capturing</source_model>
+				</field>
+				<field id="address_equal" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="180" translate="label comment" type="select">
+					<label><![CDATA[Address equality]]></label>
+					<comment><![CDATA[RatePay generally declines transactions where billing and delivery addresses do not match. Please note that differing addresses require an additional agreement with RatePay.
+								]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\AddressEqual</source_model>
+				</field>
+				<field id="authorizationMethod" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="190" translate="label comment" type="select">
+					<label><![CDATA[Authorization Method]]></label>
+					<comment><![CDATA[Select the authorization method to use for processing this payment method.]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Ratepayopeninvoice\Authorizationmethod</source_model>
+				</field>
+			</group><group id="payengine3cw_ratepaydirectdebits" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="50" translate="label">
+				<label>Concardis PayEngine 3.0 RatePay Direct Debits</label>
+				<field id="model"/>
+				<field id="active" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="0" translate="label" type="select">
+					<label><![CDATA[Enabled]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="title" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label><![CDATA[Title]]></label>
+				</field>
+				<field id="description" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="textarea">
+					<label><![CDATA[Description]]></label>
+				</field>
+				<field id="show_image" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="select">
+					<label><![CDATA[Show Image]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_payment_id" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label" type="select">
+					<label><![CDATA[Show Payment Id]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Show the payment id in the order information]]></comment> 
+				</field>
+				<field id="currency" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="50" translate="label" type="multiselect">
+					<label><![CDATA[Allowed Currencies]]></label>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Ratepaydirectdebits\Currency</source_model>
+					<can_be_empty>1</can_be_empty>
+				</field>
+				<field id="base_currency" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="60" translate="label" type="select">
+					<label><![CDATA[Use Base Currency]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Send amounts to Concardis PayEngine 3.0 in store's base currency.]]></comment>
+				</field>
+				<field id="allowspecific" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="70" translate="label" type="allowspecific">
+					<label><![CDATA[Payment from Applicable Countries]]></label>
+					<source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+				</field>
+				<field id="specificcountry" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="80" translate="label" type="multiselect">
+					<label><![CDATA[Payment from Specific Countries]]></label>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Ratepaydirectdebits\Country</source_model>
+					<can_be_empty>1</can_be_empty>
+				</field>
+				<field id="min_order_total" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="90" translate="label" type="text">
+					<label><![CDATA[Minimum Order Total]]></label>
+				</field>
+				<field id="max_order_total" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="100" translate="label" type="text">
+					<label><![CDATA[Maximum Order Total]]></label>
+				</field>
+				<field id="sort_order" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="120" translate="label" type="text">
+					<label><![CDATA[Sort Order]]></label>
+					<frontend_class>validate-number</frontend_class>
+				</field>
+				<field id="settlement" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="130" translate="label" type="select">
+					<label><![CDATA[Invoice Settlement]]></label>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Settlement</source_model>
+					<comment><![CDATA[Choose settlement after order in case you want an invoice to be created with your oder. The state of the invoice will set according to your capture status.]]></comment>
+				</field>
+				<field id="invoice_email" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="140" translate="label" type="select">
+					<label><![CDATA[Send Invoice Email]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Send the invoice email automatically after invoice creation.]]></comment>
+					<depends>
+						<field id="settlement">direct</field>
+					</depends>
+				</field>
+			<field id="capturing" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="150" translate="label comment" type="select">
+					<label><![CDATA[Capturing]]></label>
+					<comment><![CDATA[Should the amount be confirmed automatically or
+									should the amount only be authorised? Please note that
+									the automatic confirmation should only be used for digital goods and similar cases.
+									Once the payment has been made the goods should be immediately
+									available.
+								]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Ratepaydirectdebits\Capturing</source_model>
+				</field>
+				<field id="address_equal" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="160" translate="label comment" type="select">
+					<label><![CDATA[Address equality]]></label>
+					<comment><![CDATA[RatePay generally declines transactions where billing and delivery addresses do not match. Please note that differing addresses require an additional agreement with RatePay.
+								]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\AddressEqual</source_model>
+				</field>
+				<field id="device_id" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="170" translate="label comment" type="select">
+					<label><![CDATA[Device tracking]]></label>
+					<comment><![CDATA[Should device tracking be used, and if, when?
+								]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\DeviceId</source_model>
+				</field>
+				<field id="device_id_minimum" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="180" translate="label comment" type="text">
+					<label><![CDATA[Device tracking minimum amount]]></label>
+					<comment><![CDATA[Minimum cart amount which must be reached for device
+									tracking to be used, when configured to only run above certain
+									amounts.
+								]]></comment>
+				</field>
+				<field id="authorizationMethod" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="190" translate="label comment" type="select">
+					<label><![CDATA[Authorization Method]]></label>
+					<comment><![CDATA[Select the authorization method to use for processing this payment method.]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Ratepaydirectdebits\Authorizationmethod</source_model>
+				</field>
+			</group><group id="payengine3cw_ratepayinstallments" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="60" translate="label">
+				<label>Concardis PayEngine 3.0 RatePay Installments</label>
+				<field id="model"/>
+				<field id="active" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="0" translate="label" type="select">
+					<label><![CDATA[Enabled]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="title" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label><![CDATA[Title]]></label>
+				</field>
+				<field id="description" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="textarea">
+					<label><![CDATA[Description]]></label>
+				</field>
+				<field id="show_image" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="select">
+					<label><![CDATA[Show Image]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_payment_id" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label" type="select">
+					<label><![CDATA[Show Payment Id]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Show the payment id in the order information]]></comment> 
+				</field>
+				<field id="currency" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="50" translate="label" type="multiselect">
+					<label><![CDATA[Allowed Currencies]]></label>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Ratepayinstallments\Currency</source_model>
+					<can_be_empty>1</can_be_empty>
+				</field>
+				<field id="base_currency" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="60" translate="label" type="select">
+					<label><![CDATA[Use Base Currency]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Send amounts to Concardis PayEngine 3.0 in store's base currency.]]></comment>
+				</field>
+				<field id="allowspecific" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="70" translate="label" type="allowspecific">
+					<label><![CDATA[Payment from Applicable Countries]]></label>
+					<source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+				</field>
+				<field id="specificcountry" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="80" translate="label" type="multiselect">
+					<label><![CDATA[Payment from Specific Countries]]></label>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Ratepayinstallments\Country</source_model>
+					<can_be_empty>1</can_be_empty>
+				</field>
+				<field id="min_order_total" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="90" translate="label" type="text">
+					<label><![CDATA[Minimum Order Total]]></label>
+				</field>
+				<field id="max_order_total" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="100" translate="label" type="text">
+					<label><![CDATA[Maximum Order Total]]></label>
+				</field>
+				<field id="sort_order" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="120" translate="label" type="text">
+					<label><![CDATA[Sort Order]]></label>
+					<frontend_class>validate-number</frontend_class>
+				</field>
+				<field id="settlement" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="130" translate="label" type="select">
+					<label><![CDATA[Invoice Settlement]]></label>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Settlement</source_model>
+					<comment><![CDATA[Choose settlement after order in case you want an invoice to be created with your oder. The state of the invoice will set according to your capture status.]]></comment>
+				</field>
+				<field id="invoice_email" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="140" translate="label" type="select">
+					<label><![CDATA[Send Invoice Email]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Send the invoice email automatically after invoice creation.]]></comment>
+					<depends>
+						<field id="settlement">direct</field>
+					</depends>
+				</field>
+			<field id="authorizationMethod" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="150" translate="label comment" type="select">
+					<label><![CDATA[Authorization Method]]></label>
+					<comment><![CDATA[Select the authorization method to use for processing this payment method.]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Ratepayinstallments\Authorizationmethod</source_model>
+				</field>
+			</group><group id="payengine3cw_sofortueberweisung" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="70" translate="label">
+				<label>Concardis PayEngine 3.0 Sofortüberweisung</label>
+				<field id="model"/>
+				<field id="active" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="0" translate="label" type="select">
+					<label><![CDATA[Enabled]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="title" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label><![CDATA[Title]]></label>
+				</field>
+				<field id="description" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="textarea">
+					<label><![CDATA[Description]]></label>
+				</field>
+				<field id="show_image" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="select">
+					<label><![CDATA[Show Image]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="show_payment_id" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label" type="select">
+					<label><![CDATA[Show Payment Id]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Show the payment id in the order information]]></comment> 
+				</field>
+				<field id="currency" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="50" translate="label" type="multiselect">
+					<label><![CDATA[Allowed Currencies]]></label>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Sofortueberweisung\Currency</source_model>
+					<can_be_empty>1</can_be_empty>
+				</field>
+				<field id="base_currency" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="60" translate="label" type="select">
+					<label><![CDATA[Use Base Currency]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Send amounts to Concardis PayEngine 3.0 in store's base currency.]]></comment>
+				</field>
+				<field id="allowspecific" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="70" translate="label" type="allowspecific">
+					<label><![CDATA[Payment from Applicable Countries]]></label>
+					<source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+				</field>
+				<field id="specificcountry" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="80" translate="label" type="multiselect">
+					<label><![CDATA[Payment from Specific Countries]]></label>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Sofortueberweisung\Country</source_model>
+					<can_be_empty>1</can_be_empty>
+				</field>
+				<field id="min_order_total" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="90" translate="label" type="text">
+					<label><![CDATA[Minimum Order Total]]></label>
+				</field>
+				<field id="max_order_total" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="100" translate="label" type="text">
+					<label><![CDATA[Maximum Order Total]]></label>
+				</field>
+				<field id="sort_order" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="120" translate="label" type="text">
+					<label><![CDATA[Sort Order]]></label>
+					<frontend_class>validate-number</frontend_class>
+				</field>
+				<field id="settlement" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="130" translate="label" type="select">
+					<label><![CDATA[Invoice Settlement]]></label>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Settlement</source_model>
+					<comment><![CDATA[Choose settlement after order in case you want an invoice to be created with your oder. The state of the invoice will set according to your capture status.]]></comment>
+				</field>
+				<field id="invoice_email" showInDefault="1" showInStore="0" showInWebsite="1" sortOrder="140" translate="label" type="select">
+					<label><![CDATA[Send Invoice Email]]></label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment><![CDATA[Send the invoice email automatically after invoice creation.]]></comment>
+					<depends>
+						<field id="settlement">direct</field>
+					</depends>
+				</field>
+			<field id="capturing" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="150" translate="label comment" type="select">
+					<label><![CDATA[Capturing]]></label>
+					<comment><![CDATA[Should the amount be captured automatically (debit) or
+									should the amount only be reserved (deferred)?
+								]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Sofortueberweisung\Capturing</source_model>
+				</field>
+				<field id="device_id" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="160" translate="label comment" type="select">
+					<label><![CDATA[Device tracking]]></label>
+					<comment><![CDATA[Should device tracking be used, and if, when?
+								]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\DeviceId</source_model>
+				</field>
+				<field id="device_id_minimum" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="170" translate="label comment" type="text">
+					<label><![CDATA[Device tracking minimum amount]]></label>
+					<comment><![CDATA[Minimum cart amount which must be reached for device
+									tracking to be used, when configured to only run above certain
+									amounts.
+								]]></comment>
+				</field>
+				<field id="authorizationMethod" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="180" translate="label comment" type="select">
+					<label><![CDATA[Authorization Method]]></label>
+					<comment><![CDATA[Select the authorization method to use for processing this payment method.]]></comment>
+					<source_model>Customweb\PayEngine3Cw\Model\Config\Source\Sofortueberweisung\Authorizationmethod</source_model>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

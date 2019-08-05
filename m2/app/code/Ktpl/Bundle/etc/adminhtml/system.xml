@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        
+        <section id="ktpl_bundle_section" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Bundle configuration</label>
+            <tab>ktpl_general</tab>
+            <resource>Ktpl_Bundle::ktpl_bundle_config</resource>
+            <group id="bundle" translate="label"  sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Bundle Configuration</label>
+                <field id="rule_ids" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Rule Id(s)</label>
+                </field>
+                <field id="sku_ids" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>SKU Id(s)</label>
+                </field>
+                
+            </group>
+        </section>
+        
+    </system>
+</config>

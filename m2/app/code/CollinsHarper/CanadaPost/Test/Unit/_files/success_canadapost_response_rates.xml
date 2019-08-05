@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © 2015 Collins Harper. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<price-quotes xmlns="http://www.canadapost.ca/ws/ship/rate">
+    <price-quote>
+        <service-code>DOM.PC</service-code>
+        <service-link rel="service" href="https://ct.soa-gw.canadapost.ca/rs/ship/service/DOM.PC?country=CA" media-type="application/vnd.cpc.ship.rate+xml"/>
+        <service-name>Priority</service-name>
+        <price-details>
+            <base>43.35</base>
+            <taxes>
+                <gst percent="5.000">2.35</gst>
+                <pst>0.00</pst>
+                <hst>0.00</hst>
+            </taxes>
+            <due>49.38</due>
+            <options>
+                <option>
+                    <option-code>DC</option-code>
+                    <option-name>Delivery confirmation</option-name>
+                    <option-price>0</option-price>
+                </option>
+            </options>
+            <adjustments>
+                <adjustment>
+                    <adjustment-code>FUELSC</adjustment-code>
+                    <adjustment-name>Fuel surcharge</adjustment-name>
+                    <adjustment-cost>3.68</adjustment-cost>
+                    <qualifier>
+                        <percent>8.5</percent>
+                    </qualifier>
+                </adjustment>
+            </adjustments>
+        </price-details>
+        <weight-details>
+            <cubed-weight>0.2</cubed-weight>
+        </weight-details>
+        <service-standard>
+            <am-delivery>false</am-delivery>
+            <guaranteed-delivery>true</guaranteed-delivery>
+            <expected-transit-time>2</expected-transit-time>
+            <expected-delivery-date>2016-02-11</expected-delivery-date>
+        </service-standard>
+    </price-quote>
+    <price-quote>
+        <service-code>DOM.RP</service-code>
+        <service-link rel="service" href="https://ct.soa-gw.canadapost.ca/rs/ship/service/DOM.RP?country=CA" media-type="application/vnd.cpc.ship.rate+xml"/>
+        <service-name>Regular Parcel</service-name>
+        <price-details>
+            <base>13.91</base>
+            <taxes>
+                <gst percent="5.000">0.72</gst>
+                <pst>0.00</pst>
+                <hst>0.00</hst>
+            </taxes>
+            <due>15.12</due>
+            <options>
+                <option>
+                    <option-code>DC</option-code>
+                    <option-name>Delivery confirmation</option-name>
+                    <option-price>0</option-price>
+                    <qualifier>
+                        <included>true</included>
+                    </qualifier>
+                </option>
+            </options>
+            <adjustments>
+                <adjustment>
+                    <adjustment-code>FUELSC</adjustment-code>
+                    <adjustment-name>Fuel surcharge</adjustment-name>
+                    <adjustment-cost>0.49</adjustment-cost>
+                    <qualifier>
+                        <percent>3.5</percent>
+                    </qualifier>
+                </adjustment>
+            </adjustments>
+        </price-details>
+        <weight-details>
+            <cubed-weight>0.17</cubed-weight>
+        </weight-details>
+        <service-standard>
+            <am-delivery>false</am-delivery>
+            <guaranteed-delivery>false</guaranteed-delivery>
+            <expected-transit-time>5</expected-transit-time>
+            <expected-delivery-date>2016-02-16</expected-delivery-date>
+        </service-standard>
+    </price-quote>
+    <price-quote>
+        <service-code>DOM.XP</service-code>
+        <service-link rel="service" href="https://ct.soa-gw.canadapost.ca/rs/ship/service/DOM.XP?country=CA" media-type="application/vnd.cpc.ship.rate+xml"/>
+        <service-name>Xpresspost</service-name>
+        <price-details>
+            <base>18.18</base>
+            <taxes>
+                <gst percent="5.000">0.99</gst>
+                <pst>0.00</pst>
+                <hst>0.00</hst>
+            </taxes>
+            <due>20.72</due>
+            <options>
+                <option>
+                    <option-code>DC</option-code>
+                    <option-name>Delivery confirmation</option-name>
+                    <option-price>0</option-price>
+                </option>
+            </options>
+            <adjustments>
+                <adjustment>
+                    <adjustment-code>FUELSC</adjustment-code>
+                    <adjustment-name>Fuel surcharge</adjustment-name>
+                    <adjustment-cost>1.55</adjustment-cost>
+                    <qualifier>
+                        <percent>8.5</percent>
+                    </qualifier>
+                </adjustment>
+            </adjustments>
+        </price-details>
+        <weight-details>
+            <cubed-weight>0.2</cubed-weight>
+        </weight-details>
+        <service-standard>
+            <am-delivery>false</am-delivery>
+            <guaranteed-delivery>true</guaranteed-delivery>
+            <expected-transit-time>2</expected-transit-time>
+            <expected-delivery-date>2016-02-11</expected-delivery-date>
+        </service-standard>
+    </price-quote>
+</price-quotes>

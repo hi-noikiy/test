@@ -1,0 +1,347 @@
+<?php
+/**
+ * Magestore.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+<?php
+/**
+ * Edit Affiliate template
+ * @see \Magestore\Affiliateplus\Block\Account\Edit
+ * @var $block \Magestore\Affiliateplus\Block\Account\Edit
+ */
+?>
+<?php
+$store_id = $this->getStoreId();
+$check_responsvie = $block->getResponsiveEnable($store_id);
+if($check_responsvie){
+    $class_name = 'col-lg-9 col-md-9 col-sm-12 col-xs-12';
+    $class_name_col = 'col-lg-6 col-md-6 col-sm-12 col-xs-12';
+}
+else{
+    $class_name = 'col-lg-9 col-md-9 col-sm-9 col-xs-9';
+    $class_name_col = 'col-lg-6 col-md-6 col-sm-6 col-xs-6';
+}
+?>
+
+<?php $accountData = $this->getFormData('account') ?>
+<div class="aff-main-content  <?php /* @escapeNotVerified */ echo $class_name; ?>" xmlns="http://www.w3.org/1999/html"
+     xmlns="http://www.w3.org/1999/html">
+    <div class="my-account">
+        <div class="aff-title">
+            <h1><?php /* @escapeNotVerified */ echo __('Account Settings'); ?></h1>
+        </div>
+        <?php /* @escapeNotVerified */ echo $block->getLayout()->getMessagesBlock()->getGroupedHtml() ?>
+        <div class="">
+            <form id="signup_affiliate_account_form" method="post" action="<?php /* @escapeNotVerified */ echo $this->getUrl('affiliateplus/account/editPost') ?>">
+                <div class=""  style="border: 1px solid #ececec; float: left;">
+                    <div class="lable-title">
+                        <h2 class="legend"><?php /* @escapeNotVerified */ echo __('Account Information') ?></h2>
+                    </div>
+                    <div class="form-group">
+                        <div class="<?php echo $class_name_col; ?>">
+                            <label class="required" for="firstname"><span><?php /* @escapeNotVerified */ echo __('First Name') ?></span><em>*</em></label>
+                            <input type="text" class="input-text required-entry form-control" title="First Name" name="firstname" id="firstname" value="<?php echo /* @escapeNotVerified */ $this->getFormData('firstname') ?>">
+                        </div>
+                        <div class="<?php echo $class_name_col; ?>">
+                            <label class="required" for="lastname"><span><?php /* @escapeNotVerified */ echo __('Last Name') ?></span><em>*</em></label>
+                            <input type="text" class="input-text required-entry form-control" title="Last Name"  name="lastname" id="lastname" value="<?php echo /* @escapeNotVerified */ $this->getFormData('lastname') ?>">
+                        </div>
+                    </div>
+                    <?php $_dob = $this->getBlockFactory()->createBlock('Magento\Customer\Block\Widget\Dob') ?>
+                    <?php if ($_dob->isEnabled()): ?>
+                        <div class="form-group">
+                            <div><?php echo $_dob->setDate($this->getFormData('dob'))->toHtml() ?></div>
+                        </div>
+                    <?php endif ?>
+
+                    <?php $_taxvat = $this->getLayout()->createBlock('Magento\Customer\Block\Widget\Taxvat') ?>
+                    <?php if ($_taxvat->isEnabled()): ?>
+                        <div class="form-group">
+                            <div><?php echo $_taxvat->setTaxvat($this->getFormData('taxvat'))->toHtml() ?></div>
+                        </div>
+                    <?php endif ?>
+
+                    <?php $_gender = $this->getLayout()->createBlock('Magento\Customer\Block\Widget\Gender') ?>
+                    <?php if ($_gender->isEnabled()): ?>
+                        <div class="form-group">
+                            <div><?php echo $_gender->setGender($this->getFormData('gender'))->toHtml() ?></div>
+                        </div>
+                    <?php endif ?>
+                    <?php if ($this->customerHasAddresses()): ?>
+                        <div calss = "form-group">
+                            <div class="<?php echo $class_name_col; ?>">
+                                <label for="customer-address-select"><span><?php /* @escapeNotVerified */ echo __('Select an address from your address book or enter a new address.') ?></span></label>
+                                <?php echo $this->getAddressesHtmlSelect('account') ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                    <div id="account-new-address-form" <?php if ($this->customerHasAddresses()): ?> style="display:none;"<?php endif; ?>>
+                        <div class="form-group">
+                            <div class="<?php /* @escapeNotVerified */ echo $class_name_col; ?>">
+                                <label for="account:street1" class="required"><span><?php /* @escapeNotVerified */ echo __('Address') ?></span><em>*</em></label>
+                                <input type="text" title="<?php /* @escapeNotVerified */ echo __('Street Address') ?>" name="account[street][]" id="account:street1" value="<?php /* @escapeNotVerified */ echo $block->getAddress()->getStreetLine(1) ?>" class="input-text required-entry form-control" />
+                            </div>
+                            <div class="<?php echo $class_name_col; ?>">
+                                <input type="hidden" name="account[address_id]" value="<?php /* @escapeNotVerified */ echo $this->getAddress()->getId() ?>" id="account:address_id" />
+                            </div>
+                            <?php for ($_i = 2, $_n = $this->helper('Magento\Customer\Helper\Address')->getStreetLines(); $_i <= $_n; $_i++): ?>
+
+                            <div class="<?php echo $class_name_col; ?>">
+                                <label for="account:street1" class="required"><span><?php /* @escapeNotVerified */ echo __('Street Address') ?></span><em></em></label>
+                                <input type="text" title="<?php /* @escapeNotVerified */ echo __('Street Address %s', $_i) ?>" name="account[street][]" id="account:street<?php echo $_i ?>" value="<?php echo $block->escapeHtml($this->getAddress()->getStreetLine($_i)) ?>" class="input-text form-control" />
+                            </div>
+
+                        </div>
+                        <?php endfor ?>
+                        <div class="form-group">
+                            <div class="<?php echo $class_name_col; ?>">
+                                <label for="account:city" class="required"><span><?php /* @escapeNotVerified */ echo __('City') ?></span><em>*</em></label>
+                                <input type="text" title="<?php /* @escapeNotVerified */ echo __('City') ?>" name="account[city]" value="<?php echo $block->escapeHtml($this->getAddress()->getCity()) ?>" class="input-text required-entry form-control" id="customer:city" />
+                            </div>
+                            <div class="<?php echo $class_name_col; ?>">
+                                <label for="account:region_id" class="required"><span><?php /* @escapeNotVerified */ echo __('State/Province') ?></span><em>*</em></label>
+                                <select id="account:region_id" name="account[region_id]" title="<?php /* @escapeNotVerified */ echo __('State/Province') ?>" class="form-control validate-select" style="display:none;" <?php echo(!$block->getConfig('general/region/display_all')) ? ' disabled="disabled"' : '';?>>
+                                    <option value=""><?php /* @escapeNotVerified */ echo __('Please select region, state or province') ?></option>
+                                </select>
+                                <input type="text" id="account:region" name="account[region]" value="<?php echo $block->escapeHtml($block->getAddress()->getRegion()) ?>"  title="<?php echo __('State/Province') ?>" class="input-text form-control <?php /* @escapeNotVerified */ echo $this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('region') ?>" style="display:none;" <?php echo(!$block->getConfig('general/region/display_all')) ? ' disabled="disabled"' : '';?> />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="<?php echo $class_name_col; ?>">
+                                <label for="account:postcode" class="required"><span><?php /* @escapeNotVerified */ echo __('Zip/Postal Code') ?></span><em>*</em></label>
+                                <input type="text" title="<?php /* @escapeNotVerified */ echo __('Zip/Postal Code') ?>" name="account[postcode]" id="account:postcode" value="<?php echo $block->escapeHtml($this->getAddress()->getPostcode()) ?>" class="input-text form-control validate-zip-international required-entry" />
+                            </div>
+                            <div class="<?php echo $class_name_col; ?>">
+                                <label for="account:country_id" class="required"><span><?php /* @escapeNotVerified */ echo __('Country') ?></span><em>*</em></label>
+                                <?php echo $this->getCountryHtmlSelect('account') ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="<?php echo $class_name_col; ?>">
+                                <label for="account:telephone" class="required"><span><?php /* @escapeNotVerified */ echo __('Telephone') ?></span><em>*</em></label>
+                                <input type="text" name="account[telephone]" value="<?php echo $block->escapeHtml($this->getAddress()->getTelephone()) ?>" title="<?php /* @escapeNotVerified */ echo __('Telephone') ?>" class="form-control input-text required-entry" id="account:telephone" />
+                            </div>
+                            <div class="<?php echo $class_name_col; ?>">
+                                <label for="account:fax"><span><?php /* @escapeNotVerified */ echo __('Fax') ?></span></label>
+                                <input type="text" name="account[fax]" value="<?php echo $block->escapeHtml($this->getAddress()->getFax()) ?>" title="<?php /* @escapeNotVerified */ echo __('Fax') ?>" class="input-text form-control" id="account:fax" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <?php if ($this->getFormData('account_name')): ?>
+                            <div class="<?php echo $class_name_col; ?>" style="margin-top:15px;">
+                                <label for="account_name"><span><?php /* @escapeNotVerified */ echo __('Name'); ?></span></label>
+                                <div class = "" style="float:left; margin-left:5px;">
+                                    <strong>
+                                        <span><?php echo $this->getFormData('account_name') ?></span>
+                                    </strong>
+                                </div>
+                                <input id="account_name" type="hidden" title="<?php /* @escapeNotVerified */ echo __('Name'); ?>" name="account_name" class ="form-control" value="<?php echo $this->getFormData('account_name') ?>"/>
+                                <div id="affiliate_message_hidden" class="affiliate_message"></div>
+                            </div>
+                        <?php endif ?>
+                        <div class="<?php echo $class_name_col; ?>">
+                            <?php if ($this->requiredPaypal()): ?>
+                                <label class="required" for="paypal_email"><span><?php /* @escapeNotVerified */ echo __('Paypal Email'); ?></span><em>*</em></label>
+                                <input id="paypal_email" class="input-text required-entry validate-email form-control" type="text" title="<?php /* @escapeNotVerified */ echo __('Paypal Email'); ?>" name="paypal_email" value="<?php echo $this->getFormData('paypal_email') ?>"/>
+                            <?php else: ?>
+                                <label for="paypal_email"><span><?php /* @escapeNotVerified */ echo __('Paypal Email'); ?></span></label>
+                                <input id="paypal_email" class="input-text validate-email form-control" type="text" title="<?php /* @escapeNotVerified */ echo __('Paypal Email'); ?>" name="paypal_email" value="<?php echo $this->getFormData('paypal_email') ?>"/>
+                            <?php endif ?>
+                        </div>
+                    </div>
+
+                    <?php
+                    //hainh update add editing  referral website
+                    //22-04-2014
+                    ?>
+                    <div class="form-group">
+                        <div class="<?php echo $class_name_col; ?>">
+                            <label for="referring_website"><span><?php /* @escapeNotVerified */ echo __('Referring Website'); ?></span></label>
+                            <input id="referring_website" class="input-text form-control" type="text" title="<?php /* @escapeNotVerified */ echo __('Referring Website'); ?>" name="referring_website" value="<?php echo $this->getFormData('referring_website') ?>"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="<?php echo $class_name_col; ?>">
+                            <input style="float: left" type="checkbox" name="change_password" id="change_password" value="1" onclick="setPasswordForm(this.checked)" title="<?php /* @escapeNotVerified */ echo __('Change Password') ?>"<?php if ($this->getFormData('change_password')): ?> checked="checked"<?php endif; ?> class="checkbox" />
+                            <label  for="change_password"><?php /* @escapeNotVerified */ echo __('Change Password') ?></label>
+                        </div>
+                        <div class="<?php echo $class_name_col; ?>">
+                            <input style="float: left" type="checkbox" class="checkbox" name="notification" id="notification" value="1" <?php if ($this->getFormData('notification')): ?>checked="checked"<?php endif ?> />
+                            <label for="notification"><?php /* @escapeNotVerified */ echo __('Receive email notification') ?></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="" style="display:none;border: 1px solid #ececec; float: left;margin-top: 10px; width:100%;" >
+                    <div class="lable-title">
+                        <h2 class="legend"><?php /* @escapeNotVerified */ echo __('Change Password') ?></h2>
+                    </div>
+                    <div class="form-list form-group">
+                        <div class = "<?php echo $class_name_col; ?>">
+                            <label for="current_password" class="required"><span><?php /* @escapeNotVerified */ echo __('Current Password') ?></span><em>*</em></label>
+                            <div class="input-box" style="width:100%">
+                                <input type="password" title="<?php /* @escapeNotVerified */ echo __('Current Password') ?>" class="input-text required-entry form-control" name="current_password" id="current_password" />
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top:15px;">
+                            <div class = "<?php echo $class_name_col; ?>">
+                                <label for="password" class="required"><span><?php /* @escapeNotVerified */ echo __('New Password') ?></span><em>*</em></label>
+                                <input type="password" title="<?php /* @escapeNotVerified */ echo __('New Password') ?>" class="input-text validate-password form-control" name="password" id="password" />
+                            </div>
+                            <div class = "<?php echo $class_name_col; ?>">
+                                <label for="confirmation" class="required"><span><?php /* @escapeNotVerified */ echo __('Confirm New Password') ?></span><em>*</em></label>
+                                <input type="password" title="<?php /* @escapeNotVerified */ echo __('Confirm New Password') ?>" class="input-text form-control" name="confirmation" id="confirmation" data-validate='{required:true, equalTo:"#password"}' />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php
+                if($block->getConfig('affiliateplus_payment/recurring/enable') && count($this->getMethodArr())):
+                    ?>
+                    <div>
+                        <div class="lable-title" style="margin-top:20px;">
+                            <h2 class="legend"><?php echo __('Recurring Payment ') ?></h2>
+                        </div>
+                        <ul>
+                            <li class="form-group">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <input type="checkbox" name="recurring_payment" id="recurring_payment"  onclick="recurringPaymentCheck(this.checked)" value="1" <?php if ($this->getRecurringPayment()): ?>checked="checked"<?php endif ?> />
+                                    <label for="recurring_payment"><?php echo __('Receive money by Recurring Payment') ?></label>
+                                </div>
+                            </li>
+                            <li class="form-group">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <label for="recurring_method" id="label_recurring_method" class="required"><em>*</em><?php echo __('Select the payment method') ?></label>
+
+                                    <select id="recurring_method" class="input-text required-entry form-control" onchange="changeMethodPayment()" name="recurring_method">
+                                        <?php
+                                        foreach ($this->getMethodArr() as $key => $value) {
+                                            ?>
+                                            <option <?php if ($this->getRecurringMethod() == $key) echo 'selected="selected"'; ?> value="<?php echo $key ?>"><?php echo __($value) ?></option>
+                                        <?php } ?>
+                                    </select>
+
+                                </div>
+                                <div id="div_moneybooker_email"  class="col-lg-6 col-md-6 col-sm-12 col-xs-12 field moneybooker_email" <?php if (!$this->moneybookerDisplay()) { ?>style="display:none;" <?php } ?>>
+                                    <label class="required" id="label_moneybooker_email"   for="moneybooker_email"><em>*</em><?php echo __('Moneybooker Email'); ?></label>
+
+                                    <input id="moneybooker_email" class="input-text required-entry validate-email form-control" type="text" title="<?php echo __('Moneybooker Email'); ?>" name="moneybooker_email" value="<?php echo $this->getMoneybookerEmail() ?>"/>
+
+                                </div>
+
+                                <div id="div_paypal_email"  class="col-lg-6 col-md-6 col-sm-12 col-xs-12 field paypal-email" <?php if ($this->moneybookerDisplay()) { ?>style="display:none;" <?php } ?> >
+                                    <label class="required" id="label_paypal_email" for="paypal_email"><em>*</em><?php echo __('Paypal Email'); ?></label>
+
+                                    <input id="paypal_email" class="input-text required-entry validate-email form-control" type="text" title="<?php echo __('Paypal Email'); ?>" name="paypal_email" value="<?php echo $this->getFormData('paypal_email') ?>"/>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                <?php endif;?>
+                <div class="buttons-set">
+                    <p class="required">* <?php /* @escapeNotVerified */ echo __('Required Fields'); ?></p>
+                    <button class="button button-config action primary" type="submit" title="Save">
+                        <span ><?php /* @escapeNotVerified */ echo __('Save') ?></span>
+                    </button>
+                    <?php if (0): ?>
+                        <p class="back-link">
+                            <a href="javascript:history.go(-1)">
+                                <button type="button button-config" onclick="javascript:history.go(-1)" class="button button-config action primary">
+                                    <span>
+                                        <?php /* @escapeNotVerified */ echo __('Back') ?>
+                                    </span>
+                                </button>
+                            </a>
+                        </p>
+                    <?php endif ?>
+                </div>
+
+            </form>
+        </div>
+        <div class="clear"></div>
+        <script type="text/x-magento-init">
+    {
+        "#signup_affiliate_account_form": {
+            "validation": {}
+        }
+    }
+</script>
+        <script type="text/javascript">
+            require(['jquery', 'regionUpdater'], function ($) {
+                $('[id="account:country_id"]').regionUpdater({
+                    "optionalRegionAllowed": <?php /* @escapeNotVerified */ echo($block->getConfig('general/region/display_all') ? 'true' : 'false'); ?>,
+                    "regionListId": '[id="account:region_id"]',
+                    "regionInputId": '[id="account:region"]',
+                    "postcodeId": '[id="account:postcode"]',
+                    "form": "#signup_affiliate_account_form",
+                    "regionJson": <?php /* @escapeNotVerified */ echo $this->helper('Magento\Directory\Helper\Data')->getRegionJson() ?>,
+                    "defaultRegion": "<?php /* @escapeNotVerified */ echo $block->getAddress()->getRegionId() ?>",
+                    "countriesWithOptionalZip": <?php /* @escapeNotVerified */ echo $this->helper('Magento\Directory\Helper\Data')->getCountriesWithOptionalZip(true) ?>
+                });
+            })
+            //<![CDATA[
+            //            if ($('account-address-select')) {
+            //                $('account-address-select').value = "<?php //echo $accountData['address_id'] ?>//";
+            //                lsRequestTrialNewAddress($('account-address-select').value);
+            //            }
+            //            var regionUpdate = new regionUpdater('account:country_id', 'account:region', 'account:region_id', <?php //echo $this->helper('Magento\Directory\Helper\Data')->getRegionJson() ?>//, undefined, 'postcode');
+            function lsRequestTrialNewAddress(addressId) {
+                require(['prototype'], function(){
+                    if (addressId == "") {
+                        $('account-new-address-form').show();
+                    } else {
+                        $('account-new-address-form').hide();
+                    }
+                });
+            }
+            function setPasswordForm(arg) {
+                require(['prototype'], function(){
+                    if (arg) {
+                        $('current_password').up(3).show();
+                        $('current_password').addClassName('required-entry');
+                        $('password').addClassName('required-entry');
+                        $('confirmation').addClassName('required-entry');
+                    } else {
+                        $('current_password').up(3).hide();
+                        $('current_password').removeClassName('required-entry');
+                        $('password').removeClassName('required-entry');
+                        $('confirmation').removeClassName('required-entry');
+                    }
+                });
+            }
+            <?php if ($this->getFormData('change_password')): ?>
+            setPasswordForm(true);
+            <?php endif; ?>
+            var hasSelect = document.getElementById('account:country_id');
+            var hasSelects = document.getElementById('account-address-select');
+            if(hasSelect){
+                require(['prototype'], function(){
+                    hasSelect.addClassName('form-control');
+                    hasSelects.addClassName('form-control');
+                });
+            }
+            //]]>
+        </script>
+    </div>
+
+
+</div>

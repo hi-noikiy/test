@@ -1,0 +1,26 @@
+<?php
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+
+// @codingStandardsIgnoreFile
+
+/** @var Aheadworks\StoreCredit\Block\Customer\StoreCreditBalance\Toplink $block */
+
+$class = $block->customerLoggedIn() ? 'customer-welcome' : '';
+$canShow = true;
+if (!$block->isAjax()): ?>
+    <?php $canShow = false ?>
+    <li class="nav item <?php /* @noEscape */ echo $class ?>" data-aw-store-credit-block-name="<?php /* @noEscape */ echo $block->getNameInLayout() ?>"></li>
+<?php endif; ?>
+
+<?php if ($canShow && $block->canShow()): ?>
+    <li class="nav item <?php /* @noEscape */ echo $class ?>">
+        <a href="<?php echo $block->escapeUrl($this->getUrl('aw_store_credit/info')) ?>">
+            <span>
+                <?php echo $block->escapeHtml(__('Your Store Credit Balance: %1', $block->getCustomerStoreCreditBalanceFormatted())) ?>
+            </span>
+        </a>
+    </li>
+<?php endif; ?>

@@ -1,0 +1,217 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <affiliateplus>
+            <general>
+                <enable>1</enable>
+                <show_affiliate_link_on_frontend>1</show_affiliate_link_on_frontend>
+                <welcome_page>affiliate-home</welcome_page>
+                <expired_time>360</expired_time>
+                <url_param_value>1</url_param_value>
+            </general>
+            <account>
+                <register_description><![CDATA[If you have not had an affiliate account yet, please choose Signup to create a new account quickly.]]></register_description>
+                <auto_create_affiliate>0</auto_create_affiliate>
+                <required_address>0</required_address>
+                <required_paypal>1</required_paypal>
+                <need_approved>0</need_approved>
+                <notification_after_signing_up><![CDATA[You have successfully signed up for an affiliate account.]]></notification_after_signing_up>
+                <balance>global</balance>
+            </account>
+            <commission>
+                <affiliate_type>sales</affiliate_type>
+                <commission_type>percentage</commission_type>
+                <commission_value>5</commission_value>
+                <use_secondary>0</use_secondary>
+                <secondary_type>percentage</secondary_type>
+                <secondary_commission>5</secondary_commission>
+                <updatebalance_orderstatus>complete</updatebalance_orderstatus>
+                <decrease_commission_creditmemo>0</decrease_commission_creditmemo>
+                <cancel_transaction_orderstatus>closed,canceled</cancel_transaction_orderstatus>
+            </commission>
+            <discount>
+                <discount_type>percentage</discount_type>
+                <discount>0</discount>
+                <use_secondary>0</use_secondary>
+                <secondary_type>percentage</secondary_type>
+                <secondary_discount>0</secondary_discount>
+                <type_discount>cart</type_discount>
+            </discount>
+            <payment>
+                <store_credit>0</store_credit>
+                <withdrawals>1</withdrawals>
+                <payment_release>100</payment_release>
+                <payment_method>api</payment_method>
+                <who_pay_fees>payer</who_pay_fees>
+                <reduce_balance>1</reduce_balance>
+                <default_method>bank</default_method>
+            </payment>
+            <email>
+                <is_sent_email_new_account>1</is_sent_email_new_account>
+                <is_sent_email_account_new_transaction>1</is_sent_email_account_new_transaction>
+                <is_sent_email_sales_new_transaction>1</is_sent_email_sales_new_transaction>
+                <is_sent_email_account_updated_transaction>1</is_sent_email_account_updated_transaction>
+                <is_sent_email_sales_request_payment>1</is_sent_email_sales_request_payment>
+                <is_sent_email_sales_representative_request_payment>1</is_sent_email_sales_representative_request_payment>
+
+                <new_account_email_template>affiliateplus_email_new_account_email_template</new_account_email_template>
+                <new_account_sales_email_template>affiliateplus_email_new_account_sales_email_template</new_account_sales_email_template>
+                <approved_account_email_template>affiliateplus_email_approved_account_email_template</approved_account_email_template>
+                <new_transaction_account_email_template>affiliateplus_email_new_transaction_account_email_template</new_transaction_account_email_template>
+                <new_transaction_sales_email_template>affiliateplus_email_new_transaction_sales_email_template</new_transaction_sales_email_template>
+                <updated_transaction_account_email_template>affiliateplus_email_updated_transaction_account_email_template</updated_transaction_account_email_template>
+                <reduce_commission_account_email_template>affiliateplus_email_reduce_commission_account_email_template</reduce_commission_account_email_template>
+                <request_payment_email_template>affiliateplus_email_request_payment_email_template</request_payment_email_template>
+                <process_payment_email_template>affiliateplus_email_process_payment_email_template</process_payment_email_template>
+                <is_sent_report>1</is_sent_report>
+                <report_period>week</report_period>
+                <report_template>affiliateplus_email_report_template</report_template>
+                <refer_template>affiliateplus_email_refer_template</refer_template>
+                <verify_payment_email>affiliateplus_email_verify_payment_email</verify_payment_email>
+            </email>
+            <action>
+                <use_magento_link>0</use_magento_link>
+                <detect_iframe>1</detect_iframe>
+                <resetclickby>0</resetclickby>
+                <detect_cookie>1</detect_cookie>
+                <detect_proxy>1</detect_proxy>
+                <detect_software>1</detect_software>
+                <detect_proxy_header>1,2,3,4,5,6,7,8</detect_proxy_header>
+                <detect_proxy_hostbyaddr>0</detect_proxy_hostbyaddr>
+                <detect_proxy_bankip>65.49.0.*;64.55.*.*;64.55.*.*;69.22.*.*;69.167.*.*;74.115.*.*;128.241.*.*;140.174.*.*;204.2.*.*;206.14.*.*;209.107.*.*</detect_proxy_bankip>
+            </action>
+
+            <style_config>
+                <responsive_enable>1</responsive_enable>
+                <background_color>FFFFFF</background_color>
+                <background_title>EB7705</background_title>
+                <title_color>FFFFFF</title_color>
+                <background_subtitle>9D9D9D</background_subtitle>
+                <sub_title_color>FFFFFF</sub_title_color>
+
+                <button_social_background_color>0081BA</button_social_background_color>
+                <button_social_color>FFFFFF</button_social_color>
+                <background_navigation_color>FFFFFF</background_navigation_color>
+
+                <active_background_navigation_color>EEEEEE</active_background_navigation_color>
+                <active_color_navigation_color>EB7705</active_color_navigation_color>
+                <text_font_size>14</text_font_size>
+                <background_popup_color>FFFFFF</background_popup_color>
+                <background_popup_title>9D9D9D</background_popup_title>
+                <popup_title_color>FFFFFF</popup_title_color>
+                <background_color_login_button>E05435</background_color_login_button>
+                <background_color_signup_button>8EC549</background_color_signup_button>
+                <background_color_contact_button>0081BA</background_color_contact_button>
+            </style_config>
+
+            <!-- Default config of Refer Friend-->
+            <refer>
+                <enable>1</enable>
+                <show_list_refer>facebook,email,google,twitter</show_list_refer>
+                <url_prefix><![CDATA[user/]]></url_prefix>
+                <refer_description>
+                    <![CDATA[<strong>Share your affiliate link and earn more commission from your friends.</strong><br/><br/>
+<strong>Here's how it works:</strong>
+<ul style="margin-left: 15px;list-style-type: disc;">
+<li>Customize your personal url friendlier</li>
+<li>Share your customized link with your friends</li>
+<li>Earn money from your friend purchases</li>
+<li>See traffics come from social networks and emails</li>
+</ul>]]>
+                </refer_description>
+                <sharing_description>
+                    <![CDATA[<div class="block-title"><strong>Sharing is so easy</strong></div>
+<p class="box-content">You can share your affiliate url to your friends quickly by using our online marketing tool, such as: Email, Facebook, Twitter, G+. Find them below:</p>]]>
+                </sharing_description>
+                <email_subject><![CDATA[Good service and product]]></email_subject>
+                <email_content>
+                    <![CDATA[Dear {{friend_name}},
+I've been shopping at {{store_name}} and feel really happy. They provide good customer service and reasonable prices.
+If you click on my link below, you can even receive a special discount! Check it out: {{personal_url}}
+
+Thank you,
+{{account_name}}]]>
+                </email_content>
+                <sharing_message>
+                    <![CDATA[I've been shopping at {{store_name}} and feel really happy. They provide good customer service and reasonable prices.
+If you click on my link, you can even receive a special discount! Check it out: {{personal_url}}]]>
+                </sharing_message>
+                <twitter_message><![CDATA[I've been shopping at {{store_name}} and feel really happy. Check it out: {{personal_url}}]]></twitter_message>
+            </refer>
+        </affiliateplus>
+        <affiliateplus_payment>
+            <credit>
+                <active>0</active>
+                <label>Store Credit</label>
+                <require_authentication>0</require_authentication>
+                <model>Magestore\Affiliateplus\Model\Payment\Credit</model>
+            </credit>
+            <paypal>
+                <active>1</active>
+                <label>PayPal Payment</label>
+                <require_authentication>1</require_authentication>
+                <use_for_recurring>1</use_for_recurring>
+                <helper>Magestore\Affiliateplus\Helper\Payment\Paypal</helper>
+                <model>Magestore\Affiliateplus\Model\Payment\Paypal</model>
+                <user_mechant_email_default>0</user_mechant_email_default>
+                <sandbox_mode>1</sandbox_mode>
+            </paypal>
+            <offline>
+                <active>1</active>
+                <label>Offline Payment</label>
+                <require_authentication>0</require_authentication>
+                <model>Magestore\Affiliateplus\Model\Payment\Offline</model>
+            </offline>
+            <bank>
+                <active>1</active>
+                <label>Bank Transfer Payment</label>
+                <require_authentication>0</require_authentication>
+                <model>Magestore\Affiliateplus\Model\Payment\Bank</model>
+            </bank>
+            <moneybooker>
+                <active>1</active>
+                <label>Moneybooker Payment</label>
+                <require_authentication>1</require_authentication>
+                <use_for_recurring>1</use_for_recurring>
+                <user_mechant_email_default>0</user_mechant_email_default>
+                <model>Magestore\Affiliateplus\Model\Payment\MoneyBooker</model>
+                <helper>Magestore\Affiliateplus\Helper\Payment\Moneybooker</helper>
+            </moneybooker>
+            <!-- configuration for recurring Payment -->
+            <recurring>
+                <enable>0</enable>
+                <period>30</period>
+                <days>0</days>
+                <amount_type>percentage</amount_type>
+                <amount_value>10</amount_value>
+                <max_account>0</max_account>
+                <admin_email>1</admin_email>
+                <admin_template>affiliateplus_payment_recurring_admin_template</admin_template>
+                <account_email>1</account_email>
+                <account_template>affiliateplus_payment_recurring_account_template</account_template>
+            </recurring>
+
+        </affiliateplus_payment>
+    </default>
+</config>

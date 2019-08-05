@@ -1,0 +1,94 @@
+<?php
+
+/*
+* To get data of Attribute - In the Box Extra 
+*/
+?>
+
+<?php
+    $_product = $block->getProduct();
+    $_helper = $this->helper('Magento\Catalog\Helper\Output');
+    $_helpers = $this->helper('Magento\Catalog\Helper\Image');
+?>
+
+        <div class="wrapper02">
+            <div class="popupheader"><?php echo __('In the box'); ?></div>
+                <div class="block block-related">
+                    <div class="block-content">
+                        <ol class="mini-products-list" id="block-related">
+                            <?php
+                            // get selected option of attribute
+                            $displayProductInTheBox = $_product->getInTheBoxDisplayMainImage();
+
+                            // get attribute id from code
+                            $attrId = $block->getIdByCode('catalog_product', 'in_the_box_display_main_image');
+
+                            // failsafe if attribute is not present
+
+                            //check for attribute
+                            $selectedDisplayInTheBox = '';
+                            if($attrId) {
+                                // load attribute
+                                $displayProductImageAttr = $block
+                                    ->load($attrId);
+                                // label for selected display yes/no or null
+                                $selectedDisplayInTheBox = $displayProductImageAttr->getSource()->getOptionText($displayProductInTheBox);
+                            }
+
+                            if($displayProductInTheBox != '126'){
+                                $selectedDisplayInTheBox = "no";
+                            }
+
+
+                            if($selectedDisplayInTheBox != 'no') :
+                            ?>
+                                <li class="item inbx01">
+                                   <?php $image_url = $_helpers->init($_product, 'product_base_image')->setImageFile($_product->getFile())->resize(265)->getUrl();?>
+                                   <div class="inbx-img01"><img src="<?php echo $image_url?>"/>
+                                   </div>
+                                    <p class="inbx-info01"><?php echo $_product->getName(); ?></p>
+                                </li>
+                            <?php
+                            endif;
+                            ?>
+                            <?php foreach($block->getItems() as $_item): ?>
+                                <li class="item inbx01">
+                                	<?php $small_image_url = $_helpers->init($_item, 'product_page_image_small')->setImageFile($_item->getFile())->resize(300,300)->getUrl();?>
+                                	<div class="inbx-img01">
+                                        <img src="<?php echo $small_image_url?>"/>
+                                		<div class="overlydiv">
+                                            <a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $_item->getInTheBoxExtraAltTitle() ? $this->escapeHtml($_item->getInTheBoxExtraAltTitle()) : $this->escapeHtml($_item->getName()) ?>" target="_blank" class="moreinfoicon"><?php echo __('More info') ?></a>
+                                        </div> 
+                                	</div>		
+                                   <p class="inbx-info01"><?php echo $_item->getName() ?></p> 
+                                </li>
+                            <?php endforeach ?>
+                            <?php  $_inTheBoxExtra = $this->getProduct()->getInTheBoxExtra()?>
+                            <?php 
+                            $_getAttrCode='in_the_box_extra';
+                           $images=$_helper->productAttribute($_product, $_inTheBoxExtra, 'in_the_box_extra');
+                          // Get Value
+							$images = explode(',',$images); 
+						$_getMyAttr = $_product->getResource()->getAttribute('in_the_box_extra_title');
+						$title = $_getMyAttr->getFrontend()->getValue($_product);
+						$title = explode(',',$title); 
+							    
+							?>
+							<?php if ($_inTheBoxExtra): ?>
+								 <?php for ($i = 0 ; $i < count($images) ; $i++) : ?>
+                                    <li class="item inbx01">
+                                        <?php if(isset($images[$i])): ?>
+                                        <div class="inbx-img01"><?php echo $images[$i]; ?></div>
+                                        <?php endif; ?>
+                                        <?php if(isset($title[$i])): ?>
+                                        <p class="inbx-info01"><?php echo $title[$i]; ?></p>
+                                        <?php endif; ?>
+                                    </li>
+                                    <?php endfor; ?>
+							<?php endif; ?>
+                        </ol>
+                        <script type="text/javascript">decorateList('block-related', 'none-recursive')</script>
+                    </div>
+                </div>
+        </div>
+

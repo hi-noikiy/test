@@ -1,0 +1,339 @@
+<?php 
+/**
+* Ktpl\Productdetailpopup\Block\Product\View\Type\Configurable
+*
+**/
+$product = $this->getCustomProduct();
+$sku = $product->getSku();
+$name = $product->getName();
+$description = $product->getDescription();
+
+$productdata = $block->getJsonConfig1($product);
+$productdata = json_decode($productdata);
+
+if(!empty($productdata->attributes)){
+    $swatcharray = [];
+    if(!empty($productdata->swatchimage)){
+        foreach ($productdata->swatchimage as $skey =>$sval){
+            foreach($sval as $stylename => $stylevalue){
+                if($stylename == 'color')
+                    $swatcharray [$skey] = 'background-color:'.$stylevalue;
+                elseif($stylename == 'url')
+                    $swatcharray [$skey] = 'background:url('.$stylevalue.') no-repeat center';
+            }
+            
+        }
+    }
+
+
+    $product_id = $productdata->productId;
+
+    $relatedProduct = $productdata->relatedProduct;
+    $color = [];
+    $product_option_data = $productdata->attributes;
+    $product_index = $productdata->index;
+    $attributeData = [];
+    $optionsArr = [];
+    ?>
+    <!-- <span><?= __($name);?></span> -->
+    <form method="post" enctype="multipart/form-data" action="<?= $this->getUrl('productdetailpopup/Content/Addtocart') ;?>">
+        <input type="hidden" id="<?= $name; ?>" name="product" value="<?= $sku;?>" />
+        <?php foreach ($product_option_data as $key => $attributes) {
+            $attributeData[$key] = $attributes;
+            $attribute_label[] = $attributes->code;
+            foreach ($attributes->options  as $key => $value) {
+                $optionsArr[$value->id] = $value->label;
+            }                
+        } 
+
+        $ii = 0;
+        ?>
+        <?php $attributeLabel = implode(' / ', $attribute_label); ?>
+        
+       <div class="select-qyantity-by-color">
+       <h3><?= __('Select Quantity by '.$attributeLabel.': ');?></h3>
+        <?php foreach ($product_index as $key => $option) { 
+            ?>
+            <div class="quantity-wrapper">
+                <?php $f=1;
+                foreach ($option as $ke => $value) {  ?>
+
+
+                <?php if(isset($optionsArr[$value]) && $optionsArr[$value] != 'false' && $optionsArr[$value] != ''){ $f++;?>
+                <span class="swatch-custom">
+                    <?php if(isset($swatcharray[$value])) { ?>
+                    <span class="swatch-option color" style="height:25px; width:25px; <?= $swatcharray[$value] ?>"></span>
+                    <?php } else { ?>
+                    <span class="attribute-custom"><?= __($attributeData[$ke]->code .":<br />". $optionsArr[$value]); ?></span>
+                <?php } ?>
+            </span>
+            <input type="hidden" value="<?= $value ?>" name="item[<?= $ii ?>][super_attribute][<?= $ke ?>]" />
+            <?php if($f==2) { ?>
+            <span><?php echo __('Qty :');?></span>
+            <script type="text/javascript">
+                require (['jquery','qtyInput'],function($){
+                    $('.qtyinput-<?php echo $ii; ?>').qtyInput({"qtyInputSelector": "#item-<?php echo $ii; ?>",
+                        "qtyIncrementSelector":"#inc-qty-<?php /* @escapeNotVerified */ echo $ii ?>",
+                        "qtyDecrementSelector":"#dec-qty-<?php /* @escapeNotVerified */ echo $ii ?>"
+                    });
+                });
+            </script>
+            <div class="qtybox qtyinput-<?php echo $ii; ?>">
+                <input type="number"
+                name="item[<?= $ii; ?>][qty]"
+                id="item-<?php echo $ii; ?>"
+                maxlength="12"
+                value="<?php /* @escapeNotVerified */ echo 0 ?>"
+                title="<?php /* @escapeNotVerified */ echo __('Qty') ?>" class="input-text qty"
+                />
+                <div class="quantity-panel">
+                    <span class="inc-qty" id="inc-qty-<?php /* @escapeNotVerified */ echo $ii ?>"></span> 
+                    <span class="dec-qty" id="dec-qty-<?php /* @escapeNotVerified */ echo $ii ?>"></span>
+                </div>
+            </div>
+            <?php } }?>
+            
+            <?php } ?>
+
+
+            
+            
+            <!-- <input type="text" name="item[<?= $ii; ?>][qty]" /> -->
+            
+        </div> 
+
+        <?php $ii++; 
+    } ?>
+    </div>
+    <?php if ($productdata->relatedProduct) { ?>
+    <div class="any-extra-parts">
+    <h3><?php echo __('Any <strong>Extra</strong> Parts?'); ?> </h3>
+    <div class="any-extra-content">
+    <?php foreach ($relatedProduct as $value) { 
+        ?>    
+        <span><?= __('Qty :');?></span>
+            
+        <div class="any-extra-wrapper">
+            <script type="text/javascript">
+                require (['jquery','qtyInput'],function($){
+                    $('.div-qtyinput_<?= $ii; ?>').qtyInput({"qtyInputSelector": "#r_pro_<?= $ii; ?>_qty",
+                        "qtyIncrementSelector":"#inc-qty-<?php /* @escapeNotVerified */ echo $value->id ?>",
+                        "qtyDecrementSelector":"#dec-qty-<?php /* @escapeNotVerified */ echo $value->id ?>"
+                    });
+                });
+            </script>
+            <div class="qtybox div-qtyinput_<?= $ii; ?>">
+                <input type="number"
+                name="r_pro[<?= $ii; ?>][qty]"
+                id="r_pro_<?= $ii; ?>_qty"
+                maxlength="12"
+                value="<?php /* @escapeNotVerified */ echo 0 ?>"
+                title="<?php /* @escapeNotVerified */ echo __('Qty') ?>" class="input-text qty"
+                />
+                <div class="quantity-panel">
+                    <span class="inc-qty" id="inc-qty-<?php /* @escapeNotVerified */ echo $value->id ?>"></span> 
+                    <span class="dec-qty" id="dec-qty-<?php /* @escapeNotVerified */ echo $value->id ?>"></span>
+                </div>
+            </div>
+            <!-- <input type="text" name="r_pro[<?= $ii; ?>][qty]" /> -->
+            <input type="hidden" value="<?= $value->id ?>" name="r_pro[<?= $ii ?>][id]" />
+            <input type="hidden" value="<?= $value->sku ?>" name="r_pro[<?= $ii ?>][sku]" />
+            <input type="hidden" value="<?= $value->price ?>" name="r_pro[<?= $ii ?>][price]" />
+            <div class="pro-wrapper">
+                <div class="product-name"><?= __($value->name);?></div>
+                <div class="product-price"><?= __(round($value->price, 2));?></div>
+
+            </div>
+        </div> 
+        <?php $ii++; }  ?>
+        </div>
+        </div>
+    <?php } else if ($productdata->zeus_product) { ?>
+    <div class="any-extra-parts">
+    <h3><?php echo __('Any <strong>Extra</strong> Parts?'); ?> </h3>
+    <div class="any-extra-content">
+    <?php foreach ($productdata->zeus_product as $value) { 
+        ?>    
+        <span><?= __('Qty :');?></span>
+            
+        <div class="any-extra-wrapper">
+            <script type="text/javascript">
+                require (['jquery','qtyInput'],function($){
+                    $('.div-qtyinput_<?= $ii; ?>').qtyInput({"qtyInputSelector": "#r_pro_<?= $ii; ?>_qty",
+                        "qtyIncrementSelector":"#inc-qty-<?php /* @escapeNotVerified */ echo $value->id ?>",
+                        "qtyDecrementSelector":"#dec-qty-<?php /* @escapeNotVerified */ echo $value->id ?>"
+                    });
+                });
+            </script>
+            <div class="qtybox div-qtyinput_<?= $ii; ?>">
+                <input type="number"
+                name="r_pro[<?= $ii; ?>][qty]"
+                id="r_pro_<?= $ii; ?>_qty"
+                maxlength="12"
+                value="<?php /* @escapeNotVerified */ echo 0 ?>"
+                title="<?php /* @escapeNotVerified */ echo __('Qty') ?>" class="input-text qty"
+                />
+                <div class="quantity-panel">
+                    <span class="inc-qty" id="inc-qty-<?php /* @escapeNotVerified */ echo $value->id ?>"></span> 
+                    <span class="dec-qty" id="dec-qty-<?php /* @escapeNotVerified */ echo $value->id ?>"></span>
+                </div>
+            </div>
+            <!-- <input type="text" name="r_pro[<?= $ii; ?>][qty]" /> -->
+            <input type="hidden" value="<?= $value->id ?>" name="r_pro[<?= $ii ?>][id]" />
+            <input type="hidden" value="<?= $value->sku ?>" name="r_pro[<?= $ii ?>][sku]" />
+            <input type="hidden" value="<?= $value->price ?>" name="r_pro[<?= $ii ?>][price]" />
+            <div class="pro-wrapper">
+                <div class="product-name"><?= __($value->name);?></div>
+                <div class="product-price"><?= __(round($value->price, 2));?></div>
+
+            </div>
+        </div> 
+        <?php $ii++; }  ?>
+        </div>
+        </div>
+    <?php } ?>
+        <div class="actions">
+            <button type="submit" class="action primary tocart" id="product-addtocart-button">
+                <span> <?= __('Add to cart') ?></span>
+            </button>
+        </div>
+
+    </form>
+    <?php            
+}else {
+    foreach ($productdata->simple_product as $simple_product) {
+        ?>
+        <form method="post" enctype="multipart/form-data" action="<?= $this->getUrl('productdetailpopup/Content/Addtocart') ;?>">
+            <div class="select-qyantity-by-color"><h3><?php echo __("Set Quantity");?></h3>
+    
+            <?php $ii = 0;
+            foreach ($productdata->simple_product as $simple_product) { 
+                $simple_product_id = $simple_product->id;
+                $simple_product_name = $simple_product->name;
+                $simple_product_price = $simple_product->price;
+                $simple_product_sku = $simple_product->sku;
+
+                ?>    
+                <div class="quantity-wrapper">
+                    <span class="simple_product_name"><?= __($simple_product_name);?></span>
+                    <!-- <span><?= __($simple_product_price);?></span> -->
+                    <script type="text/javascript">
+                        require (['jquery','qtyInput'],function($){
+                            $('.div-qtyinput_<?= $ii; ?>').qtyInput({"qtyInputSelector": "#r_pro_<?= $ii; ?>_qty",
+                                "qtyIncrementSelector":"#inc-qty-<?php /* @escapeNotVerified */ echo $simple_product_id ?>",
+                                "qtyDecrementSelector":"#dec-qty-<?php /* @escapeNotVerified */ echo $simple_product_id ?>"
+                            });
+                        });
+                    </script>
+                    <div class="qtybox div-qtyinput_<?= $ii; ?>">
+                        <input type="number"
+                        name="r_pro[<?= $ii; ?>][qty]"
+                        id="r_pro_<?= $ii; ?>_qty"
+                        maxlength="12"
+                        value="<?php /* @escapeNotVerified */ echo 0 ?>"
+                        title="<?php /* @escapeNotVerified */ echo __('Qty') ?>" class="input-text qty"
+                        />
+                        <div class="quantity-panel">
+                            <span class="inc-qty" id="inc-qty-<?php /* @escapeNotVerified */ echo $simple_product_id ?>"></span> 
+                            <span class="dec-qty" id="dec-qty-<?php /* @escapeNotVerified */ echo $simple_product_id ?>"></span>
+                        </div>
+                    </div>
+                    <!-- <input type="text" name="r_pro[<?= $ii; ?>][qty]" /> -->
+                    <input type="hidden" value="<?= $simple_product_id ?>" name="r_pro[<?= $ii ?>][id]" />
+                    <input type="hidden" value="<?= $simple_product_sku ?>" name="r_pro[<?= $ii ?>][sku]" />
+                    <input type="hidden" value="<?= $simple_product_price ?>" name="r_pro[<?= $ii ?>][price]" />
+                </div> 
+                <?php $ii++; } ?>
+        </div>
+        <?php if ($productdata->relatedProduct) { ?>
+        <div class="any-extra-parts">
+            <h3><?= __('Any <strong>Extra</strong> Parts?'); ?> </h3>
+            <div class="any-extra-content">
+                <?php foreach ($productdata->relatedProduct as $value) { ?>  
+                    <span><?= __('Qty :');?></span>
+                <div class="any-extra-wrapper">
+                    
+                    <script type="text/javascript">
+                        require (['jquery','qtyInput'],function($){
+                            $('.div-qtyinput_<?= $ii; ?>').qtyInput({"qtyInputSelector": "#r_pro_<?= $ii; ?>_qty",
+                                "qtyIncrementSelector":"#inc-qty-<?php /* @escapeNotVerified */ echo $value->id ?>",
+                                "qtyDecrementSelector":"#dec-qty-<?php /* @escapeNotVerified */ echo $value->id ?>"
+                            });
+                        });
+                    </script>
+                    <div class="qtybox div-qtyinput_<?= $ii; ?>">
+                        <input type="number"
+                        name="r_pro[<?= $ii; ?>][qty]"
+                        id="r_pro_<?= $ii; ?>_qty"
+                        maxlength="12"
+                        value="<?php /* @escapeNotVerified */ echo 0 ?>"
+                        title="<?php /* @escapeNotVerified */ echo __('Qty') ?>" class="input-text qty"
+                        />
+                        <div class="quantity-panel">
+                            <span class="inc-qty" id="inc-qty-<?php /* @escapeNotVerified */ echo $value->id ?>"></span> 
+                            <span class="dec-qty" id="dec-qty-<?php /* @escapeNotVerified */ echo $value->id ?>"></span>
+                        </div>
+                    </div>
+                    <!-- <input type="text" name="r_pro[<?= $ii; ?>][qty]" /> -->
+                    <input type="hidden" value="<?= $value->id ?>" name="r_pro[<?= $ii ?>][id]" />
+                    <input type="hidden" value="<?= $value->sku ?>" name="r_pro[<?= $ii ?>][sku]" />
+                    <input type="hidden" value="<?= $value->price ?>" name="r_pro[<?= $ii ?>][price]" />
+                    <div class="pro-wrapper">
+                        <div class="product-name"><?= __($value->name);?></div>
+                        <div class="product-price"><?= __(round($value->price, 2));?></div>
+                    </div>
+                </div>
+                <?php } ?>    
+            </div>
+        </div>
+            <?php } else if ($productdata->zeus_product) { ?>
+        <div class="any-extra-parts">
+            <h3><?= __('Any <strong>Extra</strong> Parts?'); ?> </h3>
+            <div class="any-extra-content">
+                <?php foreach ($productdata->zeus_product as $value) { ?>  
+                    <span><?= __('Qty :');?></span>
+                <div class="any-extra-wrapper">
+                    
+                    <script type="text/javascript">
+                        require (['jquery','qtyInput'],function($){
+                            $('.div-qtyinput_<?= $ii; ?>').qtyInput({"qtyInputSelector": "#r_pro_<?= $ii; ?>_qty",
+                                "qtyIncrementSelector":"#inc-qty-<?php /* @escapeNotVerified */ echo $value->id ?>",
+                                "qtyDecrementSelector":"#dec-qty-<?php /* @escapeNotVerified */ echo $value->id ?>"
+                            });
+                        });
+                    </script>
+                    <div class="qtybox div-qtyinput_<?= $ii; ?>">
+                        <input type="number"
+                        name="r_pro[<?= $ii; ?>][qty]"
+                        id="r_pro_<?= $ii; ?>_qty"
+                        maxlength="12"
+                        value="<?php /* @escapeNotVerified */ echo 0 ?>"
+                        title="<?php /* @escapeNotVerified */ echo __('Qty') ?>" class="input-text qty"
+                        />
+                        <div class="quantity-panel">
+                            <span class="inc-qty" id="inc-qty-<?php /* @escapeNotVerified */ echo $value->id ?>"></span> 
+                            <span class="dec-qty" id="dec-qty-<?php /* @escapeNotVerified */ echo $value->id ?>"></span>
+                        </div>
+                    </div>
+                    <!-- <input type="text" name="r_pro[<?= $ii; ?>][qty]" /> -->
+                    <input type="hidden" value="<?= $value->id ?>" name="r_pro[<?= $ii ?>][id]" />
+                    <input type="hidden" value="<?= $value->sku ?>" name="r_pro[<?= $ii ?>][sku]" />
+                    <input type="hidden" value="<?= $value->price ?>" name="r_pro[<?= $ii ?>][price]" />
+                    <div class="pro-wrapper">
+                        <div class="product-name"><?= __($value->name);?></div>
+                        <div class="product-price"><?= __(round($value->price, 2));?></div>
+                    </div>
+                </div>
+            <?php } ?>    
+            </div>
+        </div>
+            <?php }  ?>
+                <div class="actions">
+                    <button type="submit" class="action primary tocart" id="product-addtocart-button">
+                        <span> <?= __('Add to cart') ?></span>
+                    </button>
+                </div>
+            </form>
+            <?php }
+        }
+        ?>

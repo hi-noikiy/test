@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Krish_CriticReview::criticreview" title="Critic Review" translate="title" module="Krish_CriticReview" sortOrder="190" resource="Krish_CriticReview::criticreview"/>
+ 		<add id="Krish_CriticReview::index" title="Critic Review Form" module="Krish_CriticReview" sortOrder="20" parent="Krish_CriticReview::criticreview" action="krishcriticreview/reviews" resource="Krish_CriticReview::criticreview"/>
+    </menu>
+</config>

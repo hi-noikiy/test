@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="potato" translate="label" sortOrder="340">
+            <label>Potatocommerce</label>
+        </tab>
+        <section id="potato_zendesk" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <label>Zendesk</label>
+            <tab>potato</tab>
+            <resource>Potato_Zendesk::potato_zendesk</resource>
+            <group id="general" translate="label,comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Application settings</label>
+                <field id="token" translate="label" type="label" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>API Token</label>
+                </field>
+                <field id="generate_token" type="button" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <frontend_model>Potato\Zendesk\Block\Adminhtml\System\Config\Field\GenerateButton</frontend_model>
+                </field>
+                <field id="separate_website" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Display websites info separate</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="separate_store" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <depends>
+                        <field id="separate_website">1</field>
+                    </depends>
+                    <label>Display store views info separate</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="account" translate="label,comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>API Details</label>
+                <field id="domain" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Zendesk Domain</label>
+                    <comment><![CDATA[<i>yourdomain</i>.zendesk.com (without "http/https" and ".zendesk.com")]]></comment>
+                </field>
+                <field id="agent_email" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Agent Email Address</label>
+                    <validate>validate-email</validate>
+                </field>
+                <field id="zendesk_token" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Agent Token</label>
+                    <comment><![CDATA[To generate a token, log in to Zendesk then select Manage > Channels > API > Token]]></comment>
+                </field>
+            </group>
+            <group id="features" translate="label,comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Features</label>
+                <field id="order_section" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Display tickets on order page in backend</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="customer_section" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Display tickets on customer page in backend</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="frontend_customer_section" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display tickets on customer account in storefront</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

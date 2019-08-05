@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * Magestore.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+<div class="affiliateplus-account-bottom">
+    <?php if($this->getAccountHelper()->customerNotLogin()): ?>
+        <div class="col-button col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <button onclick="location.href='<?php echo $this->getUrl('affiliateplus/account/login') ?>'" class="form-button btn-login">
+                <span><?php echo __('Login'); ?></span>
+            </button>
+        </div>
+    <?php endif ?>
+    <?php if($this->getAccountHelper()->accountNotRegistered()): ?>
+        <div class="col-button col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <button onclick="location.href='<?php echo $this->getUrl('affiliateplus/account/register') ?>'" class="form-button btn-signup">
+                <span><?php echo __('Signup'); ?></span>
+            </button>
+        </div>
+    <?php endif ?>
+    <div class="col-button col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <button onclick="location.href='<?php echo $this->getUrl('contact') ?>'" class="form-button btn-contact">
+            <span><?php echo __('Contact Us'); ?></span>
+
+        </button>
+    </div>
+</div>

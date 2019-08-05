@@ -1,0 +1,49 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!--@subject {{trans "Wholesaler Inquiry Form"}} @-->
+<!--@vars {
+"var data.comment":"Comment",
+"var data.email":"Sender Email",
+"var data.firstname":"Sender Firstname:",
+"var data.lastname":"Sender Lastname:",
+"var data.telephone":"Sender Telephone"
+"var data.website":"Sender Website"
+"var data.company":"Sender Company"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table class="message-details">
+    <tr>
+        <td><b>{{trans "Firstname:"}}</b></td>
+        <td>{{var data.firstname}}</td>
+    </tr>
+    <tr>
+        <td><b>{{trans "Lastname:"}}</b></td>
+        <td>{{var data.lastname}}</td>
+    </tr>
+    <tr>
+        <td><b>{{trans "Email:"}}</b></td>
+        <td>{{var data.email}}</td>
+    </tr>
+    <tr>
+        <td><b>{{trans "Telephone:"}}</b></td>
+        <td>{{var data.telephone}}</td>
+    </tr>
+    <tr>
+        <td><b>{{trans "Website:"}}</b></td>
+        <td>{{var data.website}}</td>
+    </tr>
+    <tr>
+        <td><b>{{trans "Company:"}}</b></td>
+        <td>{{var data.company}}</td>
+    </tr>
+</table>
+<p><b>{{trans "Comment:"}}</b></p>
+<p>{{var data.comment}}</p>
+
+{{template config_path="design/email/footer_template"}}

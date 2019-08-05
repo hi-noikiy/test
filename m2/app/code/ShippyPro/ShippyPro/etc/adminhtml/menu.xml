@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="ShippyPro_ShippyPro::shippypro" title="ShippyPro" translate="title" module="ShippyPro_ShippyPro" parent="Magento_Backend::content" sortOrder="50" dependsOnModule="ShippyPro_ShippyPro" resource="ShippyPro_ShippyPro::shippypro"/>
+        <add id="ShippyPro_ShippyPro::settings" title="Settings" module="ShippyPro_ShippyPro" parent="ShippyPro_ShippyPro::shippypro" sortOrder="30" action="adminhtml/system_config/edit/section/shippypro/" resource="ShippyPro_ShippyPro::settings"/>
+    </menu>
+</config>

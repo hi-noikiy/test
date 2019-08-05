@@ -1,0 +1,19 @@
+{
+  "name": "celigo/magento2-netsuite-connector",
+  "description": "A Magento 2 module for Celigo Magento2 NetSuite Connector",
+  "type": "magento2-module",
+  "version": "1.3.6",
+  "license": [
+
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "magento/framework": ">=100 <103"
+  },
+  "autoload": {
+    "files": [ "registration.php" ],
+    "psr-4": {
+      "Celigo\\Magento2NetSuiteConnector\\": ""
+    }
+  }
+}

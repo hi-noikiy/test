@@ -1,0 +1,11 @@
+<?php 
+     
+     $data = $block->QuartData();
+     echo $block->mantisCode();
+     $getAdvertiserCode = $block->getAdvertiserCode();
+     $getTransaction = $block->getTransaction();
+
+?>
+<script type="text/javascript" data-cfasync="false" src="https://assets.mantisadnetwork.com/analytics.min.js" async></script>
+<noscript>
+<img src="//mantodea.mantisadnetwork.com/analytics/pixel?advertiser=<?php echo $getAdvertiserCode; ?>&transaction=<?php echo $getTransaction; ?>" /></noscript>

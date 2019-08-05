@@ -1,0 +1,185 @@
+<?php
+
+/**
+ * Magestore.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * @var \Magestore\Affiliateplus\Block\Payment\View $block
+ */
+?>
+<?php $payment = $block->getPayment(); ?>
+<?php $statusOption = $block->getStatusArray() ?>
+<?php $isStoreCredit = (bool)($payment->getData('payment_method') == 'credit') ?>
+<?php
+$store_id = $this->getStoreManager()->getStore()->getStoreId();
+$check_responsvie = $block->getConfig('affiliateplus/style_config/responsive_enable', $store_id);
+if($check_responsvie)
+    $class_name = 'col-lg-9 col-md-9 col-sm-12 col-xs-12';
+else
+    $class_name = 'col-lg-9 col-md-9 col-sm-9 col-xs-9';
+?>
+<div class="aff-main-content  <?php echo $class_name; ?>">
+    <div class="aff-title">
+        <h1><?php echo $isStoreCredit ? __('Transaction detail') : __('Withdrawal detail'); ?></h1>
+    </div>
+    <div class="box-info box-account">
+        <div class="lable-title">
+            <h2 class="legend"><?php echo $isStoreCredit ? __('Transaction Information') : __('Withdrawal Information') ?></h2>
+        </div>
+        <ul class="form-list">
+            <li class="form-group">
+                <div class="field-drawal">
+                    <strong><?php echo __('Status') ?></strong>
+                </div>
+                <div class="field-drawal">
+                    <?php echo $statusOption[$payment->getStatus()] ?>
+                </div>
+            </li>
+            <li class="form-group">
+                <div class="field-drawal">
+                    <strong><?php echo __('Date Requested') ?></strong>
+                </div>
+                <div class="field-drawal">
+                    <?php echo $block->formatDate($payment->getRequestTime(), \IntlDateFormatter::MEDIUM, false) ?>
+                </div>
+            </li>
+            <?php if ($payment->getData('tax_amount')): ?>
+                <li class="form-group">
+                    <div class="field-drawal">
+                        <strong><?php echo __('Amount') ?></strong>
+                    </div>
+                    <div class="field-drawal">
+                        <!--Gin fix bug show amount --><?php //echo $block->formatPrice($payment->getAmountInclTax()) ?>
+                        <?php echo $block->formatPrice($payment->getTaxAmount() + $payment->getAmount()) ?>
+                    </div>
+                </li>
+                <li class="form-group">
+                    <div class="field-drawal">
+                        <strong><?php echo __('Tax') ?></strong>
+                    </div>
+                    <div class="field-drawal">
+                        <?php echo $block->formatPrice($payment->getTaxAmount()) ?>
+                    </div>
+                </li>
+                <li class="form-group">
+                    <div class="field-drawal">
+                        <strong><?php echo __('Amount (Excl. Tax)') ?></strong>
+                    </div>
+                    <div class="field-drawal">
+                        <?php echo $block->formatPrice($payment->getAmount()) ?>
+                    </div>
+                </li>
+            <?php else: ?>
+                <li class="form-group">
+                    <div class="field-drawal">
+                        <strong><?php echo __('Amount') ?></strong>
+                    </div>
+                    <div class="field-drawal">
+                        <?php echo $block->formatPrice($payment->getAmount()) ?>
+                    </div>
+                </li>
+            <?php endif ?>
+            <?php if (!$isStoreCredit): ?>
+                <li class="form-group">
+                    <div class="field-drawal">
+                        <strong><?php echo __('Fee') ?></strong>
+                    </div>
+                    <div class="field-drawal">
+                        <?php if ($payment->getStatus() == 1): ?>
+                            <?php echo $block->formatPrice(0) ?>
+                        <?php elseif ($payment->getIsPayerFee()): ?>
+                            <?php echo $block->formatPrice(0) ?>
+                        <?php else: ?>
+                            <?php echo $block->formatPrice($payment->getFee()) ?>
+                        <?php endif ?>
+                    </div>
+                </li>
+            <?php endif ?>
+            <li class="form-group">
+                <div class="field-drawal">
+                    <strong><?php echo __('Payment') ?></strong>
+                </div>
+                <div class="field-drawal">
+                    <?php echo $payment->getPaymentMethodHtml() ?>
+                </div>
+            </li>
+            <?php echo $this->getChildHtml('payment_method_info') ?>
+            <?php if (!$isStoreCredit): ?>
+                <li class="form-group">
+                    <div class="field-drawal">
+                        <strong><?php echo __('History') ?></strong>
+                    </div>
+                    <div class="field-drawal">
+                        <a href="#aff-popup"onclick="viewFullHistory(null);" title="<?php echo __('View History') ?>">
+                            <?php echo __('View History') ?>
+                        </a>
+                    </div>
+                </li>
+            <?php endif ?>
+        </ul>
+    </div>
+    <?php if (!$isStoreCredit): ?>
+        <div id="affiliateplus_payment_history_block" style="display: none;">
+            <div style="text-align: left; margin: 10px;">
+                <div class="lable-title">
+                    <h2 class="legend"><?php echo __('Withdrawal History') ?></h2>
+                </div>
+                <ul class="note-list">
+                    <?php foreach ($this->getFullHistory() as $_item): ?>
+                        <li>
+                            <strong><?php echo $this->formatDate($_item->getCreatedTime(), \IntlDateFormatter::MEDIUM) ?></strong>
+                            <?php echo $this->formatTime($_item->getCreatedTime(), \IntlDateFormatter::MEDIUM) ?><span class="separator">|</span><strong><?php echo $_item->getStatusLabel() ?></strong>
+                            <?php if ($_item->getDescription()): ?>
+                                <span class="separator">|</span><?php echo $_item->getDescription() ?>
+                            <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+        <script type="text/javascript">
+            function viewFullHistory(el) {
+                ajaxPopup(null, $('affiliateplus_payment_history_block').innerHTML,el);
+            }
+        </script>
+    <?php endif ?>
+    <div class="buttons-set">
+        <button type="button" style="float:left" class="button button-config action primary" onclick="javascript:history.go(-1)">
+            <span><?php echo __('Back') ?></span>
+        </button>
+        <?php if ($payment->getStatus() < 3) { ?>
+            <div>
+                <button type="button" class="button button-config action primary" onclick="cancelPayment()">
+                    <span><?php echo __('Cancel Withdrawal') ?></span>
+                </button>
+            </div>
+        <?php } ?>
+    </div>
+</div>
+<?php
+$confirmText = __('Are you sure?');
+$cancelurl = $this->getUrl('affiliateplus/index/cancelPayment', ['id' => $payment->getId()]);
+?>
+<script type="text/javascript">
+    function cancelPayment(){
+        if (confirm('<?php echo $confirmText ?>')){
+            setLocation('<?php echo $cancelurl ?>');
+        }
+    }
+</script>

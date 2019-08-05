@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="potato" translate="label" sortOrder="340">
+            <label>POTATOCOMMERCE</label>
+        </tab>
+        <section id="po_addressautocomplete" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <label>Checkout Address Autocomplete</label>
+            <tab>potato</tab>
+            <resource>Potato_AddressAutocomplete::po_addressautocomplete</resource>
+            <group id="general" translate="label,comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>General Settings</label>
+                <field id="is_enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable Extension</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="google_places" translate="label,comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Google Places API Settings</label>
+                <field id="api_key" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>API Key</label>
+                    <comment><![CDATA[<a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">Get a key</a>]]></comment>
+                </field>
+                <field id="hide_logo" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Hide "Powered by Google" logo</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[<a href="https://developers.google.com/places/web-service/policies?hl=en#logo_requirements" target="_blank">Logo requirements</a>]]></comment>
+                </field>
+                <field id="use_browser_geolocation" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use browser geolocation</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Bias the autocomplete object to the user's geographical location, as supplied by the browser's 'navigator.geolocation' object.]]></comment>
+                </field>
+                <field id="use_country_restriction" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use country restriction</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Component restrictions are used to restrict predictions to only those within the parent component. E.g., the country.]]></comment>
+                </field>
+            </group>
+            <group id="address_component" translate="label,comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Address Component Configuration</label>
+                <comment><![CDATA[<a href="https://developers.google.com/maps/documentation/javascript/3.exp/reference#GeocoderAddressComponent" target="_blank">GeocoderAddressComponent object specification</a>]]></comment>
+                <field id="is_street_combined" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Is Street Name and Street Number Combined</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="street1" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Street 1</label>
+                    <source_model>Potato\AddressAutocomplete\Model\Source\Name\Type</source_model>
+                </field>
+                <field id="street2" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Street 2</label>
+                    <source_model>Potato\AddressAutocomplete\Model\Source\Name\Type</source_model>
+                </field>
+                <field id="region" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Region</label>
+                    <source_model>Potato\AddressAutocomplete\Model\Source\Name\Type</source_model>
+                </field>
+                <field id="postcode" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Postcode</label>
+                    <source_model>Potato\AddressAutocomplete\Model\Source\Name\Type</source_model>
+                </field>
+                <field id="city" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>City</label>
+                    <source_model>Potato\AddressAutocomplete\Model\Source\Name\Type</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

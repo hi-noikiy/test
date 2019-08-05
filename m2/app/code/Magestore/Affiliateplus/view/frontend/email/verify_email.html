@@ -1,0 +1,46 @@
+<!--
+/**
+ * Copyright © 2016 Magestore. All rights reserved.
+ */
+-->
+<!--@subject {{var store.getFrontendName()}}: Welcome to Affiliate system @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image",
+"htmlescape var=$referral.getReferralName()":"Customer Name",
+"store url=\"customer/account/\"":"Customer Account Url",
+"var referral.getEmail()":"Customer Email",
+"htmlescape var=$referral.getPassword()":"Customer Password"}
+@-->
+
+{{template config_path="design/email/header_template"}}
+    <!-- [ middle starts here] -->
+    <table cellspacing="0" cellpadding="0" border="0" width="650">
+        <tr>
+            <td valign="top">
+                <p class="greeting"><strong>{{trans 'Dear %name' name=$name}}</strong>
+                    <br/>
+                    {{trans 'Authentication Code: <b>%code</b>' code=$code |raw}}
+                    <br/>
+                <p>
+                    {{trans 'Please enter this code into the verification form.'}}
+                </p>
+                <p>
+                    {{trans 'Or click on this link'}}:
+                    {{trans '<a href="%link">%link</a>' link=$link |raw}}
+                </p>
+                <p>
+                    {{trans 'to verify your account'}}.
+                </p>
+                <p>
+                    {{trans 'If you have any questions about your account or any other matter, please feel free to contact us at '}}
+                    {{trans '<a href="mailto: %transaction_email_identity">%transaction_email_identity</a>' transaction_email_identity="$trans_email_ident_support" |raw}}.
+                    {{trans 'or call us at <span class="nobr">%store_phone_information</span>' store_phone_information=$store_phone_information |raw}}
+                    {{trans 'Monday - Friday, 8am - 5pm PST.'}}
+                </p>
+                <br/>
+                <p>{{trans 'Thank you again'}}, <br/><strong>{{var sender_name}}</strong></p>
+            </td>
+        </tr>
+    </table>
+{{template config_path="design/email/footer_template"}}

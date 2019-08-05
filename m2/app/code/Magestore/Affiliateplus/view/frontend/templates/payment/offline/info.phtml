@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * Magestore.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Affiliateplus
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * @var \Magestore\Affiliateplus\Block\Payment\Offline\Info $block
+ */
+?>
+<?php if ($paymentMethod = $block->getPaymentMethod()): ?>
+    <li class="fields">
+        <div class="field">
+            <strong><?php echo __('Payment Address') ?></strong>
+        </div>
+        <div class="field">
+            <?php echo $paymentMethod->getAddressHtml() ?>
+        </div>
+    </li>
+    <?php if($this->getInvoiceAddress()): ?>
+        <li class="fields">
+            <div class="field">
+                <strong><?php echo __('Invoice Address') ?></strong>
+            </div>
+            <div class="field">
+                <img width="250" src="<?php echo $block->getBaseUrlMedia().'/affiliateplus/payment/'.$this->getInvoiceAddress(); ?>" />
+            </div>
+        </li>
+    <?php endif;?>
+    <?php if ($paymentMethod->getTransferInfo()): ?>
+        <li class="fields">
+            <div class="field">
+                <strong><?php echo __('Transfer Information') ?></strong>
+            </div>
+            <div class="field">
+                <?php echo $paymentMethod->getTransferInfo() ?>
+            </div>
+        </li>
+    <?php endif ?>
+    <?php if ($paymentMethod->getMessage()): ?>
+        <li class="fields">
+            <div class="field">
+                <strong><?php echo __('Admin Message') ?></strong>
+            </div>
+            <div class="field">
+                <?php echo $paymentMethod->getMessage() ?>
+            </div>
+        </li>
+    <?php endif ?>
+<?php endif ?>

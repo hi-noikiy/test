@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_AffiliateplusProgram
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+  <!-- Get list programs in welcome page -->
+  <event name="affiliateplus_get_list_program_welcome">
+    <observer name="affiliateplus_get_list_program_welcome" instance="Magestore\Affiliateplusprogram\Observer\Frontend\GetListProgramWelcome" shared="false" />
+  </event>
+  <!-- Banner Prepare Collection -->
+  <event name="affiliateplus_banner_prepare_collection">
+    <observer name="affiliateplus_banner_prepare_collection" instance="Magestore\Affiliateplusprogram\Observer\Frontend\BannerPrepareCollection" shared="false" />
+  </event>
+  <!-- Calculate product final price base on program's discount -->
+  <event name="affiliateplus_product_get_final_price">
+    <observer name="affiliateplus_product_get_final_price" instance="Magestore\Affiliateplusprogram\Observer\Frontend\ProductGetFinalPrice" shared="false" />
+  </event>
+  <!-- Set commission to 0 when the transaction is cancelled -->
+  <event name="affiliateplus_cancel_transaction_multipleprogram">
+    <observer name="affiliateplus_cancel_transaction_multipleprogram" instance="Magestore\Affiliateplusprogram\Observer\Frontend\AffiliateplusCancelTransactionMltipleprogram" shared="false" />
+  </event>
+
+  <!--<event name="affiliateplus_created_transaction">-->
+    <!--<observer name="affiliateplus_created_transaction" instance="Magestore\Affiliateplusprogram\Observer\CreatedTransaction" shared="false" />-->
+  <!--</event>-->
+</config>
